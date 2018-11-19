@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"
+import PropTypes from 'prop-types'
 
 const EthAddress = ({address, short, onClick}) => (
   <span className='eth-address' onClick={onClick}>
@@ -20,5 +21,9 @@ const EthAddress = ({address, short, onClick}) => (
     `}</style>
   </span>
 )
+
+EthAddress.propTypes = {
+  address: PropTypes.string
+};
 
 export default EthAddress;

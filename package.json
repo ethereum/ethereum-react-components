@@ -37,6 +37,7 @@
     "cross-env": "^5.2.0",
     "ethereum-blockies": "git+https://github.com/ethereum/blockies.git",
     "identicon.js": "^2.3.3",
-    "jazzicon": "^1.5.0"
+    "jazzicon": "^1.5.0",
+    "prop-types": "^15.6.2"
   }
 }
