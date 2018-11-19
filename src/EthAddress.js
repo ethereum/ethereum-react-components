@@ -22,6 +22,8 @@ const EthAddress = ({address, short, onClick}) => (
   </span>
 )
 
+EthAddress.displayName = 'EthAddress'
+
 EthAddress.propTypes = {
   address: PropTypes.string.isRequired,
   /** Display abbreviated form with '...'& 23 instead of 42 chars.  */

@@ -8,6 +8,7 @@ import { Welcome } from '@storybook/react/demo';
 
 
 import { Button, Identicon, EthAddress, FeeSelector } from '../src/index'
+import { addDecorator } from '@storybook/react/dist/client/preview';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -24,10 +25,29 @@ storiesOf('Identicon', module)
   ))
 
 storiesOf('Eth Address', module)
+  .addDecorator(story => (
+    <div style={{
+      padding: '20px 40px 40px'
+    }}>
+      <h1 style={{
+        margin: '20px 0px 0px',
+        padding: '0px 0px 5px',
+        color: 'rgb(68, 68, 68)'
+      }}>Rendered</h1>
+      <div style={{ borderBottom: '1px solid rgb(238, 238, 238)', backgroundColor: '#eeeeee63' }}></div>
+      <div style={{ padding: 20, }}>{story()}</div>
+    </div>
+  ))
   .addParameters({
+    // see https://github.com/storybooks/storybook/tree/master/addons/info#options-and-defaults
     info: {
-      // Your settings
-      inline: true, header: false 
+      inline: true,
+      header: false,
+      styles: {
+        infoBody: {
+          border: 'none'
+        }
+      }
     },
   })
   .add('default', () => <EthAddress address={"0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"} />)
