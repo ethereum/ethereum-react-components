@@ -23,7 +23,13 @@ const EthAddress = ({address, short, onClick}) => (
 )
 
 EthAddress.propTypes = {
-  address: PropTypes.string
+  address: PropTypes.string.isRequired,
+  /** Display abbreviated form with '...'& 23 instead of 42 chars.  */
+  short: PropTypes.bool
+};
+
+EthAddress.defaultProps = {
+  short: false
 };
 
 export default EthAddress;
