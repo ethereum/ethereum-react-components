@@ -2,3 +2,10 @@ language: node_js
 node_js:
   - "node"
 script: yarn build-storybook
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: true
+  on:
+    branch: master
