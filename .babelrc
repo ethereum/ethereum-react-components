@@ -1,0 +1,11 @@
+{
+  "env": {
+    "production": {
+      "presets": ["es2015", "react", "stage-1"]
+    },
+    "development": {
+      "presets": ["es2015", "react", "stage-1"],
+      "plugins": ["styled-jsx/babel"]
+    }
+  }
+}
