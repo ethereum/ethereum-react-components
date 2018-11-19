@@ -1,8 +1,11 @@
 import React from "react";
 
-const EthAddress = ({address, onClick}) => (
+const EthAddress = ({address, short, onClick}) => (
   <span className='eth-address' onClick={onClick}>
-    {address}
+    {short
+    ? [...address.split('').slice(0, 10), '...', ...address.split('').slice(42 - 10)].join('')
+    : address
+    }
 
     {/*language=CSS*/}
     <style jsx>{`
