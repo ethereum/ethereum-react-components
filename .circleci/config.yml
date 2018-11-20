@@ -23,10 +23,10 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       - run: yarn run build-storybook
-      - run: |
-        if [ $TRAVIS_BRANCH == 'circleci' ]; then
-          yarn run unleash -p 
-        fi;
+      - run: git add docs
+      - run: git commit -m 'Updating github pages [ci skip]'
 
-      
+      - run: yarn run unleash -p
+        
+        #- run: if [ $TRAVIS_BRANCH == 'circleci' ]; then yarn run unleash -p; fi
 
