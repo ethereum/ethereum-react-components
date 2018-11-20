@@ -1,10 +1,13 @@
 import React from 'react';
-import i18n from '../../i18n'
-import { InputPassword } from '..'
-import PropTypes from 'prop-types'
-import './FormCreateAccount.scss'
+import i18n from '../../i18n';
+import { InputPassword } from '..';
+import PropTypes from 'prop-types';
+import './FormCreateAccount.scss';
 
-
+// TODO this falls under category API dependencies and needs to be
+// - required in the beginning: const Mist = require(./api/mist)
+// - passed as utility: <MyForm Mist={Mist} /> || <MyForm utils={Mist.notifications} /> 
+// - put behind some abstract handler and logic moved up: <MyForm onFormValidationError={(error) => Mist.notification.warn(error.message) }} />
 let Mist = {
   notification: {
     warn: text => alert(text)
@@ -12,10 +15,8 @@ let Mist = {
 }
 
 class CreateAccount extends React.Component {
-
   static displayName = 'CreateAccount'
 
-  // eslint-disable-next-line
   static propTypes = {
 
   }
@@ -32,8 +33,7 @@ class CreateAccount extends React.Component {
       passwordInputType: 'text',
       pw: '',
       pwRepeat: '',
-      showPassword: false,
-      showRepeat: false
+      showRepeat: false,
     };
   }
   resetForm() {
@@ -58,7 +58,7 @@ class CreateAccount extends React.Component {
     // ask for password repeat
     if (!pwRepeat.length) {
       this.setState({ showRepeat: true });
-      this.refs.password_repeat.focus();
+      // FIXME deprecated use this.refs.password_repeat.focus();
       return;
     }
 
@@ -97,42 +97,49 @@ class CreateAccount extends React.Component {
   }
 
   renderFormBody() {
-    if (this.state.creating) {
+    const {
+      showRepeat, creating, pw,
+    } = this.state;
+    if (creating) {
       return <h2>{i18n.t('mist.popupWindows.requestAccount.creating')}</h2>;
-    } else {
-      return (
-        <div>
-          <div className={`field-container ${this.state.showRepeat ? 'repeat-field' : ''}`} >
-            {this.state.showPassword
-              ?<InputPassword 
+    }
+    return (
+      <div>
+        <div className={`field-container ${showRepeat ? 'repeat-field' : ''}`}>
+          {showRepeat
+            /** repeat password */
+            ? (
+              <InputPassword
+                className="password-repeat"
+                placeholder={i18n.t('mist.popupWindows.requestAccount.repeatPassword')}
+                onChange={e => this.setState({ pwRepeat: e.target.value })}
+              />
+            )
+            /** enter password */
+            : (
+              <InputPassword
                 className="password"
                 placeholder={i18n.t('mist.popupWindows.requestAccount.enterPassword')}
                 onChange={e => this.setState({ pw: e.target.value })}
+                value={pw}
               />
-              /** repeat password */
-              :<InputPassword 
-                className="password-repeat"
-                ref="password_repeat"
-                placeholder={i18n.t('mist.popupWindows.requestAccount.repeatPassword')}
-                onChange={e => this.setState({ pwRepeat: e.target.value })}            
-              />
-            }
-          </div>
-          <div className="dapp-modal-buttons">
-            <button
-              className="cancel"
-              type="button"
-              onClick={e => this.handleCancel(e)}
-            >
-              {i18n.t('buttons.cancel')}
-            </button>
-            <button className="ok dapp-primary-button" type="submit">
-              {i18n.t('buttons.ok')}
-            </button>
-          </div>
+            )
+          }
         </div>
-      );
-    }
+        <div className="dapp-modal-buttons">
+          <button
+            className="cancel"
+            type="button"
+            onClick={e => this.handleCancel(e)}
+          >
+            {i18n.t('buttons.cancel')}
+          </button>
+          <button className="ok dapp-primary-button" type="submit">
+            {i18n.t('buttons.ok')}
+          </button>
+        </div>
+      </div>
+    );
   }
 
   render() {
