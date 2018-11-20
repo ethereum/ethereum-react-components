@@ -7,7 +7,7 @@ import { linkTo } from '@storybook/addon-links';
 import { Welcome } from '@storybook/react/demo';
 
 
-import { Button, Identicon, EthAddress, FeeSelector } from '../src/index'
+import { Button, Identicon, EthAddress, FeeSelector, FormCreateAccount, InputPassword } from '../src/index'
 import { addDecorator } from '@storybook/react/dist/client/preview';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
@@ -69,6 +69,38 @@ storiesOf('NodeInfo', module)
       <span>placeholder</span>
     </div>
   ))
+
+storiesOf('Create Account/Password Input', module)
+  .add('default ', () => (
+    <InputPassword />
+  ))
+  .add('filled + default (invisible) ', () => (
+    <InputPassword value="my secret password" />
+  ))
+  .add('filled + visible ', () => (
+    <InputPassword show value="my secret password" />
+  ))
+
+storiesOf('Create Account/Form', module)
+  .add('default ', () => (
+    <FormCreateAccount />
+  ))
+  .add('repeat password ', () => (
+    <FormCreateAccount />
+  ))
+  .add('password too short ', () => (
+    <FormCreateAccount />
+  ))
+  .add('bad character ', () => (
+    <FormCreateAccount />
+  ))
+  .add('password mismatch ', () => (
+    <FormCreateAccount />
+  ))
+  .add('creating ', () => (
+    <FormCreateAccount />
+  ))
+
 
 storiesOf('Transaction Form/Fee Selector', module)
   .add('default ', () => (
