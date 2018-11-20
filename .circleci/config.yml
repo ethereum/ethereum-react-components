@@ -23,10 +23,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
        
 
-      - add_ssh_keys:
-          fingerprints: 
-            - "f6:dc:2a:6c:7b:0e:f6:72:b9:b9:de:82:a0:43:20:da"
-
       - run: yarn run build-storybook
       
       - run: git config --global user.email "mist@ethereum.org"
@@ -36,6 +32,7 @@ jobs:
       - run: git push origin $CIRCLE_BRANCH
 
       - run: yarn run unleash -d -p
+      - run: yarn run unleash -p
         
         #- run: if [ $CIRCLE_BRANCH == 'circleci' ]; then yarn run unleash -p; fi
 
