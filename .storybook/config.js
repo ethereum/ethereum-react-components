@@ -1,9 +1,23 @@
-import { configure } from '@storybook/react';
+import { configure, addDecorator } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
+import { withNotes } from '@storybook/addon-notes';
 
-// automatically import all files ending in *.stories.js
-const req = require.context('../stories', true, /.stories.js$/);
+addDecorator(withNotes);
+addDecorator(withInfo);
+
+configure(loadStories, module);
+function loadStoriesDynamically() {
+  req.keys().sort().forEach(filename => req(filename));
+
+}
+
 function loadStories() {
-  req.keys().forEach(filename => req(filename));
+  require('../src/stories/1.index.stories.jsx')
+  require('../src/stories/2.createAccount.stories.jsx')
+  require('../src/stories/3.sendTx.stories.jsx')
+  require('../src/stories/4.txHistory.stories.jsx')
+  require('../src/stories/5.wallet.stories.jsx')
+  require('../src/stories/6.nodeInfo.stories.jsx')
 }
 
 configure(loadStories, module);
