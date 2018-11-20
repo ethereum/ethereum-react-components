@@ -1,8 +1,28 @@
 import React from 'react';
 import i18n from '../../i18n'
+import PropTypes from 'prop-types'
 import './InputPassword.scss'
 
 class InputPassword extends React.Component {
+  static displayName = 'InputPassword'
+
+  static propTypes = {
+    className: PropTypes.oneOf([PropTypes.object, PropTypes.string]),
+    /** placeholder when there is no value */
+    placeholder: PropTypes.string,
+    /** handles value changes */
+    onChange: PropTypes.func.isRequired,
+    /** value to initialize the input field */
+    value: PropTypes.string,
+    /** true: input is visible as plaintext */
+    show: PropTypes.bool
+  }
+
+  static defaultProps = {
+    value: "",
+    placeholder: "",
+    show: false
+  }
   constructor(props) {
     super(props)
     this.state = {

@@ -1,7 +1,9 @@
 import React from 'react';
 import i18n from '../../i18n'
-import { InputPassword } from '..';
+import { InputPassword } from '..'
+import PropTypes from 'prop-types'
 import './FormCreateAccount.scss'
+
 
 let Mist = {
   notification: {
@@ -9,7 +11,18 @@ let Mist = {
   }
 }
 
-class RequestAccount extends React.Component {
+class CreateAccount extends React.Component {
+
+  static displayName = 'CreateAccount'
+
+  static propTypes = {
+
+  }
+
+  static defaultProps = {
+
+  }
+
   constructor(props) {
     super(props);
 
@@ -133,4 +146,4 @@ class RequestAccount extends React.Component {
   }
 }
 
-export default RequestAccount;
+export default CreateAccount;
