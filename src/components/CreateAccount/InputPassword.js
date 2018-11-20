@@ -7,7 +7,7 @@ class InputPassword extends React.Component {
   static displayName = 'InputPassword'
 
   static propTypes = {
-    className: PropTypes.oneOf([PropTypes.object, PropTypes.string]),
+    className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     /** placeholder when there is no value */
     placeholder: PropTypes.string,
     /** handles value changes */
