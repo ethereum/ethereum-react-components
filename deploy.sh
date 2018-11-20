@@ -8,14 +8,12 @@ git config --global user.name "Mist-bot"
 
 # Commits to /docs (github pages)
 export FILES_CHANGED=`git status --untracked-files=no --porcelain | wc -l`
-echo $FILES_CHANGED;
 if [[ $FILES_CHANGED -gt 0 ]]; then
   echo "YES";
   git add docs;
   git commit -am 'Updating github pages [ci skip]';
   git push origin $BRANCH;
 fi
-exit;
 
 ### 2. NPM publishing
 
