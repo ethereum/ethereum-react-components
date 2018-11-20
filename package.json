@@ -1,6 +1,6 @@
 {
   "name": "ethereum-react-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A components library which is used in multiple projects. Contains frequently used Ethereum components to display and handle addresses, transactions...",
   "main": "dist/index.js",
   "scripts": {
@@ -9,7 +9,8 @@
     "build-aux": "cross-env NODE_ENV=production babel ./src --out-dir ./build",
     "build": "yarn run clean-dist && yarn run build-aux",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o docs"
+    "build-storybook": "build-storybook -o docs",
+    "publish": "yarn run standard-version --message='chore(release): %s [ci skip]'"
   },
   "peerDependencies": {
     "react": "^15.x",
@@ -30,8 +31,8 @@
     "babel-preset-stage-1": "^6.24.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "styled-jsx": "^3.1.2",
-    "unleash": "^2.0.1"
+    "standard-version": "^4.4.0",
+    "styled-jsx": "^3.1.2"
   },
   "dependencies": {
     "cross-env": "^5.2.0",
