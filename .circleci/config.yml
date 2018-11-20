@@ -7,17 +7,6 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - run: 
-          name: "Git user configuration"
-          command: |
-            git config --global user.email "mist@ethereum.org" && 
-            git config --global user.name "Mist-bot"
-
-      - run:
-          name: "npm configuration"
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-
-
       - checkout
 
       # Download and cache dependencies
@@ -36,16 +25,6 @@ jobs:
       - run: yarn run build-storybook
 
       - run: 
-          name: "Commiting docs files, if changed"
-          command: |
-            if [[ $CIRCLE_BRANCH == 'master' && $(git status --porcelain | wc -l) -gt 0 ]]; then
-              git add docs;
-              git commit -am 'Updating github pages [ci skip]';
-              git push origin $CIRCLE_BRANCH;
-            fi
-
-        #- run: yarn run unleash --patch
-        #- run: npm version patch
-        #- run: npm publish
-        #- run: git push --follow-tags
-        
+          name: "Commiting docs files and publishing module"
+          command: BRANCH=$CIRCLE_BRANCH ./deploy.sh
+          

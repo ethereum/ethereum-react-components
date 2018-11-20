@@ -9,8 +9,7 @@
     "build-aux": "cross-env NODE_ENV=production babel ./src --out-dir ./build",
     "build": "yarn run clean-dist && yarn run build-aux",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o docs",
-    "publish": "yarn run standard-version --message='chore(release): %s [ci skip]'"
+    "build-storybook": "build-storybook -o docs"
   },
   "peerDependencies": {
     "react": "^15.x",
