@@ -29,7 +29,7 @@ jobs:
       - run: git add docs
       - run: git commit -m 'Updating github pages [ci skip]'
 
-      - run: yarn run unleash -p
+      - run: yarn run unleash -d -p
         
         #- run: if [ $TRAVIS_BRANCH == 'circleci' ]; then yarn run unleash -p; fi
 
