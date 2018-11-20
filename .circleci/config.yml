@@ -35,7 +35,7 @@ jobs:
       - run: 
           name: "Commiting docs files, if changed"
           command: |
-            if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
+            if [[ $(git status ./docs --porcelain | wc -l) -gt 0 ]]; then
               git add docs;
               git commit -m 'Updating github pages [ci skip]';
               git push origin $CIRCLE_BRANCH;
