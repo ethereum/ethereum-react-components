@@ -7,13 +7,13 @@ git config --global user.email "mist@ethereum.org" &&
 git config --global user.name "Mist-bot"
 
 # Commits to /docs (github pages)
-export FILES_CHANGED=`git status --untracked-files=no --porcelain | wc -l`
+export FILES_CHANGED=`git status ./docs --untracked-files=no --porcelain | wc -l`
 if [[ $FILES_CHANGED -gt 0 ]]; then
-  echo "YES";
   git add docs;
   git commit -am 'Updating github pages [ci skip]';
   git push origin $BRANCH;
 fi
+
 
 ### 2. NPM publishing
 
