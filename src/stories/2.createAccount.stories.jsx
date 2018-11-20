@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-
 import { FormCreateAccount, InputPassword } from '../components';
 
 storiesOf('Create Account/Password Input', module)

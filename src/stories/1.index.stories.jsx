@@ -1,14 +1,12 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import { Welcome } from '@storybook/react/demo';
 
 
-import { addDecorator } from '@storybook/react/dist/client/preview';
-import { Button, Identicon, EthAddress } from '../components';
+import { Identicon, EthAddress } from '../components';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
 
