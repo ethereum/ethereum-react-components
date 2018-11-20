@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config=jest.config.js",
     "clean-dist": "rm -rf ./dist",
     "build-aux": "cross-env NODE_ENV=production babel ./src --out-dir ./build",
     "build": "yarn run clean-dist && yarn run build-aux",
