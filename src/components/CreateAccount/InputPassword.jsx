@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import './InputPassword.scss'
 
 class InputPassword extends React.Component {
-  // TODO static displayName = 'InputPassword'
+  
+  static displayName = 'InputPassword'
 
   static propTypes = {
     className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -19,9 +20,9 @@ class InputPassword extends React.Component {
   }
 
   static defaultProps = {
-    value: "",
-    placeholder: "",
-    show: false
+    value: '',
+    placeholder: '',
+    show: false,
   }
   constructor(props) {
     super(props)
