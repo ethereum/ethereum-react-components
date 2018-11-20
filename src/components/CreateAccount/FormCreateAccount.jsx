@@ -13,7 +13,7 @@ let Mist = {
 
 class CreateAccount extends React.Component {
 
-  // TODO static displayName = 'CreateAccount'
+  static displayName = 'CreateAccount'
 
   // eslint-disable-next-line
   static propTypes = {

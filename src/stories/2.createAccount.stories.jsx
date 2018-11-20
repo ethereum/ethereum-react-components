@@ -38,7 +38,11 @@ storiesOf('Create Account/Form', module)
   })
   .add('default ', () => (
     <FormCreateAccount />
-  ))
+  ), {
+    notes: {
+      markdown: '# Testing notes ',
+    },
+  })
   .add('repeat password ', () => (
     <FormCreateAccount />
   ))
