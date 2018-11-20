@@ -1,20 +1,23 @@
 {
   "plugins": [
-    ["transform-runtime", {
-      "polyfill": false,
-      "regenerator": true
-    }]
+    ["@babel/plugin-transform-runtime",      {
+      "corejs": false,
+      "helpers": true,
+      "regenerator": true,
+      "useESModules": false
+    }],
+    "@babel/plugin-proposal-class-properties"
   ],
   "env": {
     "production": {
-      "presets": ["env", "react", "stage-1"]
+      "presets": ["@babel/preset-env", "@babel/preset-react"]
     },
     "development": {
-      "presets": ["env", "react", "stage-1"],
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
       "plugins": ["styled-jsx/babel"]
     },
     "test": {
-      "presets": ["env", "react", "stage-1"],
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
       "plugins": ["styled-jsx/babel"]
     }
   }

@@ -14,6 +14,8 @@ module.exports = (storybookBaseConfig, configType) => {
     include: path.resolve(__dirname, "../")
   });
 
+  console.log('base config', storybookBaseConfig)
+
   // Return the altered config
   return storybookBaseConfig;
 };
