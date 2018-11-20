@@ -23,6 +23,9 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       - run: yarn run build-storybook
+      
+      - run: git config --global user.email "mist@ethereum.org"
+      - run: git config --global user.name "Mist-bot"
       - run: git add docs
       - run: git commit -m 'Updating github pages [ci skip]'
 
