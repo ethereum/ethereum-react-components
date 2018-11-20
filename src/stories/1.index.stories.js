@@ -7,7 +7,7 @@ import { linkTo } from '@storybook/addon-links';
 import { Welcome } from '@storybook/react/demo';
 
 
-import { Button, Identicon, EthAddress, FeeSelector, FormCreateAccount, InputPassword } from '../components'
+import { Button, Identicon, EthAddress } from '../components'
 import { addDecorator } from '@storybook/react/dist/client/preview';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
@@ -52,74 +52,13 @@ storiesOf('Eth Address', module)
   })
   .add('default', () => <EthAddress address={"0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"} />)
   .add('shortened', () => <EthAddress short address={"0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"} />)
+  .add('with identicon', () => <EthAddress identicon address={"0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"} />)
   .add('click -> copy to clipboard', () => <span>placeholder</span>)
 
 storiesOf('Eth QR', module)
   .add('default', () => <EthAddress address={"0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"} />)
   .add('click -> copy to clipboard', () => <span>placeholder</span>)
 
-storiesOf('NodeInfo', module)
-  .add('no connection ', () => (
-    <div>
-      <span>placeholder</span>
-    </div>
-  ))
-  .add('main net', () => (
-    <div>
-      <span>placeholder</span>
-    </div>
-  ))
-
-storiesOf('Create Account/Password Input', module)
-  .add('default ', () => (
-    <InputPassword />
-  ))
-  .add('filled + default (invisible) ', () => (
-    <InputPassword value="my secret password" />
-  ))
-  .add('filled + visible ', () => (
-    <InputPassword show value="my secret password" />
-  ))
-
-storiesOf('Create Account/Form', module)
-  .add('default ', () => (
-    <FormCreateAccount />
-  ))
-  .add('repeat password ', () => (
-    <FormCreateAccount />
-  ))
-  .add('password too short ', () => (
-    <FormCreateAccount />
-  ))
-  .add('bad character ', () => (
-    <FormCreateAccount />
-  ))
-  .add('password mismatch ', () => (
-    <FormCreateAccount />
-  ))
-  .add('creating ', () => (
-    <FormCreateAccount />
-  ))
 
 
-storiesOf('Transaction Form/Fee Selector', module)
-  .add('default ', () => (
-    <FeeSelector />
-  ))
-  .add('main net', () => (
-    <div>
-      <span>placeholder</span>
-    </div>
-  ))
 
-storiesOf('Transaction Form/Fee Selector', module)
-  .add('no connection ', () => (
-    <div>
-      <span>placeholder</span>
-    </div>
-  ))
-  .add('main net', () => (
-    <div>
-      <span>placeholder</span>
-    </div>
-  ))

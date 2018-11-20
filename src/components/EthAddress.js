@@ -1,8 +1,10 @@
 import React from "react"
 import PropTypes from 'prop-types'
+import Identicon from './Identicon'
 
-const EthAddress = ({address, short, onClick}) => (
+const EthAddress = ({address, short, identicon, onClick}) => (
   <span className='eth-address' onClick={onClick}>
+    {identicon === true && <Identicon seed={address}/>}
     {short
     ? [...address.split('').slice(0, 10), '...', ...address.split('').slice(42 - 10)].join('')
     : address
@@ -27,11 +29,14 @@ EthAddress.displayName = 'EthAddress'
 EthAddress.propTypes = {
   address: PropTypes.string.isRequired,
   /** Display abbreviated form with '...'& 23 instead of 42 chars.  */
-  short: PropTypes.bool
+  short: PropTypes.bool,
+  /** Displays the identicon next to the address */
+  identicon: PropTypes.bool
 };
 
 EthAddress.defaultProps = {
-  short: false
+  short: false,
+  identicon: false
 };
 
 export default EthAddress;
