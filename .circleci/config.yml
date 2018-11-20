@@ -28,6 +28,7 @@ jobs:
       - run: git config --global user.name "Mist-bot"
       - run: git add docs
       - run: git commit -m 'Updating github pages [ci skip]'
+      - run: git push
 
       - run: yarn run unleash -d -p
         
