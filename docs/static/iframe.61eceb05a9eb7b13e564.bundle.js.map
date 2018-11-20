@@ -1,1 +1,0 @@
-{"version":3,"file":"static/iframe.61eceb05a9eb7b13e564.bundle.js","sources":["webpack:///./src/i18n/index.js"],"sourcesContent":["\r\nconst i18n = {\r\n  t: text => text \r\n}\r\n\r\nexport default i18n"],"mappings":"AAEA","sourceRoot":""}
