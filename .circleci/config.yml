@@ -29,10 +29,9 @@ jobs:
       - run: yarn install
 
       - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-       
+        paths:
+          - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn run build-storybook
       
@@ -40,15 +39,13 @@ jobs:
       - run: 
           name: "Commiting docs files, if changed"
           command: |
-            if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
+            if [[ $CIRCLE_BRANCH == 'master' && $(git status --porcelain | wc -l) -gt 0 ]]; then
               git add docs;
               git commit -am 'Updating github pages [ci skip]';
               git push origin $CIRCLE_BRANCH;
             fi
 
-      - run: yarn run unleash -p
-
-
+        #- run: yarn run unleash --patch
         #- run: npm version patch
         #- run: npm publish
         #- run: git push --follow-tags
