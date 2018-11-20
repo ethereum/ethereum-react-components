@@ -26,5 +26,11 @@ jobs:
 
       - run: 
           name: "Commiting docs files and publishing module"
-          command: BRANCH=$CIRCLE_BRANCH ./deploy.sh
+          command: |
+            if [[ $CIRCLE_BRANCH == 'master' ]]; then
+              echo "We're on master branch, deploying..."
+              BRANCH=$CIRCLE_BRANCH ./deploy.sh;
+            else
+              echo "Not on master branch, skipping deployment."
+            fi;
           
