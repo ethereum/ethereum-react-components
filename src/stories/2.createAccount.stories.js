@@ -7,6 +7,17 @@ import { linkTo } from '@storybook/addon-links';
 import { FormCreateAccount, InputPassword } from '../components'
 
 storiesOf('Create Account/Password Input', module)
+  .addParameters({
+    info: {
+      inline: true,
+      header: false,
+      styles: {
+        infoBody: {
+          border: 'none'
+        }
+      }
+    },
+  })
   .add('default ', () => (
     <InputPassword />
   ))
@@ -18,6 +29,17 @@ storiesOf('Create Account/Password Input', module)
   ))
 
 storiesOf('Create Account/Form', module)
+  .addParameters({
+    info: {
+      inline: true,
+      header: false,
+      styles: {
+        infoBody: {
+          border: 'none'
+        }
+      }
+    },
+  })
   .add('default ', () => (
     <FormCreateAccount />
   ))
