@@ -13,6 +13,11 @@ jobs:
             git config --global user.email "mist@ethereum.org" && 
             git config --global user.name "Mist-bot"
 
+      -run:
+        name: "npm configuration"
+        command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+
+
       - checkout
 
       # Download and cache dependencies
@@ -35,13 +40,13 @@ jobs:
       - run: 
           name: "Commiting docs files, if changed"
           command: |
-            if [[ $(git status ./docs --porcelain | wc -l) -gt 0 ]]; then
+            if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
               git add docs;
-              git commit -m 'Updating github pages [ci skip]';
+              git commit -am 'Updating github pages [ci skip]';
               git push origin $CIRCLE_BRANCH;
             fi
 
       - run: npm version patch
-      - run: git push --tags --quiet
       - run: npm publish
+      - run: git push --follow-tags
         
