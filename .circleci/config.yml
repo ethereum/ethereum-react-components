@@ -7,6 +7,12 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - run: 
+          name: "Git user configuration"
+          command: |
+            git config --global user.email "mist@ethereum.org" && 
+            git config --global user.name "Mist-bot"
+
       - checkout
 
       # Download and cache dependencies
@@ -25,11 +31,15 @@ jobs:
 
       - run: yarn run build-storybook
       
-      - run: git config --global user.email "mist@ethereum.org"
-      - run: git config --global user.name "Mist-bot"
-      - run: git add docs
-      - run: git commit -m 'Updating github pages [ci skip]'
-      - run: git push origin $CIRCLE_BRANCH
+
+      - run: 
+          name: "Commiting docs files, if changed"
+          command: |
+            if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
+              git add docs;
+              git commit -m 'Updating github pages [ci skip]';
+              git push origin $CIRCLE_BRANCH;
+            fi
 
       - run: yarn run unleash -d -p
       - run: yarn run unleash -p
