@@ -27,6 +27,7 @@ const EthAddress = ({address, short, identicon, onClick}) => (
 EthAddress.displayName = 'EthAddress'
 
 EthAddress.propTypes = {
+  /** Ethereum public address (42 chars)  */
   address: PropTypes.string.isRequired,
   /** Display abbreviated form with '...'& 23 instead of 42 chars.  */
   short: PropTypes.bool,

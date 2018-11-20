@@ -12,7 +12,7 @@ import { addDecorator } from '@storybook/react/dist/client/preview';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
 
-storiesOf('Identicon', module)
+storiesOf('Widgets/Identicon', module)
   .add('with seed', () => (
     <div>
       <Identicon seed={"0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"} />
@@ -24,7 +24,7 @@ storiesOf('Identicon', module)
     </div>
   ))
 
-storiesOf('Eth Address', module)
+storiesOf('Widgets/Eth Address', module)
   .addDecorator(story => (
     <div style={{
       padding: '20px 40px 40px'
@@ -55,7 +55,7 @@ storiesOf('Eth Address', module)
   .add('with identicon', () => <EthAddress identicon address={"0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"} />)
   .add('click -> copy to clipboard', () => <span>placeholder</span>)
 
-storiesOf('Eth QR', module)
+storiesOf('Widgets/Eth QR', module)
   .add('default', () => <EthAddress address={"0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"} />)
   .add('click -> copy to clipboard', () => <span>placeholder</span>)
 
