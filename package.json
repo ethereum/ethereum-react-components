@@ -1,7 +1,7 @@
 {
   "name": "ethereum-react-components",
-  "version": "2.0.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A components library which is used in multiple projects. Contains frequently used Ethereum components to display and handle addresses, transactions...",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -38,5 +38,16 @@
     "ethereum-blockies": "git+https://github.com/ethereum/blockies.git",
     "identicon.js": "^2.3.3",
     "jazzicon": "^1.5.0"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilippLgh/ethereum-react-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PhilippLgh/ethereum-react-components/issues"
+  },
+  "homepage": "https://github.com/PhilippLgh/ethereum-react-components#readme"
 }
