@@ -1,18 +1,26 @@
 #!/bin/bash
 
+### 1. Github Pages
+
 # Git config
 git config --global user.email "mist@ethereum.org" &&
 git config --global user.name "Mist-bot"
 
-# NPM config
-echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-
 # Commits to /docs (github pages)
-if [[ (git status --porcelain | wc -l) -gt 0 ]]; then
+export FILES_CHANGED=`git status --untracked-files=no --porcelain | wc -l`
+echo $FILES_CHANGED;
+if [[ $FILES_CHANGED -gt 0 ]]; then
+  echo "YES";
   git add docs;
   git commit -am 'Updating github pages [ci skip]';
   git push origin $BRANCH;
 fi
+exit;
+
+### 2. NPM publishing
+
+# NPM config
+echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
 # Bumps package.json, commits and publishes to npm
 yarn run standard-version --message='chore(release): %s [ci skip]'
