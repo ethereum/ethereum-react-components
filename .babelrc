@@ -7,14 +7,14 @@
   ],
   "env": {
     "production": {
-      "presets": ["es2015", "react", "stage-1"]
+      "presets": ["env", "react", "stage-1"]
     },
     "development": {
-      "presets": ["es2015", "react", "stage-1"],
+      "presets": ["env", "react", "stage-1"],
       "plugins": ["styled-jsx/babel"]
     },
     "test": {
-      "presets": ["es2015", "react", "stage-1"],
+      "presets": ["env", "react", "stage-1"],
       "plugins": ["styled-jsx/babel"]
     }
   }
