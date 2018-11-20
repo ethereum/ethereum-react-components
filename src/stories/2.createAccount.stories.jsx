@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
 
-import { FormCreateAccount, InputPassword } from '../components'
+import { FormCreateAccount, InputPassword } from '../components';
 
 storiesOf('Create Account/Password Input', module)
   .addParameters({
@@ -13,9 +11,9 @@ storiesOf('Create Account/Password Input', module)
       header: false,
       styles: {
         infoBody: {
-          border: 'none'
-        }
-      }
+          border: 'none',
+        },
+      },
     },
   })
   .add('default ', () => (
@@ -26,7 +24,7 @@ storiesOf('Create Account/Password Input', module)
   ))
   .add('filled + visible ', () => (
     <InputPassword show value="my secret password" />
-  ))
+  ));
 
 storiesOf('Create Account/Form', module)
   .addParameters({
@@ -35,9 +33,9 @@ storiesOf('Create Account/Form', module)
       header: false,
       styles: {
         infoBody: {
-          border: 'none'
-        }
-      }
+          border: 'none',
+        },
+      },
     },
   })
   .add('default ', () => (
@@ -57,4 +55,4 @@ storiesOf('Create Account/Form', module)
   ))
   .add('creating ', () => (
     <FormCreateAccount />
-  ))
+  ));

@@ -14,6 +14,12 @@ module.exports = (storybookBaseConfig, configType) => {
     include: path.resolve(__dirname, "../")
   });
 
+  storybookBaseConfig.module.rules.push({
+    test: /\.js$/,
+    exclude: /node_modules/,
+    use: ['babel-loader', 'eslint-loader']
+  })
+
   // Return the altered config
   return storybookBaseConfig;
 };

@@ -1,5 +1,5 @@
 
-let CreateAccountForm = {
+const CreateAccountForm = {
   'mist.popupWindows.requestAccount.enterPassword': 'enter password',
   'mist.popupWindows.requestAccount.repeatPassword': 'repeat password',
   'mist.popupWindows.importAccount.buttons.showPassword': 'show password',
@@ -7,14 +7,14 @@ let CreateAccountForm = {
   'mist.popupWindows.requestAccount.title': 'Create Account',
   'buttons.ok': 'ok',
   'buttons.cancel': 'cancel',
-}
+};
 
-let lang = {
-  ...CreateAccountForm
-}
+const lang = {
+  ...CreateAccountForm,
+};
 
 const i18n = {
-  t: k => lang[k] ? lang[k] : k 
-}
+  t: k => (lang[k] ? lang[k] : k),
+};
 
-export default i18n
+export default i18n;

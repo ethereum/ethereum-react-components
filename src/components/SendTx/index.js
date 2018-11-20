@@ -1,5 +1,7 @@
-import FeeSelector from './FeeSelector'
+import FeeSelector from './FeeSelector';
+import TransactionForm from './TransactionForm';
 
 export {
-  FeeSelector
-}
+  FeeSelector,
+  TransactionForm,
+};

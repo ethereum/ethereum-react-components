@@ -7,6 +7,6 @@ import { linkTo } from '@storybook/addon-links';
 // import {  } from '../components'
 
 storiesOf('TX History', module)
-.add('default ', () => (
-  <span>placeholder</span>
-))
+  .add('default ', () => (
+    <span>placeholder</span>
+  ));

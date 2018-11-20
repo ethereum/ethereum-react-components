@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './InputPassword.scss'
 
 class InputPassword extends React.Component {
-  static displayName = 'InputPassword'
+  // TODO static displayName = 'InputPassword'
 
   static propTypes = {
     className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
