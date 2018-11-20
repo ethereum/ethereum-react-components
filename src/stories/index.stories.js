@@ -7,7 +7,7 @@ import { linkTo } from '@storybook/addon-links';
 import { Welcome } from '@storybook/react/demo';
 
 
-import { Button, Identicon, EthAddress, FeeSelector, FormCreateAccount, InputPassword } from '../src/index'
+import { Button, Identicon, EthAddress, FeeSelector, FormCreateAccount, InputPassword } from '../components'
 import { addDecorator } from '@storybook/react/dist/client/preview';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);

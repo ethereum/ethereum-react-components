@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import blockies from 'ethereum-blockies'
-import { i18n } from './i18n'
-import hqxConstructor from './lib/hqx'
+import { i18n } from '../i18n'
+import hqxConstructor from '../lib/hqx'
 
 // window.blockies = blockies
 
