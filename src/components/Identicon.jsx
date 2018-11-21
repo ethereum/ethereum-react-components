@@ -18,7 +18,8 @@ const { hqx } = mod;
 export default class DappIdenticon extends Component {
   constructor(props) {
     super(props);
-    const identity = this.props.seed.toLowerCase();
+    let seed = this.props.seed || '0x0000000000000000000000000000000000000000'
+    const identity = seed.toLowerCase();
     this.state = {
       imageData: this.identiconData(identity), // cache image data
     };
@@ -57,17 +58,13 @@ export default class DappIdenticon extends Component {
   }
 
   render() {
-    if (!this.props.seed) {
-      return <span />;
-    }
-
     if (this.props.jazz) {
       return this.renderJazzIdenticon(this.props.seed);
     }
 
     return (
       <span title="elements.identiconHelper">
-        <img src={this.state.imageData} className="identicon-pixel" />
+        <img src={this.state.imageData} width="64" height="64" className="identicon-pixel" />
       </span>
     );
   }

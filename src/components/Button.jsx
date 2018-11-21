@@ -1,11 +1,3 @@
-
-import React from 'react';
-
-import Identicon from './Identicon';
-import EthAddress from './EthAddress';
-import { FeeSelector } from './SendTx';
-import { FormCreateAccount, InputPassword } from './CreateAccount';
-
 const Button = ({ children, onClick }) => (
   <button className="Button" onClick={onClick}>
     {children}
@@ -25,13 +17,3 @@ const Button = ({ children, onClick }) => (
     </style>
   </button>
 );
-
-
-export {
-  Identicon,
-  Button,
-  EthAddress,
-  FeeSelector,
-  FormCreateAccount,
-  InputPassword,
-};

@@ -1,4 +1,10 @@
 src
 config
+docs
+coverage
+.storybook
+.circleci
+.cache
 .babelrc
 .eslintrc
+.gitignore
