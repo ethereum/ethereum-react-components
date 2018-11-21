@@ -1,4 +1,3 @@
-import React from 'react';
 import Identicon from './Identicon';
 import EthAddress from './EthAddress';
 import { FeeSelector } from './SendTx';
