@@ -5,5 +5,7 @@ module.exports = {
   ],
   "parser": "babel-eslint",
   "rules": {
+    "comma-dangle": "off",
+    "semi": "off"
   }
 };
