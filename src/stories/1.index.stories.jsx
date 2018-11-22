@@ -1,12 +1,18 @@
 import React from 'react'
-
 import { storiesOf } from '@storybook/react'
 import { linkTo } from '@storybook/addon-links'
-
 import { Welcome } from '@storybook/react/demo'
 
 
-import { Identicon, EthAddress, Spinner, Pulse, LoadingButton } from '../components';
+import {
+  Identicon,
+  EthAddress,
+  Spinner,
+  Pulse,
+  Button,
+  LoadingButton,
+  ValidatedField
+} from '../components';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -55,43 +61,40 @@ storiesOf('Widgets/Animations/Pulse', module)
     </div>
   ))
 
+storiesOf('Widgets/Button', module)
+  .add('default', () => (
+    <div>
+      <Button>click me</Button>
+    </div>
+  ))
+
 storiesOf('Widgets/LoadingButton', module)
   .add('default', () => (
     <div>
       <LoadingButton>click me</LoadingButton>
     </div>
   ))
-
-storiesOf('Widgets/Eth Address', module)
-  .addDecorator(story => (
-    <div style={{
-      padding: '20px 40px 40px',
-    }}
-    >
-      <h1 style={{
-        margin: '20px 0px 0px',
-        padding: '0px 0px 5px',
-        color: 'rgb(68, 68, 68)',
-      }}
-      >
-Rendered
-      </h1>
-      <div style={{ borderBottom: '1px solid rgb(238, 238, 238)', backgroundColor: '#eeeeee63' }} />
-      <div style={{ padding: 20 }}>{story()}</div>
+  .add('loading', () => (
+    <div>
+      <LoadingButton loading>click me</LoadingButton>
     </div>
   ))
-  .addParameters({
-    // see https://github.com/storybooks/storybook/tree/master/addons/info#options-and-defaults
-    info: {
-      inline: true,
-      header: false,
-      styles: {
-        infoBody: {
-          border: 'none',
-        },
-      },
-    },
+
+storiesOf('Widgets/ValidatedField', module)
+  .add('address', () => <ValidatedField type="address" />, {
+    notes: 'try 0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D'
   })
+  .add('address valid', () => <ValidatedField type="address" value="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
+  .add('checksum address', () => <ValidatedField type="checksum-address" />)
+  .add('password', () => <ValidatedField type="password" />)
+  .add('password invalid', () => <ValidatedField type="password" value="123"/>)
+  .add('private key', () => <ValidatedField type="private-key" />)
+  .add('public key', () => <ValidatedField type="public-key" />)
+  .add('signature', () => <ValidatedField type="signature" />)
+  .add('zero address', () => <ValidatedField type="zero-address" value="0x0000000000000000000000000000000000000000" />)
+
+
+storiesOf('Widgets/Eth Address', module)
   .add('default', () => <EthAddress address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
   .add('shortened', () => <EthAddress short address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
   .add('with identicon', () => <EthAddress identicon address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
