@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { linkTo } from '@storybook/addon-links'
-import { Welcome } from '@storybook/react/demo'
+import Welcome from './Welcome'
 
 
 import {
@@ -13,15 +13,13 @@ import {
   LoadingButton,
   ValidatedField
 } from '../components';
+import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark';
+import Cross from '../components/Widgets/AnimatedIcons/AnimatedCross';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
 
 storiesOf('Widgets/Identicon', module)
-  .add('with seed', () => (
-    <div>
-      <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
-    </div>
-  ))
+  .add('with seed', () => <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
   .add('with radius', () => (<Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />), {
     notes: {
       markdown: '# Title ',
@@ -29,56 +27,25 @@ storiesOf('Widgets/Identicon', module)
   });
 
 storiesOf('Widgets/Animations/Spinner', module)
-  .add('default', () => (
-    <div>
-      <Spinner />
-    </div>
-  ))
+  .add('default', () => <Spinner />)
+
 storiesOf('Widgets/Animations/Pulse', module)
-  .add('default', () => (
-    <div>
-      <Pulse />
-    </div>
-  ))
-  .add('filled', () => (
-    <div>
-      <Pulse fill />
-    </div>
-  ))
-  .add('multiple', () => (
-    <div>
-      <Pulse multiple />
-    </div>
-  ))
-  .add('multiple filled', () => (
-    <div>
-      <Pulse multiple fill />
-    </div>
-  ))
-  .add('multiple filled green', () => (
-    <div>
-      <Pulse multiple fill color="#78c781" />
-    </div>
-  ))
+  .add('default', () => <Pulse />)
+  .add('filled', () => <Pulse fill />)
+  .add('multiple', () => <Pulse multiple />)
+  .add('multiple filled', () => <Pulse multiple fill />)
+  .add('multiple filled green', () => <Pulse multiple fill color="#78c781" />)
+
+storiesOf('Widgets/Animations/Icons', module)
+  .add('checkmark', () => <Checkmark />)
+  .add('cross', () => <Cross />)
 
 storiesOf('Widgets/Button', module)
-  .add('default', () => (
-    <div>
-      <Button>click me</Button>
-    </div>
-  ))
+  .add('default', () => <Button>click me</Button>)
 
 storiesOf('Widgets/LoadingButton', module)
-  .add('default', () => (
-    <div>
-      <LoadingButton>click me</LoadingButton>
-    </div>
-  ))
-  .add('loading', () => (
-    <div>
-      <LoadingButton loading>click me</LoadingButton>
-    </div>
-  ))
+  .add('default', () => <LoadingButton>click me</LoadingButton>)
+  .add('loading', () => <LoadingButton loading>click me</LoadingButton>)
 
 storiesOf('Widgets/ValidatedField', module)
   .add('address', () => <ValidatedField type="address" />, {
@@ -87,7 +54,7 @@ storiesOf('Widgets/ValidatedField', module)
   .add('address valid', () => <ValidatedField type="address" value="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
   .add('checksum address', () => <ValidatedField type="checksum-address" />)
   .add('password', () => <ValidatedField type="password" />)
-  .add('password invalid', () => <ValidatedField type="password" value="123"/>)
+  .add('password invalid', () => <ValidatedField type="password" value="123" />)
   .add('private key', () => <ValidatedField type="private-key" />)
   .add('public key', () => <ValidatedField type="public-key" />)
   .add('signature', () => <ValidatedField type="signature" />)
