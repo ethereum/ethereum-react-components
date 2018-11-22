@@ -60,6 +60,7 @@
   "dependencies": {
     "cross-env": "^5.2.0",
     "ethereum-blockies": "git+https://github.com/ethereum/blockies.git",
+    "ethereumjs-util": "^6.0.0",
     "identicon.js": "^2.3.3",
     "jazzicon": "^1.5.0",
     "loaders.css": "^0.1.2",
