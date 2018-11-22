@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-import { storiesOf } from '@storybook/react';
-import { linkTo } from '@storybook/addon-links';
+import { storiesOf } from '@storybook/react'
+import { linkTo } from '@storybook/addon-links'
 
-import { Welcome } from '@storybook/react/demo';
+import { Welcome } from '@storybook/react/demo'
 
 
-import { Identicon, EthAddress } from '../components';
+import { Identicon, EthAddress, Spinner, Pulse, LoadingButton } from '../components';
 
 storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -21,6 +21,46 @@ storiesOf('Widgets/Identicon', module)
       markdown: '# Title ',
     },
   });
+
+storiesOf('Widgets/Animations/Spinner', module)
+  .add('default', () => (
+    <div>
+      <Spinner />
+    </div>
+  ))
+storiesOf('Widgets/Animations/Pulse', module)
+  .add('default', () => (
+    <div>
+      <Pulse />
+    </div>
+  ))
+  .add('filled', () => (
+    <div>
+      <Pulse fill />
+    </div>
+  ))
+  .add('multiple', () => (
+    <div>
+      <Pulse multiple />
+    </div>
+  ))
+  .add('multiple filled', () => (
+    <div>
+      <Pulse multiple fill />
+    </div>
+  ))
+  .add('multiple filled green', () => (
+    <div>
+      <Pulse multiple fill color="#78c781" />
+    </div>
+  ))
+
+storiesOf('Widgets/LoadingButton', module)
+  .add('default', () => (
+    <div>
+      <LoadingButton>click me</LoadingButton>
+    </div>
+  ))
 
 storiesOf('Widgets/Eth Address', module)
   .addDecorator(story => (

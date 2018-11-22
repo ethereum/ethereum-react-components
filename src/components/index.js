@@ -1,7 +1,9 @@
-import Identicon from './Identicon';
-import EthAddress from './EthAddress';
-import { FeeSelector } from './SendTx';
-import { FormCreateAccount, InputPassword } from './CreateAccount';
+import Identicon from './Identicon'
+import EthAddress from './EthAddress'
+import { FeeSelector } from './SendTx'
+import { FormCreateAccount, InputPassword } from './CreateAccount'
+import { Spinner, Pulse } from './Widgets/LoadingAnimations'
+import LoadingButton from './Widgets/LoadingButton'
 
 export {
   Identicon,
@@ -9,4 +11,7 @@ export {
   FeeSelector,
   FormCreateAccount,
   InputPassword,
+  Spinner,
+  Pulse,
+  LoadingButton
 };
