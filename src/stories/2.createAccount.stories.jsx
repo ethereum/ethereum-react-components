@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { FormCreateAccount, InputPassword } from '../components';
 
-storiesOf('Create Account/Password Input', module)
+storiesOf('Wallet/Account/Create/Password Input', module)
   .addParameters({
     info: {
       inline: true,
@@ -24,7 +24,7 @@ storiesOf('Create Account/Password Input', module)
     <InputPassword show value="my secret password" />
   ));
 
-storiesOf('Create Account/Form', module)
+storiesOf('Wallet/Account/Create/Form', module)
   .addParameters({
     info: {
       inline: true,

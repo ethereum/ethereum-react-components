@@ -40,10 +40,10 @@ storiesOf('Widgets/Animations/Icons', module)
   .add('checkmark', () => <Checkmark />)
   .add('cross', () => <Cross />)
 
-storiesOf('Widgets/Button', module)
+storiesOf('Widgets/Buttons/Button', module)
   .add('default', () => <Button>click me</Button>)
 
-storiesOf('Widgets/LoadingButton', module)
+storiesOf('Widgets/Buttons/LoadingButton', module)
   .add('default', () => <LoadingButton>click me</LoadingButton>)
   .add('loading', () => <LoadingButton loading>click me</LoadingButton>)
 
