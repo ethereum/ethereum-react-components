@@ -1,6 +1,6 @@
 import Identicon from './Identicon'
 import EthAddress from './EthAddress'
-import { FeeSelector } from './Tx/SendTx'
+import FeeSelector from './Tx/SendTx/FeeSelector'
 import { FormCreateAccount, InputPassword } from './CreateAccount'
 import NodeInfo from './Network/NodeInfo'
 import { Spinner, Pulse } from './Widgets/LoadingAnimations'
@@ -28,4 +28,4 @@ export {
   NetworkChooser,
   RpcTester,
   TxHistory
-};
+}

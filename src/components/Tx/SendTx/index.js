@@ -1,7 +1,3 @@
-import FeeSelector from './FeeSelector'
-import TransactionForm from './TransactionForm'
+import FormSendTx from './FormSendTx'
 
-export {
-  FeeSelector,
-  TransactionForm
-}
+export default FormSendTx
