@@ -1,10 +1,10 @@
 import React from 'react'
 import i18n from '../../i18n'
 import PropTypes from 'prop-types'
+import Checkbox from '../Widgets/Checkbox'
 import './InputPassword.scss'
 
 class InputPassword extends React.Component {
-  
   static displayName = 'InputPassword'
 
   static propTypes = {
@@ -22,7 +22,7 @@ class InputPassword extends React.Component {
   static defaultProps = {
     value: '',
     placeholder: '',
-    show: false,
+    show: false
   }
   constructor(props) {
     super(props)
@@ -32,31 +32,30 @@ class InputPassword extends React.Component {
   }
   render() {
     return (
-    <div className="input-password">
-      <input
-        autoFocus
-        type={this.state.showPassword ? 'text' : 'password'}
-        placeholder={this.props.placeholder}
-        className={this.props.className}
-        value={this.props.value}
-        onChange={this.props.onChange}
-      />
-      <div className="show-password-container">
+      <div className="input-password">
         <input
-          id="show-password-checkbox"
-          type="checkbox"
-          name="elements_input_bool"
-          className="show-password"
-          checked={this.state.showPassword}
-          onChange={() =>
-            this.setState({ showPassword: !this.state.showPassword })
-          }
+          autoFocus
+          type={this.state.showPassword ? 'text' : 'password'}
+          placeholder={this.props.placeholder}
+          className={this.props.className}
+          value={this.props.value}
+          onChange={this.props.onChange}
         />
-        <label htmlFor="show-password-checkbox">
-          {i18n.t('mist.popupWindows.importAccount.buttons.showPassword')}
-        </label>
+        <div className="show-password-container">
+          <Checkbox
+            id="show-password-checkbox"
+            name="elements_input_bool"
+            className="show-password"
+            checked={this.state.showPassword}
+            onChange={() =>
+              this.setState({ showPassword: !this.state.showPassword })
+            }
+            labelText={i18n.t(
+              'mist.popupWindows.importAccount.buttons.showPassword'
+            )}
+          />
+        </div>
       </div>
-    </div>
     )
   }
 }
