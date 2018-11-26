@@ -5,11 +5,14 @@ import TxRow from './TxHistoryListEntry'
 
 class TxHistory extends Component {
   renderTxList(txs) {
-    const { etherPriceUSD } = this.props
+    const { etherPriceUSD, blockNumber } = this.props
+    // FIXME hardcoded network
     const networkString = 'Main'
+
     return txs.map(tx => (
       <TxRow
         tx={tx}
+        blockNumber={blockNumber}
         key={tx.hash}
         networkString={networkString}
         etherPriceUSD={etherPriceUSD}
