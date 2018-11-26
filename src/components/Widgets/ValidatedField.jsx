@@ -1,54 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import util from 'ethereumjs-util'
 import Checkmark from './AnimatedIcons/Checkmark'
 import Cross from './AnimatedIcons/AnimatedCross'
 
 const height = 50
-
-const config = {
-  address: {
-    placeholder: 'address',
-    validator: util.isValidAddress
-  },
-  password: {
-    placeholder: 'password',
-    input: 'password',
-    validator: (pw) => {
-      const ascii = /^[ -~]+$/
-      if (!ascii.test(pw)) {
-        throw new Error('illegal character (non-ascii)')
-      }
-
-      if (pw.length < 8) {
-        throw new Error('password too short (< 8)')
-      }
-
-      return true
-    }
-  },
-  'checksum-address': {
-    placeholder: 'checksum address',
-    validator: util.isValidChecksumAddress
-  },
-  'private-key': {
-    placeholder: 'private key',
-    validator: util.isValidPrivate
-  },
-  'public-key': {
-    placeholder: 'public key',
-    validator: util.isValidPublic
-  },
-  signature: {
-    placeholder: 'signature',
-    validator: util.isValidSignature
-  },
-  'zero-address': {
-    placeholder: 'zero address',
-    validator: util.isZeroAddress
-  }
-
-}
 
 class ValidatedField extends React.Component {
   constructor(props) {
@@ -68,13 +23,20 @@ class ValidatedField extends React.Component {
   }
 
   handleValidation = async (value) => {
-    const { validator } = this.props
+    const { validator, onChange } = this.props
+
+    // graceful degradation to input field if parent wants to handle change events
+    if (typeof onChange === 'function') {
+      // e.persist()
+      return onChange(value)
+    }
+
     this.setState({
       inputValue: value,
       errorMessage: '',
       isValid: ''
     })
-    if (value === '') return
+    if (value === '' || !validator) return 0
 
     let isValid = 'processing'
     this.setState({
@@ -112,8 +74,9 @@ class ValidatedField extends React.Component {
   }
 
   render() {
-    const { type, placeholder } = this.props
+    const { type, placeholder, value, size } = this.props
     const { inputValue, errorMessage } = this.state
+    let renderedValue = inputValue ||  value
     return (
       <div>
         <div style={{
@@ -124,9 +87,9 @@ class ValidatedField extends React.Component {
         >
           <input
             type={type}
-            size="45"
+            size={size}
             placeholder={placeholder}
-            value={inputValue}
+            value={renderedValue}
             onChange={e => this.handleValidation(e.target.value)}
           />
           {this.renderIndicator()}
@@ -137,25 +100,4 @@ class ValidatedField extends React.Component {
   }
 }
 
-
-const EthValidatedField = ({ type, value = '' }) => {
-  const { validator, placeholder } = config[type]
-  const inputType = config[type].input || 'text'
-  return (
-    <ValidatedField
-      validator={validator}
-      type={inputType}
-      placeholder={placeholder}
-      value={value}
-    />
-  )
-}
-
-EthValidatedField.displayName = 'ValidatedField'
-
-EthValidatedField.propTypes = {
-  type: PropTypes.oneOf(['address', 'checksum-address', 'password', 'private-key', 'public-key', 'signature', 'zero-address']).isRequired
-}
-
-
-export default EthValidatedField
+export default ValidatedField
