@@ -345,6 +345,7 @@ const TxHistory = {
 
 const lang = {
   ...en,
+  ...en.mist, // allow translation keys without mist.x prefix
   ...CreateAccountForm,
   ...FeeSelector,
   ...TxHistory
@@ -352,14 +353,12 @@ const lang = {
 
 const i18n = {
   t: str => {
-
     let parts = str.split('.')
     let cur = lang
     for(var i = 0; i < parts.length; i++) {
       cur = cur[parts[i]]
-      if(!cur){ return str}
     }
-
+    if(typeof cur === 'string') return cur
     return (lang[str] ? lang[str] : str)
   }
 }
