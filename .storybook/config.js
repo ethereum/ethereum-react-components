@@ -52,10 +52,10 @@ function loadStoriesDynamically() {
 function loadStories() {
   require('../src/stories/1.index.stories.jsx')
   require('../src/stories/2.createAccount.stories.jsx')
-  require('../src/stories/3.sendTx.stories.jsx')
-  require('../src/stories/4.txHistory.stories.jsx')
+  require('../src/stories/3.Tx.stories.jsx')
+  require('../src/stories/4.tools.stories.jsx')
   require('../src/stories/5.wallet.stories.jsx')
-  require('../src/stories/6.nodeInfo.stories.jsx')
+  require('../src/stories/6.network.stories.jsx')
 }
 
 configure(loadStories, module);

@@ -27,6 +27,8 @@ export const Spinner = ({ pstyle }) => {
   )
 }
 
+Spinner.displayName = 'Spinner'
+
 export const Pulse = ({ pstyle, multiple = false, fill = false, color = '#CCC' }) => {
 
   let type = multiple === true ? 'multiple' : 'one'
@@ -82,3 +84,5 @@ export const Pulse = ({ pstyle, multiple = false, fill = false, color = '#CCC' }
     </div>
   )
 }
+
+Pulse.displayName = 'Pulse'

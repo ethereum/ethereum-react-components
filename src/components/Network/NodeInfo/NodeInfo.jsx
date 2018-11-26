@@ -17,8 +17,6 @@ const numeral = (val) => {
   }
 }
 
-
-
 class NodeInfo extends Component {
   constructor(props) {
     super(props)

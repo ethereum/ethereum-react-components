@@ -12,8 +12,6 @@ const numeral = (val) => {
   }
 }
 
-
-
 class NodeInfoBox extends Component {
   constructor(props) {
     super(props)
@@ -22,7 +20,7 @@ class NodeInfoBox extends Component {
     }
   }
 
-  localStatsFindingPeers() {
+  localStatsFindingPeers = () => {
     return (
       <div>
         <div className="looking-for-peers row-icon">
@@ -33,7 +31,7 @@ class NodeInfoBox extends Component {
     )
   }
 
-  localStatsStartSync() {
+  localStatsStartSync = () => {
     const { local } = this.props
     const { connectedPeers } = local.sync
 
