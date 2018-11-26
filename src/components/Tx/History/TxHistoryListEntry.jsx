@@ -1,172 +1,139 @@
 import React, { Component } from 'react'
-import ethUtils from 'ethereumjs-util'
 import Identicon from '../../Identicon'
 import i18n from '../../../i18n'
+import * as util from '../../../lib/util'
 
-// FIXME utils
-const BigNumber = ethUtils.BN
-const isHex = str => typeof str === 'string' && str.startsWith('0x')
-const toBN = str => new BigNumber(str)
-const hexToNumberString = str => toBN(str).toString(10)
-const toBigNumber = (str) => {
-  return isHex(str) ? new BigNumber(hexToNumberString(str)) : new BigNumber(str)
+const NETWORK = {
+  MAIN: 1,
+  ROPSTEN: 3,
+  RINKEBY: 4,
+  KOVAN: 42
 }
-// end
 
+const TX = {
+  FAILED: 0,
+  SUCCESS: 1
+}
 
 class TxRow extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { showDetails: false };
-  }
-
-  valueToEtherAmount = value => {
-    const { tx } = this.props
-    const theValue = toBigNumber(value)
-    const etherAmount = theValue.div(new BigNumber('1000000000000000000'))
-    return etherAmount;
-  };
+  state = { showDetails: false }
 
   toggleDetails() {
-    this.setState({ showDetails: !this.state.showDetails });
+    this.setState({ showDetails: !this.state.showDetails })
   }
 
+  renderBold = (label, val) => (
+    <div>
+      {i18n.t('txHistory.gasUsed')}:{' '}
+      <span className="bold">{util.hexToNumberString(val)}</span>
+    </div>
+  )
+
   renderDetails() {
-    const { tx, etherPriceUSD } = this.props;
+    const { tx, etherPriceUSD, blockNumber } = this.props
 
     if (!this.state.showDetails) {
       return (
         <div className="tx-moreDetails" onClick={() => this.toggleDetails()}>
           Show details
         </div>
-      );
+      )
     }
 
-    let txHashLink = 'Unavailable';
+    let txHashLink = 'Unavailable'
     if (tx.hash) {
-      let subdomain = '';
-      if (tx.networkId === 3) {
-        subdomain = 'ropsten.';
-      } else if (tx.networkId === 4) {
-        subdomain = 'rinkeby.';
-      } else if (tx.networkId === 42) {
-        subdomain = 'kovan.';
+      let subdomain = ''
+      if (tx.networkId === NETWORK.ROPSTEN) {
+        subdomain = 'ropsten.'
+      } else if (tx.networkId === NETWORK.RINKEBY) {
+        subdomain = 'rinkeby.'
+      } else if (tx.networkId === NETWORK.KOVAN) {
+        subdomain = 'kovan.'
       }
       txHashLink = (
-        <a
-          href={`https://${subdomain}etherscan.io/tx/${tx.hash}`}
-          target="_blank"
-        >
+        <a href={`https://${subdomain}etherscan.io/tx/${tx.hash}`} target="_blank">
           {tx.hash}
         </a>
-      );
+      )
     }
 
-    const etherAmount = this.valueToEtherAmount(tx.value);
-    let etherAmountUSD;
-    if (tx.networkId === 1 && etherPriceUSD) {
-      etherAmountUSD = this.toBigNumber(etherAmount)
-        .times(new BigNumber(etherPriceUSD))
-        .toString()
-        .toFixed(2);
+    const etherAmount = util.weiToEther(tx.value)
+    let etherAmountUSD
+    if (tx.networkId === NETWORK.MAIN && etherPriceUSD) {
+      etherAmountUSD = util.toUsd(etherAmount, 'ether', etherPriceUSD)
     }
-    const gasPriceEther = this.valueToEtherAmount(tx.gasPrice);
-    const gasPriceGwei = new BigNumber(gasPriceEther)
-      .times(new BigNumber('1000000000'))
-      .toString()
-      .toFixed();
-    let txCostEther;
-    let txCostUSD;
+    const gasPriceEther = util.weiToEther(tx.gasPrice)
+    const gasPriceGwei = util.etherToGwei(gasPriceEther)
+    let txCostEther
+    let txCostUSD
     if (tx.blockNumber) {
       const txCost = this.toBigNumber(tx.gasUsed)
-        .times(this.toBigNumber(tx.gasPrice))
-        .toFixed();
-      txCostEther = this.valueToEtherAmount(txCost);
-      if (tx.networkId === 1 && etherPriceUSD > 0) {
-        txCostUSD = this.toBigNumber(txCostEther)
-          .times(new BigNumber(etherPriceUSD))
-          .toString()
-          .toFixed(2);
+        .mul(this.toBigNumber(tx.gasPrice))
+        .toString()
+        .toFixed()
+      txCostEther = util.weiToEther(txCost)
+      if (tx.networkId === NETWORK.MAIN && etherPriceUSD > 0) {
+        txCostUSD = util.toUsd(txCostEther, 'ether', etherPriceUSD)
       }
     }
 
     let status = (
       <span className="bold" style={{ color: 'grey' }}>
-        {i18n.t('mist.txHistory.statusPending')}
+        {i18n.t('txHistory.statusPending')}
       </span>
-    );
-    if (tx.status === 0) {
+    )
+    if (tx.status === TX.FAILED) {
       status = (
         <span className="bold" style={{ color: 'red' }}>
-          {i18n.t('mist.txHistory.statusFailed')}
+          {i18n.t('txHistory.statusFailed')}
         </span>
-      );
-    } else if (tx.status === 1 && tx.blockNumber) {
-      const blockNumber = _.max([
-        this.props.nodes.local.blockNumber,
-        this.props.nodes.remote.blockNumber
-      ]);
-      const numberConfirmations = blockNumber - tx.blockNumber;
+      )
+    } else if (tx.status === TX.SUCCESS && tx.blockNumber) {
+      
+      const numberConfirmations = blockNumber - tx.blockNumber
       status = (
         <span>
           <span className="bold" style={{ color: 'green' }}>
-            {i18n.t('mist.txHistory.statusConfirmed')}
+            {i18n.t('txHistory.statusConfirmed')}
           </span>{' '}
           <span>
-            ({i18n.t('mist.txHistory.confirmations', {
+            ({i18n.t('txHistory.confirmations', {
               count: numberConfirmations
             })})
           </span>
         </span>
-      );
+      )
     }
 
     return (
       <div>
         <div>
-          {i18n.t('mist.txHistory.status')}: {status}
+          {i18n.t('txHistory.status')}: {status}
         </div>
+        {this.renderBold('txHistory.txHash', txHashLink)}
+
         <div>
-          {i18n.t('mist.txHistory.txHash')}:{' '}
-          <span className="bold">{txHashLink}</span>
-        </div>
-        <div>
-          {i18n.t('mist.txHistory.etherAmount')}:{' '}
+          {i18n.t('txHistory.etherAmount')}:{' '}
           <span className="bold">{etherAmount} ether</span>{' '}
           {etherAmountUSD && <span> (${etherAmountUSD} USD)</span>}
         </div>
+        {this.renderBold('txHistory.nonce', tx.nonce)}
+        {this.renderBold('txHistory.gasLimit', tx.gas)}
+        {tx.gasUsed && this.renderBold('txHistory.gasUsed', tx.gasUsed)}
         <div>
-          {i18n.t('mist.txHistory.nonce')}:{' '}
-          <span className="bold">{web3.utils.hexToNumberString(tx.nonce)}</span>
-        </div>
-        <div>
-          {i18n.t('mist.txHistory.gasLimit')}:{' '}
-          <span className="bold">{web3.utils.hexToNumberString(tx.gas)}</span>
-        </div>
-        {tx.gasUsed && (
-          <div>
-            {i18n.t('mist.txHistory.gasUsed')}:{' '}
-            <span className="bold">
-              {web3.utils.hexToNumberString(tx.gasUsed)}
-            </span>
-          </div>
-        )}
-        <div>
-          {i18n.t('mist.txHistory.gasPrice')}:{' '}
-          <span className="bold">{gasPriceEther} ether</span> ({gasPriceGwei}{' '}
-          Gwei)
+          {i18n.t('txHistory.gasPrice')}:{' '}
+          <span className="bold">{gasPriceEther} ether</span> ({gasPriceGwei}{' '} Gwei)
         </div>
         {txCostEther && (
           <div>
-            {i18n.t('mist.txHistory.txCost')}:{' '}
+            {i18n.t('txHistory.txCost')}:{' '}
             <span className="bold">{txCostEther} ether</span>
             {txCostUSD && <span> (${txCostUSD} USD)</span>}
           </div>
         )}
         {tx.data && (
           <div>
-            {i18n.t('mist.txHistory.data')}:{' '}
+            {i18n.t('txHistory.data')}:{' '}
             <span className="bold">{tx.data}</span>
           </div>
         )}
@@ -174,32 +141,41 @@ class TxRow extends Component {
           Hide details
         </div>
       </div>
-    );
+    )
+  }
+
+  renderAddress = (label, address) => {
+    return (
+      <div>
+        {i18n.t(label)}:
+        <Identicon seed={address} size="small" />
+        <span className="bold">{address}</span>
+      </div>
+    )
   }
 
   render() {
-    const { tx, networkString } = this.props
-    let network = '';
+    const { tx, networkString, token } = this.props
+    let network = ''
     if (networkString !== 'Main') {
-      network = networkString;
+      network = networkString
     }
-    const isTokenTransfer =
-      tx.executionFunction === 'transfer(address,uint256)';
-    let description;
-    let tokensTo;
+    const isTokenTransfer = tx.executionFunction === 'transfer(address,uint256)'
+    let description
+    let tokensTo
     if (isTokenTransfer) {
-      const decimals = tx.token.decimals;
-      const tokenCount = tx.params[1].value.slice(0, -Math.abs(decimals));
-      const tokenSymbol = this.props.token.symbol || 'tokens';
-      description = `Transferred ${tokenCount} ${tokenSymbol}`;
-      tokensTo = tx.params[0].value;
+      const decimals = tx.token.decimals
+      const tokenCount = tx.params[1].value.slice(0, -Math.abs(decimals))
+      const tokenSymbol = token.symbol || 'tokens'
+      description = `Transferred ${tokenCount} ${tokenSymbol}`
+      tokensTo = tx.params[0].value
     } else if (tx.isNewContract) {
-      description = 'Created New Contract';
+      description = 'Created New Contract'
     } else if (tx.executionFunction) {
-      description = 'Executed Contract Function';
+      description = 'Executed Contract Function'
     } else {
-      const etherAmount = this.valueToEtherAmount(tx.value);
-      description = `Sent ${etherAmount} ether`;
+      const etherAmount = util.weiToEther(tx.value)
+      description = `Sent ${etherAmount} ether`
     }
 
     return (
@@ -209,31 +185,15 @@ class TxRow extends Component {
           <div className="tx-date">{tx.createdAt}</div>
         </div>
         <div className="tx-description">{description}</div>
-        {tx.contractAddress && (
-          <div>
-            {i18n.t('mist.txHistory.newContract')}:
-            <Identicon seed={tx.contractAddress} size="small" />
-            <span className="bold">{tx.contractAddress}</span>
-          </div>
-        )}
-        <div>
-          {i18n.t('mist.txHistory.from')}:
-          <Identicon seed={tx.from} size="small" />
-          <span className="bold">{tx.from}</span>
-        </div>
-        {isTokenTransfer && (
-          <div>
-            {i18n.t('mist.txHistory.to')}:
-            <Identicon seed={tokensTo} size="small" />
-            <span className="bold">{tokensTo}</span>
-          </div>
-        )}
+        {tx.contractAddress && this.renderAddress('txHistory.newContract', tx.contractAddress)}
+        {this.renderAddress('txHistory.from', tx.from)}
+        {isTokenTransfer && this.renderAddress('txHistory.to', tokensTo)}
         {!isTokenTransfer && (
           <div>
             {tx.to && (
               <div>
-                {i18n.t('mist.txHistory.to')}
-                {tx.toIsContract && ' ' + i18n.t('mist.txHistory.contract')}:
+                {i18n.t('txHistory.to')}
+                {tx.toIsContract && ' ' + i18n.t('txHistory.contract')}:
                 <Identicon seed={tx.to} size="small" />
                 <span className="bold">{tx.to}</span>
               </div>
@@ -242,7 +202,7 @@ class TxRow extends Component {
         )}
         {this.renderDetails()}
       </div>
-    );
+    )
   }
 }
 
