@@ -356,6 +356,7 @@ const i18n = {
     let parts = str.split('.')
     let cur = lang
     for(var i = 0; i < parts.length; i++) {
+      if(cur === undefined) break
       cur = cur[parts[i]]
     }
     if(typeof cur === 'string') return cur
