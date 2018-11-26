@@ -1,3 +1,3 @@
-import TxHistory from './TxHistory'
+import TxHistory from './TxHistoryList'
 
 export default TxHistory
