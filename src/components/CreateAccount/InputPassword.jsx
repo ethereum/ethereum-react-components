@@ -2,6 +2,7 @@ import React from 'react'
 import i18n from '../../i18n'
 import PropTypes from 'prop-types'
 import Checkbox from '../Widgets/Checkbox'
+import ValidatedField from '../Widgets/ValidatedField'
 import './InputPassword.scss'
 
 class InputPassword extends React.Component {
@@ -14,7 +15,7 @@ class InputPassword extends React.Component {
     /** handles value changes */
     onChange: PropTypes.func.isRequired,
     /** value to initialize the input field */
-    value: PropTypes.string,
+    value: PropTypes.string.isRequired,
     /** true: input is visible as plaintext */
     show: PropTypes.bool
   }
@@ -33,7 +34,7 @@ class InputPassword extends React.Component {
   render() {
     return (
       <div className="input-password">
-        <input
+        <ValidatedField
           autoFocus
           type={this.state.showPassword ? 'text' : 'password'}
           placeholder={this.props.placeholder}

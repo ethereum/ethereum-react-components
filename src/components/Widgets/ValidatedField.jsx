@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import Checkmark from './AnimatedIcons/Checkmark'
 import Cross from './AnimatedIcons/AnimatedCross'
 
@@ -22,7 +23,7 @@ class ValidatedField extends React.Component {
     this.handleValidation(inputValue)
   }
 
-  handleValidation = async (value) => {
+  handleValidation = async value => {
     const { validator, onChange } = this.props
 
     // graceful degradation to input field if parent wants to handle change events
@@ -68,24 +69,23 @@ class ValidatedField extends React.Component {
     if (isValid === 'valid') return <Checkmark size={24} />
     if (isValid === 'invalid') return <Cross size={24} />
     if (isValid === 'error') return <Cross size={24} />
-    return (
-      isValid
-    )
+    return isValid
   }
 
   render() {
     const { type, placeholder, value, size } = this.props
     const { inputValue, errorMessage } = this.state
-    let renderedValue = inputValue ||  value
+    let renderedValue = inputValue || value
+
     return (
       <div>
-        <div style={{
-          height,
-          display: 'flex',
-          alignItems: 'center'
-        }}
-        >
-          <input
+        <div
+          style={{
+            height,
+            display: 'flex',
+            alignItems: 'center'
+          }}>
+          <StyledInput
             type={type}
             size={size}
             placeholder={placeholder}
@@ -101,3 +101,21 @@ class ValidatedField extends React.Component {
 }
 
 export default ValidatedField
+
+const StyledInput = styled.input`
+  border: 0;
+  border-bottom: solid 2px #ccc6c6;
+  background-color: #f5f4f2;
+  color: #4a90e2;
+  width: 300px;
+  max-width: 100%;
+  margin-top: 18px;
+  padding: 6px 16px;
+  padding-bottom: 4px;
+  font-size: 1em;
+  font-weight: 300;
+  &:focus {
+    outline: 0;
+    border-color: #4a90e2;
+  }
+`
