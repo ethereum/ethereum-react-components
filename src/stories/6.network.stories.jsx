@@ -5,7 +5,7 @@ import { NodeInfo } from '../components'
 import NodeInfoDot from '../components/Network/NodeInfo/NodeInfoDot'
 import NodeInfoBox from '../components/Network/NodeInfo/NodeInfoBox'
 import NetworkChooser from '../components/Network/NetworkChooser'
-import RpcTest from '../components/Network/RPC/test'
+import RpcTest from '../components/Network/RPC/RpcTester'
 
 storiesOf('Network/Node Info/Dot', module)
   .add('no connection ', () => <NodeInfoDot />)
@@ -24,4 +24,8 @@ storiesOf('Network/Network Chooser', module)
   .add('default', () => <div style={{width: 200}}> <NetworkChooser /> </div>)
 
 storiesOf('Network/Rpc', module)
-  .add('default', () => <div style={{width: 200}}> <RpcTest /> </div>)
+  .add('default', () => (
+    <div style={{ width: 200 }}>
+      <RpcTest />
+    </div>
+  ))
