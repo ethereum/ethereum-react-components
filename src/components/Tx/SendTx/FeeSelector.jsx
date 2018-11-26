@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
-import i18n from '../../i18n'
+import React, { Component } from 'react'
+import i18n from '../../../i18n'
+
+const util = {
+  
+}
 
 class FeeSelector extends Component {
   constructor(props) {
@@ -9,21 +13,25 @@ class FeeSelector extends Component {
       ticks: 1,
       gasRetries: 0
     }
-
   }
+
   parseFee = () => {
 
   }
+
   handleClick = () => {
+    this.props.togglePriority()
+  }
+
+  renderStatus = () => {
 
   }
-  renderStatus = () => {
-    
-  }
+
   render() {
     return (
       <div className="fee-selector">
-        {this.props.priority ? (
+        {this.props.priority 
+        ? (
           <span
             onClick={this.handleClick}
             className="fee-selector__btn"
@@ -31,7 +39,8 @@ class FeeSelector extends Component {
           >
             {i18n.t('mist.sendTx.priorityFee')}
           </span>
-        ) : (
+        ) 
+        : (
           <span
             onClick={this.handleClick}
             className="fee-selector__btn"
