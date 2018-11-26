@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import FeeSelector from '../components/SendTx/FeeSelector';
+import FeeSelector from '../components/Tx/SendTx/FeeSelector';
 
 storiesOf('Tx/Fee Selector', module)
   .add('default ', () => (
@@ -27,3 +27,9 @@ storiesOf('Tx/Fee Selector', module)
 
 storiesOf('Tx/Send', module)
   .add('no connection ', () => <span>placeholder</span>)
+
+
+storiesOf('Tx/History', module)
+  .add('default ', () => (
+    <span>placeholder</span>
+  ));
