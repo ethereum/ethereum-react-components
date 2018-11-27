@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.0.8...v1.1.0) (2018-11-27)
+
+
+### Features
+
+* Introduces ValidatedField within InputPassword ([#20](https://github.com/PhilippLgh/ethereum-react-components/issues/20)) ([87c17fc](https://github.com/PhilippLgh/ethereum-react-components/commit/87c17fc))
+
+
+
 <a name="1.0.8"></a>
 ## [1.0.8](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.0.7...v1.0.8) (2018-11-26)
 
