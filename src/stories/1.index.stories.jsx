@@ -22,18 +22,22 @@ storiesOf('Welcome', module).add('to Ethereum Components', () => (
 ))
 
 storiesOf('Widgets/Identicon', module)
-  .add('with seed', () => (
-    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
+  .add('default', () => <Identicon />)
+  .add('tiny (with seed)', () => (
+    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="tiny" />
   ))
-  .add(
-    'with radius',
-    () => <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />,
-    {
-      notes: {
-        markdown: '# Title '
-      }
-    }
-  )
+  .add('small (with seed)', () => (
+    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="small" />
+  ))
+  .add('medium (with seed)', () => (
+    <Identicon
+      seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
+      size="medium"
+    />
+  ))
+  .add('large (with seed)', () => (
+    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="large" />
+  ))
 
 storiesOf('Widgets/Animations/Spinner', module).add('default', () => (
   <Spinner />
