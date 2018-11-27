@@ -326,6 +326,9 @@ const en = {
 }
 
 const CreateAccountForm = {
+  'mist.popupWindows.requestAccount.errors.passwordMismatch': "Your passwords don't match.",
+  'mist.popupWindows.requestAccount.errors.passwordTooShort': 'Make a longer password',
+  'mist.popupWindows.requestAccount.backupHint': "Make sure you backup your keyfiles AND password!\n\nYou can find your keyfiles folder using the main menu -> File -> Backup -> Accounts. Keep a copy of the \"keystore\" folder where you can't lose it!",
   'mist.popupWindows.requestAccount.enterPassword': 'enter password',
   'mist.popupWindows.requestAccount.repeatPassword': 'repeat password',
   'mist.popupWindows.importAccount.buttons.showPassword': 'show password',
