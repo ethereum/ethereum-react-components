@@ -10,7 +10,6 @@ import {
   Pulse,
   Button,
   Checkbox,
-  LoadingButton,
   ValidatedField,
   ConverterForm
 } from '../components'
@@ -54,13 +53,21 @@ storiesOf('Widgets/Animations/Icons', module)
   .add('checkmark', () => <Checkmark />)
   .add('cross', () => <Cross />)
 
-storiesOf('Widgets/Buttons/Button', module).add('default', () => (
-  <Button>click me</Button>
-))
-
-storiesOf('Widgets/Buttons/LoadingButton', module)
-  .add('default', () => <LoadingButton>click me</LoadingButton>)
-  .add('loading', () => <LoadingButton loading>click me</LoadingButton>)
+storiesOf('Widgets/Buttons/Button', module)
+  .add('default', () => <Button>click me</Button>)
+  .add('disabled', () => <Button disabled>click me</Button>)
+  .add('secondary', () => <Button secondary>click me</Button>)
+  .add('secondary disabled', () => (
+    <Button secondary disabled>
+      click me
+    </Button>
+  ))
+  .add('flat', () => <Button flat>click me</Button>)
+  .add('flat secondary', () => (
+    <Button flat secondary>
+      click me
+    </Button>
+  ))
 
 storiesOf('Widgets/Checkbox', module)
   .add('unchecked', () => (

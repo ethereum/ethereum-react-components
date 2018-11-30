@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import i18n from '../../i18n'
-import { InputPassword } from '..'
 import PropTypes from 'prop-types'
+import { Button, InputPassword } from '..'
 import './FormCreateAccount.scss'
 
 // TODO this falls under category API dependencies and needs to be
@@ -125,12 +125,12 @@ class CreateAccount extends Component {
           )}
         </div>
         <div className="dapp-modal-buttons">
-          <button className="cancel" onClick={e => this.handleCancel(e)}>
+          <Button flat secondary onClick={e => this.handleCancel(e)}>
             {i18n.t('buttons.cancel')}
-          </button>
-          <button className="ok dapp-primary-button" type="submit">
+          </Button>
+          <Button flat type="submit">
             {i18n.t('buttons.ok')}
-          </button>
+          </Button>
         </div>
       </div>
     )
