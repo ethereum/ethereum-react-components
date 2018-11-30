@@ -15,42 +15,30 @@ const dummyTx = {
   value: '1000000000000000000'
 }
 
-storiesOf('Tx/Fee Selector', module)
-  .add('default ', () => (
-    <FeeSelector />
-  ))
+storiesOf('Tx/Fee Selector', module).add('default ', () => <FeeSelector />)
 
 storiesOf('Tx/Submit Form', module)
   .add('default', () => <FormSubmitTx />)
+  .add('confirming', () => <FormSubmitTx unlocking />)
+  .add('error', () => <FormSubmitTx error />)
 
-storiesOf('Tx/Send Tx', module)
-  .add('default', () => { 
-    const nodes = {
-      network: 'main',
-      local: { blockNumber: 100 },
-      remote: { blockNumber: 100 }
-    }
-    return(
-      <SendTx network={nodes.network} newTx={dummyTx} />
-    )
-  })
+storiesOf('Tx/Send Tx', module).add('default', () => {
+  const nodes = {
+    network: 'main',
+    local: { blockNumber: 100 },
+    remote: { blockNumber: 100 }
+  }
+  return <SendTx network={nodes.network} newTx={dummyTx} />
+})
 
-
-storiesOf('Tx/History', module)
-  .add('default ', () => {
-    const nodes = {
-      local: { blockNumber: 100 },
-      remote: { blockNumber: 100 }
-    }
-    const { local, remote } = nodes
-    const blockNumber = Math.max(local.blockNumber, remote.blockNumber)
-    return (
-      <TxHistory
-        etherPriceUSD="200"
-        blockNumber={blockNumber}
-        txs={[
-          dummyTx
-        ]}
-      />
-    )
-  })
+storiesOf('Tx/History', module).add('default ', () => {
+  const nodes = {
+    local: { blockNumber: 100 },
+    remote: { blockNumber: 100 }
+  }
+  const { local, remote } = nodes
+  const blockNumber = Math.max(local.blockNumber, remote.blockNumber)
+  return (
+    <TxHistory etherPriceUSD="200" blockNumber={blockNumber} txs={[dummyTx]} />
+  )
+})
