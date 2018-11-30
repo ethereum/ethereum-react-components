@@ -1,9 +1,22 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled, { css } from 'styled-components'
+import { Button } from '../../'
 import i18n from '../../../i18n'
 
 class FormSubmitTx extends Component {
-  state = {
-    pw: ''
+  static propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    unlocking: PropTypes.bool,
+    error: PropTypes.bool
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      pw: ''
+    }
   }
 
   handleSubmit = e => {
@@ -14,47 +27,74 @@ class FormSubmitTx extends Component {
 
   render() {
     const { pw } = this.state
-    const { gasPrice, gasError, estimatedGas, unlocking } = this.props
-
-    /* FIXME
-    if (!estimatedGas || !gasPrice || gasPrice === 0 || gasPrice === '0x0') {
-      return null
-    }
-    */
+    const { error, unlocking } = this.props
 
     if (unlocking) {
-      return (
-        <div className="footer--unlocking">
-          <h2>{i18n.t('mist.sendTx.unlocking')}</h2>
-        </div>
-      )
+      return <UnlockingDiv>{i18n.t('mist.sendTx.unlocking')}</UnlockingDiv>
     }
 
     return (
-      <div className="footer">
-        <form
-          onSubmit={this.handleSubmit}
-          className={gasError ? 'footer__form error' : 'footer__form'}
-        >
-          <input
-            className="footer__input"
-            type="password"
-            value={pw}
-            onChange={e => this.setState({ pw: e.target.value })}
-            placeholder={i18n.t('mist.sendTx.enterPassword')}
-          />
+      <StyledForm onSubmit={this.handleSubmit} error={error}>
+        <StyledInput
+          type="password"
+          value={pw}
+          error={error}
+          onChange={e => this.setState({ pw: e.target.value })}
+          placeholder={i18n.t('mist.sendTx.enterPassword')}
+        />
 
-          <button
-            className={gasError ? 'footer__btn error' : 'footer__btn'}
-            disabled={!pw}
-            type="submit"
-          >
-            {i18n.t('mist.sendTx.execute')}
-          </button>
-        </form>
-      </div>
+        <Button withinInput error={error} disabled={!pw} type="submit">
+          {i18n.t('mist.sendTx.execute')}
+        </Button>
+      </StyledForm>
     )
   }
 }
 
 export default FormSubmitTx
+
+const StyledForm = styled.form`
+  display: flex;
+  font-weight: bold;
+  border: 1px solid #00aafa;
+  border-radius: 6px;
+  background-color: white;
+
+  ${props =>
+    props.error &&
+    css`
+      border: 1px solid #f66d6f;
+    `}
+`
+
+const StyledInput = styled.input`
+  color: #00aafa;
+  border: none;
+  background-color: transparent;
+  height: 54px;
+  width: 100%;
+  padding: 0 12px;
+  margin: 0;
+
+  ::placeholder {
+    color: black;
+  }
+
+  ${props =>
+    props.error &&
+    css`
+      color: #f66d6f;
+    `}
+`
+
+const UnlockingDiv = styled.div`
+  display: inline-block;
+  padding: 6px 8px 2px;
+  margin: 48px 0;
+  font-size: 1em;
+  text-transform: uppercase;
+  background: #827a7a;
+  color: #fafafa;
+  font-family: 'Montserrat';
+  font-weight: 400;
+`

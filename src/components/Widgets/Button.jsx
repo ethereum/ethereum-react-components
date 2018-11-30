@@ -6,7 +6,9 @@ const Button = ({
   children,
   onClick,
   type = 'button',
+  error = false,
   disabled = false,
+  withinInput = false,
   loading = false,
   flat = false,
   secondary = false
@@ -14,8 +16,10 @@ const Button = ({
   <StyledButton
     className="Button"
     type={type}
+    error={error}
     disabled={disabled}
     onClick={onClick}
+    withinInput={withinInput}
     flat={flat}
     secondary={secondary}>
     {children}
@@ -26,7 +30,8 @@ Button.propTypes = {
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
   flat: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  withinInput: PropTypes.bool,
+  onClick: PropTypes.func,
   secondary: PropTypes.bool,
   type: PropTypes.oneOf(['button', 'reset', 'submit'])
 }
@@ -65,4 +70,18 @@ const StyledButton = styled.button`
       cursor: not-allowed;
       opacity: 0.6;
     `}
+
+  ${props =>
+    props.withinInput &&
+    css`
+      margin: 4px;
+    `}
+
+  ${props =>
+    props.error &&
+    css`
+      border: 1px solid #f66d6f;
+      background-color: #f66d6f;
+    `}
+
 `
