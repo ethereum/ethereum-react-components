@@ -84,13 +84,12 @@ storiesOf('Widgets/Eth Address', module)
   .add('shortened', () => (
     <EthAddress short address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
   ))
-  .add('with identicon', () => (
+  .add('with callback', () => (
     <EthAddress
-      identicon
+      onClick={() => alert('clicked!')}
       address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
     />
   ))
-  .add('click -> copy to clipboard', () => <span>placeholder</span>)
 
 storiesOf('Widgets/Eth QR', module)
   .add('default', () => (

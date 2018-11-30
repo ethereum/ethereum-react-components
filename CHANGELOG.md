@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.2...v1.1.3) (2018-11-30)
+
+
+### Bug Fixes
+
+* updates EthAddress with wallet feedback ([#25](https://github.com/PhilippLgh/ethereum-react-components/issues/25)) ([bc6940e](https://github.com/PhilippLgh/ethereum-react-components/commit/bc6940e))
+
+
+
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.1...v1.1.2) (2018-11-30)
+
+
+### Bug Fixes
+
+* introduces Button styling with variations ([#24](https://github.com/PhilippLgh/ethereum-react-components/issues/24)) ([1d2a03a](https://github.com/PhilippLgh/ethereum-react-components/commit/1d2a03a))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.0...v1.1.1) (2018-11-28)
 
