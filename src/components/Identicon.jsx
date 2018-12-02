@@ -47,7 +47,6 @@ export default class Identicon extends Component {
 
     const seed = this.props.seed ? this.props.seed : '0x0000000000000000000000000000000000000000'
     const size = this.props.size ? this.props.size : 'medium'
-    const image = this.identiconData(seed.toLowerCase())
     const classes = this.props.classes ? this.props.classes : ''
 
     seed === '0x0000000000000000000000000000000000000000'
@@ -57,7 +56,7 @@ export default class Identicon extends Component {
     return (
       <StyledSpan
         className={classes}
-        backgroundImage={`url('${image}')`}
+        backgroundImage={`url('${this.identiconData(seed.toLowerCase())}')`}
         size={size}
         title={this.props.title 
           ? `This is a security icon. If there were any change to the address, the resulting icon would be a completely different one`
@@ -65,7 +64,7 @@ export default class Identicon extends Component {
         }
         >
         <StyledImg
-          src={image}
+          src={this.identiconDataPixel(seed.toLowerCase())}
           className="identicon-pixel"
         />
       </StyledSpan>
