@@ -1,17 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const EthAddress = ({ address, short = false, onClick }) => (
-  <span className="eth-address" onClick={onClick}>
-    {short
-      ? [
-          ...address.split('').slice(0, 10),
-          '...',
-          ...address.split('').slice(42 - 10)
-        ].join('')
-      : address}
-  </span>
-)
+const EthAddress = ({ address, short = false, onClick, classes }) => {
+
+ !address
+   ? short = false
+   : null
+
+  return (
+    <span className={"eth-address " + classes} onClick={onClick}>
+      {short
+        ? [
+            ...address.split('').slice(0, 10),
+            '...',
+            ...address.split('').slice(42 - 10)
+          ].join('')
+        : address}
+    </span>
+  )
+}
 
 EthAddress.displayName = 'EthAddress'
 
