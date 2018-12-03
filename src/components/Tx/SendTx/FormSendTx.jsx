@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-// import ExecutionContext from './ExecutionContext'
+import TxDescription from './TxDescription'
 import FeeSelector from './FeeSelector'
 import FormSubmit from './FormSubmitTx'
-// import GasNotification from './GasNotification'
+import GasNotification from './GasNotification'
 import TxParties from './TxParties'
 
 
@@ -70,23 +70,29 @@ class SendTx extends Component {
       estimatedGas,
       gasError,
       gasLoading,
-      unlocking
+      unlocking,
+      data
     } = newTx
 
     const {
       isNewContract,
       toIsContract,
       executionFunction,
-      params
+      params,
+      token
     } = newTx
 
-    const { fromIsContract, hasSignature } = this.state
+    const {
+      fromIsContract,
+      hasSignature,
+      showFormattedParams,
+      providedGas
+    } = this.state
 
     return (
       <div className="popup-windows tx-info">
         <div ref={divElement => (this.divElement = divElement)}>
-          {/*
-          <ExecutionContext
+          <TxDescription
             adjustWindowHeight={this.adjustWindowHeight}
             data={data}
             estimatedGas={estimatedGas}
@@ -98,14 +104,13 @@ class SendTx extends Component {
             network={network}
             params={params}
             etherPriceUSD={etherPriceUSD}
-            providedGas={this.state.providedGas}
-            showFormattedParams={this.state.showFormattedParams}
+            providedGas={providedGas}
+            showFormattedParams={showFormattedParams}
             to={to}
             toIsContract={toIsContract}
             value={value}
             token={token}
           />
-          */}
 
           <TxParties
             fromIsContract={fromIsContract}
@@ -131,14 +136,12 @@ class SendTx extends Component {
             togglePriority={this.togglePriority}
           />
 
-          {/*
           <GasNotification
             estimatedGas={estimatedGas}
             gasLoading={gasLoading}
             toIsContract={toIsContract}
             to={to}
           />
-          */}
 
           <div className="footer">
             <FormSubmit

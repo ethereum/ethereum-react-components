@@ -4,7 +4,7 @@ import ethUtils from 'ethereumjs-util'
 const BigNumber = ethUtils.BN
 
 const isHex = str => typeof str === 'string' && str.startsWith('0x')
-const toBN = str => new BigNumber(str)
+export const toBN = str => new BigNumber(str)
 export const hexToNumberString = str => toBN(str).toString(10)
 
 export const toBigNumber = (str) => {
@@ -33,4 +33,9 @@ export const toUsd = (etherAmount, format, etherPriceUSD) => {
 
 export const networkIdToName = (str) => {
   return str
+}
+
+// FIXME wrapper for EthTools.formatBalance
+export const formatBalance = () => {
+
 }
