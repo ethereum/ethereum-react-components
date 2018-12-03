@@ -1,34 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-const EthAddress = ({ address, short = false, onClick, classes }) => {
+class EthAddress extends Component {
+  static propTypes = {
+    /** Ethereum public address (42 chars)  */
+    address: PropTypes.string.isRequired,
+    /** Display abbreviated form with '...' (23 chars)  */
+    short: PropTypes.bool,
+    /** Callback to be executed onClick */
+    onClick: PropTypes.func,
+    classes: PropTypes.string
+  }
 
- !address
-   ? short = false
-   : null
+  static defaultProps = {
+    short: false
+  }
 
-  return (
-    <span className={"eth-address " + classes} onClick={onClick}>
-      {short
-        ? [
-            ...address.split('').slice(0, 10),
-            '...',
-            ...address.split('').slice(42 - 10)
-          ].join('')
-        : address}
-    </span>
-  )
-}
+  render() {
+    const { address, classes, onClick, short } = this.props
 
-EthAddress.displayName = 'EthAddress'
-
-EthAddress.propTypes = {
-  /** Ethereum public address (42 chars)  */
-  address: PropTypes.string.isRequired,
-  /** Display abbreviated form with '...' (23 chars)  */
-  short: PropTypes.bool,
-  /** Callback to be executed onClick */
-  onClick: PropTypes.func
+    return (
+      <span className={'eth-address ' + classes} onClick={onClick}>
+        {address && short
+          ? [
+              ...address.split('').slice(0, 10),
+              '...',
+              ...address.split('').slice(42 - 10)
+            ].join('')
+          : address}
+      </span>
+    )
+  }
 }
 
 export default EthAddress

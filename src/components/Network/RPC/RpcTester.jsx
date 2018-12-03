@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Select from 'react-select'
-import axios from 'axios';
+import axios from 'axios'
 
 const jsApi = [
   'net_version',
   'net_peerCount',
   'eth_protocolVersion',
   'eth_syncing',
-  'web3_clientVersion',
+  'web3_clientVersion'
 ]
 
 const options = jsApi.map(command => ({
@@ -17,22 +17,20 @@ const options = jsApi.map(command => ({
 
 // geth --rpc --rpccorsdomain "*"
 
-class Rpc extends React.Component {
+class Rpc extends Component {
   state = {
     selectedMethod: null,
     result: 'no result'
   }
 
-  componentDidMount = async () => {
+  componentDidMount = async () => {}
 
-  }
-
-  handleChange = (selection) => {
+  handleChange = selection => {
     this.setState({ selectedMethod: selection.value })
     this.makeRequest(selection.value)
   }
 
-  makeRequest = async (selectedMethod) => {
+  makeRequest = async selectedMethod => {
     const url = 'http://localhost:7545'
     const obj = {
       jsonrpc: '2.0',
@@ -64,9 +62,7 @@ class Rpc extends React.Component {
           options={options}
         />
         <h2>Result</h2>
-        <pre>
-          {result}
-        </pre>
+        <pre>{result}</pre>
       </div>
     )
   }

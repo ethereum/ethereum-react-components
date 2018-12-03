@@ -1,42 +1,37 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-const Button = ({
-  children,
-  onClick,
-  type = 'button',
-  error = false,
-  disabled = false,
-  withinInput = false,
-  loading = false,
-  flat = false,
-  secondary = false
-}) => (
-  <StyledButton
-    className="Button"
-    type={type}
-    error={error}
-    disabled={disabled}
-    onClick={onClick}
-    withinInput={withinInput}
-    flat={flat}
-    secondary={secondary}>
-    {children}
-  </StyledButton>
-)
+class Button extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+    disabled: PropTypes.bool,
+    flat: PropTypes.bool,
+    loading: PropTypes.bool,
+    onClick: PropTypes.func,
+    secondary: PropTypes.bool,
+    type: PropTypes.oneOf(['button', 'reset', 'submit']),
+    withinInput: PropTypes.bool
+  }
 
-Button.propTypes = {
-  loading: PropTypes.bool,
-  disabled: PropTypes.bool,
-  flat: PropTypes.bool,
-  withinInput: PropTypes.bool,
-  onClick: PropTypes.func,
-  secondary: PropTypes.bool,
-  type: PropTypes.oneOf(['button', 'reset', 'submit'])
+  static defaultProps = {
+    disabled: false,
+    error: false,
+    flat: false,
+    loading: false,
+    secondary: false,
+    type: 'button',
+    withinInput: false
+  }
+
+  render() {
+    return (
+      <StyledButton {...this.props} className="Button">
+        {this.props.children}
+      </StyledButton>
+    )
+  }
 }
-
-export default Button
 
 const StyledButton = styled.button`
   background-color: #00aafa;
@@ -83,5 +78,6 @@ const StyledButton = styled.button`
       border: 1px solid #f66d6f;
       background-color: #f66d6f;
     `}
-
 `
+
+export default Button

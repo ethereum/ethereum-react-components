@@ -1,20 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ValidatedField } from '..'
 
-class ConverterForm extends React.Component {
-  static displayName = 'ConverterForm'
+class ConverterForm extends Component {
+  static propTypes = {}
 
-  static propTypes = {
-
-  }
-
-  static defaultProps = {
-
-  }
+  static defaultProps = {}
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       input: '',
@@ -22,7 +16,7 @@ class ConverterForm extends React.Component {
     }
   }
 
-  handleInputChange = (input) => {
+  handleInputChange = input => {
     const { converter } = this.props
     this.setState({
       input
@@ -39,7 +33,12 @@ class ConverterForm extends React.Component {
       <form>
         Input:
         <br />
-        <ValidatedField value={input} placeholder="input" onChange={this.handleInputChange} size={70} />
+        <ValidatedField
+          value={input}
+          placeholder="input"
+          onChange={this.handleInputChange}
+          size={70}
+        />
         <br />
         Output:
         <br />
