@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Checkmark from './AnimatedIcons/Checkmark'
@@ -6,7 +6,7 @@ import Cross from './AnimatedIcons/AnimatedCross'
 
 const height = 50
 
-class ValidatedField extends React.Component {
+class ValidatedField extends Component {
   constructor(props) {
     super(props)
     const { value } = props

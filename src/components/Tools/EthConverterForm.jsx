@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Select from 'react-select'
 import PropTypes from 'prop-types'
 import ethUtils from 'ethereumjs-util'
 import ConverterForm from '../Widgets/ConverterForm'
 
 function perf(cb) {
-  return (input) => {
+  return input => {
     console.time('someFunction')
     let result = cb(input) // Whatever is timed goes between the two "console.time"
     console.timeEnd('someFunction')
@@ -22,17 +22,16 @@ const converters = {
 const options = [
   { value: 'keccak', label: 'Keccak' },
   { value: 'base64_encode', label: 'Base64 (encode)' },
-  { value: 'base64_decode', label: 'Base64 (decode)' },
+  { value: 'base64_decode', label: 'Base64 (decode)' }
   // { value: 'base56', label: 'Base56' }
 ]
 
-class EthConverterForm extends React.Component {
-
+class EthConverterForm extends Component {
   state = {
-    selectedOption: options[0],
+    selectedOption: options[0]
   }
 
-  handleChange = (selectedOption) => {
+  handleChange = selectedOption => {
     this.setState({ selectedOption })
   }
 
@@ -41,9 +40,7 @@ class EthConverterForm extends React.Component {
     const converter = converters[selectedOption.value]
     return (
       <div>
-        <div
-          style={{ width: 500, marginBottom: 20 }}
-        >
+        <div style={{ width: 500, marginBottom: 20 }}>
           <Select
             value={selectedOption}
             onChange={this.handleChange}
@@ -56,11 +53,8 @@ class EthConverterForm extends React.Component {
   }
 }
 
-
 EthConverterForm.propTypes = {
-  type: PropTypes.oneOf([
-    'keccak'
-  ]).isRequired
+  type: PropTypes.oneOf(['keccak']).isRequired
 }
 
 export default EthConverterForm
