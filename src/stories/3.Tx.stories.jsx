@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react'
 import FeeSelector from '../components/Tx/SendTx/FeeSelector'
 import TxHistory from '../components/Tx/History'
 import FormSubmitTx from '../components/Tx/SendTx/FormSubmitTx'
+import TxDescription from '../components/Tx/SendTx/TxDescription'
+import GasNotification from '../components/Tx/SendTx/GasNotification'
 import SendTx from '../components/Tx/SendTx/FormSendTx'
 
 const dummyTx = {
@@ -22,6 +24,12 @@ storiesOf('Tx/Fee Selector', module)
 
 storiesOf('Tx/Submit Form', module)
   .add('default', () => <FormSubmitTx />)
+
+storiesOf('Tx/Description', module)
+  .add('default', () => <TxDescription />)
+
+storiesOf('Tx/Gas Notification', module)
+  .add('default', () => <GasNotification />)
 
 storiesOf('Tx/Send Tx', module)
   .add('default', () => { 
