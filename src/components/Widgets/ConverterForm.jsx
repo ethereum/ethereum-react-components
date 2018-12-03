@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { ValidatedField } from '..'
 
 class ConverterForm extends Component {
-  static displayName = 'ConverterForm'
-
   static propTypes = {}
 
   static defaultProps = {}

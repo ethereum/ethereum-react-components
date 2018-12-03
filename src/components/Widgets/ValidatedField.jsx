@@ -7,12 +7,24 @@ import Cross from './AnimatedIcons/AnimatedCross'
 const height = 50
 
 class ValidatedField extends Component {
+  static propTypes = {
+    onChange: PropTypes.func,
+    placeholder: PropTypes.string,
+    size: PropTypes.any,
+    type: PropTypes.any,
+    validator: PropTypes.any,
+    value: PropTypes.string
+  }
+
+  static defaultProps = {
+    value: ''
+  }
+
   constructor(props) {
     super(props)
-    const { value } = props
-    const inputValue = value || ''
+
     this.state = {
-      inputValue,
+      inputValue: this.props.value,
       isValid: undefined, // valid || invalid || error || processing
       errorMessage: ''
     }
@@ -78,7 +90,7 @@ class ValidatedField extends Component {
     let renderedValue = inputValue || value
 
     return (
-      <div>
+      <React.Fragment>
         <div
           style={{
             height,
@@ -95,12 +107,10 @@ class ValidatedField extends Component {
           {this.renderIndicator()}
         </div>
         <span style={{ color: 'red' }}>{errorMessage}</span>
-      </div>
+      </React.Fragment>
     )
   }
 }
-
-export default ValidatedField
 
 const StyledInput = styled.input`
   border: 0;
@@ -109,7 +119,6 @@ const StyledInput = styled.input`
   color: #4a90e2;
   width: 300px;
   max-width: 100%;
-  margin-top: 18px;
   padding: 6px 16px;
   padding-bottom: 4px;
   font-size: 1em;
@@ -119,3 +128,5 @@ const StyledInput = styled.input`
     border-color: #4a90e2;
   }
 `
+
+export default ValidatedField
