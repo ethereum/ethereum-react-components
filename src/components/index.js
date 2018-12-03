@@ -11,6 +11,7 @@ import ConverterForm from './Tools/EthConverterForm'
 import NetworkChooser from './Network/NetworkChooser'
 import RpcTester from './Network/RPC/RpcTester'
 import TxHistory from './Tx/History'
+import FormSendTx from './Tx/SendTx'
 
 export {
   Identicon,
@@ -27,5 +28,6 @@ export {
   ConverterForm,
   NetworkChooser,
   RpcTester,
-  TxHistory
+  TxHistory,
+  FormSendTx
 }
