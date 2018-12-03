@@ -11,16 +11,12 @@ class Checkbox extends Component {
     labelText: PropTypes.string
   }
 
+  static defaultProps = {}
+
   render() {
     return (
       <React.Fragment>
-        <StyledCheckbox
-          id={this.props.id}
-          type="checkbox"
-          name={this.props.name}
-          checked={this.props.checked}
-          onChange={this.props.onChange}
-        />
+        <StyledCheckbox {...this.props} type="checkbox" />
         {this.props.labelText && (
           <StyledCheckboxLabel htmlFor={this.props.id}>
             {this.props.labelText}
@@ -30,8 +26,6 @@ class Checkbox extends Component {
     )
   }
 }
-
-export default Checkbox
 
 const StyledCheckbox = styled.input`
   display: inline-block;
@@ -91,3 +85,5 @@ const StyledCheckboxLabel = styled.label`
   font-size: 14px;
   font-weight: 300;
 `
+
+export default Checkbox
