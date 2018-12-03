@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.7"></a>
+## [1.1.7](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.6...v1.1.7) (2018-12-03)
+
+
+### Bug Fixes
+
+* add TxDescription & GasNotification to Send Tx Form ([#30](https://github.com/PhilippLgh/ethereum-react-components/issues/30)) ([d096596](https://github.com/PhilippLgh/ethereum-react-components/commit/d096596))
+
+
+
 <a name="1.1.6"></a>
 ## [1.1.6](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.5...v1.1.6) (2018-12-03)
 
