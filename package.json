@@ -1,6 +1,6 @@
 {
   "name": "ethereum-react-components",
-  "version": "1.0.2",
+  "version": "1.1.6",
   "description": "A components library which is used in multiple projects. Contains frequently used Ethereum components to display and handle addresses, transactions...",
   "main": "dist/index.js",
   "scripts": {
@@ -46,6 +46,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
     "node-sass": "^4.10.0",
+    "prettier": "^1.15.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-test-renderer": "^16.6.3",
@@ -69,7 +70,8 @@
     "loaders.css": "^0.1.2",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
-    "react-select": "^2.1.2"
+    "react-select": "^2.1.2",
+    "styled-components": "^4.1.1"
   },
   "directories": {
     "doc": "docs"

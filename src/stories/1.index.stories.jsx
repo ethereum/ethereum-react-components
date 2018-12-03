@@ -9,25 +9,38 @@ import {
   Spinner,
   Pulse,
   Button,
-  LoadingButton,
+  Checkbox,
   ValidatedField,
   ConverterForm
-} from '../components';
-import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark';
-import Cross from '../components/Widgets/AnimatedIcons/AnimatedCross';
+} from '../components'
+import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
+import Cross from '../components/Widgets/AnimatedIcons/AnimatedCross'
 
-storiesOf('Welcome', module).add('to Ethereum Components', () => <Welcome showApp={linkTo('Button')} />);
+storiesOf('Welcome', module).add('to Ethereum Components', () => (
+  <Welcome showApp={linkTo('Button')} />
+))
 
 storiesOf('Widgets/Identicon', module)
-  .add('with seed', () => <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
-  .add('with radius', () => (<Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />), {
-    notes: {
-      markdown: '# Title ',
-    },
-  });
+  .add('default', () => <Identicon />)
+  .add('tiny (with seed)', () => (
+    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="tiny" />
+  ))
+  .add('small (with seed)', () => (
+    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="small" />
+  ))
+  .add('medium (with seed)', () => (
+    <Identicon
+      seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
+      size="medium"
+    />
+  ))
+  .add('large (with seed)', () => (
+    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="large" />
+  ))
 
-storiesOf('Widgets/Animations/Spinner', module)
-  .add('default', () => <Spinner />)
+storiesOf('Widgets/Animations/Spinner', module).add('default', () => (
+  <Spinner />
+))
 
 storiesOf('Widgets/Animations/Pulse', module)
   .add('default', () => <Pulse />)
@@ -42,17 +55,44 @@ storiesOf('Widgets/Animations/Icons', module)
 
 storiesOf('Widgets/Buttons/Button', module)
   .add('default', () => <Button>click me</Button>)
+  .add('disabled', () => <Button disabled>click me</Button>)
+  .add('secondary', () => <Button secondary>click me</Button>)
+  .add('secondary disabled', () => (
+    <Button secondary disabled>
+      click me
+    </Button>
+  ))
+  .add('flat', () => <Button flat>click me</Button>)
+  .add('flat secondary', () => (
+    <Button flat secondary>
+      click me
+    </Button>
+  ))
 
-storiesOf('Widgets/Buttons/LoadingButton', module)
-  .add('default', () => <LoadingButton>click me</LoadingButton>)
-  .add('loading', () => <LoadingButton loading>click me</LoadingButton>)
+storiesOf('Widgets/Checkbox', module)
+  .add('unchecked', () => (
+    <Checkbox id="example" name="example" labelText="Example" />
+  ))
+  .add('checked', () => (
+    <Checkbox id="example" name="example" checked labelText="Example" />
+  ))
 
 storiesOf('Widgets/Eth Address', module)
-  .add('default', () => <EthAddress address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
-  .add('shortened', () => <EthAddress short address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
-  .add('with identicon', () => <EthAddress identicon address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
-  .add('click -> copy to clipboard', () => <span>placeholder</span>);
+  .add('default', () => (
+    <EthAddress address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
+  ))
+  .add('shortened', () => (
+    <EthAddress short address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
+  ))
+  .add('with callback', () => (
+    <EthAddress
+      onClick={() => alert('clicked!')}
+      address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
+    />
+  ))
 
 storiesOf('Widgets/Eth QR', module)
-  .add('default', () => <EthAddress address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />)
-  .add('click -> copy to clipboard', () => <span>placeholder</span>);
+  .add('default', () => (
+    <EthAddress address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
+  ))
+  .add('click -> copy to clipboard', () => <span>placeholder</span>)

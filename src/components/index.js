@@ -5,7 +5,7 @@ import { FormCreateAccount, InputPassword } from './CreateAccount'
 import NodeInfo from './Network/NodeInfo'
 import { Spinner, Pulse } from './Widgets/LoadingAnimations'
 import Button from './Widgets/Button'
-import LoadingButton from './Widgets/LoadingButton'
+import Checkbox from './Widgets/Checkbox'
 import ValidatedField from './Widgets/ValidatedField'
 import ConverterForm from './Tools/EthConverterForm'
 import NetworkChooser from './Network/NetworkChooser'
@@ -22,7 +22,7 @@ export {
   Spinner,
   Pulse,
   Button,
-  LoadingButton,
+  Checkbox,
   ValidatedField,
   ConverterForm,
   NetworkChooser,
