@@ -1,23 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const NodeInfoDot = ({ network, active }) => {
-  let dotColor = network === 'main' ? '#7ed321' : '#00aafa'
-  dotColor = diff > 60 ? 'red' : active === 'remote' ? 'orange' : dotColor
-  const currentBlock = 100
-  const lightClasses = 'pulse-light__orange'
-  const diff = 10
-  return (
-    <div className="pie-container">
-      {/*<Pulse fill color="orange" />*/}
-      <div
-        id="node-info__light"
-        className={lightClasses}
-        style={{
-          backgroundColor: dotColor
-        }}
-      />
-      {/*
+class NodeInfoDot extends Component {
+  static propTypes = {
+    /** Some definition of the prop */
+    active: PropTypes.oneOf(['remote', 'local']),
+    network: PropTypes.oneOf(['main', 'rinkeby', 'kovan', 'private'])
+  }
+
+  static defaultProps = {}
+
+  render() {
+    const { network, active } = this.props
+
+    let dotColor = network === 'main' ? '#7ed321' : '#00aafa'
+    dotColor = diff > 60 ? 'red' : active === 'remote' ? 'orange' : dotColor
+    const currentBlock = 100
+    const lightClasses = 'pulse-light__orange'
+    const diff = 10
+
+    return (
+      <div className="pie-container">
+        {/*<Pulse fill color="orange" />*/}
+        <div
+          id="node-info__light"
+          className={lightClasses}
+          style={{
+            backgroundColor: dotColor
+          }}
+        />
+        {/*
       {active === 'remote' && currentBlock !== 0 && (
       <div>
         <PieChart
@@ -37,15 +50,13 @@ const NodeInfoDot = ({ network, active }) => {
       </div>
       )}
       */}
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
-NodeInfoDot.propTypes = {
-  network: PropTypes.oneOf(['main', 'private']),
-  active: PropTypes.oneOf(['remote', 'local']),
-  /** latest block from sync -> triggers pulse animation  */
-  block: PropTypes.object
-}
+const StyledInnerDiv = styled.div``
+
+const StyledOuterDiv = styled.div``
 
 export default NodeInfoDot
