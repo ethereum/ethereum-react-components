@@ -22,20 +22,29 @@ storiesOf('Welcome', module).add('to Ethereum Components', () => (
 
 storiesOf('Widgets/Identicon', module)
   .add('default', () => <Identicon />)
-  .add('tiny (with seed)', () => (
-    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="tiny" />
-  ))
-  .add('small (with seed)', () => (
-    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="small" />
-  ))
-  .add('medium (with seed)', () => (
+  .add('tiny (with address)', () => (
     <Identicon
-      seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
+      address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
+      size="tiny"
+    />
+  ))
+  .add('small (with address)', () => (
+    <Identicon
+      address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
+      size="small"
+    />
+  ))
+  .add('medium (with address)', () => (
+    <Identicon
+      address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
       size="medium"
     />
   ))
-  .add('large (with seed)', () => (
-    <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" size="large" />
+  .add('large (with address)', () => (
+    <Identicon
+      address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
+      size="large"
+    />
   ))
 
 storiesOf('Widgets/Animations/Spinner', module).add('default', () => (

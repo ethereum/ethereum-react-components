@@ -313,7 +313,7 @@ const en = {
     "checksumAlert":
       "This address looks valid, but it doesn't have some security features that will protect you against typos, so double check you have the right one. If provided, check if the security icon matches.",
     "identiconHelper":
-      "This is a security icon.  If there were any change to the address, the resulting icon would be a completely different one",
+      "This is a security icon.  If there were any change to the address, the resulting icon would be a completely different one.",
     "type": {
       "address": "Address",
       "bool": "Boolean",
