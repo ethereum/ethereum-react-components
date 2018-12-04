@@ -18,7 +18,6 @@ export default class Identicon extends Component {
   }
 
   static defaultProps = {
-    address: '0x0000000000000000000000000000000000000000',
     size: 'medium'
   }
 
@@ -38,6 +37,10 @@ export default class Identicon extends Component {
   render() {
     const { address, size, classes } = this.props
 
+    if (!address) {
+      return <StyledSpanEmpty size={size} />
+    }
+
     return (
       <StyledSpan
         className={classes}
@@ -49,50 +52,55 @@ export default class Identicon extends Component {
     )
   }
 }
+const config = {
+  tiny: {
+    size: '21px',
+    boxShadow:
+      'inset 0 1px 1px hsla(0,0%,100%,.4), inset 0 -1px 2px rgba(0,0,0,.3)'
+  },
+  small: {
+    size: '32px',
+    boxShadow:
+      'inset 0 2px 2px hsla(0,0%,100%,.4), inset 0 -2px 4px rgba(0,0,0,.4)'
+  },
+  medium: {
+    size: '48px',
+    boxShadow:
+      'inset 0 4px 4px hsla(0,0%,100%,.4), inset 0 -4px 6px rgba(0,0,0,.5)'
+  },
+  large: {
+    size: '64px',
+    boxShadow:
+      'inset 0 4px 8px hsla(0,0%,100%,.4), inset 0 -4px 12px rgba(0,0,0,.6)'
+  }
+}
+
+const StyledSpanEmpty = styled.span`
+  background-color: white;
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: ${props => config[props.size].boxShadow};
+  display: inline-block;
+  height: ${props => config[props.size].size};
+  width: ${props => config[props.size].size};
+`
 
 const StyledSpan = styled.span`
   background-image: ${props => props.backgroundImage};
   background-size: cover;
   border-radius: 50%;
-  box-shadow: inset 0 4px 4px hsla(0,0%,100%,.4), inset 0 -4px 6px rgba(0,0,0,.5);
+  box-shadow: ${props => config[props.size].boxShadow};
   cursor: help;
   display: inline-block;
   overflow: hidden;
   transition: border-radius 2.5s;
   transition-delay: 3s;
-  height: 48px;
-  width: 48px;
+  height: ${props => config[props.size].size};
+  width: ${props => config[props.size].size};
   :hover {
     border-radius: 15%;
     transition-delay: 1s;
   }
-
-  ${props =>
-    props.size === 'tiny' &&
-    css`
-      height: 21px;
-      width: 21px;
-      box-shadow: inset 0 1px 1px hsla(0, 0%, 100%, 0.4),
-        inset 0 -1px 2px rgba(0, 0, 0, 0.3);
-    `}
-
-  ${props =>
-    props.size === 'small' &&
-    css`
-      height: 32px;
-      width: 32px;
-      box-shadow: inset 0 2px 2px hsla(0, 0%, 100%, 0.4),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.4);
-    `}
-
-  ${props =>
-    props.size === 'large' &&
-    css`
-      height: 64px;
-      width: 64px;
-      box-shadow: inset 0 4px 8px hsla(0, 0%, 100%, 0.4),
-        inset 0 -4px 12px rgba(0, 0, 0, 0.6);
-    `}
 `
 
 const StyledImg = styled.img`
