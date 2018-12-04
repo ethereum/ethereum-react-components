@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-class Button extends Component {
+export default class Button extends Component {
+  static displayName = 'Button'
+
   static propTypes = {
     children: PropTypes.node,
     disabled: PropTypes.bool,
+    error: PropTypes.bool,
     flat: PropTypes.bool,
     loading: PropTypes.bool,
     onClick: PropTypes.func,
@@ -79,5 +82,3 @@ const StyledButton = styled.button`
       background-color: #f66d6f;
     `}
 `
-
-export default Button

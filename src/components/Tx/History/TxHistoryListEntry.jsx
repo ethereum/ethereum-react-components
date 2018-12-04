@@ -15,7 +15,9 @@ const TX = {
   SUCCESS: 1
 }
 
-class TxRow extends Component {
+export default class TxRow extends Component {
+  static displayName = 'TxRow'
+
   state = { showDetails: false }
 
   toggleDetails() {
@@ -51,7 +53,9 @@ class TxRow extends Component {
         subdomain = 'kovan.'
       }
       txHashLink = (
-        <a href={`https://${subdomain}etherscan.io/tx/${tx.hash}`} target="_blank">
+        <a
+          href={`https://${subdomain}etherscan.io/tx/${tx.hash}`}
+          target="_blank">
           {tx.hash}
         </a>
       )
@@ -89,7 +93,6 @@ class TxRow extends Component {
         </span>
       )
     } else if (tx.status === TX.SUCCESS && tx.blockNumber) {
-      
       const numberConfirmations = blockNumber - tx.blockNumber
       status = (
         <span>
@@ -97,9 +100,11 @@ class TxRow extends Component {
             {i18n.t('txHistory.statusConfirmed')}
           </span>{' '}
           <span>
-            ({i18n.t('txHistory.confirmations', {
+            (
+            {i18n.t('txHistory.confirmations', {
               count: numberConfirmations
-            })})
+            })}
+            )
           </span>
         </span>
       )
@@ -122,7 +127,8 @@ class TxRow extends Component {
         {tx.gasUsed && this.renderBold('txHistory.gasUsed', tx.gasUsed)}
         <div>
           {i18n.t('txHistory.gasPrice')}:{' '}
-          <span className="bold">{gasPriceEther} ether</span> ({gasPriceGwei}{' '} Gwei)
+          <span className="bold">{gasPriceEther} ether</span> ({gasPriceGwei}{' '}
+          Gwei)
         </div>
         {txCostEther && (
           <div>
@@ -133,8 +139,7 @@ class TxRow extends Component {
         )}
         {tx.data && (
           <div>
-            {i18n.t('txHistory.data')}:{' '}
-            <span className="bold">{tx.data}</span>
+            {i18n.t('txHistory.data')}: <span className="bold">{tx.data}</span>
           </div>
         )}
         <div className="tx-moreDetails" onClick={() => this.toggleDetails()}>
@@ -185,7 +190,8 @@ class TxRow extends Component {
           <div className="tx-date">{tx.createdAt}</div>
         </div>
         <div className="tx-description">{description}</div>
-        {tx.contractAddress && this.renderAddress('txHistory.newContract', tx.contractAddress)}
+        {tx.contractAddress &&
+          this.renderAddress('txHistory.newContract', tx.contractAddress)}
         {this.renderAddress('txHistory.from', tx.from)}
         {isTokenTransfer && this.renderAddress('txHistory.to', tokensTo)}
         {!isTokenTransfer && (
@@ -205,5 +211,3 @@ class TxRow extends Component {
     )
   }
 }
-
-export default TxRow

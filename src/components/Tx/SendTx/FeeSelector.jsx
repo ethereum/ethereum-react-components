@@ -6,13 +6,16 @@ import { Spinner } from '../../Widgets/LoadingAnimations'
 import * as util from '../../../lib/util'
 
 const BN = ethUtils.BN
-class FeeSelector extends Component {
-  propTypes = {
+
+export default class FeeSelector extends Component {
+  static displayName = 'FeeSelector'
+
+  static propTypes = {
     togglePriority: PropTypes.string.isRequired,
     gasLoading: PropTypes.bool
   }
 
-  defaultProps = {
+  static defaultProps = {
     network: 'main'
   }
 
@@ -82,7 +85,9 @@ class FeeSelector extends Component {
 
     return (
       <React.Fragment>
-        {gasLoading && <Spinner singleColor="#00aafa" size={16} className="react-spinner" /> }
+        {gasLoading && (
+          <Spinner singleColor="#00aafa" size={16} className="react-spinner" />
+        )}
         {error}
       </React.Fragment>
     )
@@ -91,31 +96,24 @@ class FeeSelector extends Component {
   render() {
     return (
       <div className="fee-selector">
-        {this.props.priority 
-        ? (
+        {this.props.priority ? (
           <span
             onClick={this.handleClick}
             className="fee-selector__btn"
-            data-tooltip="Click For Standard Fee"
-          >
+            data-tooltip="Click For Standard Fee">
             {i18n.t('mist.sendTx.priorityFee')}
           </span>
-        ) 
-        : (
+        ) : (
           <span
             onClick={this.handleClick}
             className="fee-selector__btn"
-            data-tooltip="Click For Priority Fee"
-          >
+            data-tooltip="Click For Priority Fee">
             {i18n.t('mist.sendTx.standardFee')}
           </span>
-        )}
-        {' '}
+        )}{' '}
         <span className="fee-amount">{this.parseFee()}</span>
         {this.renderStatus()}
       </div>
     )
   }
 }
-
-export default FeeSelector

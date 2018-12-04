@@ -61,7 +61,9 @@ const NetworkOption = ({ innerProps, isDisabled, data }) => (
   </div>
 )
 
-class NetworkChooser extends Component {
+export default class NetworkChooser extends Component {
+  static displayName = 'NetworkChooser'
+
   state = {
     selectedOption: null
   }
@@ -85,5 +87,3 @@ class NetworkChooser extends Component {
     )
   }
 }
-
-export default NetworkChooser

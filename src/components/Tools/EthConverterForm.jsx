@@ -26,7 +26,13 @@ const options = [
   // { value: 'base56', label: 'Base56' }
 ]
 
-class EthConverterForm extends Component {
+export default class EthConverterForm extends Component {
+  static displayName = 'EthConverterForm'
+
+  static propTypes = {
+    type: PropTypes.oneOf(['keccak']).isRequired
+  }
+
   state = {
     selectedOption: options[0]
   }
@@ -52,9 +58,3 @@ class EthConverterForm extends Component {
     )
   }
 }
-
-EthConverterForm.propTypes = {
-  type: PropTypes.oneOf(['keccak']).isRequired
-}
-
-export default EthConverterForm

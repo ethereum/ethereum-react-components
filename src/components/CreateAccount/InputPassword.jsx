@@ -5,7 +5,7 @@ import Checkbox from '../Widgets/Checkbox'
 import ValidatedField from '../Widgets/ValidatedField'
 import './InputPassword.scss'
 
-class InputPassword extends Component {
+export default class InputPassword extends Component {
   static displayName = 'InputPassword'
 
   static propTypes = {
@@ -60,5 +60,3 @@ class InputPassword extends Component {
     )
   }
 }
-
-export default InputPassword

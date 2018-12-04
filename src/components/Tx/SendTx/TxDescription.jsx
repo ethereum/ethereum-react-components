@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import i18n from '../../../i18n'
 import * as util from '../../../lib/util'
 
-
-class TxDescription extends Component {
-
+export default class TxDescription extends Component {
   static displayName = 'TxDescription'
 
   static propTypes = {
@@ -29,10 +27,13 @@ class TxDescription extends Component {
     showDetails: false
   }
 
-
   formattedBalance() {
     const { value } = this.props
-    return util.formatBalance(util.toBN(value || 0), '0,0.00[0000000000000000]', 'ether')
+    return util.formatBalance(
+      util.toBN(value || 0),
+      '0,0.00[0000000000000000]',
+      'ether'
+    )
   }
 
   calculateTransferValue() {
@@ -52,7 +53,7 @@ class TxDescription extends Component {
   }
 
   handleDetailsClick = () => {
-    const {adjustWindowHeight} = this.props
+    const { adjustWindowHeight } = this.props
     const { showDetails } = this.props
     this.setState({ showDetails: !showDetails }, adjustWindowHeight)
   }
@@ -90,7 +91,7 @@ class TxDescription extends Component {
     const { params, token } = this.props
     if (params.length === 0) return <div />
 
-    const tokenCount = params[1].value.slice(0,-Math.abs(token.decimals))
+    const tokenCount = params[1].value.slice(0, -Math.abs(token.decimals))
 
     const tokenSymbol = token.symbol || i18n.t('mist.sendTx.tokens')
 
@@ -163,7 +164,7 @@ class TxDescription extends Component {
       isNewContract,
       toIsContract,
       token,
-      value,
+      value
     } = this.props
 
     if (!toIsContract && !isNewContract) {
@@ -188,8 +189,7 @@ class TxDescription extends Component {
       return (
         <div
           className="execution-context__details-link"
-          onClick={this.handleDetailsClick}
-        >
+          onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.showDetails')}
         </div>
       )
@@ -295,8 +295,7 @@ class TxDescription extends Component {
 
         <div
           className="execution-context__details-link"
-          onClick={this.handleDetailsClick}
-        >
+          onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.hideDetails')}
         </div>
       </div>
@@ -321,5 +320,3 @@ class TxDescription extends Component {
     )
   }
 }
-
-export default TxDescription

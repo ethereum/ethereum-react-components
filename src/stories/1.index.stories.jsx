@@ -62,7 +62,7 @@ storiesOf('Widgets/Animations/Icons', module)
   .add('checkmark', () => <Checkmark />)
   .add('cross', () => <Cross />)
 
-storiesOf('Widgets/Buttons/Button', module)
+storiesOf('Widgets/Button', module)
   .add('default', () => <Button>click me</Button>)
   .add('disabled', () => <Button disabled>click me</Button>)
   .add('secondary', () => <Button secondary>click me</Button>)

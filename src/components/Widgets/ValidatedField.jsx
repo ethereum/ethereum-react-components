@@ -6,7 +6,9 @@ import Cross from './AnimatedIcons/AnimatedCross'
 
 const height = 50
 
-class ValidatedField extends Component {
+export default class ValidatedField extends Component {
+  static displayName = 'ValidatedField'
+
   static propTypes = {
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
@@ -128,5 +130,3 @@ const StyledInput = styled.input`
     border-color: #4a90e2;
   }
 `
-
-export default ValidatedField

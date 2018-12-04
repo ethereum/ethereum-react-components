@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import i18n from '../../../i18n'
 import TxRow from './TxHistoryListEntry'
 
+export default class TxHistory extends Component {
+  static displayName = 'TxHistory'
 
-class TxHistory extends Component {
   renderTxList(txs) {
     const { etherPriceUSD, blockNumber } = this.props
     // FIXME hardcoded network
@@ -21,7 +22,8 @@ class TxHistory extends Component {
   }
 
   render() {
-    const { txs, etherPriceUSD } = this.props 
+    const { txs, etherPriceUSD } = this.props
+
     return (
       <div className="list-txs">
         <div className="header">
@@ -34,13 +36,13 @@ class TxHistory extends Component {
                 <span className="txs-total">
                   {i18n.t('txHistory.total', { count: txs.length })}
                 </span>
-              )
+                )
               </span>
             )}
           </h1>
         </div>
         <div className="tx-list">
-          { this.renderTxList(txs) }
+          {this.renderTxList(txs)}
           {txs.length === 0 && (
             <div className="no-txs">No transactions yet.</div>
           )}
@@ -49,5 +51,3 @@ class TxHistory extends Component {
     )
   }
 }
-
-export default TxHistory

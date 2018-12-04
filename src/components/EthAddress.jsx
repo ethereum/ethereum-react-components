@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class EthAddress extends Component {
+export default class EthAddress extends Component {
+  static displayName = 'EthAddress'
+
   static propTypes = {
     /** Ethereum public address (42 chars)  */
     address: PropTypes.string.isRequired,
@@ -32,5 +34,3 @@ class EthAddress extends Component {
     )
   }
 }
-
-export default EthAddress
