@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.10"></a>
+## [1.1.10](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.9...v1.1.10) (2018-12-04)
+
+
+### Bug Fixes
+
+* clean up identicon ([#36](https://github.com/PhilippLgh/ethereum-react-components/issues/36)) ([730a87a](https://github.com/PhilippLgh/ethereum-react-components/commit/730a87a))
+
+
+
 <a name="1.1.9"></a>
 ## [1.1.9](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.8...v1.1.9) (2018-12-03)
 
