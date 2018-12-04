@@ -70,6 +70,7 @@
     "loaders.css": "^0.1.2",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
+    "react-minimal-pie-chart": "^3.3.0",
     "react-select": "^2.1.2",
     "styled-components": "^4.1.1"
   },
