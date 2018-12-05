@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ValidatedField } from '..'
 
-class ConverterForm extends Component {
+export default class ConverterForm extends Component {
+  static displayName = 'ConverterForm'
+
   static propTypes = {}
 
   static defaultProps = {}
@@ -48,5 +50,3 @@ class ConverterForm extends Component {
     )
   }
 }
-
-export default ConverterForm

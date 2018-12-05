@@ -4,7 +4,9 @@ import styled, { css } from 'styled-components'
 import { Button } from '../../'
 import i18n from '../../../i18n'
 
-class FormSubmitTx extends Component {
+export default class FormSubmitTx extends Component {
+  static displayName = 'FormSubmitTx'
+
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     unlocking: PropTypes.bool,
@@ -50,8 +52,6 @@ class FormSubmitTx extends Component {
     )
   }
 }
-
-export default FormSubmitTx
 
 const StyledForm = styled.form`
   display: flex;

@@ -11,6 +11,8 @@ hqxConstructor(mod)
 const { hqx } = mod
 
 export default class Identicon extends Component {
+  static displayName = Identicon
+
   static propTypes = {
     address: PropTypes.string,
     classes: PropTypes.string,

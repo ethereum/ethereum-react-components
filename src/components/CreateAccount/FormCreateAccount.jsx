@@ -14,7 +14,7 @@ let Mist = {
   }
 }
 
-class CreateAccount extends Component {
+export default class CreateAccount extends Component {
   static displayName = 'CreateAccount'
 
   static propTypes = {}
@@ -147,5 +147,3 @@ class CreateAccount extends Component {
     )
   }
 }
-
-export default CreateAccount

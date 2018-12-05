@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-class Checkbox extends Component {
+export default class Checkbox extends Component {
+  static displayName = 'Checkbox'
+
   static propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string,
@@ -85,5 +87,3 @@ const StyledCheckboxLabel = styled.label`
   font-size: 14px;
   font-weight: 300;
 `
-
-export default Checkbox

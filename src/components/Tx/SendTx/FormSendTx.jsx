@@ -5,8 +5,9 @@ import FormSubmit from './FormSubmitTx'
 import GasNotification from './GasNotification'
 import TxParties from './TxParties'
 
+export default class SendTx extends Component {
+  static displayName = 'SendTx'
 
-class SendTx extends Component {
   state = {
     hasSignature: false,
     providedGas: 0,
@@ -24,11 +25,9 @@ class SendTx extends Component {
     return 0
   }
 
-  togglePriority = () => {
+  togglePriority = () => {}
 
-  }
-
-  handleSubmit = (formData) => {
+  handleSubmit = formData => {
     const {
       data,
       to,
@@ -41,7 +40,8 @@ class SendTx extends Component {
     } = this.props.newTx
 
     // If no gas value was provided, use estimatedGas
-    const gasValue = parseInt(gas, 16) !== 0 ? gas : `0x${estimatedGas.toString(16)}`
+    const gasValue =
+      parseInt(gas, 16) !== 0 ? gas : `0x${estimatedGas.toString(16)}`
 
     // If priority tx, double the value and format it
     const chosenPrice = priority ? '0x' + (gasPrice * 2).toString(16) : gasPrice
@@ -152,11 +152,8 @@ class SendTx extends Component {
               handleSubmit={this.handleSubmit}
             />
           </div>
-
         </div>
       </div>
     )
   }
 }
-
-export default SendTx

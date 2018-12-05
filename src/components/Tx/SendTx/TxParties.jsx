@@ -3,8 +3,9 @@ import Identicon from '../../Identicon'
 import i18n from '../../../i18n'
 import * as util from '../../../lib/util'
 
+export default class TxParties extends Component {
+  static displayName = 'TxParties'
 
-class TxParties extends Component {
   totalAmount = () => {
     var amount = EthTools.formatBalance(
       web3.utils.toBN(this.props.value || 0),
@@ -38,12 +39,11 @@ class TxParties extends Component {
           className={
             'tx-parties__direction-name ' +
             (toIsContract &&
-              !isNewContract &&
-              executionFunction !== 'transfer(address,uint256)'
+            !isNewContract &&
+            executionFunction !== 'transfer(address,uint256)'
               ? 'is-contract'
               : '')
-          }
-        >
+          }>
           {i18n.t('mist.sendTx.from')}
         </div>
         <div>
@@ -88,8 +88,7 @@ class TxParties extends Component {
             className={
               'tx-parties__direction-name ' +
               (toIsContract ? 'is-contract' : '')
-            }
-          >
+            }>
             {toIsContract
               ? i18n.t('mist.sendTx.contract')
               : i18n.t('mist.sendTx.to')}
@@ -113,8 +112,7 @@ class TxParties extends Component {
             <div
               className={`function-signature ${
                 hasSignature ? 'has-signature' : ''
-                }`}
-            >
+              }`}>
               {executionFunction}
             </div>
           )}
@@ -132,5 +130,3 @@ class TxParties extends Component {
     )
   }
 }
-
-export default TxParties
