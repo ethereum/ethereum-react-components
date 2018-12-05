@@ -22,6 +22,7 @@ storiesOf('Welcome', module).add('to Ethereum Components', () => (
 
 storiesOf('Widgets/Identicon', module)
   .add('default', () => <Identicon />)
+  .add('anonymous', () => <Identicon anonymous />)
   .add('tiny (with address)', () => (
     <Identicon
       address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"

@@ -5,6 +5,7 @@ import blockies from 'ethereum-blockies'
 import styled, { css } from 'styled-components'
 import i18n from '../i18n/'
 import hqxConstructor from '../lib/hqx'
+import anonymousIcon from '../assets/images/anonymous-icon.png'
 
 const mod = { Math: window.Math }
 hqxConstructor(mod)
@@ -15,11 +16,13 @@ export default class Identicon extends Component {
 
   static propTypes = {
     address: PropTypes.string,
+    anonymous: PropTypes.bool,
     classes: PropTypes.string,
     size: PropTypes.oneOf(['tiny', 'small', 'medium', 'large'])
   }
 
   static defaultProps = {
+    anonymous: false,
     size: 'medium'
   }
 
@@ -37,7 +40,16 @@ export default class Identicon extends Component {
   }
 
   render() {
-    const { address, size, classes } = this.props
+    const { address, anonymous, size, classes } = this.props
+
+    if (anonymous) {
+      return (
+        <StyledSpanAnonymous
+          backgroundImage={`url('${anonymousIcon}')`}
+          size={size}
+        />
+      )
+    }
 
     if (!address) {
       return <StyledSpanEmpty size={size} />
@@ -76,6 +88,16 @@ const config = {
       'inset 0 4px 8px hsla(0,0%,100%,.4), inset 0 -4px 12px rgba(0,0,0,.6)'
   }
 }
+
+const StyledSpanAnonymous = styled.span`
+  background-image: ${props => props.backgroundImage};
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: ${props => config[props.size].boxShadow};
+  display: inline-block;
+  height: ${props => config[props.size].size};
+  width: ${props => config[props.size].size};
+`
 
 const StyledSpanEmpty = styled.span`
   background-color: white;

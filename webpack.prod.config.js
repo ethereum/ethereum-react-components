@@ -1,7 +1,7 @@
-const path = require('path');
-const pkg = require('./package.json');
+const path = require('path')
+const pkg = require('./package.json')
 
-const libraryName = pkg.name;
+const libraryName = pkg.name
 
 module.exports = {
   mode: 'production', // "production" | "development" | "none"
@@ -12,7 +12,7 @@ module.exports = {
     publicPath: '/dist/',
     library: libraryName,
     libraryTarget: 'umd',
-    umdNamedDefine: true,
+    umdNamedDefine: true
   },
   resolve: {
     modules: ['node_modules'],
@@ -31,13 +31,17 @@ module.exports = {
         }
       },
       {
+        test: /\.(png|jpg|gif)$/i,
+        loaders: ['file-loader']
+      },
+      {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        loaders: ['style-loader', 'css-loader']
       }
     ]
   }
-};
+}
