@@ -6,7 +6,7 @@ import i18n from '../../../i18n'
 import './NodeInfo.scss'
 
 // FIXME
-const numeral = (val) => {
+const numeral = val => {
   return {
     format: () => `${val}`
   }
@@ -16,8 +16,7 @@ class NodeInfoBox extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-    }
+    this.state = {}
   }
 
   localStatsFindingPeers = () => {
@@ -52,12 +51,7 @@ class NodeInfoBox extends Component {
   localStatsSyncProgress() {
     const { local } = this.props
     const { sync } = local
-    const {
-      highestBlock,
-      currentBlock,
-      startingBlock,
-      connectedPeers
-    } = sync
+    const { highestBlock, currentBlock, startingBlock, connectedPeers } = sync
     let { displayBlock } = sync
 
     displayBlock = displayBlock || startingBlock
@@ -66,7 +60,8 @@ class NodeInfoBox extends Component {
 
     sync.displayBlock = displayBlock
 
-    const progress = ((displayBlock - startingBlock) / (highestBlock - startingBlock)) * 100
+    const progress =
+      ((displayBlock - startingBlock) / (highestBlock - startingBlock)) * 100
 
     return (
       <div>
@@ -171,10 +166,7 @@ class NodeInfoBox extends Component {
             // TODO: make this i8n compatible
           }
           <i className="icon icon-clock" />
-          {diff < 120
-            ? diff + ' seconds'
-            : `${Math.floor(diff / 60)} minutes`
-          }
+          {diff < 120 ? diff + ' seconds' : `${Math.floor(diff / 60)} minutes`}
         </div>
       </div>
     )
@@ -224,8 +216,7 @@ class NodeInfoBox extends Component {
     return (
       <div id="local-stats" className="node-info__section">
         <div className="node-info__node-title local">
-          <strong>{i18n.t('mist.nodeInfo.local')}</strong>
-          {' '}
+          <strong>{i18n.t('mist.nodeInfo.local')}</strong>{' '}
           {i18n.t('mist.nodeInfo.node')}
           {syncText && <span className="node-info__pill">{syncText}</span>}
         </div>
@@ -255,40 +246,9 @@ class NodeInfoBox extends Component {
   }
 }
 
-const NodeInfoBoxWrapper = () => {
-  const data = {
-    active: 'remote',
-    network: 'main',
-    changingNetwork: false,
-    remote: {
-      client: 'infura',
-      blockNumber: 100, // if < 1000 NodeInfo will display "connecting.."
-      timestamp: 0
-    },
-    local: {
-      client: 'geth',
-      blockNumber: 1,
-      timestamp: 0,
-      syncMode: 'fast',
-      sync: {
-        connectedPeers: 0,
-        currentBlock: 1,
-        highestBlock: 0,
-        knownStates: 0,
-        pulledStates: 0,
-        startingBlock: 0
-        
-      }
-    }
-  }
-  return (
-    <NodeInfoBox {...data} />
-  )
-}
-
 NodeInfoBox.propTypes = {
   network: PropTypes.oneOf(['main', 'private']),
-  active: PropTypes.oneOf(['remote', 'local']),
+  active: PropTypes.oneOf(['remote', 'local'])
 }
 
-export default NodeInfoBoxWrapper
+export default NodeInfoBox
