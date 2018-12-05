@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.11"></a>
+## [1.1.11](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.10...v1.1.11) (2018-12-05)
+
+
+### Bug Fixes
+
+* adds displayNames, other standardizations ([#38](https://github.com/PhilippLgh/ethereum-react-components/issues/38)) ([421c062](https://github.com/PhilippLgh/ethereum-react-components/commit/421c062))
+* WIP Node Info component ([#37](https://github.com/PhilippLgh/ethereum-react-components/issues/37)) ([caef548](https://github.com/PhilippLgh/ethereum-react-components/commit/caef548))
+
+
+
 <a name="1.1.10"></a>
 ## [1.1.10](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.1.9...v1.1.10) (2018-12-04)
 
