@@ -34,23 +34,23 @@ class NodeInfoDot extends Component {
     super(props)
 
     this.state = {
-      pulseColor: ''
+      pulseColorClassClass: ''
     }
   }
 
   componentDidUpdate(prevProps) {
     // if new block arrived, add animation to light
     if (this.isNewBlock(prevProps, this.props)) {
-      const pulseColor =
+      const pulseColorClass =
         prevProps.active === 'remote'
-          ? 'orange'
+          ? 'pulse-light__orange'
           : this.props.network === 'main'
-          ? 'green'
-          : 'blue'
+          ? 'pulse-light__green'
+          : 'pulse-light__blue'
 
-      this.setState({ pulseColor }, () => {
+      this.setState({ pulseColorClass }, () => {
         setTimeout(() => {
-          this.setState({ pulseColor: '' })
+          this.setState({ pulseColorClass: '' })
         }, 2000)
       })
     }
@@ -83,7 +83,7 @@ class NodeInfoDot extends Component {
         <div className="pie-container">
           <div
             id="node-info__light"
-            className={this.state.pulseColor}
+            className={this.state.pulseColorClass}
             style={{
               backgroundColor:
                 this.secondsSinceLastBlock() > 60
@@ -169,21 +169,21 @@ const StyledLight = styled.div`
   transition: background-color ease-in-out 5s;
 
   ${state =>
-    state.pulseColor === 'orange' &&
+    state.pulseColorClass === 'orange' &&
     css`
       animation: ${beaconOrange} ease-in-out;
       animation-duration: 2s;
     `}
 
   ${state =>
-    state.pulseColor === 'green' &&
+    state.pulseColorClass === 'green' &&
     css`
       animation: ${beaconGreen} ease-in-out;
       animation-duration: 2s;
     `}
 
   ${state =>
-    state.pulseColor === 'blue' &&
+    state.pulseColorClass === 'blue' &&
     css`
       animation: ${beaconBlue} ease-in-out;
       animation-duration: 2s;

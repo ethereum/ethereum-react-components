@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react'
 import { NodeInfo } from '../components'
 import NodeInfoDot from '../components/Network/NodeInfo/NodeInfoDot'
 import NodeInfoBox from '../components/Network/NodeInfo/NodeInfoBox'
+import NewBlockEvery3s from '../components/Network/NodeInfo/NewBlockEvery3s'
 import NetworkChooser from '../components/Network/NetworkChooser'
 import RpcTest from '../components/Network/RPC/RpcTester'
 
@@ -108,10 +109,20 @@ const privateNet = { ...mainLocal, network: 'private' }
 storiesOf('Network/Node Info/Dot', module)
   .add('no connection ', () => <NodeInfoDot {...initial} />)
   .add('main network remote', () => <NodeInfoDot {...mainRemote} />)
+  .add('main network remote new block every 3s', () => (
+    <NewBlockEvery3s {...mainRemote}>
+      <NodeInfoDot />
+    </NewBlockEvery3s>
+  ))
   .add('main network remote nosync', () => (
     <NodeInfoDot {...mainRemoteNoSync} />
   ))
   .add('main network local', () => <NodeInfoDot {...mainLocal} />)
+  .add('main network local new block every 3s', () => (
+    <NewBlockEvery3s {...mainLocal}>
+      <NodeInfoBox />
+    </NewBlockEvery3s>
+  ))
   .add('test network remote', () => <NodeInfoDot {...testRemote} />)
   .add('test network local', () => <NodeInfoDot {...testLocal} />)
   .add('private network local', () => <NodeInfoDot {...privateNet} />)
@@ -119,6 +130,11 @@ storiesOf('Network/Node Info/Dot', module)
 storiesOf('Network/Node Info/Box', module)
   .add('no connection ', () => <NodeInfoBox {...initial} />)
   .add('main network remote', () => <NodeInfoBox {...mainRemote} />)
+  .add('main network remote new block every 3s', () => (
+    <NewBlockEvery3s {...mainRemote}>
+      <NodeInfoBox />
+    </NewBlockEvery3s>
+  ))
   .add('main network remote nosync', () => (
     <NodeInfoBox {...mainRemoteNoSync} />
   ))
@@ -130,6 +146,11 @@ storiesOf('Network/Node Info/Box', module)
   ))
 
   .add('main network local', () => <NodeInfoBox {...mainLocal} />)
+  .add('main network local new block every 3s', () => (
+    <NewBlockEvery3s {...mainLocal}>
+      <NodeInfoBox />
+    </NewBlockEvery3s>
+  ))
   .add('test network remote', () => <NodeInfoBox {...testRemote} />)
   .add('test network local', () => <NodeInfoBox {...testLocal} />)
   .add('private network local', () => <NodeInfoBox {...privateNet} />)
@@ -146,6 +167,11 @@ storiesOf('Network/Node Info/Full', module)
   ))
 
   .add('main network local', () => <NodeInfo {...mainLocal} />)
+  .add('main network local new block every 3s', () => (
+    <NewBlockEvery3s {...mainLocal}>
+      <NodeInfo />
+    </NewBlockEvery3s>
+  ))
   .add('test network remote', () => <NodeInfo {...testRemote} />)
   .add('test network local', () => <NodeInfo {...testLocal} />)
   .add('private network local', () => <NodeInfo {...privateNet} />)

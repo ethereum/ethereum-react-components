@@ -10,13 +10,6 @@ import './NodeInfo.scss'
 import NodeInfoDot from './NodeInfoDot'
 import NodeInfoBox from './NodeInfoBox'
 
-// FIXME
-const numeral = val => {
-  return {
-    format: () => `${val}`
-  }
-}
-
 class NodeInfo extends Component {
   constructor(props) {
     super(props)

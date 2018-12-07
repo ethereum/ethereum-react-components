@@ -6,12 +6,9 @@ import i18n from '../../../i18n'
 import './NodeInfo.scss'
 
 // FIXME
-const numeral = val => {
-  return {
-    format: () => `${val}`
-  }
+const numberWithCommas = val => {
+  return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
-
 class NodeInfoBox extends Component {
   constructor(props) {
     super(props)
@@ -56,7 +53,7 @@ class NodeInfoBox extends Component {
 
     displayBlock = displayBlock || startingBlock
     displayBlock += (currentBlock - displayBlock) / 20
-    const formattedDisplayBlock = numeral(displayBlock).format('0,0')
+    const formattedDisplayBlock = numberWithCommas(displayBlock)
 
     sync.displayBlock = displayBlock
 
@@ -86,7 +83,7 @@ class NodeInfoBox extends Component {
     const { blockNumber, timestamp, sync } = local
     const { connectedPeers } = sync
 
-    const formattedBlockNumber = numeral(blockNumber).format('0,0')
+    const formattedBlockNumber = numberWithCommas(blockNumber)
 
     const timeSince = moment(timestamp, 'X')
     const diff = moment().diff(timeSince, 'seconds')
@@ -126,7 +123,7 @@ class NodeInfoBox extends Component {
       return null
     }
 
-    const formattedBlockNumber = numeral(blockNumber).format('0,0')
+    const formattedBlockNumber = numberWithCommas(blockNumber)
     const remoteTimestamp = moment.unix(timestamp)
     const diff = moment().diff(remoteTimestamp, 'seconds')
 
