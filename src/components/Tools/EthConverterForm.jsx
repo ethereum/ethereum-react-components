@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
-import PropTypes from 'prop-types'
 import ethUtils from 'ethereumjs-util'
 import ConverterForm from '../Widgets/ConverterForm'
 
 function perf(cb) {
   return input => {
     console.time('someFunction')
-    let result = cb(input) // Whatever is timed goes between the two "console.time"
+    const result = cb(input) // Whatever is timed goes between the two "console.time"
     console.timeEnd('someFunction')
     return result
   }
@@ -29,9 +28,9 @@ const options = [
 export default class EthConverterForm extends Component {
   static displayName = 'EthConverterForm'
 
-  static propTypes = {
-    type: PropTypes.oneOf(['keccak']).isRequired
-  }
+  static propTypes = {}
+
+  static defaultProps = {}
 
   state = {
     selectedOption: options[0]

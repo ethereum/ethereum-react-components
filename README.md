@@ -15,26 +15,6 @@ Two projects using these components are
 - [Mist React](https://github.com/ethereum/mist-ui-react)
 - [Mist](https://github.com/ethereum/mist)
 
-# Development
-
-## Clone & Storybook
-
-```
-git clone https://github.com/PhilippLgh/ethereum-react-components.git
-cd ethereum-react-components
-yarn
-yarn storybook
-```
-
-## Local Testing
-
-```
-cd ethereum-react-components
-yarn link
-cd my/project/with/ethereum/components
-yarn link "ethereum-react-components"
-```
-
 # Installation
 
 Our CI automatically bundles and publishes the latest production version to [NPM](https://www.npmjs.com/package/ethereum-react-components) and
@@ -55,3 +35,29 @@ import { Identicon } from 'ethereum-react-components';
 ```
 
 For a detailed documentation check out e.g. the [Identicon story](https://philipplgh.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon)
+
+# Development
+
+## Clone & Storybook
+
+```
+git clone https://github.com/PhilippLgh/ethereum-react-components.git
+cd ethereum-react-components
+yarn
+yarn storybook
+```
+
+## Workflow
+
+- Mind the [component style checklist](CHECKLIST.md)
+- Use eslint in your editor or via command line: `yarn lint:watch`
+- Make [Conventional Commits](https://www.conventionalcommits.org/)
+
+## Local Testing
+
+```
+cd ethereum-react-components
+yarn link
+cd my/project/with/ethereum/components
+yarn link "ethereum-react-components"
+```

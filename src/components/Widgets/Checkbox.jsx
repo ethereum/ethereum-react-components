@@ -16,13 +16,13 @@ export default class Checkbox extends Component {
   static defaultProps = {}
 
   render() {
+    const { id, labelText } = this.props
+
     return (
       <React.Fragment>
         <StyledCheckbox {...this.props} type="checkbox" />
-        {this.props.labelText && (
-          <StyledCheckboxLabel htmlFor={this.props.id}>
-            {this.props.labelText}
-          </StyledCheckboxLabel>
+        {labelText && (
+          <StyledCheckboxLabel htmlFor={id}>{labelText}</StyledCheckboxLabel>
         )}
       </React.Fragment>
     )

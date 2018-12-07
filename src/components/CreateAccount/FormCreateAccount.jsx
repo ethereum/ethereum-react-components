@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import i18n from '../../i18n'
-import PropTypes from 'prop-types'
 import { Button, InputPassword } from '..'
 import './FormCreateAccount.scss'
 
 // TODO this falls under category API dependencies and needs to be
 // - required in the beginning: const Mist = require(./api/mist)
 // - passed as utility: <MyForm Mist={Mist} /> || <MyForm utils={Mist.notifications} />
-// - put behind some abstract handler and logic moved up: <MyForm onFormValidationError={(error) => Mist.notification.warn(error.message) }} />
-let Mist = {
+// - put behind some abstract handler and logic moved up:
+//    <MyForm onFormValidationError={(error) => Mist.notification.warn(error.message) }} />
+const Mist = {
   notification: {
     warn: text => alert(text.content)
   }
@@ -24,14 +24,13 @@ export default class CreateAccount extends Component {
 
     this.state = {
       creating: false,
-      passwordInputType: 'text',
       pw: '',
       pwRepeat: '',
       showRepeat: false
     }
   }
 
-  resetForm() {
+  resetForm = () => {
     this.setState({
       pw: '',
       pwRepeat: '',
@@ -40,7 +39,7 @@ export default class CreateAccount extends Component {
     })
   }
 
-  handleCancel(e) {
+  handleCancel = e => {
     e.preventDefault()
     Mist.closeThisWindow()
   }
@@ -81,7 +80,7 @@ export default class CreateAccount extends Component {
 
   async createAccount(pw) {
     try {
-      await Mist.createAccountWeb3()
+      await Mist.createAccountWeb3(pw)
     } catch (error) {
       console.log('error', error)
     }

@@ -5,7 +5,9 @@ import { ValidatedField } from '..'
 export default class ConverterForm extends Component {
   static displayName = 'ConverterForm'
 
-  static propTypes = {}
+  static propTypes = {
+    converter: PropTypes.func
+  }
 
   static defaultProps = {}
 
@@ -20,12 +22,9 @@ export default class ConverterForm extends Component {
 
   handleInputChange = input => {
     const { converter } = this.props
-    this.setState({
-      input
-    })
-    const converted = converter(input)
-    this.setState({
-      output: converted
+    this.setState({ input }, () => {
+      const converted = converter(input)
+      this.setState({ output: converted })
     })
   }
 

@@ -25,8 +25,10 @@ export default class ValidatedField extends Component {
   constructor(props) {
     super(props)
 
+    const { value } = this.props
+
     this.state = {
-      inputValue: this.props.value,
+      inputValue: value,
       isValid: undefined, // valid || invalid || error || processing
       errorMessage: ''
     }
@@ -71,10 +73,8 @@ export default class ValidatedField extends Component {
       isValid = 'error'
       errorMessage = error.message
     }
-    this.setState({
-      isValid,
-      errorMessage
-    })
+
+    return this.setState({ isValid, errorMessage })
   }
 
   renderIndicator() {
@@ -89,7 +89,7 @@ export default class ValidatedField extends Component {
   render() {
     const { type, placeholder, value, size } = this.props
     const { inputValue, errorMessage } = this.state
-    let renderedValue = inputValue || value
+    const renderedValue = inputValue || value
 
     return (
       <React.Fragment>

@@ -38,7 +38,7 @@ const options = chainOptions.map(chain => {
   }
 })
 
-const NetworkOption = ({ innerProps, isDisabled, data }) => (
+const NetworkOption = ({ innerProps, data }) => (
   <div
     {...innerProps}
     style={{
