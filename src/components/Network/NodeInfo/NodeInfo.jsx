@@ -3,7 +3,7 @@ import moment from 'moment'
 // import PieChart from 'react-minimal-pie-chart'
 import PropTypes from 'prop-types'
 import i18n from '../../../i18n'
-import { Pulse } from '../../Widgets/LoadingAnimations'
+import Pulse from '../../Widgets/AnimatedIcons/Pulse'
 
 import './NodeInfo.scss'
 
@@ -39,8 +39,7 @@ class NodeInfo extends Component {
         className={mainClass}
         onMouseUp={() => this.setState({ sticky: !this.state.sticky })}
         onMouseEnter={() => this.setState({ showSubmenu: true })}
-        onMouseLeave={() => this.setState({ showSubmenu: this.state.sticky })}
-      >
+        onMouseLeave={() => this.setState({ showSubmenu: this.state.sticky })}>
         <NodeInfoDot
           network={network}
           active={active}

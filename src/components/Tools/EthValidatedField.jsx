@@ -61,7 +61,9 @@ export default class EthValidatedField extends Component {
       'public-key',
       'signature',
       'zero-address'
-    ]).isRequired,
+    ]),
+    placeholder: PropTypes.string,
+    onChange: PropTypes.func,
     value: PropTypes.string,
     size: PropTypes.any
   }
@@ -75,7 +77,7 @@ export default class EthValidatedField extends Component {
   render() {
     const { type, value, placeholder, onChange, size } = this.props
 
-    config['undefined'].placeholder = placeholder
+    config.undefined.placeholder = placeholder
     const { validator, placeholderConfig } = config[type]
     const inputType = config[type].input || 'text'
 

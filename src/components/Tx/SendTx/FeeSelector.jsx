@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ethUtils from 'ethereumjs-util'
 import i18n from '../../../i18n'
-import { Spinner } from '../../Widgets/LoadingAnimations'
+import Spinner from '../../Widgets/AnimatedIcons/Spinner'
 import * as util from '../../../lib/util'
 
-const BN = ethUtils.BN
+const { BN } = ethUtils
 
 export default class FeeSelector extends Component {
   static displayName = 'FeeSelector'
 
   static propTypes = {
     togglePriority: PropTypes.string.isRequired,
-    gasLoading: PropTypes.bool
+    gasLoading: PropTypes.bool,
+    network: PropTypes.string
   }
 
   static defaultProps = {

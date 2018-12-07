@@ -28,9 +28,11 @@ export default class Button extends Component {
   }
 
   render() {
+    const { children } = this.props
+
     return (
       <StyledButton {...this.props} className="Button">
-        {this.props.children}
+        {children}
       </StyledButton>
     )
   }
@@ -59,7 +61,7 @@ const StyledButton = styled.button`
       background-color: inherit;
       border: none;
       color: #00aafa;
-      font-weight: ${props => (props.secondary ? 'inherit' : 'bold')};
+      font-weight: ${props.secondary ? 'inherit' : 'bold'};
     `};
 
   ${props =>

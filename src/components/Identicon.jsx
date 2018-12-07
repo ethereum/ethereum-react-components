@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import blockies from 'ethereum-blockies'
-import styled, { css } from 'styled-components'
-import i18n from '../i18n/'
+import styled from 'styled-components'
+import i18n from '../i18n'
 import hqxConstructor from '../lib/hqx'
 import anonymousIcon from '../assets/images/anonymous-icon.png'
 
@@ -27,7 +26,7 @@ export default class Identicon extends Component {
   }
 
   // uses hqx pixel scaling with max value 4 x 2 = factor 8
-  identiconData(address) {
+  identiconData = address => {
     return hqx(
       hqx(blockies.create({ seed: address, size: 8, scale: 1 }), 4),
       4
@@ -35,7 +34,7 @@ export default class Identicon extends Component {
   }
 
   // uses blockie's factor 8 scaling
-  identiconDataPixel(address) {
+  identiconDataPixel = address => {
     return blockies.create({ seed: address, size: 8, scale: 8 }).toDataURL()
   }
 
