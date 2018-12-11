@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class NewBlockEvery3s extends Component {
+  static displayName = 'NewBlockEvery3s'
+
+  static propTypes = {
+    children: PropTypes.node
+  }
+
   constructor(props) {
     super(props)
 
@@ -8,16 +15,22 @@ class NewBlockEvery3s extends Component {
       props
     }
   }
+
   componentDidMount() {
-    let intervalId = setInterval(this.timer.bind(this), 3000)
+    const intervalId = setInterval(this.timer.bind(this), 3000)
     this.setState({ intervalId })
   }
+
   componentWillUnmount() {
-    clearInterval(this.state.intervalId)
+    const { intervalId } = this.state
+    clearInterval(intervalId)
   }
+
   timer() {
-    const oldProps = this.state.props
-    let newProps = {
+    const { props } = this.state
+    const oldProps = props
+
+    const newProps = {
       ...oldProps,
       remote: {
         ...oldProps,
@@ -30,15 +43,19 @@ class NewBlockEvery3s extends Component {
         timestamp: Date.now()
       }
     }
+
     this.setState({ props: newProps })
   }
+
   render() {
+    const { children } = this.props
+    const { props } = this.state
+
     if (!this.state) {
-      return
+      return null
     }
-    return (
-      <div>{React.cloneElement(this.props.children, this.state.props)}</div>
-    )
+
+    return <div>{React.cloneElement(children, props)}</div>
   }
 }
 
