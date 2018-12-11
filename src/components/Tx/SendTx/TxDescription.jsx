@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import i18n from '../../../i18n'
+import { Identicon } from '../..'
 import * as util from '../../../lib/util'
+
+// TODO
+const web3 = {}
 
 export default class TxDescription extends Component {
   static displayName = 'TxDescription'
 
   static propTypes = {
     network: PropTypes.oneOf(['main']),
-    /** some ether value FIXME underspecified*/
+    /** some ether value FIXME underspecified */
     value: PropTypes.string,
     /** current ether price is us dollars */
     etherPriceUSD: PropTypes.string,
@@ -20,14 +24,16 @@ export default class TxDescription extends Component {
     params: PropTypes.object,
     data: PropTypes.object,
     adjustWindowHeight: PropTypes.func,
-    showDetails: PropTypes.bool
+    showDetails: PropTypes.bool,
+    gasPrice: PropTypes.string,
+    estimatedGas: PropTypes.string
   }
 
   static defaultProps = {
     showDetails: false
   }
 
-  formattedBalance() {
+  formattedBalance = () => {
     const { value } = this.props
     return util.formatBalance(
       util.toBN(value || 0),
@@ -36,20 +42,21 @@ export default class TxDescription extends Component {
     )
   }
 
-  calculateTransferValue() {
+  calculateTransferValue = () => {
     const { value, etherPriceUSD } = this.props
 
     if (!value || !etherPriceUSD) {
       return
     }
 
-    const bigValue = util.toBigNumber(value)
+    // const bigValue = util.toBigNumber(value)
 
-    const fee = bigValue
-      .mult(etherPriceUSD)
-      .div(util.toBN('1000000000000000000'))
-    //FIXME return this.formatter.format(fee)
-    return '250'
+    // const fee = bigValue
+    // .mult(etherPriceUSD)
+    // .div(util.toBN('1000000000000000000'))
+    // FIXME return this.formatter.format(fee)
+
+    return '250' // eslint-disable-line
   }
 
   handleDetailsClick = () => {
@@ -58,16 +65,17 @@ export default class TxDescription extends Component {
     this.setState({ showDetails: !showDetails }, adjustWindowHeight)
   }
 
-  determineTxType() {
+  determineTxType = () => {
     const { isNewContract, toIsContract, executionFunction } = this.props
     if (isNewContract) return 'newContract'
     if (toIsContract) {
       if (executionFunction === 'transfer(address,uint256)') {
         return 'tokenTransfer'
-      } else {
-        return 'genericFunctionExecution'
       }
+
+      return 'genericFunctionExecution'
     }
+
     return 'etherTransfer'
   }
 
@@ -162,10 +170,12 @@ export default class TxDescription extends Component {
       gasError,
       gasPrice,
       isNewContract,
+      params,
       toIsContract,
       token,
       value
     } = this.props
+    const { showDetails } = this.state
 
     if (!toIsContract && !isNewContract) {
       return null
@@ -185,7 +195,7 @@ export default class TxDescription extends Component {
       }
     }
 
-    if (!this.state.showDetails) {
+    if (!showDetails) {
       return (
         <div
           className="execution-context__details-link"
@@ -195,14 +205,14 @@ export default class TxDescription extends Component {
       )
     }
 
-    const params = this.props.params.map(param => {
+    const paramsRows = params.map(param => {
       return (
         <div key={Math.random()} className="execution-context__param">
           <div className="execution-context__param-value">
             <div className="execution-context__param-unicode">{'\u2192'}</div>
             {param.type === 'address' ? (
               <div className="execution-context__param-identicon">
-                <Identicon seed={param.value} size="small" />
+                <Identicon address={param.value} size="small" />
               </div>
             ) : null}
             {param.value}
@@ -277,19 +287,19 @@ export default class TxDescription extends Component {
                 <span className="execution-context__details-title">
                   {i18n.t('mist.sendTx.tokenName')}
                 </span>
-                <Identicon seed={token.address} size="small" />
+                <Identicon address={token.address} size="small" />
                 <span className="bold">{token.address}</span>
               </div>
             )}
           </div>
         )}
 
-        {this.props.params.length > 0 && (
+        {params.length > 0 && (
           <div>
             <div className="execution-context__params-title">
               {i18n.t('mist.sendTx.parameters')}
             </div>
-            <div className="execution-context__params-table">{params}</div>
+            <div className="execution-context__params-table">{paramsRows}</div>
           </div>
         )}
 

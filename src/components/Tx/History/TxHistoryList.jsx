@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import i18n from '../../../i18n'
 import TxRow from './TxHistoryListEntry'
 
 export default class TxHistory extends Component {
   static displayName = 'TxHistory'
+
+  static propTypes = {
+    etherPriceUSD: PropTypes.string,
+    blockNumber: PropTypes.number,
+    txs: PropTypes.array
+  }
 
   renderTxList(txs) {
     const { etherPriceUSD, blockNumber } = this.props
@@ -22,7 +29,7 @@ export default class TxHistory extends Component {
   }
 
   render() {
-    const { txs, etherPriceUSD } = this.props
+    const { txs } = this.props
 
     return (
       <div className="list-txs">

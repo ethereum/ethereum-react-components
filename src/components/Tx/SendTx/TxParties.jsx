@@ -1,19 +1,32 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Identicon from '../../Identicon'
 import i18n from '../../../i18n'
-import * as util from '../../../lib/util'
+// import * as util from '../../../lib/util'
 
 export default class TxParties extends Component {
   static displayName = 'TxParties'
 
-  totalAmount = () => {
-    var amount = EthTools.formatBalance(
-      web3.utils.toBN(this.props.value || 0),
-      '0,0.00[0000000000000000]',
-      'ether'
-    )
+  static propTypes = {
+    executionFunction: PropTypes.string,
+    from: PropTypes.string,
+    hasSignature: PropTypes.bool,
+    isNewContract: PropTypes.bool,
+    params: PropTypes.array,
+    to: PropTypes.string,
+    toIsContract: PropTypes.bool
+  }
 
-    var dotPos = ~amount.indexOf('.')
+  totalAmount = () => {
+    // const amount = EthTools.formatBalance(
+    // web3.utils.toBN(this.props.value || 0),
+    // '0,0.00[0000000000000000]',
+    // 'ether'
+    // )
+    // TODO
+    const amount = 1
+
+    const dotPos = ~amount.indexOf('.')
       ? amount.indexOf('.') + 3
       : amount.indexOf(',') + 3
 
@@ -36,14 +49,13 @@ export default class TxParties extends Component {
       <div className="tx-parties__party">
         <Identicon seed={from.toLowerCase()} size="small" />
         <div
-          className={
-            'tx-parties__direction-name ' +
-            (toIsContract &&
+          className={`tx-parties__direction-name ${
+            toIsContract &&
             !isNewContract &&
             executionFunction !== 'transfer(address,uint256)'
               ? 'is-contract'
-              : '')
-          }>
+              : ''
+          }`}>
           {i18n.t('mist.sendTx.from')}
         </div>
         <div>
@@ -85,10 +97,9 @@ export default class TxParties extends Component {
         <div className="tx-parties__party">
           <Identicon seed={to.toLowerCase()} size="small" />
           <div
-            className={
-              'tx-parties__direction-name ' +
-              (toIsContract ? 'is-contract' : '')
-            }>
+            className={`tx-parties__direction-name ${
+              toIsContract ? 'is-contract' : ''
+            }`}>
             {toIsContract
               ? i18n.t('mist.sendTx.contract')
               : i18n.t('mist.sendTx.to')}

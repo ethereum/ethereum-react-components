@@ -13,11 +13,15 @@ export default class FeeSelector extends Component {
   static propTypes = {
     togglePriority: PropTypes.string.isRequired,
     gasLoading: PropTypes.bool,
-    network: PropTypes.string
+    // network: PropTypes.string,
+    etherPriceUSD: PropTypes.string,
+    priority: PropTypes.bool,
+    gasPrice: PropTypes.string,
+    estimatedGas: PropTypes.string
   }
 
   static defaultProps = {
-    network: 'main'
+    // network: 'main'
   }
 
   state = {
@@ -95,9 +99,11 @@ export default class FeeSelector extends Component {
   }
 
   render() {
+    const { priority } = this.props
+
     return (
       <div className="fee-selector">
-        {this.props.priority ? (
+        {priority ? (
           <span
             onClick={this.handleClick}
             className="fee-selector__btn"
