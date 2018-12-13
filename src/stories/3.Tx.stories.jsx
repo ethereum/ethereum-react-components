@@ -3,9 +3,11 @@ import { storiesOf } from '@storybook/react'
 import FeeSelector from '../components/Tx/SendTx/FeeSelector'
 import TxHistory from '../components/Tx/History'
 import FormSubmitTx from '../components/Tx/SendTx/FormSubmitTx'
-import TxDescription from '../components/Tx/SendTx/TxDescription'
+// import TxDescription from '../components/Tx/SendTx/TxDescription'
 import DeployContract from '../components/Tx/SendTx/TxDescription/DeployContract'
 import TokenTransfer from '../components/Tx/SendTx/TxDescription/TokenTransfer'
+import FunctionExecution from '../components/Tx/SendTx/TxDescription/FunctionExecution'
+import SendEther from '../components/Tx/SendTx/TxDescription/SendEther'
 import GasNotification from '../components/Tx/SendTx/GasNotification'
 import TxParties from '../components/Tx/SendTx/TxParties'
 import TxParty from '../components/Tx/SendTx/TxParty'
@@ -48,18 +50,20 @@ storiesOf('Tx/Description/TokenTransfer', module)
     )
   })
 
-storiesOf('Tx/Description', module)
-  .add('send ETH', () => {
-    return <TxDescription txType="sendEth" />
+storiesOf('Tx/Description/SendEther', module)
+  .add('default', () => {
+    return <SendEther value="0.03" valueInUSD="3" network="main" />
   })
-  .add('send tokens', () => {
-    return <TxDescription txType="transferTokens" />
+  .add('transfer', () => {
+    return <SendEther value="0.03" valueInUSD="3" network="rinkeby" />
   })
-  .add('deploy contract', () => {
-    return <TxDescription txType="deployContract" />
+
+storiesOf('Tx/Description/FunctionExecution', module)
+  .add('default', () => {
+    return <FunctionExecution />
   })
-  .add('execute function', () => {
-    return <TxDescription txType="executeFunction" />
+  .add('transfer', () => {
+    return <FunctionExecution executionFunction="transfer(uint256,address)" />
   })
 
 storiesOf('Tx/TxParty', module)

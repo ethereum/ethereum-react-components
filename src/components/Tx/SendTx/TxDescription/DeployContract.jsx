@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 export default class DeployContract extends Component {
+  static displayName = 'DeployContract'
+
   static propTypes = {
     data: PropTypes.string
   }
@@ -15,7 +17,7 @@ export default class DeployContract extends Component {
     return (
       <StyledWrapper>
         <div>
-          Upload <Bold>New Contract</Bold>
+          <Bold>Upload</Bold> New Contract
         </div>
         <StyledSubtext className="context-description__subtext">
           About {bytesCount} bytes

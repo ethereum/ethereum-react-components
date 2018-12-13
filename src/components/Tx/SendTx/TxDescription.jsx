@@ -6,6 +6,8 @@ import * as util from '../../../lib/util'
 
 import DeployContract from './TxDescription/DeployContract'
 import TokenTransfer from './TxDescription/TokenTransfer'
+import FunctionExecution from './TxDescription/FunctionExecution'
+import SendEther from './TxDescription/SendEther'
 
 // TODO
 const web3 = {}
@@ -89,42 +91,16 @@ export default class TxDescription extends Component {
     return 'etherTransfer'
   }
 
-  renderGenericFunctionDescription = () => {
-    return (
-      <div className="context-description__sentence">
-        Executing <span className="bold">Contract Function</span>
-      </div>
-    )
-  }
-
-  renderEtherTransferDescription() {
-    const { network } = this.props
-    let conversion
-    if (network === 'main') {
-      const value = this.calculateTransferValue()
-      if (value) {
-        conversion = <span>About {value} USD</span>
-      }
-    } else {
-      conversion = (
-        <span>
-          $0 (<span className="capitalize">{network}</span>)
-        </span>
-      )
-    }
-
-    return (
-      <div className="context-description__sentence">
-        <div>
-          Transfer <span className="bold">{this.formattedBalance()} ETHER</span>
-        </div>
-        <div className="context-description__subtext">{conversion}</div>
-      </div>
-    )
-  }
-
   renderDescription() {
-    const { data, params, token } = this.props
+    const {
+      etherPriceUSD,
+      executionFunction,
+      data,
+      params,
+      network,
+      token,
+      value
+    } = this.props
 
     const txType = this.determineTxType()
     switch (txType) {
@@ -133,11 +109,15 @@ export default class TxDescription extends Component {
       case 'tokenTransfer':
         return <TokenTransfer params={params} token={token} />
       case 'genericFunctionExecution':
-        return this.renderGenericFunctionDescription()
-      case 'etherTransfer':
-        return this.renderEtherTransferDescription()
+        return <FunctionExecution executionFunction={executionFunction} />
       default:
-        return this.renderEtherTransferDescription()
+        return (
+          <SendEther
+            network={network}
+            value={util.weiToEther(value)}
+            valueInUSD={util.toUsd(value, etherPriceUSD)}
+          />
+        )
     }
   }
 

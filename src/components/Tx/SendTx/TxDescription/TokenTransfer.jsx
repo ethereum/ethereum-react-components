@@ -5,6 +5,8 @@ import i18n from '../../../../i18n'
 import { formatTokenCount } from '../../../../util/formatters'
 
 export default class TokenTransfer extends Component {
+  static displayName = 'TokenTransfer'
+
   static propTypes = {
     params: PropTypes.array,
     token: PropTypes.object
