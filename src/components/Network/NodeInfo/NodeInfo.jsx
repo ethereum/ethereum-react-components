@@ -1,16 +1,37 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-// import PieChart from 'react-minimal-pie-chart'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import i18n from '../../../i18n'
 import Pulse from '../../Widgets/AnimatedIcons/Pulse'
-
-import './NodeInfo.scss'
 
 import NodeInfoDot from './NodeInfoDot'
 import NodeInfoBox from './NodeInfoBox'
 
 class NodeInfo extends Component {
+  static propTypes = {
+    /** Active network */
+    active: PropTypes.oneOf(['remote', 'local']).isRequired,
+    /** Current network */
+    network: PropTypes.oneOf(['main', 'rinkeby', 'kovan', 'private'])
+      .isRequired,
+    /** Local network data */
+    local: PropTypes.shape({
+      blockNumber: PropTypes.number.isRequired,
+      timestamp: PropTypes.number.isRequired,
+      sync: PropTypes.shape({
+        highestBlock: PropTypes.number.isRequired,
+        currentBlock: PropTypes.number.isRequired,
+        startingBlock: PropTypes.number.isRequired
+      }).isRequired
+    }).isRequired,
+    /** Remote network data */
+    remote: PropTypes.shape({
+      blockNumber: PropTypes.number.isRequired,
+      timestamp: PropTypes.number.isRequired
+    }).isRequired
+  }
+
   constructor(props) {
     super(props)
 
@@ -21,36 +42,57 @@ class NodeInfo extends Component {
 
   render() {
     const { network, active, remote, local } = this.props
-    const { showSubmenu } = this.state
+    const { showSubmenu, sticky } = this.state
 
     let mainClass = network === 'main' ? 'node-mainnet' : 'node-testnet'
-    if (this.state.sticky) mainClass += ' sticky'
+    if (sticky) {
+      mainClass += ' sticky'
+    }
 
     return (
-      <div
-        id="node-info"
-        className={mainClass}
-        onMouseUp={() => this.setState({ sticky: !this.state.sticky })}
-        onMouseEnter={() => this.setState({ showSubmenu: true })}
-        onMouseLeave={() => this.setState({ showSubmenu: this.state.sticky })}>
-        <NodeInfoDot
-          network={network}
-          active={active}
-          remote={remote}
-          local={local}
-        />
-
-        {showSubmenu && (
-          <NodeInfoBox
+      <StyledNode>
+        <div
+          id="node-info"
+          className={mainClass}
+          onMouseUp={() => this.setState({ sticky: !sticky })}
+          onMouseEnter={() => this.setState({ showSubmenu: true })}
+          onMouseLeave={() => this.setState({ showSubmenu: sticky })}
+        >
+          <NodeInfoDot
             network={network}
             active={active}
             remote={remote}
             local={local}
+            sticky={sticky}
           />
-        )}
-      </div>
+
+          {showSubmenu && (
+            <NodeInfoBox
+              network={network}
+              active={active}
+              remote={remote}
+              local={local}
+              dotLocation="topLeft"
+            />
+          )}
+        </div>
+      </StyledNode>
     )
   }
 }
+
+const StyledNode = styled.div`
+  cursor: default;
+  display: flex;
+  flex-flow: row wrap;
+  flex-shrink: 0;
+  font-size: 0.9em;
+  color: #827a7a;
+
+  #node-info {
+    padding: 22px;
+    -webkit-app-region: no-drag;
+  }
+`
 
 export default NodeInfo

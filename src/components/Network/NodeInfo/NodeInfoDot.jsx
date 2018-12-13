@@ -25,32 +25,52 @@ class NodeInfoDot extends Component {
     remote: PropTypes.shape({
       blockNumber: PropTypes.number.isRequired,
       timestamp: PropTypes.number.isRequired
-    }).isRequired
+    }).isRequired,
+    /** Component is stickied */
+    sticky: PropTypes.bool
   }
-
-  static defaultProps = {}
 
   constructor(props) {
     super(props)
-
     this.state = {
-      pulseColorClassClass: ''
+      pulseColor: '',
+      diffTimestamp: moment().unix()
     }
   }
 
-  componentDidUpdate(prevProps) {
-    // if new block arrived, add animation to light
-    if (this.isNewBlock(prevProps, this.props)) {
-      const pulseColorClass =
-        prevProps.active === 'remote'
-          ? 'pulse-light__orange'
-          : this.props.network === 'main'
-          ? 'pulse-light__green'
-          : 'pulse-light__blue'
+  componentDidMount() {
+    // NOTE: this component should update diff every second
+    this.diffInterval = setInterval(() => {
+      this.setState({ diffTimestamp: moment().unix() })
+    }, 1000)
+  }
 
-      this.setState({ pulseColorClass }, () => {
+  componentWillUnmount() {
+    clearInterval(this.diffInterval)
+  }
+
+  componentDidUpdate(prevProps) {
+    this.pulseIfNewBlock(prevProps)
+  }
+
+  pulseIfNewBlock(props) {
+    // If new block arrived, add animation to light
+    if (this.isNewBlock(props, this.props)) {
+      let pulseColor
+
+      if (props.active === 'remote') {
+        pulseColor = 'orange'
+      } else if (props.active === 'local') {
+        if (props.network === 'main') {
+          pulseColor = 'green'
+        } else {
+          pulseColor = 'blue'
+        }
+      }
+
+      this.setState({ pulseColor }, () => {
         setTimeout(() => {
-          this.setState({ pulseColorClass: '' })
+          this.setState({ pulseColor: '' })
         }, 2000)
       })
     }
@@ -66,51 +86,62 @@ class NodeInfoDot extends Component {
 
   secondsSinceLastBlock() {
     const { active } = this.props
-    const lastBlock = moment(this.props[active].timestamp, 'X')
-    return moment().diff(lastBlock, 'seconds')
+    const { diffTimestamp } = this.state
+    const lastBlock = moment.unix(this.props[active].timestamp)
+    return moment.unix(diffTimestamp).diff(lastBlock, 'seconds')
   }
 
   render() {
-    const { active, network, local, remote } = this.props
-    const dotColor = network === 'main' ? '#7ed321' : '#00aafa'
+    const { active, network, local, remote, sticky } = this.props
+    const { pulseColor } = this.state
+
+    let dotColor
+    let progressColor
+
+    const colorMainnet = '#7ed321'
+    const colorTestnet = '#00aafa'
+    const colorRed = '#e81e1e'
+
+    if (network === 'main') {
+      dotColor = colorMainnet
+    } else {
+      dotColor = colorTestnet
+    }
+    if (active === 'remote' || local.syncMode === 'nosync') {
+      dotColor = 'orange'
+    }
+    if (this.secondsSinceLastBlock() > 60) {
+      dotColor = colorRed
+    }
 
     const { highestBlock, currentBlock, startingBlock } = local.sync
     const progress =
       ((currentBlock - startingBlock) / (highestBlock - startingBlock)) * 100
 
     return (
-      <StyledLight>
-        <div className="pie-container">
-          <div
-            id="node-info__light"
-            className={this.state.pulseColorClass}
-            style={{
-              backgroundColor:
-                this.secondsSinceLastBlock() > 60
-                  ? 'red'
-                  : active === 'remote'
-                  ? 'orange'
-                  : dotColor
-            }}
-          />
-          {active === 'remote' && currentBlock !== 0 && (
+      <div className="pie-container">
+        <StyledLight
+          pulseColor={pulseColor}
+          sticky={sticky}
+          style={{
+            backgroundColor: dotColor
+          }}
+        >
+          {currentBlock > 0 && dotColor !== colorRed && (
             <PieChart
               startAngle={-90}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                zIndex: 2,
-                height: 16
-              }}
               data={[
                 { value: progress || 0, key: 1, color: dotColor },
-                { value: 100 - (progress || 1), key: 2, color: 'orange' }
+                {
+                  value: 100 - (progress || 1),
+                  key: 2,
+                  color: remote.blockNumber > 100 ? 'orange' : 'red'
+                }
               ]}
             />
           )}
-        </div>
-      </StyledLight>
+        </StyledLight>
+      </div>
     )
   }
 }
@@ -168,22 +199,36 @@ const StyledLight = styled.div`
   border-radius: 50%;
   transition: background-color ease-in-out 5s;
 
-  ${state =>
-    state.pulseColorClass === 'orange' &&
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 16px;
+  }
+
+  ${props =>
+    props.sticky &&
+    css`
+      box-shadow: inset rgba(0, 0, 0, 0.3) 0 1px 3px;
+    `}
+
+  ${props =>
+    props.pulseColor === 'orange' &&
     css`
       animation: ${beaconOrange} ease-in-out;
       animation-duration: 2s;
     `}
 
-  ${state =>
-    state.pulseColorClass === 'green' &&
+  ${props =>
+    props.pulseColor === 'green' &&
     css`
       animation: ${beaconGreen} ease-in-out;
       animation-duration: 2s;
     `}
 
-  ${state =>
-    state.pulseColorClass === 'blue' &&
+  ${props =>
+    props.pulseColor === 'blue' &&
     css`
       animation: ${beaconBlue} ease-in-out;
       animation-duration: 2s;

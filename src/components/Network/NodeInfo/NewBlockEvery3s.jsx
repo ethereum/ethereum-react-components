@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 class NewBlockEvery3s extends Component {
   static displayName = 'NewBlockEvery3s'
@@ -35,12 +36,12 @@ class NewBlockEvery3s extends Component {
       remote: {
         ...oldProps,
         blockNumber: oldProps.remote.blockNumber + 1,
-        timestamp: Date.now()
+        timestamp: moment().unix()
       },
       local: {
         ...oldProps.local,
-        blockNumber: oldProps.remote.blockNumber + 1,
-        timestamp: Date.now()
+        blockNumber: oldProps.local.blockNumber + 1,
+        timestamp: moment().unix()
       }
     }
 

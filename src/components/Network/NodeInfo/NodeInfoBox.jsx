@@ -1,26 +1,79 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
+import styled, { css } from 'styled-components'
 import i18n from '../../../i18n'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faShareAlt,
+  faUsers,
+  faBolt,
+  faLayerGroup,
+  faCloudDownloadAlt,
+  faClock
+} from '@fortawesome/free-solid-svg-icons'
 
-import './NodeInfo.scss'
+library.add(
+  faShareAlt,
+  faUsers,
+  faBolt,
+  faLayerGroup,
+  faCloudDownloadAlt,
+  faClock
+)
 
-// FIXME
 const numberWithCommas = val => {
   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
+
 class NodeInfoBox extends Component {
+  static propTypes = {
+    /** Active network */
+    active: PropTypes.oneOf(['remote', 'local']).isRequired,
+    /** Current network */
+    network: PropTypes.oneOf(['main', 'rinkeby', 'kovan', 'private'])
+      .isRequired,
+    /** Local network data */
+    local: PropTypes.shape({
+      blockNumber: PropTypes.number.isRequired,
+      timestamp: PropTypes.number.isRequired,
+      sync: PropTypes.shape({
+        highestBlock: PropTypes.number.isRequired,
+        currentBlock: PropTypes.number.isRequired,
+        startingBlock: PropTypes.number.isRequired
+      }).isRequired
+    }).isRequired,
+    /** Remote network data */
+    remote: PropTypes.shape({
+      blockNumber: PropTypes.number.isRequired,
+      timestamp: PropTypes.number.isRequired
+    }).isRequired,
+    /** Location of dot relative to box */
+    dotLocation: PropTypes.oneOf(['bottomLeft'])
+  }
+
   constructor(props) {
     super(props)
+    this.state = { diffTimestamp: moment().unix() }
+  }
 
-    this.state = {}
+  componentDidMount() {
+    // NOTE: this component should update diff every second
+    this.diffInterval = setInterval(() => {
+      this.setState({ diffTimestamp: moment().unix() })
+    }, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.diffInterval)
   }
 
   localStatsFindingPeers = () => {
     return (
       <div>
         <div className="looking-for-peers row-icon">
-          <i className="icon icon-share" />
+          <FontAwesomeIcon icon="share-alt" />
           {i18n.t('mist.nodeInfo.lookingForPeers')}
         </div>
       </div>
@@ -34,11 +87,11 @@ class NodeInfoBox extends Component {
     return (
       <div>
         <div className="peer-count row-icon">
-          <i className="icon icon-users" />
+          <FontAwesomeIcon icon="users" />
           {` ${connectedPeers} ${i18n.t('mist.nodeInfo.peers')}`}
         </div>
         <div className="sync-starting row-icon">
-          <i className="icon icon-energy" />
+          <FontAwesomeIcon icon="bolt" />
           {i18n.t('mist.nodeInfo.syncStarting')}
         </div>
       </div>
@@ -63,15 +116,15 @@ class NodeInfoBox extends Component {
     return (
       <div>
         <div className="block-number row-icon">
-          <i className="icon icon-layers" />
+          <FontAwesomeIcon icon="layer-group" />
           {formattedDisplayBlock}
         </div>
         <div className="peer-count row-icon">
-          <i className="icon icon-users" />
+          <FontAwesomeIcon icon="users" />
           {` ${connectedPeers} ${i18n.t('mist.nodeInfo.peers')}`}
         </div>
         <div className="sync-progress row-icon">
-          <i className="icon icon-cloud-download" />
+          <FontAwesomeIcon icon="cloud-download-alt" />
           <progress max="100" value={progress || 0} />
         </div>
       </div>
@@ -80,13 +133,14 @@ class NodeInfoBox extends Component {
 
   localStatsSynced() {
     const { local, network } = this.props
+    const { diffTimestamp } = this.state
     const { blockNumber, timestamp, sync } = local
     const { connectedPeers } = sync
 
     const formattedBlockNumber = numberWithCommas(blockNumber)
 
-    const timeSince = moment(timestamp, 'X')
-    const diff = moment().diff(timeSince, 'seconds')
+    const timeSince = moment.unix(timestamp)
+    const diff = moment.unix(diffTimestamp).diff(timeSince, 'seconds')
 
     return (
       <div>
@@ -94,12 +148,12 @@ class NodeInfoBox extends Component {
           className="block-number row-icon"
           title={i18n.t('mist.nodeInfo.blockNumber')}
         >
-          <i className="icon icon-layers" />
+          <FontAwesomeIcon icon="layer-group" />
           {formattedBlockNumber}
         </div>
         {network !== 'private' && (
           <div className="peer-count row-icon">
-            <i className="icon icon-users" />
+            <FontAwesomeIcon icon="users" />
             {` ${connectedPeers} ${i18n.t('mist.nodeInfo.peers')}`}
           </div>
         )}
@@ -107,7 +161,7 @@ class NodeInfoBox extends Component {
           className="block-diff row-icon"
           title={i18n.t('mist.nodeInfo.timeSinceBlock')}
         >
-          <i className="icon icon-clock" />
+          <FontAwesomeIcon icon="clock" />
           <span>{diff} seconds</span>
         </div>
       </div>
@@ -116,6 +170,7 @@ class NodeInfoBox extends Component {
 
   renderRemoteStats() {
     const { active, remote } = this.props
+    const { diffTimestamp } = this.state
     const { blockNumber, timestamp } = remote
 
     // Hide remote stats if local node is synced
@@ -125,7 +180,7 @@ class NodeInfoBox extends Component {
 
     const formattedBlockNumber = numberWithCommas(blockNumber)
     const remoteTimestamp = moment.unix(timestamp)
-    const diff = moment().diff(remoteTimestamp, 'seconds')
+    const diff = moment.unix(diffTimestamp).diff(remoteTimestamp, 'seconds')
 
     if (remote.blockNumber < 1000) {
       // Still loading initial remote results
@@ -136,7 +191,7 @@ class NodeInfoBox extends Component {
           </div>
           <div>
             <div className="remote-loading row-icon">
-              <i className="icon icon-energy" />
+              <FontAwesomeIcon icon="bolt" />
               {i18n.t('mist.nodeInfo.connecting')}
             </div>
           </div>
@@ -152,7 +207,8 @@ class NodeInfoBox extends Component {
           </span>
         </div>
         <div className="block-number row-icon">
-          <i className="icon icon-layers" /> {formattedBlockNumber}
+          <FontAwesomeIcon icon="layer-group" />
+          {formattedBlockNumber}
         </div>
         <div
           className={
@@ -162,7 +218,7 @@ class NodeInfoBox extends Component {
           {
             // TODO: make this i8n compatible
           }
-          <i className="icon icon-clock" />
+          <FontAwesomeIcon icon="clock" />
           {diff < 120 ? diff + ' seconds' : `${Math.floor(diff / 60)} minutes`}
         </div>
       </div>
@@ -224,24 +280,184 @@ class NodeInfoBox extends Component {
   }
 
   render() {
-    const { network } = this.props
+    const { network, dotLocation } = this.props
     return (
-      <section className="node-info__submenu-container">
-        <section>
-          <div className="node-info__section">
-            <div className="node-info__network-title">{network}</div>
-            <div className="node-info__subtitle">
-              {network !== 'main' && i18n.t('mist.nodeInfo.testNetwork')}
-              {network === 'main' && i18n.t('mist.nodeInfo.network')}
+      <StyledBox dotLocation={dotLocation}>
+        <section className="node-info__submenu-container">
+          <section>
+            <div className="node-info__section">
+              <div className="node-info__network-title">{network}</div>
+              <div className="node-info__subtitle">
+                {network !== 'main' && i18n.t('mist.nodeInfo.testNetwork')}
+                {network === 'main' && i18n.t('mist.nodeInfo.network')}
+              </div>
             </div>
-          </div>
-          {this.renderRemoteStats()}
-          {this.renderLocalStats()}
+            {this.renderRemoteStats()}
+            {this.renderLocalStats()}
+          </section>
         </section>
-      </section>
+      </StyledBox>
     )
   }
 }
+
+const StyledBox = styled.div`
+  font-family: sans-serif;
+  ${props =>
+    props.dotLocation &&
+    css`
+      position: absolute;
+      top: 152px;
+    `}
+
+  .node-info__subtitle {
+    margin-left: 1px;
+    font-size: 10px;
+    color: #aaa;
+    text-transform: uppercase;
+  }
+
+  .node-info__section {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 11px;
+  }
+  .node-info__section:first-of-type {
+    border-top: none;
+  }
+
+  .node-info__network-title {
+    font-weight: 300;
+    font-size: 24px;
+    // color: #24C33A;
+    text-transform: capitalize;
+  }
+
+  .node-info__node-title {
+    font-size: 18px;
+    font-weight: 200;
+    margin-bottom: 6px;
+    strong {
+      font-weight: 400;
+    }
+  }
+
+  .node-info__pill {
+    display: inline-block;
+    margin-left: 5px;
+    font-weight: 300;
+    font-size: 11px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    padding: 1px 6px 2px;
+    vertical-align: middle;
+    text-transform: none;
+  }
+
+  .node-info__submenu-container {
+    width: 220px;
+    border-radius: 5px;
+    z-index: 1000;
+    cursor: default;
+
+    transition: 150ms linear all, 1ms linear top;
+    transition-delay: 200ms;
+    transform: translateY(-11px);
+
+    section {
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(2px);
+      width: 100%;
+      border-radius: 5px;
+      color: #fff;
+      position: relative;
+    }
+
+    progress {
+      width: 100%;
+    }
+
+    ${props =>
+      props.dotLocation === 'topLeft' &&
+      // Apply css arrow to topLeft of box
+      css`
+        position: absolute;
+        left: 40px;
+        top: 0px;
+
+        &::before {
+          content: '';
+          margin-left: -8px;
+          top: 0;
+          margin-top: 12px;
+          display: block;
+          position: absolute;
+          width: 0px;
+          height: 8px * 2.25;
+          border: 0px solid transparent;
+          border-width: 8px;
+          border-left: 0;
+          border-right-color: rgba(0, 0, 0, 0.78);
+        }
+      `}
+  }
+
+  .row-icon {
+    margin-bottom: 6px;
+    margin-left: 3px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    .icon {
+      display: inline-block;
+      margin-right: 6px;
+    }
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .svg-inline--fa {
+    margin-right: 4px;
+  }
+
+  strong {
+    font-weight: 500;
+  }
+
+  .orange {
+    color: orange;
+  }
+
+  .red {
+    color: #e81e1e;
+  }
+
+  .node-mainnet .node-info__node-title.local {
+    color: $colorMainnet;
+  }
+
+  .node-testnet .node-info__node-title.local {
+    color: $colorTestnet;
+  }
+
+  progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) inset;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .node-mainnet progress[value]::-webkit-progress-value {
+    background-image: linear-gradient(left, transparent, $colorMainnet);
+    background: $colorMainnet;
+    background-size: cover;
+  }
+
+  .node-testnet progress[value]::-webkit-progress-value {
+    background-image: linear-gradient(left, transparent, $colorTestnet);
+    background-size: cover;
+  }
+`
 
 NodeInfoBox.propTypes = {
   network: PropTypes.oneOf(['main', 'private']),
