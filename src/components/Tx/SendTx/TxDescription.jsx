@@ -4,6 +4,9 @@ import i18n from '../../../i18n'
 import { Identicon } from '../..'
 import * as util from '../../../lib/util'
 
+import DeployContract from './TxDescription/DeployContract'
+import TokenTransfer from './TxDescription/TokenTransfer'
+
 // TODO
 const web3 = {}
 
@@ -11,6 +14,12 @@ export default class TxDescription extends Component {
   static displayName = 'TxDescription'
 
   static propTypes = {
+    // txType: PropTypes.oneOf([
+    // 'sendEth',
+    // 'transferTokens',
+    // 'deployContract',
+    // 'executeFunction'
+    // ]),
     network: PropTypes.oneOf(['main']),
     /** some ether value FIXME underspecified */
     value: PropTypes.string,
@@ -67,6 +76,7 @@ export default class TxDescription extends Component {
 
   determineTxType = () => {
     const { isNewContract, toIsContract, executionFunction } = this.props
+
     if (isNewContract) return 'newContract'
     if (toIsContract) {
       if (executionFunction === 'transfer(address,uint256)') {
@@ -77,40 +87,6 @@ export default class TxDescription extends Component {
     }
 
     return 'etherTransfer'
-  }
-
-  renderNewContractDescription = () => {
-    const { data } = this.props
-    const bytesCount = encodeURI(data).split(/%..|./).length - 1
-
-    return (
-      <div className="context-description__sentence">
-        <div>
-          Upload <span className="bold">New Contract</span>
-        </div>
-        <div className="context-description__subtext">
-          About {bytesCount} bytes
-        </div>
-      </div>
-    )
-  }
-
-  renderTokenTransferDescription = () => {
-    const { params, token } = this.props
-    if (params.length === 0) return <div />
-
-    const tokenCount = params[1].value.slice(0, -Math.abs(token.decimals))
-
-    const tokenSymbol = token.symbol || i18n.t('mist.sendTx.tokens')
-
-    return (
-      <div className="context-description__sentence">
-        {i18n.t('mist.sendTx.transfer')}{' '}
-        <span className="bold">
-          {tokenCount} {tokenSymbol}
-        </span>
-      </div>
-    )
   }
 
   renderGenericFunctionDescription = () => {
@@ -148,12 +124,14 @@ export default class TxDescription extends Component {
   }
 
   renderDescription() {
+    const { data, params, token } = this.props
+
     const txType = this.determineTxType()
     switch (txType) {
       case 'newContract':
-        return this.renderNewContractDescription()
+        return <DeployContract data={data} />
       case 'tokenTransfer':
-        return this.renderTokenTransferDescription()
+        return <TokenTransfer params={params} token={token} />
       case 'genericFunctionExecution':
         return this.renderGenericFunctionDescription()
       case 'etherTransfer':
@@ -314,6 +292,7 @@ export default class TxDescription extends Component {
 
   render() {
     const { gasError } = this.props
+
     return (
       <div className="execution-context">
         <div className="context-description">

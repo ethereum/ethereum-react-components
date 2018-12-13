@@ -4,6 +4,8 @@ import FeeSelector from '../components/Tx/SendTx/FeeSelector'
 import TxHistory from '../components/Tx/History'
 import FormSubmitTx from '../components/Tx/SendTx/FormSubmitTx'
 import TxDescription from '../components/Tx/SendTx/TxDescription'
+import DeployContract from '../components/Tx/SendTx/TxDescription/DeployContract'
+import TokenTransfer from '../components/Tx/SendTx/TxDescription/TokenTransfer'
 import GasNotification from '../components/Tx/SendTx/GasNotification'
 import TxParties from '../components/Tx/SendTx/TxParties'
 import TxParty from '../components/Tx/SendTx/TxParty'
@@ -27,9 +29,38 @@ storiesOf('Tx/Submit Form', module)
   .add('confirming', () => <FormSubmitTx unlocking />)
   .add('error', () => <FormSubmitTx error />)
 
-storiesOf('Tx/Description', module).add('default', () => {
-  return <TxDescription />
+storiesOf('Tx/Description/DeployContract', module).add('with data', () => {
+  return <DeployContract data={'a'.repeat(500)} />
 })
+
+storiesOf('Tx/Description/TokenTransfer', module)
+  .add('with token data', () => {
+    return (
+      <TokenTransfer
+        params={[{ value: '?' }, { value: '800000000000000' }]}
+        token={{ symbol: 'LOL', decimals: 18 }}
+      />
+    )
+  })
+  .add('without token data', () => {
+    return (
+      <TokenTransfer params={[{ value: '?' }, { value: '800000000000000' }]} />
+    )
+  })
+
+storiesOf('Tx/Description', module)
+  .add('send ETH', () => {
+    return <TxDescription txType="sendEth" />
+  })
+  .add('send tokens', () => {
+    return <TxDescription txType="transferTokens" />
+  })
+  .add('deploy contract', () => {
+    return <TxDescription txType="deployContract" />
+  })
+  .add('execute function', () => {
+    return <TxDescription txType="executeFunction" />
+  })
 
 storiesOf('Tx/TxParty', module)
   .add('origin', () => {

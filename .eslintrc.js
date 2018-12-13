@@ -28,6 +28,7 @@ module.exports = {
     'object-curly-newline': 0,
     'operator-linebreak': 0,
     'no-bitwise': 0,
+    'no-mixed-operators': 0,
     'react/display-name': 2,
     'react/forbid-prop-types': 0,
     'react/jsx-closing-bracket-location': 0,
