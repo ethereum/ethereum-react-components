@@ -65,7 +65,7 @@ class NodeInfoDot extends Component {
 
   pulseIfNewBlock(props) {
     // If new block arrived, add animation to light
-    if (this.isNewBlock(props, this.props)) {
+    if (NodeInfoDot.isNewBlock(props, this.props)) {
       let pulseColor
 
       if (props.active === 'remote') {
