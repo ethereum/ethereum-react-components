@@ -81,8 +81,9 @@ const mainRemoteSyncing = () => {
       ...mainRemote().local,
       sync: {
         ...mainRemote().local.sync,
-        currentBlock: 1000,
-        highestBlock: 10000
+        currentBlock: 10000,
+        highestBlock: 100000,
+        connectedPeers: 5
       }
     }
   }

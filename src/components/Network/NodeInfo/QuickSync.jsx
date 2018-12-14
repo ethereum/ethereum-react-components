@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 
 class QuickSync extends Component {
+  static propTypes = {
+    children: PropTypes.node
+  }
+
   constructor(props) {
     super(props)
 
@@ -11,28 +16,33 @@ class QuickSync extends Component {
   }
 
   componentDidMount() {
-    let intervalId = setInterval(this.timer.bind(this), 250)
+    const intervalId = setInterval(this.timer.bind(this), 250)
     this.setState({ intervalId })
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.intervalId)
+    const { intervalId } = this.state
+    clearInterval(intervalId)
   }
 
   timer() {
-    const oldProps = this.state.props
+    const { props, intervalId } = this.state
+    const { oldProps } = props
+    let { active } = oldProps
 
-    let newBlock = oldProps.local.sync.currentBlock + 250
+    let newBlock = oldProps.local.sync.currentBlock + 2500
     if (newBlock > oldProps.local.sync.highestBlock) {
       newBlock = oldProps.local.sync.highestBlock
-      clearInterval(this.state.intervalId)
+      active = 'local'
+      clearInterval(intervalId)
     }
 
-    let newProps = {
+    const newProps = {
       ...oldProps,
+      active,
       local: {
         ...oldProps.local,
-        blockNumber: oldProps.local.blockNumber + 1,
+        blockNumber: newBlock,
         timestamp: moment().unix(),
         sync: {
           ...oldProps.local.sync,
@@ -46,11 +56,11 @@ class QuickSync extends Component {
 
   render() {
     if (!this.state) {
-      return
+      return null
     }
-    return (
-      <div>{React.cloneElement(this.props.children, this.state.props)}</div>
-    )
+    const { children } = this.props
+    const { props } = this.state
+    return <div>{React.cloneElement(children, props)}</div>
   }
 }
 

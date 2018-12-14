@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import i18n from '../../../i18n'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -13,6 +12,7 @@ import {
   faCloudDownloadAlt,
   faClock
 } from '@fortawesome/free-solid-svg-icons'
+import i18n from '../../../i18n'
 
 library.add(
   faShareAlt,
@@ -102,22 +102,17 @@ class NodeInfoBox extends Component {
     const { local } = this.props
     const { sync } = local
     const { highestBlock, currentBlock, startingBlock, connectedPeers } = sync
-    let { displayBlock } = sync
 
-    displayBlock = displayBlock || startingBlock
-    displayBlock += (currentBlock - displayBlock) / 20
-    const formattedDisplayBlock = numberWithCommas(displayBlock)
-
-    sync.displayBlock = displayBlock
+    const formattedCurrentBlock = numberWithCommas(currentBlock)
 
     const progress =
-      ((displayBlock - startingBlock) / (highestBlock - startingBlock)) * 100
+      ((currentBlock - startingBlock) / (highestBlock - startingBlock)) * 100
 
     return (
       <div>
         <div className="block-number row-icon">
           <FontAwesomeIcon icon="layer-group" />
-          {formattedDisplayBlock}
+          {formattedCurrentBlock}
         </div>
         <div className="peer-count row-icon">
           <FontAwesomeIcon icon="users" />
@@ -158,12 +153,16 @@ class NodeInfoBox extends Component {
           </div>
         )}
         <div
-          className="block-diff row-icon"
-          title={i18n.t('mist.nodeInfo.timeSinceBlock')}
+          className={
+            diff > 60 ? 'block-diff row-icon red' : 'block-diff row-icon'
+          }
         >
+          {
+            // TODO: make this i8n compatible
+          }
           <FontAwesomeIcon icon="clock" />
-          <span>{diff} seconds</span>
-        </div>
+          {diff < 120 ? `${diff} seconds` : `${Math.floor(diff / 60)} minutes`}
+        </div>{' '}
       </div>
     )
   }
@@ -219,7 +218,7 @@ class NodeInfoBox extends Component {
             // TODO: make this i8n compatible
           }
           <FontAwesomeIcon icon="clock" />
-          {diff < 120 ? diff + ' seconds' : `${Math.floor(diff / 60)} minutes`}
+          {diff < 120 ? `${diff} seconds` : `${Math.floor(diff / 60)} minutes`}
         </div>
       </div>
     )

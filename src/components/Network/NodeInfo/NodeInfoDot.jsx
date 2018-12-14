@@ -30,6 +30,16 @@ class NodeInfoDot extends Component {
     sticky: PropTypes.bool
   }
 
+  static isNewBlock(prevProps, newProps) {
+    let isNewBlock
+    if (prevProps.active === 'remote') {
+      isNewBlock = prevProps.remote.blockNumber !== newProps.remote.blockNumber
+    } else {
+      isNewBlock = prevProps.local.blockNumber !== newProps.local.blockNumber
+    }
+    return isNewBlock
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -45,12 +55,12 @@ class NodeInfoDot extends Component {
     }, 1000)
   }
 
-  componentWillUnmount() {
-    clearInterval(this.diffInterval)
-  }
-
   componentDidUpdate(prevProps) {
     this.pulseIfNewBlock(prevProps)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.diffInterval)
   }
 
   pulseIfNewBlock(props) {
@@ -76,14 +86,6 @@ class NodeInfoDot extends Component {
     }
   }
 
-  isNewBlock(prevProps, newProps) {
-    if (prevProps.active === 'remote') {
-      return prevProps.remote.blockNumber !== newProps.remote.blockNumber
-    } else {
-      return prevProps.local.blockNumber !== newProps.local.blockNumber
-    }
-  }
-
   secondsSinceLastBlock() {
     const { active } = this.props
     const { diffTimestamp } = this.state
@@ -96,7 +98,6 @@ class NodeInfoDot extends Component {
     const { pulseColor } = this.state
 
     let dotColor
-    let progressColor
 
     const colorMainnet = '#7ed321'
     const colorTestnet = '#00aafa'
@@ -131,7 +132,11 @@ class NodeInfoDot extends Component {
             <PieChart
               startAngle={-90}
               data={[
-                { value: progress || 0, key: 1, color: dotColor },
+                {
+                  value: progress || 0,
+                  key: 1,
+                  color: network === 'main' ? colorMainnet : colorTestnet
+                },
                 {
                   value: 100 - (progress || 1),
                   key: 2,
