@@ -7,14 +7,15 @@ export default class SendEther extends Component {
 
   static propTypes = {
     network: PropTypes.string,
-    valueInUSD: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
+    valueInUSD: PropTypes.string
   }
 
   static defaultProps = {}
 
   render() {
-    const { valueInUSD, network, value } = this.props
+    console.log('∆∆∆ this.props', this.props)
+    const { network, value, valueInUSD } = this.props
 
     let conversion = <span>About ${valueInUSD} USD</span>
 
@@ -29,7 +30,7 @@ export default class SendEther extends Component {
     return (
       <StyledWrapper>
         <div>
-          <Bold>Transfer</Bold> {value} ETHER
+          <Bold>Transfer</Bold> {value.toString} ETHER
         </div>
         <StyledSubtext>{conversion}</StyledSubtext>
       </StyledWrapper>

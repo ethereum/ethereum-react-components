@@ -23,11 +23,10 @@ export const etherToGwei = valEther => {
   return new BigNumber(valEther).mul(new BigNumber('1000000000'))
 }
 
-export const toUsd = (etherAmount, format, etherPriceUSD) => {
-  return toBigNumber(etherAmount)
-    .mul(new BigNumber(etherPriceUSD))
-    .toString()
-    .toFixed(2)
+export const toUsd = (etherAmount = '0', etherPriceUSD) => {
+  return parseFloat(
+    toBigNumber(etherAmount).mul(toBigNumber(etherPriceUSD))
+  ).toFixed(2)
 }
 
 export const networkIdToName = str => {

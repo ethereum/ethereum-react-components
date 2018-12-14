@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import FeeSelector from '../components/Tx/SendTx/FeeSelector'
 import TxHistory from '../components/Tx/History'
 import FormSubmitTx from '../components/Tx/SendTx/FormSubmitTx'
-// import TxDescription from '../components/Tx/SendTx/TxDescription'
+import TxDescription from '../components/Tx/SendTx/TxDescription'
 import DeployContract from '../components/Tx/SendTx/TxDescription/DeployContract'
 import TokenTransfer from '../components/Tx/SendTx/TxDescription/TokenTransfer'
 import FunctionExecution from '../components/Tx/SendTx/TxDescription/FunctionExecution'
@@ -21,7 +21,11 @@ const dummyTx = {
   data: '',
   gasPrice: '0x9184e72a000', // 10000000000000
   value: '1000000000000000000',
-  params: [{ value: '0x4444444444444444444444444444444444444444' }]
+  params: [
+    { value: '0x4444444444444444444444444444444444444444' },
+    { value: '20000000000000000' }
+  ],
+  network: 'main'
 }
 
 storiesOf('Tx/Fee Selector', module).add('default ', () => <FeeSelector />)
@@ -30,6 +34,33 @@ storiesOf('Tx/Submit Form', module)
   .add('default', () => <FormSubmitTx />)
   .add('confirming', () => <FormSubmitTx unlocking />)
   .add('error', () => <FormSubmitTx error />)
+
+storiesOf('Tx/Description', module)
+  .add('default', () => {
+    return <TxDescription {...dummyTx} />
+  })
+  .add('deploy contract', () => {
+    return <TxDescription {...dummyTx} isNewContract={true} />
+  })
+  .add('transfer tokens', () => {
+    return (
+      <TxDescription
+        {...dummyTx}
+        executionFunction="transfer(address,uint256)"
+        token={{ symbol: 'LOL', decimals: 18 }}
+        toIsContract
+      />
+    )
+  })
+  .add('execute function', () => {
+    return (
+      <TxDescription
+        {...dummyTx}
+        executionFunction="approve(uint256)"
+        toIsContract
+      />
+    )
+  })
 
 storiesOf('Tx/Description/DeployContract', module).add('with data', () => {
   return <DeployContract data={'a'.repeat(500)} />

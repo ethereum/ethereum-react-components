@@ -9,6 +9,8 @@ import TokenTransfer from './TxDescription/TokenTransfer'
 import FunctionExecution from './TxDescription/FunctionExecution'
 import SendEther from './TxDescription/SendEther'
 
+import { Button } from '../../..'
+
 // TODO
 const web3 = {}
 
@@ -16,12 +18,6 @@ export default class TxDescription extends Component {
   static displayName = 'TxDescription'
 
   static propTypes = {
-    // txType: PropTypes.oneOf([
-    // 'sendEth',
-    // 'transferTokens',
-    // 'deployContract',
-    // 'executeFunction'
-    // ]),
     network: PropTypes.oneOf(['main']),
     /** some ether value FIXME underspecified */
     value: PropTypes.string,
@@ -35,12 +31,13 @@ export default class TxDescription extends Component {
     params: PropTypes.object,
     data: PropTypes.object,
     adjustWindowHeight: PropTypes.func,
-    showDetails: PropTypes.bool,
     gasPrice: PropTypes.string,
     estimatedGas: PropTypes.string
   }
 
-  static defaultProps = {
+  static defaultProps = {}
+
+  state = {
     showDetails: false
   }
 
@@ -72,7 +69,7 @@ export default class TxDescription extends Component {
 
   handleDetailsClick = () => {
     const { adjustWindowHeight } = this.props
-    const { showDetails } = this.props
+    const { showDetails } = this.state
     this.setState({ showDetails: !showDetails }, adjustWindowHeight)
   }
 
@@ -155,11 +152,13 @@ export default class TxDescription extends Component {
 
     if (!showDetails) {
       return (
-        <div
+        <Button
+          flat
+          secondary
           className="execution-context__details-link"
           onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.showDetails')}
-        </div>
+        </Button>
       )
     }
 
@@ -261,11 +260,13 @@ export default class TxDescription extends Component {
           </div>
         )}
 
-        <div
+        <Button
+          flat
+          secondary
           className="execution-context__details-link"
           onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.hideDetails')}
-        </div>
+        </Button>
       </div>
     )
   }
