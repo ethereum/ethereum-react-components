@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.7"></a>
+## [1.2.7](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.2.6...v1.2.7) (2018-12-15)
+
+
+### Bug Fixes
+
+* NodeInfo Updates ([#50](https://github.com/PhilippLgh/ethereum-react-components/issues/50)) ([0150388](https://github.com/PhilippLgh/ethereum-react-components/commit/0150388))
+
+
+
 <a name="1.2.6"></a>
 ## [1.2.6](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.2.5...v1.2.6) (2018-12-12)
 
