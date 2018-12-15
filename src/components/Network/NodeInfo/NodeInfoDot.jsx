@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import PieChart from 'react-minimal-pie-chart'
 
-class NodeInfoDot extends Component {
+export default class NodeInfoDot extends Component {
   static propTypes = {
     /** Active network */
     active: PropTypes.oneOf(['remote', 'local']).isRequired,
@@ -26,7 +26,7 @@ class NodeInfoDot extends Component {
       blockNumber: PropTypes.number.isRequired,
       timestamp: PropTypes.number.isRequired
     }).isRequired,
-    /** Component is stickied */
+    /** If component is stickied to apply drop shadow on dot */
     sticky: PropTypes.bool
   }
 
@@ -89,7 +89,7 @@ class NodeInfoDot extends Component {
   secondsSinceLastBlock() {
     const { active } = this.props
     const { diffTimestamp } = this.state
-    const lastBlock = moment.unix(this.props[active].timestamp)
+    const lastBlock = moment.unix(this.props[active].timestamp) // eslint-disable-line
     return moment.unix(diffTimestamp).diff(lastBlock, 'seconds')
   }
 
@@ -239,5 +239,3 @@ const StyledLight = styled.div`
       animation-duration: 2s;
     `}
 `
-
-export default NodeInfoDot

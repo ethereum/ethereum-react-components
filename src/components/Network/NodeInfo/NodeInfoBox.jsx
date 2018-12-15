@@ -27,7 +27,7 @@ const numberWithCommas = val => {
   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
-class NodeInfoBox extends Component {
+export default class NodeInfoBox extends Component {
   static propTypes = {
     /** Active network */
     active: PropTypes.oneOf(['remote', 'local']).isRequired,
@@ -347,7 +347,7 @@ const StyledBox = styled.div`
     font-size: 11px;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 8px;
-    padding: 1px 6px 2px;
+    padding: 2px 6px;
     vertical-align: middle;
     text-transform: none;
   }
@@ -457,10 +457,3 @@ const StyledBox = styled.div`
     background-size: cover;
   }
 `
-
-NodeInfoBox.propTypes = {
-  network: PropTypes.oneOf(['main', 'private']),
-  active: PropTypes.oneOf(['remote', 'local'])
-}
-
-export default NodeInfoBox

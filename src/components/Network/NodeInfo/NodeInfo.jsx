@@ -4,11 +4,12 @@ import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import i18n from '../../../i18n'
 import Pulse from '../../Widgets/AnimatedIcons/Pulse'
+import classNames from 'classnames'
 
 import NodeInfoDot from './NodeInfoDot'
 import NodeInfoBox from './NodeInfoBox'
 
-class NodeInfo extends Component {
+export default class NodeInfo extends Component {
   static propTypes = {
     /** Active network */
     active: PropTypes.oneOf(['remote', 'local']).isRequired,
@@ -44,19 +45,22 @@ class NodeInfo extends Component {
     const { network, active, remote, local } = this.props
     const { showSubmenu, sticky } = this.state
 
-    let mainClass = network === 'main' ? 'node-mainnet' : 'node-testnet'
-    if (sticky) {
-      mainClass += ' sticky'
-    }
+    const nodeInfoClass = classNames({
+      'node-mainnet': network === 'main',
+      'node-testnet': network !== 'main',
+      sticky
+    })
 
     return (
       <StyledNode>
         <div
           id="node-info"
-          className={mainClass}
+          className={nodeInfoClass}
           onMouseUp={() => this.setState({ sticky: !sticky })}
           onMouseEnter={() => this.setState({ showSubmenu: true })}
           onMouseLeave={() => this.setState({ showSubmenu: sticky })}
+          role="button"
+          tabIndex={0}
         >
           <NodeInfoDot
             network={network}
@@ -92,7 +96,9 @@ const StyledNode = styled.div`
   #node-info {
     padding: 22px;
     -webkit-app-region: no-drag;
+
+    &:focus {
+      outline: 0;
+    }
   }
 `
-
-export default NodeInfo
