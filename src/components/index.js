@@ -14,21 +14,26 @@ import RpcTester from './Network/RPC/RpcTester'
 import TxHistory from './Tx/History'
 import FormSendTx from './Tx/SendTx'
 
+import AccountItem from './Wallet/AccountItem'
+import TokenListForItem from './Wallet/TokenListForItem'
+
 export {
-  Identicon,
-  EthAddress,
-  FeeSelector,
-  NodeInfo,
-  FormCreateAccount,
-  InputPassword,
-  Spinner,
-  Pulse,
+  AccountItem,
   Button,
   Checkbox,
-  ValidatedField,
   ConverterForm,
+  EthAddress,
+  FeeSelector,
+  FormCreateAccount,
+  FormSendTx,
+  Identicon,
+  InputPassword,
   NetworkChooser,
+  NodeInfo,
+  Pulse,
   RpcTester,
+  Spinner,
+  TokenListForItem,
   TxHistory,
-  FormSendTx
+  ValidatedField
 }
