@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import i18n from '../../i18n'
 import Checkbox from '../Widgets/Checkbox'
-import ValidatedField from '../Widgets/ValidatedField'
+import ValidatedField from '../Widgets/Form/ValidatedField'
 import './InputPassword.scss'
 
 export default class InputPassword extends Component {
