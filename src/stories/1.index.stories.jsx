@@ -9,7 +9,11 @@ import {
   Spinner,
   Pulse,
   Button,
-  Checkbox
+  Checkbox,
+  Input,
+  TextArea,
+  Select,
+  FileChooser
   // ValidatedField,
   // ConverterForm
 } from '../components'
@@ -79,7 +83,27 @@ storiesOf('Widgets/Button', module)
     </Button>
   ))
 
-storiesOf('Widgets/Checkbox', module)
+storiesOf('Widgets/Form/Input', module)
+  .add('default', () => (
+    <Input />
+  ))
+
+storiesOf('Widgets/Form/TextArea', module)
+  .add('default', () => (
+    <TextArea />
+  ))
+
+storiesOf('Widgets/Form/FileChooser', module)
+  .add('default', () => (
+    <FileChooser />
+  ))
+
+storiesOf('Widgets/Form/Select', module)
+  .add('default', () => (
+    <Select />
+  ))
+
+storiesOf('Widgets/Form/Checkbox', module)
   .add('unchecked', () => (
     <Checkbox id="example" name="example" labelText="Example" />
   ))

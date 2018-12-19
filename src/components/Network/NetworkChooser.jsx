@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Select from 'react-select'
+import Select from '../Widgets/Form/Select'
 // import PropTypes from 'prop-types'
 import EthCommon from 'ethereumjs-common'
 // import { Pulse } from '..'

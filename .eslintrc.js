@@ -27,6 +27,7 @@ module.exports = {
     'no-console': 0,
     'object-curly-newline': 0,
     'operator-linebreak': 0,
+    "linebreak-style": 0,
     'no-bitwise': 0,
     'no-mixed-operators': 0,
     'react/display-name': 2,
