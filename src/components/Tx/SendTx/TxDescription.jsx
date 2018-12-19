@@ -4,6 +4,13 @@ import i18n from '../../../i18n'
 import { Identicon } from '../..'
 import * as util from '../../../lib/util'
 
+import DeployContract from './TxDescription/DeployContract'
+import TokenTransfer from './TxDescription/TokenTransfer'
+import FunctionExecution from './TxDescription/FunctionExecution'
+import SendEther from './TxDescription/SendEther'
+
+import { Button } from '../../..'
+
 // TODO
 const web3 = {}
 
@@ -24,12 +31,13 @@ export default class TxDescription extends Component {
     params: PropTypes.object,
     data: PropTypes.object,
     adjustWindowHeight: PropTypes.func,
-    showDetails: PropTypes.bool,
     gasPrice: PropTypes.string,
     estimatedGas: PropTypes.string
   }
 
-  static defaultProps = {
+  static defaultProps = {}
+
+  state = {
     showDetails: false
   }
 
@@ -61,12 +69,13 @@ export default class TxDescription extends Component {
 
   handleDetailsClick = () => {
     const { adjustWindowHeight } = this.props
-    const { showDetails } = this.props
+    const { showDetails } = this.state
     this.setState({ showDetails: !showDetails }, adjustWindowHeight)
   }
 
   determineTxType = () => {
     const { isNewContract, toIsContract, executionFunction } = this.props
+
     if (isNewContract) return 'newContract'
     if (toIsContract) {
       if (executionFunction === 'transfer(address,uint256)') {
@@ -79,87 +88,33 @@ export default class TxDescription extends Component {
     return 'etherTransfer'
   }
 
-  renderNewContractDescription = () => {
-    const { data } = this.props
-    const bytesCount = encodeURI(data).split(/%..|./).length - 1
-
-    return (
-      <div className="context-description__sentence">
-        <div>
-          Upload <span className="bold">New Contract</span>
-        </div>
-        <div className="context-description__subtext">
-          About {bytesCount} bytes
-        </div>
-      </div>
-    )
-  }
-
-  renderTokenTransferDescription = () => {
-    const { params, token } = this.props
-    if (params.length === 0) return <div />
-
-    const tokenCount = params[1].value.slice(0, -Math.abs(token.decimals))
-
-    const tokenSymbol = token.symbol || i18n.t('mist.sendTx.tokens')
-
-    return (
-      <div className="context-description__sentence">
-        {i18n.t('mist.sendTx.transfer')}{' '}
-        <span className="bold">
-          {tokenCount} {tokenSymbol}
-        </span>
-      </div>
-    )
-  }
-
-  renderGenericFunctionDescription = () => {
-    return (
-      <div className="context-description__sentence">
-        Executing <span className="bold">Contract Function</span>
-      </div>
-    )
-  }
-
-  renderEtherTransferDescription() {
-    const { network } = this.props
-    let conversion
-    if (network === 'main') {
-      const value = this.calculateTransferValue()
-      if (value) {
-        conversion = <span>About {value} USD</span>
-      }
-    } else {
-      conversion = (
-        <span>
-          $0 (<span className="capitalize">{network}</span>)
-        </span>
-      )
-    }
-
-    return (
-      <div className="context-description__sentence">
-        <div>
-          Transfer <span className="bold">{this.formattedBalance()} ETHER</span>
-        </div>
-        <div className="context-description__subtext">{conversion}</div>
-      </div>
-    )
-  }
-
   renderDescription() {
+    const {
+      etherPriceUSD,
+      executionFunction,
+      data,
+      params,
+      network,
+      token,
+      value
+    } = this.props
+
     const txType = this.determineTxType()
     switch (txType) {
       case 'newContract':
-        return this.renderNewContractDescription()
+        return <DeployContract data={data} />
       case 'tokenTransfer':
-        return this.renderTokenTransferDescription()
+        return <TokenTransfer params={params} token={token} />
       case 'genericFunctionExecution':
-        return this.renderGenericFunctionDescription()
-      case 'etherTransfer':
-        return this.renderEtherTransferDescription()
+        return <FunctionExecution executionFunction={executionFunction} />
       default:
-        return this.renderEtherTransferDescription()
+        return (
+          <SendEther
+            network={network}
+            value={util.weiToEther(value)}
+            valueInUSD={util.toUsd(value, etherPriceUSD)}
+          />
+        )
     }
   }
 
@@ -197,11 +152,13 @@ export default class TxDescription extends Component {
 
     if (!showDetails) {
       return (
-        <div
+        <Button
+          flat
+          secondary
           className="execution-context__details-link"
           onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.showDetails')}
-        </div>
+        </Button>
       )
     }
 
@@ -303,17 +260,20 @@ export default class TxDescription extends Component {
           </div>
         )}
 
-        <div
+        <Button
+          flat
+          secondary
           className="execution-context__details-link"
           onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.hideDetails')}
-        </div>
+        </Button>
       </div>
     )
   }
 
   render() {
     const { gasError } = this.props
+
     return (
       <div className="execution-context">
         <div className="context-description">
