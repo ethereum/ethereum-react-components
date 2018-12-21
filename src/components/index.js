@@ -17,8 +17,8 @@ import ValidatedField from './Widgets/Form/ValidatedField'
 import ConverterForm from './Tools/EthConverterForm'
 import NetworkChooser from './Network/NetworkChooser'
 import RpcTester from './Network/RPC/RpcTester'
-import TxHistory from './Tx/History'
 import FormSendTx from './Tx/SendTx'
+import TxHistory from './Tx/TxHistory'
 
 import AccountItem from './Wallet/AccountItem'
 import TokenListForItem from './Wallet/TokenListForItem'
@@ -42,10 +42,10 @@ export {
   NetworkChooser,
   NodeInfo,
   NodeInfoBox,
+  TxHistory,
   Pulse,
   RpcTester,
   Spinner,
   TokenListForItem,
-  TxHistory,
   ValidatedField
 }

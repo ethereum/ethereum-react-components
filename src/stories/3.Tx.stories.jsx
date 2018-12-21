@@ -1,7 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import FeeSelector from '../components/Tx/SendTx/FeeSelector'
-import TxHistory from '../components/Tx/History'
 import FormSubmitTx from '../components/Tx/SendTx/FormSubmitTx'
 import TxDescription from '../components/Tx/SendTx/TxDescription'
 import DeployContract from '../components/Tx/SendTx/TxDescription/DeployContract'
@@ -12,6 +11,7 @@ import GasNotification from '../components/Tx/SendTx/GasNotification'
 import TxParties from '../components/Tx/SendTx/TxParties'
 import TxParty from '../components/Tx/SendTx/TxParty'
 import SendTx from '../components/Tx/SendTx/FormSendTx'
+import TxHistory from '../components/Tx/TxHistory'
 
 const dummyTx = {
   nonce: 0,
@@ -138,14 +138,41 @@ storiesOf('Tx/SendTx', module).add('default', () => {
   return <SendTx network={nodes.network} newTx={dummyTx} />
 })
 
-storiesOf('Tx/History', module).add('default ', () => {
-  const nodes = {
-    local: { blockNumber: 100 },
-    remote: { blockNumber: 100 }
-  }
-  const { local, remote } = nodes
-  const blockNumber = Math.max(local.blockNumber, remote.blockNumber)
-  return (
-    <TxHistory etherPriceUSD="200" blockNumber={blockNumber} txs={[dummyTx]} />
-  )
-})
+storiesOf('Tx/TxHistory', module)
+  .add('No txs', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[]} />
+  })
+  .add('Standard tx, Pending', () => {
+    const tx = {}
+    return <TxHistory etherPriceUSD={200} blockNumber={1000} txs={[tx]} />
+  })
+  .add('Standard tx, Confirmed', () => {
+    return <TxHistory etherPriceUSD={200} blockNumber={1000} txs={[dummyTx]} />
+  })
+  .add('Standard tx, Failed', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })
+  .add('To contract, Pending', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })
+  .add('To contract, Confirmed', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })
+  .add('To contract, Failed', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })
+  .add('ERC20, Pending', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })
+  .add('ERC20, Confirmed', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })
+  .add('ERC20, Failed', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })
+  .add('Standard tx, Test Net', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })
+  .add('Standard tx, Private Net', () => {
+    return <TxHistory etherPriceUSD="200" blockNumber="2000" txs={[dummyTx]} />
+  })

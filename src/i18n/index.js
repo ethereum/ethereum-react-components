@@ -171,7 +171,7 @@ const en = {
     },
     "txHistory": {
       "windowTitle": "Transaction History",
-      "total": "__count__ total",
+      "total": "total",
       "status": "Status",
       "statusPending": "Pending",
       "statusFailed": "Failed",
@@ -180,6 +180,7 @@ const en = {
       "txHash": "Transaction Hash",
       "etherAmount": "Ether Amount",
       "nonce": "Nonce",
+      "noTxs": "No transactions yet.",
       "gasLimit": "Gas Limit",
       "gasUsed": "Gas Used",
       "gasPrice": "Gas Price",

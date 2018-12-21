@@ -1,16 +1,14 @@
 import ethUtils from 'ethereumjs-util'
 
-const BigNumber = ethUtils.BN
-
 const isHex = str => typeof str === 'string' && str.startsWith('0x')
-export const toBN = str => new BigNumber(str)
-export const hexToNumberString = str => toBN(str).toString(10)
+
+export const hexToNumberString = str => toBigNumber(str).toString(10)
 
 export const toBigNumber = str => {
   /**
    web3.utils.isHex(estimatedGas)
       ? new BigNumber(web3.utils.hexToNumberString(estimatedGas))
-      : new BigNumber(estimatedGas) 
+      : new BigNumber(estimatedGas)
    */
   return isHex(str) ? new BigNumber(hexToNumberString(str)) : new BigNumber(str)
 }

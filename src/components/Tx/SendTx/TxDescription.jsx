@@ -44,7 +44,7 @@ export default class TxDescription extends Component {
   formattedBalance = () => {
     const { value } = this.props
     return util.formatBalance(
-      util.toBN(value || 0),
+      util.toBigNumber(value || 0),
       '0,0.00[0000000000000000]',
       'ether'
     )
@@ -156,7 +156,8 @@ export default class TxDescription extends Component {
           flat
           secondary
           className="execution-context__details-link"
-          onClick={this.handleDetailsClick}>
+          onClick={this.handleDetailsClick}
+        >
           {i18n.t('mist.sendTx.showDetails')}
         </Button>
       )
@@ -264,7 +265,8 @@ export default class TxDescription extends Component {
           flat
           secondary
           className="execution-context__details-link"
-          onClick={this.handleDetailsClick}>
+          onClick={this.handleDetailsClick}
+        >
           {i18n.t('mist.sendTx.hideDetails')}
         </Button>
       </div>
