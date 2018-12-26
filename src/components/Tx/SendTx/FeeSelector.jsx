@@ -90,9 +90,7 @@ export default class FeeSelector extends Component {
 
     return (
       <React.Fragment>
-        {gasLoading && (
-          <Spinner singleColor="#00aafa" size={16} className="react-spinner" />
-        )}
+        {gasLoading && <Spinner color="#00aafa" scale="0.5" />}
         {error}
       </React.Fragment>
     )

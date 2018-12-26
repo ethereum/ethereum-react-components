@@ -9,23 +9,25 @@ export default class Spinner extends Component {
   static displayName = 'Spinner'
 
   static propTypes = {
-    pstyle: PropTypes.any
+    scale: PropTypes.string,
+    color: PropTypes.string
+  }
+
+  static defaultProps = {
+    scale: '1',
+    color: '#AAA'
   }
 
   render() {
-    const { pstyle } = this.props
+    const { color, scale } = this.props
 
     const divCount = 8
-    const style = { backgroundColor: '#AAA' }
+    const style = { backgroundColor: color }
 
     return (
       <div
         className="loader"
-        style={{
-          ...pstyle,
-          width: '65px',
-          height: '65px'
-        }}>
+        style={{ transform: `scale(${scale}, ${scale})` }}>
         <div className="ball-spin-fade-loader">
           {[...Array(divCount)].map((_, idx) => (
             <div key={idx} style={style} />
