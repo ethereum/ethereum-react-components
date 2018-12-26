@@ -1,7 +1,56 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { AccountItem } from '../components'
+import { AccountItem, AccountList } from '../components'
+
+storiesOf('Wallet/Account/List', module).add('default', () => {
+  const accounts = [
+    {
+      balance: '6000000000000000000',
+      name: 'Account 1',
+      tokens: [
+        { address: '0x5555555555555555555555555555555555555555' },
+        { address: '0x6666666666666666666666666666666666666666' },
+        { address: '0x7777777777777777777777777777777777777777' },
+        { address: '0x8888888888888888888888888888888888888888' },
+        { address: '0x9999999999999999999999999999999999999999' },
+        { address: '0x1111111111111111111111111111111111111111' }
+      ],
+      address: '0x5555555555555555555555555555555555555555'
+    },
+    {
+      balance: '600000000000000000',
+      name: 'Account 2',
+      tokens: [],
+      address: '0x6666666666666666666666666666666666666666'
+    },
+    {
+      balance: '60000000000000000',
+      name: 'Account 3',
+      tokens: [],
+      address: '0x7777777777777777777777777777777777777777'
+    },
+    {
+      balance: '6000000000000000',
+      name: 'Account 4',
+      tokens: [],
+      address: '0x8888888888888888888888888888888888888888'
+    },
+    {
+      balance: '600000000000000',
+      name: 'Account 5',
+      tokens: [],
+      address: '0x9999999999999999999999999999999999999999'
+    },
+    {
+      balance: '60000000000000',
+      name: 'Account 6',
+      tokens: [],
+      address: '0x1111111111111111111111111111111111111111'
+    }
+  ]
+  return <AccountList accounts={accounts} />
+})
 
 storiesOf('Wallet/Account/Item', module)
   .add('default', () => (
