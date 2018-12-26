@@ -20,10 +20,12 @@ import RpcTester from './Network/RPC/RpcTester'
 import TxHistory from './Tx/History'
 import FormSendTx from './Tx/SendTx'
 
+import AccountList from './Wallet/AccountList'
 import AccountItem from './Wallet/AccountItem'
 import TokenListForItem from './Wallet/TokenListForItem'
 
 export {
+  AccountList,
   AccountItem,
   Button,
   Checkbox,
