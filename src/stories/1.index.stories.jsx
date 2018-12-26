@@ -27,6 +27,12 @@ storiesOf('Welcome', module).add('to Ethereum Components', () => (
 storiesOf('Widgets/Identicon', module)
   .add('default', () => <Identicon />)
   .add('anonymous', () => <Identicon anonymous />)
+  .add('nano (with address)', () => (
+    <Identicon
+      address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
+      size="nano"
+    />
+  ))
   .add('tiny (with address)', () => (
     <Identicon
       address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
@@ -83,25 +89,15 @@ storiesOf('Widgets/Button', module)
     </Button>
   ))
 
-storiesOf('Widgets/Form/Input', module)
-  .add('default', () => (
-    <Input />
-  ))
+storiesOf('Widgets/Form/Input', module).add('default', () => <Input />)
 
-storiesOf('Widgets/Form/TextArea', module)
-  .add('default', () => (
-    <TextArea />
-  ))
+storiesOf('Widgets/Form/TextArea', module).add('default', () => <TextArea />)
 
-storiesOf('Widgets/Form/FileChooser', module)
-  .add('default', () => (
-    <FileChooser />
-  ))
+storiesOf('Widgets/Form/FileChooser', module).add('default', () => (
+  <FileChooser />
+))
 
-storiesOf('Widgets/Form/Select', module)
-  .add('default', () => (
-    <Select />
-  ))
+storiesOf('Widgets/Form/Select', module).add('default', () => <Select />)
 
 storiesOf('Widgets/Form/Checkbox', module)
   .add('unchecked', () => (
