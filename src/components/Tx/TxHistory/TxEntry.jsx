@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import BigNumber from 'big-number'
+import web3 from 'web3'
 import i18n from '../../../i18n'
 import Identicon from '../../Identicon'
-import {
-  toBigNumber,
-  networkIdToName,
-  txValueToEtherAmount,
-  etherToGwei,
-  hexToNumberString
-} from '../../../lib/utilTxHistory'
+import { networkIdToName, hexToNumberString } from '../../../lib/util'
+
+const BN = web3.utils.BN
 
 export default class TxEntry extends Component {
   static propTypes = {
@@ -85,31 +81,27 @@ export default class TxEntry extends Component {
     }
 
     const linkedTxHash = TxEntry.linkedTxHash(tx)
-    const etherAmount = txValueToEtherAmount(tx.value)
+    const etherAmount = web3.utils.fromWei(tx.value, 'ether')
     let etherAmountUSD
 
     if (tx.networkId === 1 && etherPriceUSD) {
-      etherAmountUSD = toBigNumber(etherAmount)
-        .times(new BigNumber(etherPriceUSD))
-        .toFixed(2)
+      etherAmountUSD = (etherAmount * etherPriceUSD).toFixed(2)
     }
 
-    const gasPriceEther = txValueToEtherAmount(tx.gasPrice)
-    const gasPriceGwei = etherToGwei(gasPriceEther).toFixed()
+    const gasPriceEther = web3.utils.fromWei(tx.gasPrice, 'ether')
+    const gasPriceGwei = web3.utils.fromWei(tx.gasPrice, 'gwei')
 
     let txCostEther
     let txCostUSD
 
     if (tx.blockNumber) {
-      const txCost = toBigNumber(tx.gasUsed)
-        .times(toBigNumber(tx.gasPrice))
-        .toFixed()
-      txCostEther = txValueToEtherAmount(txCost)
+      console.log(tx.gasUsed)
+      console.log(tx.gasPrice)
+      const txCost = new BN(tx.gasUsed).mul(new BN(tx.gasPrice))
+      txCostEther = web3.utils.fromWei(txCost, 'ether')
 
       if (tx.networkId === 1 && etherPriceUSD > 0) {
-        txCostUSD = toBigNumber(txCostEther)
-          .times(new BigNumber(etherPriceUSD))
-          .toFixed(2)
+        txCostUSD = (txCostEther * etherPriceUSD).toFixed(2)
       }
     }
 
@@ -122,7 +114,7 @@ export default class TxEntry extends Component {
         <div>
           <div className="label">{i18n.t('mist.txHistory.etherAmount')}</div>
           <span className="value">{etherAmount} Ether</span>{' '}
-          {etherAmountUSD && <span> (${etherAmountUSD} USD)</span>}
+          {etherAmountUSD && <span> (~${etherAmountUSD} USD)</span>}
         </div>
         <div>
           <div className="label">{i18n.t('mist.txHistory.nonce')}</div>
@@ -172,6 +164,8 @@ export default class TxEntry extends Component {
   render() {
     const { tx } = this.props
 
+    const date = new Date(tx.createdAt).toLocaleString()
+
     const networkString = networkIdToName(tx.networkId)
     let network = ''
     if (networkString !== 'Main') {
@@ -185,10 +179,10 @@ export default class TxEntry extends Component {
 
     if (isTokenTransfer) {
       const { decimals, symbol } = tx.token
-      const tokenCount = tx.params[1].value.slice(0, -Math.abs(decimals))
+      const tokenCount = tx.params[1].slice(0, -Math.abs(decimals))
       const tokenSymbol = symbol || 'tokens'
       description = `Transferred ${tokenCount} ${tokenSymbol}`
-      tokensTo = tx.params[0].value
+      tokensTo = tx.params[0]
     } else if (tx.isNewContract) {
       description = 'Created New Contract'
     } else if (tx.executionFunction) {
@@ -199,7 +193,7 @@ export default class TxEntry extends Component {
           .replace(/([A-Z]+|[0-9]+)/g, ' $1')
       description = `Executed ${executionFunctionSentence} function`
     } else {
-      const etherAmount = txValueToEtherAmount(tx.value)
+      const etherAmount = web3.utils.fromWei(tx.value, 'ether')
       description = `Sent ${etherAmount} Ether`
     }
 
@@ -224,11 +218,7 @@ export default class TxEntry extends Component {
             {i18n.t('mist.txHistory.statusConfirmed')}
           </span>{' '}
           <span>
-            (
-            {i18n.t('mist.txHistory.confirmations', {
-              count: numberConfirmations
-            })}
-            )
+            ({numberConfirmations} {i18n.t('mist.txHistory.confirmations')})
           </span>
         </span>
       )
@@ -238,7 +228,7 @@ export default class TxEntry extends Component {
       <StyledTx key={tx.hash || tx.nonce}>
         <div className="right">
           {network && <div className="network">{network}</div>}
-          <div className="date">{tx.createdAt}</div>
+          <div className="date">{date}</div>
         </div>
         <div className="description">{description}</div>
         {tx.contractAddress && (
@@ -342,11 +332,18 @@ const StyledTx = styled.div`
     margin-bottom: 10px;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .moreDetails {
     color: #02a8f3;
     font-weight: 400;
     cursor: pointer;
     padding: 3px;
     margin-bottom: 0;
+    &:focus {
+      outline: 0;
+    }
   }
 `

@@ -176,7 +176,7 @@ const en = {
       "statusPending": "Pending",
       "statusFailed": "Failed",
       "statusConfirmed": "Confirmed",
-      "confirmations": "__count__ confirmations",
+      "confirmations": "confirmations",
       "txHash": "Transaction Hash",
       "etherAmount": "Ether Amount",
       "nonce": "Nonce",
