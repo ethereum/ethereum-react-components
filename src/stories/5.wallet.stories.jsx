@@ -1,7 +1,18 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { AccountItem, AccountList } from '../components'
+import { AccountItem, AccountList, NavbarItem } from '../components'
+
+storiesOf('Wallet/NavbarItem', module)
+  .add('wallet', () => {
+    return <NavbarItem title="wallets" icon="faWallet" />
+  })
+  .add('send', () => {
+    return <NavbarItem title="send" icon="faArrowCircleUp" />
+  })
+  .add('contracts', () => {
+    return <NavbarItem title="contracts" icon="faCopy" />
+  })
 
 storiesOf('Wallet/Account/List', module).add('default', () => {
   const accounts = [
