@@ -23,6 +23,7 @@ import FormSendTx from './Tx/SendTx'
 import AccountList from './Wallet/AccountList'
 import AccountItem from './Wallet/AccountItem'
 import TokenListForItem from './Wallet/TokenListForItem'
+import NavbarItem from './Wallet/NavbarItem'
 
 export {
   AccountList,
@@ -41,6 +42,7 @@ export {
   FormSendTx,
   Identicon,
   InputPassword,
+  NavbarItem,
   NetworkChooser,
   NodeInfo,
   NodeInfoBox,
