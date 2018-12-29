@@ -1,7 +1,13 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import moment from 'moment'
 
-import { AccountItem, AccountList, NavbarItem } from '../components'
+import {
+  AccountItem,
+  AccountList,
+  NavbarItem,
+  NetworkStatus
+} from '../components'
 
 storiesOf('Wallet/NavbarItem', module)
   .add('wallet', () => {
@@ -13,6 +19,24 @@ storiesOf('Wallet/NavbarItem', module)
   .add('contracts', () => {
     return <NavbarItem title="contracts" icon="faCopy" />
   })
+
+storiesOf('Wallet/NetworkStatus', module)
+  .add('default', () => (
+    <NetworkStatus
+      peers={2}
+      blockNumber="6,123,456"
+      timestamp={moment().unix()}
+    />
+  ))
+  .add('stale timestamp', () => (
+    <NetworkStatus
+      peers={2}
+      blockNumber="6,123,456"
+      timestamp={moment()
+        .subtract(30, 'minutes')
+        .unix()}
+    />
+  ))
 
 storiesOf('Wallet/Account/List', module).add('default', () => {
   const accounts = [

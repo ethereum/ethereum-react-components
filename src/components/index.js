@@ -24,6 +24,7 @@ import AccountList from './Wallet/AccountList'
 import AccountItem from './Wallet/AccountItem'
 import TokenListForItem from './Wallet/TokenListForItem'
 import NavbarItem from './Wallet/NavbarItem'
+import NetworkStatus from './Wallet/NetworkStatus'
 
 export {
   AccountList,
@@ -44,6 +45,7 @@ export {
   InputPassword,
   NavbarItem,
   NetworkChooser,
+  NetworkStatus,
   NodeInfo,
   NodeInfoBox,
   Pulse,
