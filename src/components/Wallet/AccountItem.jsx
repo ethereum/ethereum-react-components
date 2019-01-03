@@ -33,7 +33,7 @@ export default class AccountItem extends Component {
 
         <FlexWrapper>
           <StyledName>
-            <StyledIcon icon={faKey} /> {name}
+            <FontAwesomeIcon icon={faKey} style={{ width: '0.8em' }} /> {name}
           </StyledName>
 
           <StyledBalance>
@@ -69,10 +69,6 @@ const StyledName = styled.div`
   line-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
-`
-
-const StyledIcon = styled(FontAwesomeIcon)`
-  width: 0.9em !important;
 `
 
 const StyledBalance = styled.div`

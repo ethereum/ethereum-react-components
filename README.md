@@ -36,6 +36,9 @@ import { Identicon } from 'ethereum-react-components';
 
 For a detailed documentation check out e.g. the [Identicon story](https://ethereum.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon)
 
+Note that this storybook uses the [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro:300,400,600,700) font.
+You'll need to import and apply this font (or another font of your choosing) in your own project.
+
 # Development
 
 ## Clone & Storybook
