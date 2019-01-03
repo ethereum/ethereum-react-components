@@ -34,6 +34,7 @@ const StyledWrapper = styled.div`
   align-items: center;
   justify-content: center;
   color: #0285c0;
+  padding: 6px 32px;
 `
 
 const StyledIcon = styled.div`

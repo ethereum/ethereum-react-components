@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faShareAlt,
@@ -13,15 +12,6 @@ import {
   faClock
 } from '@fortawesome/free-solid-svg-icons'
 import i18n from '../../../i18n'
-
-library.add(
-  faShareAlt,
-  faUsers,
-  faBolt,
-  faLayerGroup,
-  faCloudDownloadAlt,
-  faClock
-)
 
 const numberWithCommas = val => {
   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -73,7 +63,7 @@ export default class NodeInfoBox extends Component {
     return (
       <div>
         <div className="looking-for-peers row-icon">
-          <FontAwesomeIcon icon="share-alt" />
+          <FontAwesomeIcon icon={faShareAlt} />
           {i18n.t('mist.nodeInfo.lookingForPeers')}
         </div>
       </div>
@@ -87,11 +77,11 @@ export default class NodeInfoBox extends Component {
     return (
       <div>
         <div className="peer-count row-icon">
-          <FontAwesomeIcon icon="users" />
+          <FontAwesomeIcon icon={faUsers} />
           {` ${connectedPeers} ${i18n.t('mist.nodeInfo.peers')}`}
         </div>
         <div className="sync-starting row-icon">
-          <FontAwesomeIcon icon="bolt" />
+          <FontAwesomeIcon icon={faBolt} />
           {i18n.t('mist.nodeInfo.syncStarting')}
         </div>
       </div>
@@ -111,15 +101,15 @@ export default class NodeInfoBox extends Component {
     return (
       <div>
         <div className="block-number row-icon">
-          <FontAwesomeIcon icon="layer-group" />
+          <FontAwesomeIcon icon={faLayerGroup} />
           {formattedCurrentBlock}
         </div>
         <div className="peer-count row-icon">
-          <FontAwesomeIcon icon="users" />
+          <FontAwesomeIcon icon={faUsers} />
           {` ${connectedPeers} ${i18n.t('mist.nodeInfo.peers')}`}
         </div>
         <div className="sync-progress row-icon">
-          <FontAwesomeIcon icon="cloud-download-alt" />
+          <FontAwesomeIcon icon={faCloudDownloadAlt} />
           <progress max="100" value={progress || 0} />
         </div>
       </div>
@@ -141,26 +131,24 @@ export default class NodeInfoBox extends Component {
       <div>
         <div
           className="block-number row-icon"
-          title={i18n.t('mist.nodeInfo.blockNumber')}
-        >
-          <FontAwesomeIcon icon="layer-group" />
+          title={i18n.t('mist.nodeInfo.blockNumber')}>
+          <FontAwesomeIcon icon={faLayerGroup} />
           {formattedBlockNumber}
         </div>
         {network !== 'private' && (
           <div className="peer-count row-icon">
-            <FontAwesomeIcon icon="users" />
+            <FontAwesomeIcon icon={faUsers} />
             {` ${connectedPeers} ${i18n.t('mist.nodeInfo.peers')}`}
           </div>
         )}
         <div
           className={
             diff > 60 ? 'block-diff row-icon red' : 'block-diff row-icon'
-          }
-        >
+          }>
           {
             // TODO: make this i8n compatible
           }
-          <FontAwesomeIcon icon="clock" />
+          <FontAwesomeIcon icon={faClock} />
           {diff < 120 ? `${diff} seconds` : `${Math.floor(diff / 60)} minutes`}
         </div>{' '}
       </div>
@@ -190,7 +178,7 @@ export default class NodeInfoBox extends Component {
           </div>
           <div>
             <div className="remote-loading row-icon">
-              <FontAwesomeIcon icon="bolt" />
+              <FontAwesomeIcon icon={faBolt} />
               {i18n.t('mist.nodeInfo.connecting')}
             </div>
           </div>
@@ -206,18 +194,17 @@ export default class NodeInfoBox extends Component {
           </span>
         </div>
         <div className="block-number row-icon">
-          <FontAwesomeIcon icon="layer-group" />
+          <FontAwesomeIcon icon={faLayerGroup} />
           {formattedBlockNumber}
         </div>
         <div
           className={
             diff > 60 ? 'block-diff row-icon red' : 'block-diff row-icon'
-          }
-        >
+          }>
           {
             // TODO: make this i8n compatible
           }
-          <FontAwesomeIcon icon="clock" />
+          <FontAwesomeIcon icon={faClock} />
           {diff < 120 ? `${diff} seconds` : `${Math.floor(diff / 60)} minutes`}
         </div>
       </div>
