@@ -17,7 +17,7 @@ export default class Identicon extends Component {
     address: PropTypes.string,
     anonymous: PropTypes.bool,
     classes: PropTypes.string,
-    size: PropTypes.oneOf(['token', 'tiny', 'small', 'medium', 'large'])
+    size: PropTypes.oneOf(['nano', 'tiny', 'small', 'medium', 'large'])
   }
 
   static defaultProps = {
@@ -66,7 +66,7 @@ export default class Identicon extends Component {
   }
 }
 const config = {
-  token: {
+  nano: {
     size: '10px',
     boxShadow:
       'inset 0 1px 1px hsla(0,0%,100%,.1), inset 0 -1px 1px rgba(0,0,0,.1)'

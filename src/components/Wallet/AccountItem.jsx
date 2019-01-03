@@ -54,7 +54,7 @@ export default class AccountItem extends Component {
 
 const StyledWrapper = styled.div`
   display: flex;
-  max-width: 500px;
+  width: 220px;
 `
 
 const FlexWrapper = styled.div`

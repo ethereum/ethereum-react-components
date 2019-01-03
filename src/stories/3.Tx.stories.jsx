@@ -40,7 +40,7 @@ storiesOf('Tx/Description', module)
     return <TxDescription {...dummyTx} />
   })
   .add('deploy contract', () => {
-    return <TxDescription {...dummyTx} isNewContract={true} />
+    return <TxDescription {...dummyTx} isNewContract />
   })
   .add('transfer tokens', () => {
     return (
