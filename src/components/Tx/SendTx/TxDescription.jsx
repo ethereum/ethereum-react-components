@@ -44,7 +44,7 @@ export default class TxDescription extends Component {
   formattedBalance = () => {
     const { value } = this.props
     return util.formatBalance(
-      util.toBigNumber(value || 0),
+      util.toBN(value || 0),
       '0,0.00[0000000000000000]',
       'ether'
     )

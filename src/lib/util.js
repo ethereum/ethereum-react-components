@@ -1,29 +1,35 @@
 import ethUtils from 'ethereumjs-util'
 
-const BN = ethUtils.BN
+const BigNumber = ethUtils.BN
 
 const isHex = str => typeof str === 'string' && str.startsWith('0x')
+export const toBN = str => new BigNumber(str)
 export const hexToNumberString = str => toBN(str).toString(10)
 
-export const toBN = str => {
-  return new BN(str)
+export const toBigNumber = str => {
+  /**
+   web3.utils.isHex(estimatedGas)
+      ? new BigNumber(web3.utils.hexToNumberString(estimatedGas))
+      : new BigNumber(estimatedGas)
+   */
+  return isHex(str) ? new BigNumber(hexToNumberString(str)) : new BigNumber(str)
 }
 
 export const weiToEther = valWei => {
-  return toBN(valWei).div(new BN('1000000000000000000'))
+  return toBigNumber(valWei).div(new BigNumber('1000000000000000000'))
 }
 
 export const etherToGwei = valEther => {
-  return new BN(valEther).mul(new BN('1000000000'))
+  return new BigNumber(valEther).mul(new BigNumber('1000000000'))
 }
 
 export const toUsd = (etherAmount = '0', etherPriceUSD) => {
   return parseFloat(
-    toBN(etherAmount).mul(toBN(etherPriceUSD))
+    toBigNumber(etherAmount).mul(toBigNumber(etherPriceUSD))
   ).toFixed(2)
 }
 
-export const networkIdToName = networkId => {
+export const networkIdToName = str => {
   switch (networkId) {
     case 1:
     return 'Main'
@@ -37,5 +43,6 @@ export const networkIdToName = networkId => {
     return 'Private'
   }
 }
+
 // FIXME wrapper for EthTools.formatBalance
 export const formatBalance = () => {}
