@@ -29,7 +29,7 @@ export const toUsd = (etherAmount = '0', etherPriceUSD) => {
   ).toFixed(2)
 }
 
-export const networkIdToName = str => {
+export const networkIdToName = networkId => {
   switch (networkId) {
     case 1:
     return 'Main'
