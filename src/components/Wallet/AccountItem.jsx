@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faKey } from '@fortawesome/free-solid-svg-icons'
 import { Identicon, TokenListForItem, EthAddress } from '..'
-
-library.add(faKey)
 
 export default class AccountItem extends Component {
   static displayName = 'AccountItem'
@@ -36,7 +33,7 @@ export default class AccountItem extends Component {
 
         <FlexWrapper>
           <StyledName>
-            <FontAwesomeIcon icon="key" /> {name}
+            <StyledIcon icon={faKey} /> {name}
           </StyledName>
 
           <StyledBalance>
@@ -68,16 +65,20 @@ const StyledName = styled.div`
   color: #00aafa;
   text-transform: uppercase;
   font-style: italic;
-  font-weight: 500;
-  line-height: 20.5px;
+  font-weight: bold;
+  line-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
+`
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  width: 0.9em !important;
 `
 
 const StyledBalance = styled.div`
   color: #827a7a;
   font-size: 1.3em;
-  font-height: 1.35em;
+  line-height: 22px;
   text-overflow: ellipsis;
 `
 

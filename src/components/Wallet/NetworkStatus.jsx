@@ -76,6 +76,7 @@ export default class NetworkStatus extends Component {
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   color: #766a6a;
 `
 
