@@ -1,6 +1,6 @@
 import ethUtils from 'ethereumjs-util'
 
-const BigNumber = ethUtils.BN
+export const BigNumber = ethUtils.BN
 
 const isHex = str => typeof str === 'string' && str.startsWith('0x')
 export const toBN = str => new BigNumber(str)

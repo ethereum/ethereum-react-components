@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import web3 from 'web3'
 import i18n from '../../../i18n'
 import Identicon from '../../Identicon'
-import { networkIdToName, hexToNumberString } from '../../../lib/util'
-
-const BN = web3.utils.BN
+import {
+  networkIdToName,
+  hexToNumberString,
+  weiToEther,
+  etherToGwei,
+  BigNumber as BN
+} from '../../../lib/util'
 
 export default class TxEntry extends Component {
   static propTypes = {
@@ -81,15 +84,15 @@ export default class TxEntry extends Component {
     }
 
     const linkedTxHash = TxEntry.linkedTxHash(tx)
-    const etherAmount = web3.utils.fromWei(tx.value, 'ether')
+    const etherAmount = weiToEther(tx.value).toString()
     let etherAmountUSD
 
     if (tx.networkId === 1 && etherPriceUSD) {
       etherAmountUSD = (etherAmount * etherPriceUSD).toFixed(2)
     }
 
-    const gasPriceEther = web3.utils.fromWei(tx.gasPrice, 'ether')
-    const gasPriceGwei = web3.utils.fromWei(tx.gasPrice, 'gwei')
+    const gasPriceEther = weiToEther(tx.gasPrice).toString()
+    const gasPriceGwei = etherToGwei(weiToEther(tx.gasPrice)).toString()
 
     let txCostEther
     let txCostUSD
@@ -98,11 +101,13 @@ export default class TxEntry extends Component {
       console.log(tx.gasUsed)
       console.log(tx.gasPrice)
       const txCost = new BN(tx.gasUsed).mul(new BN(tx.gasPrice))
-      txCostEther = web3.utils.fromWei(txCost, 'ether')
+      txCostEther = weiToEther(txCost)
 
       if (tx.networkId === 1 && etherPriceUSD > 0) {
         txCostUSD = (txCostEther * etherPriceUSD).toFixed(2)
       }
+
+      txCostEther = txCostEther.toString()
     }
 
     return (
@@ -193,7 +198,7 @@ export default class TxEntry extends Component {
           .replace(/([A-Z]+|[0-9]+)/g, ' $1')
       description = `Executed ${executionFunctionSentence} function`
     } else {
-      const etherAmount = web3.utils.fromWei(tx.value, 'ether')
+      const etherAmount = weiToEther(tx.value)
       description = `Sent ${etherAmount} Ether`
     }
 

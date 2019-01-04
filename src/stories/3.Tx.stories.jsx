@@ -190,17 +190,22 @@ const standardTxConfirmedPrivateNet = {
 
 const toContractPending = {
   ...standardTxPending,
-  toIsContract: true
+  toIsContract: true,
+  executionFunction: 'createPet(str)'
 }
 
 const toContractConfirmed = {
   ...standardTxConfirmed,
-  toIsContract: true
+  toIsContract: true,
+  blockNumber: 9990,
+  status: 1
 }
 
 const toContractFailed = {
   ...standardTxFailed,
-  toIsContract: true
+  toIsContract: true,
+  blockNumber: 9990,
+  status: 0
 }
 
 const tokenTxPending = {

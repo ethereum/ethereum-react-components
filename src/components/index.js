@@ -48,10 +48,10 @@ export {
   NetworkStatus,
   NodeInfo,
   NodeInfoBox,
-  TxHistory,
   Pulse,
   RpcTester,
   Spinner,
   TokenListForItem,
+  TxHistory,
   ValidatedField
 }
