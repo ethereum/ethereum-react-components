@@ -1,9 +1,10 @@
 import ethUtils from 'ethereumjs-util'
+import { BigNumber as BNJS } from 'bignumber.js'
 
 export const BigNumber = ethUtils.BN
 
 const isHex = str => typeof str === 'string' && str.startsWith('0x')
-export const toBN = str => new BigNumber(str)
+export const toBN = str => new BNJS(str)
 export const hexToNumberString = str => toBN(str).toString(10)
 
 export const toBigNumber = str => {
@@ -12,20 +13,20 @@ export const toBigNumber = str => {
       ? new BigNumber(web3.utils.hexToNumberString(estimatedGas))
       : new BigNumber(estimatedGas)
    */
-  return isHex(str) ? new BigNumber(hexToNumberString(str)) : new BigNumber(str)
+  return isHex(str) ? new BNJS(hexToNumberString(str)) : new BNJS(str)
 }
 
 export const weiToEther = valWei => {
-  return toBigNumber(valWei).div(new BigNumber('1000000000000000000'))
+  return toBigNumber(valWei).div(new BNJS('1000000000000000000'))
 }
 
 export const etherToGwei = valEther => {
-  return new BigNumber(valEther).mul(new BigNumber('1000000000'))
+  return new BNJS(valEther).times(new BNJS('1000000000'))
 }
 
 export const toUsd = (etherAmount = '0', etherPriceUSD) => {
   return parseFloat(
-    toBigNumber(etherAmount).mul(toBigNumber(etherPriceUSD))
+    toBigNumber(etherAmount).times(toBigNumber(etherPriceUSD))
   ).toFixed(2)
 }
 
