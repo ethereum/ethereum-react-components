@@ -241,6 +241,13 @@ const toNewContractPending = {
   isNewContract: true
 }
 
+const toNewContractFailed = {
+  ...toNewContractPending,
+  blockNumber: 9990,
+  status: 0,
+  gasUsed: 25000
+}
+
 storiesOf('Tx/TxHistory', module)
   .add('No txs', () => {
     return <TxHistory etherPriceUSD={200} blockNumber={10000} txs={[]} />
@@ -350,6 +357,24 @@ storiesOf('Tx/TxHistory', module)
         etherPriceUSD={200}
         blockNumber={10000}
         txs={[toNewContractPending]}
+      />
+    )
+  })
+  .add('New contract, Failed', () => {
+    return (
+      <TxHistory
+        etherPriceUSD={200}
+        blockNumber={10000}
+        txs={[toNewContractFailed]}
+      />
+    )
+  })
+  .add('List multiple txs', () => {
+    return (
+      <TxHistory
+        etherPriceUSD={200}
+        blockNumber={10000}
+        txs={[standardTxPending, tokenTxConfirmed, toNewContractFailed]}
       />
     )
   })
