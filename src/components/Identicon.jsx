@@ -16,7 +16,6 @@ export default class Identicon extends Component {
   static propTypes = {
     address: PropTypes.string,
     anonymous: PropTypes.bool,
-    classes: PropTypes.string,
     size: PropTypes.oneOf(['nano', 'tiny', 'small', 'medium', 'large'])
   }
 
@@ -39,11 +38,12 @@ export default class Identicon extends Component {
   }
 
   render() {
-    const { address, anonymous, size, classes } = this.props
+    const { address, anonymous, size } = this.props
 
     if (anonymous) {
       return (
         <StyledSpanAnonymous
+          {...this.props}
           backgroundImage={`url('${anonymousIcon}')`}
           size={size}
         />
@@ -51,12 +51,12 @@ export default class Identicon extends Component {
     }
 
     if (!address) {
-      return <StyledSpanEmpty size={size} />
+      return <StyledSpanEmpty {...this.props} size={size} />
     }
 
     return (
       <StyledSpan
-        className={classes}
+        {...this.props}
         backgroundImage={`url('${this.identiconData(address.toLowerCase())}')`}
         size={size}
         title={i18n.t('elements.identiconHelper')}>

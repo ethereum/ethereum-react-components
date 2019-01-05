@@ -7,6 +7,8 @@ const isHex = str => typeof str === 'string' && str.startsWith('0x')
 export const toBN = str => new BNJS(str)
 export const hexToNumberString = str => toBN(str).toString(10)
 
+export const isAddress = str => isHex(str) && str.length === 42
+
 export const toBigNumber = str => {
   /**
    web3.utils.isHex(estimatedGas)
