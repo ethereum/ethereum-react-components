@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.6...v1.5.0) (2019-01-07)
+
+
+### Features
+
+* introduces AddressInput ([#77](https://github.com/PhilippLgh/ethereum-react-components/issues/77)) ([3d303cb](https://github.com/PhilippLgh/ethereum-react-components/commit/3d303cb))
+
+
+
 <a name="1.4.6"></a>
 ## [1.4.6](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.5...v1.4.6) (2019-01-03)
 
