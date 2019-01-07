@@ -30,7 +30,22 @@ export default class TxEntry extends Component {
     blockNumber: PropTypes.number
   }
 
-  static linkedTxHash(tx) {
+  constructor(props) {
+    super(props)
+
+    this.state = { showDetails: false }
+
+    const { tx } = this.props
+    tx.isTokenTransfer = tx.executionFunction === 'transfer(address,uint256)'
+  }
+
+  toggleDetails() {
+    this.setState(prevState => ({ showDetails: !prevState.showDetails }))
+  }
+
+  renderTxHash() {
+    const { tx } = this.props
+
     if (!tx.hash) {
       return null
     }
@@ -44,7 +59,7 @@ export default class TxEntry extends Component {
       subdomain = 'kovan.'
     }
 
-    return (
+    const linkedTxHash = (
       <a
         href={`https://${subdomain}etherscan.io/tx/${tx.hash}`}
         target="_blank"
@@ -53,141 +68,192 @@ export default class TxEntry extends Component {
         {tx.hash}
       </a>
     )
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = { showDetails: false }
-  }
-
-  toggleDetails() {
-    this.setState(prevState => ({ showDetails: !prevState.showDetails }))
-  }
-
-  renderDetails() {
-    const { tx, etherPriceUSD } = this.props
-    const { showDetails } = this.state
-
-    if (!showDetails) {
-      return (
-        <div
-          role="button"
-          tabIndex={0}
-          className="moreDetails"
-          onClick={() => this.toggleDetails()}
-          onKeyDown={() => this.toggleDetails()}
-        >
-          Show details
-        </div>
-      )
-    }
-
-    const linkedTxHash = TxEntry.linkedTxHash(tx)
-    const etherAmount = weiToEther(tx.value).toString()
-    let etherAmountUSD
-
-    if (tx.networkId === 1 && etherPriceUSD) {
-      etherAmountUSD = (etherAmount * etherPriceUSD).toFixed(2)
-    }
-
-    const gasPriceEther = weiToEther(tx.gasPrice).toString()
-    const gasPriceGwei = etherToGwei(weiToEther(tx.gasPrice)).toString()
-
-    let txCostEther
-    let txCostUSD
-
-    if (tx.blockNumber) {
-      console.log(tx.gasUsed)
-      console.log(tx.gasPrice)
-      const txCost = new BN(tx.gasUsed).mul(new BN(tx.gasPrice))
-      txCostEther = weiToEther(txCost)
-
-      if (tx.networkId === 1 && etherPriceUSD > 0) {
-        txCostUSD = (txCostEther * etherPriceUSD).toFixed(2)
-      }
-
-      txCostEther = txCostEther.toString()
-    }
 
     return (
       <div>
-        <div>
-          <div className="label">{i18n.t('mist.txHistory.txHash')}</div>
-          <span className="value">{linkedTxHash}</span>
-        </div>
-        <div>
-          <div className="label">{i18n.t('mist.txHistory.etherAmount')}</div>
-          <span className="value">{etherAmount} Ether</span>{' '}
+        <StyledLabel>{i18n.t('mist.txHistory.txHash')}</StyledLabel>
+        <StyledValue>{linkedTxHash}</StyledValue>
+      </div>
+    )
+  }
+
+  renderEtherAmount() {
+    const { tx, etherPriceUSD } = this.props
+    const etherAmount = weiToEther(tx.value).toString()
+    let etherAmountUSD
+    if (tx.networkId === 1 && etherPriceUSD) {
+      etherAmountUSD = (etherAmount * etherPriceUSD).toFixed(2)
+    }
+    return (
+      <div>
+        <StyledLabel>{i18n.t('mist.txHistory.etherAmount')}</StyledLabel>
+        <StyledValue>
+          {etherAmount} Ether{' '}
           {etherAmountUSD && <span> (~${etherAmountUSD} USD)</span>}
-        </div>
+        </StyledValue>
+      </div>
+    )
+  }
+
+  renderNonce() {
+    const { tx } = this.props
+    return (
+      <div>
+        <StyledLabel>{i18n.t('mist.txHistory.nonce')}</StyledLabel>
+        <StyledValue>{hexToNumberString(tx.nonce)}</StyledValue>
+      </div>
+    )
+  }
+
+  renderGas() {
+    const { tx } = this.props
+    const gasPriceEther = weiToEther(tx.gasPrice).toString()
+    const gasPriceGwei = etherToGwei(weiToEther(tx.gasPrice)).toString()
+    return (
+      <div>
         <div>
-          <div className="label">{i18n.t('mist.txHistory.nonce')}</div>
-          <span className="value">{hexToNumberString(tx.nonce)}</span>
-        </div>
-        <div>
-          <div className="label">{i18n.t('mist.txHistory.gasLimit')}</div>
-          <span className="value">{hexToNumberString(tx.gas)}</span>
+          <StyledLabel>{i18n.t('mist.txHistory.gasLimit')}</StyledLabel>
+          <StyledValue>{hexToNumberString(tx.gas)}</StyledValue>
         </div>
         {tx.gasUsed && (
           <div>
-            <div className="label">{i18n.t('mist.txHistory.gasUsed')}</div>
-            <span className="value">{hexToNumberString(tx.gasUsed)}</span>
+            <StyledLabel>{i18n.t('mist.txHistory.gasUsed')}</StyledLabel>
+            <StyledValue>{hexToNumberString(tx.gasUsed)}</StyledValue>
           </div>
         )}
         <div>
-          <div className="label">{i18n.t('mist.txHistory.gasPrice')}</div>
-          <span className="value">{gasPriceEther} Ether</span> ({gasPriceGwei}{' '}
-          Gwei)
-        </div>
-        {txCostEther && (
-          <div>
-            <div className="label">{i18n.t('mist.txHistory.txCost')}</div>
-            <span className="value">{txCostEther} Ether</span>
-            {txCostUSD && <span> (${txCostUSD} USD)</span>}
-          </div>
-        )}
-        {tx.data && (
-          <div>
-            <div className="label">{i18n.t('mist.txHistory.data')}</div>
-            <span className="value data">{tx.data}</span>
-          </div>
-        )}
-        <div
-          role="button"
-          tabIndex={0}
-          className="moreDetails"
-          onClick={() => this.toggleDetails()}
-          onKeyDown={() => this.toggleDetails()}
-        >
-          Hide details
+          <StyledLabel>{i18n.t('mist.txHistory.gasPrice')}</StyledLabel>
+          <StyledValue>
+            {gasPriceEther} Ether ({gasPriceGwei} Gwei)
+          </StyledValue>
         </div>
       </div>
     )
   }
 
-  render() {
-    const { tx } = this.props
+  renderTxCost() {
+    const { tx, etherPriceUSD } = this.props
 
-    const date = new Date(tx.createdAt).toLocaleString()
-
-    const networkString = networkIdToName(tx.networkId)
-    let network = ''
-    if (networkString !== 'Main') {
-      network = networkString
+    if (!tx.blockNumber) {
+      return null
     }
 
-    const isTokenTransfer = tx.executionFunction === 'transfer(address,uint256)'
+    let txCostEther
+    let txCostUSD
+    const txCost = new BN(tx.gasUsed).mul(new BN(tx.gasPrice))
+    txCostEther = weiToEther(txCost)
+    if (tx.networkId === 1 && etherPriceUSD > 0) {
+      txCostUSD = (txCostEther * etherPriceUSD).toFixed(2)
+    }
+    txCostEther = txCostEther.toString()
 
+    return (
+      <div>
+        <StyledLabel>{i18n.t('mist.txHistory.txCost')}</StyledLabel>
+        <StyledValue>{txCostEther} Ether</StyledValue>
+        {txCostUSD && <span> (${txCostUSD} USD)</span>}
+      </div>
+    )
+  }
+
+  renderData() {
+    const { tx } = this.props
+
+    if (!tx.data) {
+      return null
+    }
+
+    return (
+      <div>
+        <StyledLabel>{i18n.t('mist.txHistory.data')}</StyledLabel>
+        <StyledValue>
+          <StyledData>{tx.data}</StyledData>
+        </StyledValue>
+      </div>
+    )
+  }
+
+  renderDetails() {
+    const { showDetails } = this.state
+
+    if (!showDetails) {
+      return (
+        <StyledMoreDetails
+          role="button"
+          tabIndex={0}
+          onClick={() => this.toggleDetails()}
+          onKeyDown={() => this.toggleDetails()}
+        >
+          Show details
+        </StyledMoreDetails>
+      )
+    }
+
+    return (
+      <div>
+        {this.renderTxHash()}
+        {this.renderEtherAmount()}
+        {this.renderNonce()}
+        {this.renderGas()}
+        {this.renderTxCost()}
+        {this.renderData()}
+
+        <StyledMoreDetails
+          role="button"
+          tabIndex={0}
+          onClick={() => this.toggleDetails()}
+          onKeyDown={() => this.toggleDetails()}
+        >
+          Hide details
+        </StyledMoreDetails>
+      </div>
+    )
+  }
+
+  renderStatus() {
+    const { tx } = this.props
+    let status = (
+      <StyledValue style={{ color: 'grey' }}>
+        {i18n.t('mist.txHistory.statusPending')}
+      </StyledValue>
+    )
+    if (tx.status === 0) {
+      status = (
+        <StyledValue style={{ color: 'red' }}>
+          {i18n.t('mist.txHistory.statusFailed')}
+        </StyledValue>
+      )
+    } else if (tx.status === 1 && tx.blockNumber) {
+      const { blockNumber } = this.props
+      const numberConfirmations = blockNumber - tx.blockNumber
+
+      status = (
+        <span>
+          <StyledValue style={{ color: 'green' }}>
+            {i18n.t('mist.txHistory.statusConfirmed')}
+          </StyledValue>{' '}
+          <StyledValue>
+            ({numberConfirmations} {i18n.t('mist.txHistory.confirmations')})
+          </StyledValue>
+        </span>
+      )
+    }
+    return (
+      <div>
+        <StyledLabel>{i18n.t('mist.txHistory.status')}</StyledLabel>
+        <StyledValue style={{ fontWeight: 'bold' }}>{status}</StyledValue>
+      </div>
+    )
+  }
+
+  renderDescription() {
+    const { tx } = this.props
     let description
-    let tokensTo
-
-    if (isTokenTransfer) {
+    if (tx.isTokenTransfer) {
       const { decimals, symbol } = tx.token
       const tokenCount = tx.params[1].slice(0, -Math.abs(decimals))
       const tokenSymbol = symbol || 'tokens'
       description = `Transferred ${tokenCount} ${tokenSymbol}`
-      tokensTo = tx.params[0]
     } else if (tx.isNewContract) {
       description = 'Created New Contract'
     } else if (tx.executionFunction) {
@@ -201,86 +267,96 @@ export default class TxEntry extends Component {
       const etherAmount = weiToEther(tx.value)
       description = `Sent ${etherAmount} Ether`
     }
+    return <StyledDescription>{description}</StyledDescription>
+  }
 
-    let status = (
-      <span className="value" style={{ color: 'grey' }}>
-        {i18n.t('mist.txHistory.statusPending')}
-      </span>
+  renderFrom() {
+    const { tx } = this.props
+    return (
+      <div>
+        <StyledLabel>{i18n.t('mist.txHistory.from')}</StyledLabel>
+        <StyledIdenticon>
+          <Identicon address={tx.from} size="small" />
+        </StyledIdenticon>
+        <StyledValue>{tx.from}</StyledValue>
+      </div>
     )
-    if (tx.status === 0) {
-      status = (
-        <span className="value" style={{ color: 'red' }}>
-          {i18n.t('mist.txHistory.statusFailed')}
-        </span>
-      )
-    } else if (tx.status === 1 && tx.blockNumber) {
-      const { blockNumber } = this.props
-      const numberConfirmations = blockNumber - tx.blockNumber
+  }
 
-      status = (
-        <span>
-          <span className="value" style={{ color: 'green' }}>
-            {i18n.t('mist.txHistory.statusConfirmed')}
-          </span>{' '}
-          <span>
-            ({numberConfirmations} {i18n.t('mist.txHistory.confirmations')})
-          </span>
-        </span>
+  renderTo() {
+    const { tx } = this.props
+    if (tx.isTokenTransfer) {
+      const tokensTo = tx.params[0]
+      return (
+        <div>
+          <StyledLabel>{i18n.t('mist.txHistory.to')}</StyledLabel>
+          <StyledIdenticon>
+            <Identicon address={tokensTo} size="small" />
+          </StyledIdenticon>
+          <StyledValue>{tokensTo}</StyledValue>
+        </div>
       )
     }
 
+    if (!tx.to) {
+      return null
+    }
+
+    return (
+      <div>
+        <StyledLabel>
+          {i18n.t('mist.txHistory.to')}
+          {tx.toIsContract && ` ${i18n.t('mist.txHistory.contract')}`}
+        </StyledLabel>
+        <StyledIdenticon>
+          <Identicon address={tx.to} size="small" />
+        </StyledIdenticon>
+        <StyledValue>{tx.to}</StyledValue>
+      </div>
+    )
+  }
+
+  renderNewContract() {
+    const { tx } = this.props
+    if (!tx.contractAddress) {
+      return null
+    }
+    return (
+      <div>
+        <StyledLabel>{i18n.t('mist.txHistory.newContract')}</StyledLabel>
+        <StyledIdenticon>
+          <Identicon address={tx.contractAddress} size="small" />
+        </StyledIdenticon>
+        <StyledValue>{tx.contractAddress}</StyledValue>
+      </div>
+    )
+  }
+
+  renderNetwork() {
+    const { tx } = this.props
+    const networkName = networkIdToName(tx.networkId)
+    return <StyledNetwork>{networkName}</StyledNetwork>
+  }
+
+  renderDate() {
+    const { tx } = this.props
+    const date = new Date(tx.createdAt).toLocaleString()
+    return <StyledDate>{date}</StyledDate>
+  }
+
+  render() {
+    const { tx } = this.props
     return (
       <StyledTx key={tx.hash || tx.nonce}>
-        <div className="right">
-          {network && <div className="network">{network}</div>}
-          <div className="date">{date}</div>
-        </div>
-        <div className="description">{description}</div>
-        {tx.contractAddress && (
-          <div>
-            <div className="label">{i18n.t('mist.txHistory.newContract')}</div>
-            <div className="identicon">
-              <Identicon address={tx.contractAddress} size="small" />
-            </div>
-            <span className="value">{tx.contractAddress}</span>
-          </div>
-        )}
-        <div>
-          <div className="label">{i18n.t('mist.txHistory.from')}</div>
-          <div className="identicon">
-            <Identicon address={tx.from} size="small" />
-          </div>
-          <span className="value">{tx.from}</span>
-        </div>
-        {isTokenTransfer && (
-          <div>
-            <div className="label">{i18n.t('mist.txHistory.to')}</div>
-            <div className="identicon">
-              <Identicon address={tokensTo} size="small" />
-            </div>
-            <span className="value">{tokensTo}</span>
-          </div>
-        )}
-        {!isTokenTransfer && (
-          <div>
-            {tx.to && (
-              <div>
-                <div className="label">
-                  {i18n.t('mist.txHistory.to')}
-                  {tx.toIsContract && ` ${i18n.t('mist.txHistory.contract')}`}
-                </div>
-                <div className="identicon">
-                  <Identicon address={tx.to} size="small" />
-                </div>
-                <span className="value">{tx.to}</span>
-              </div>
-            )}
-          </div>
-        )}
-        <div>
-          <div className="label">{i18n.t('mist.txHistory.status')}</div>
-          <strong className="value">{status}</strong>
-        </div>
+        <StyledRight>
+          {this.renderNetwork()}
+          {this.renderDate()}
+        </StyledRight>
+        {this.renderDescription()}
+        {this.renderNewContract()}
+        {this.renderFrom()}
+        {this.renderTo()}
+        {this.renderStatus()}
         {this.renderDetails()}
       </StyledTx>
     )
@@ -295,44 +371,6 @@ const StyledTx = styled.div`
   color: #111;
   word-wrap: break-word;
 
-  .description {
-    font-size: 125%;
-    margin-bottom: 0.5em;
-  }
-
-  .label {
-    display: inline-block;
-    background: #ededed;
-    color: #444;
-    padding: 0.35em;
-    border-radius: 5px;
-    font-size: 80%;
-    margin-right: 5px;
-  }
-
-  .right {
-    float: right;
-    text-align: right;
-  }
-
-  .date {
-    font-size: 80%;
-    margin-bottom: 0;
-  }
-
-  .network {
-    color: red;
-    font-size: 13px;
-    font-weight: value;
-    margin-bottom: 0;
-  }
-
-  .identicon {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 7px 0 2px;
-  }
-
   div {
     margin-bottom: 10px;
   }
@@ -340,15 +378,58 @@ const StyledTx = styled.div`
   a {
     text-decoration: none;
   }
+`
 
-  .moreDetails {
-    color: #02a8f3;
-    font-weight: 400;
-    cursor: pointer;
-    padding: 3px;
+const StyledRight = styled.div`
+  float: right;
+  text-align: right;
+  div {
     margin-bottom: 0;
-    &:focus {
-      outline: 0;
-    }
   }
 `
+
+const StyledLabel = styled.div`
+  display: inline-block;
+  background: #ededed;
+  color: #444;
+  padding: 0.35em;
+  border-radius: 5px;
+  font-size: 80%;
+  margin-right: 5px;
+`
+
+const StyledValue = styled.span``
+
+const StyledDate = styled.div`
+  font-size: 80%;
+  margin-bottom: 0;
+`
+
+const StyledNetwork = styled.div`
+  font-size: 13px;
+  font-weight: bold;
+`
+
+const StyledDescription = styled.div`
+  font-size: 125%;
+  margin-bottom: 0.5em;
+`
+
+const StyledMoreDetails = styled.div`
+  color: #02a8f3;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 3px;
+  margin-bottom: 0;
+  &:focus {
+    outline: 0;
+  }
+`
+
+const StyledIdenticon = styled.div`
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 7px 0 2px;
+`
+
+const StyledData = styled.div``
