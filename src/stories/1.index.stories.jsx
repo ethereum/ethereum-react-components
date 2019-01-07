@@ -10,6 +10,7 @@ import {
   Pulse,
   Button,
   Checkbox,
+  AddressInput,
   Input,
   TextArea,
   Select,
@@ -115,7 +116,20 @@ storiesOf('Widgets/Button', module)
     </Button>
   ))
 
-storiesOf('Widgets/Form/Input', module).add('default', () => <Input />)
+storiesOf('Widgets/Form/Input', module).add('default', () => (
+  <Input placeholder="Sample input..." />
+))
+
+storiesOf('Widgets/Form/AddressInput', module)
+  .add('empty state', () => {
+    return <AddressInput />
+  })
+  .add('error state', () => {
+    return <AddressInput value="0x0123" />
+  })
+  .add('success state', () => {
+    return <AddressInput value="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
+  })
 
 storiesOf('Widgets/Form/TextArea', module).add('default', () => <TextArea />)
 
