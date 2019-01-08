@@ -99,7 +99,7 @@ export default class NodeInfoBox extends Component {
   }
 
   localStatsSyncProgress() {
-    const { local } = this.props
+    const { local, network } = this.props
     const { sync } = local
     const { highestBlock, currentBlock, startingBlock, connectedPeers } = sync
 
@@ -120,7 +120,11 @@ export default class NodeInfoBox extends Component {
         </div>
         <div className="sync-progress row-icon">
           <FontAwesomeIcon icon={faCloudDownloadAlt} />
-          <progress max="100" value={progress || 0} />
+          <StyledProgress
+            testnet={network !== 'main'}
+            max="100"
+            value={progress || 0}
+          />
         </div>
       </div>
     )
@@ -224,8 +228,8 @@ export default class NodeInfoBox extends Component {
 
   renderLocalStats() {
     const { local, active, network } = this.props
-    const { syncMode, sync } = local
-    const { currentBlock, connectedPeers } = sync
+    const { syncMode, sync, blockNumber } = local
+    const { currentBlock, highestBlock, connectedPeers } = sync
 
     let syncText
     if (syncMode) {
@@ -243,7 +247,7 @@ export default class NodeInfoBox extends Component {
       return null
     }
 
-    if (active === 'local') {
+    if (active === 'local' && blockNumber > highestBlock - 50) {
       // Case: already synced up
       localStats = this.localStatsSynced()
     } else if (active === 'remote') {
@@ -261,6 +265,9 @@ export default class NodeInfoBox extends Component {
         // Case: show progress
         localStats = this.localStatsSyncProgress()
       }
+    } else {
+      // Case: show progress
+      localStats = this.localStatsSyncProgress()
     }
 
     return (
@@ -315,10 +322,6 @@ const StyledSubmenuContainer = styled.div`
     border-radius: 5px;
     color: #fff;
     position: relative;
-  }
-
-  progress {
-    width: 100%;
   }
 
   ${props =>
@@ -406,6 +409,36 @@ const StyledTitle = styled.div`
     `}
 `
 
+const StyledProgress = styled.progress`
+    width: 100%;
+    background-color: #eee;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) inset;
+    background: rgba(255, 255, 255, 0.1);
+    height: 5px;
+
+    ${props =>
+      !props.testnet &&
+      css`
+        &::-webkit-progress-value {
+          bakground-image: linear-gradient(left, transparent, ${colorMainnet});
+          background: ${colorMainnet};
+          background-size: cover;
+        }
+      `}
+    ${props =>
+      props.testnet &&
+      css`
+        &::-webkit-progress-value {
+          background-image: linear-gradient(left, transparent, ${colorTestnet});
+          background: ${colorTestnet};
+          background-size: cover;
+        }
+      `}
+
+  }
+`
+
 const StyledBox = styled.div`
   font-family: sans-serif;
   ${props =>
@@ -440,23 +473,5 @@ const StyledBox = styled.div`
 
   .red {
     color: #e81e1e;
-  }
-
-  progress[value]::-webkit-progress-bar {
-    background-color: #eee;
-    border-radius: 2px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) inset;
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .node-mainnet progress[value]::-webkit-progress-value {
-    background-image: linear-gradient(left, transparent, ${colorMainnet});
-    background: $colorMainnet;
-    background-size: cover;
-  }
-
-  .node-testnet progress[value]::-webkit-progress-value {
-    background-image: linear-gradient(left, transparent, ${colorTestnet});
-    background-size: cover;
   }
 `

@@ -174,6 +174,21 @@ const testRemote = () => {
 const testLocal = () => {
   return { ...mainLocal(), network: 'ropsten' }
 }
+const testLocalSyncing = () => {
+  return {
+    ...testLocal(),
+    local: {
+      ...testLocal().local,
+      sync: {
+        ...testLocal().local.sync,
+        currentBlock: 10000,
+        highestBlock: 100000,
+        connectedPeers: 5
+      }
+    }
+  }
+}
+
 const privateNet = () => {
   return { ...mainLocal(), network: 'private' }
 }
@@ -277,6 +292,11 @@ storiesOf('Network/Node Info/Box/Main Net/Local', module)
 storiesOf('Network/Node Info/Box/Test Net', module)
   .add('remote', () => <NodeInfoBox {...testRemote()} />)
   .add('local', () => <NodeInfoBox {...testLocal()} />)
+  .add('local sync', () => (
+    <QuickSync {...testLocalSyncing()}>
+      <NodeInfoBox />
+    </QuickSync>
+  ))
 storiesOf('Network/Node Info/Box/Private Network', module).add('local', () => (
   <NodeInfoBox {...privateNet()} />
 ))
