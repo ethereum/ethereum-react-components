@@ -26,6 +26,10 @@ export const etherToGwei = valEther => {
   return new BNJS(valEther).times(new BNJS('1000000000'))
 }
 
+export const etherToWei = valEther => {
+  return new BNJS(valEther).times(new BNJS('1000000000000000000'))
+}
+
 export const toUsd = (etherAmount = '0', etherPriceUSD) => {
   return parseFloat(
     toBigNumber(etherAmount).times(toBigNumber(etherPriceUSD))

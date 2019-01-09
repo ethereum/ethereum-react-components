@@ -37,6 +37,7 @@ storiesOf('Wallet/NetworkStatus', module)
         .unix()}
     />
   ))
+  .add('empty state', () => <NetworkStatus />)
 
 storiesOf('Wallet/Account/List', module).add('default', () => {
   const accounts = [
