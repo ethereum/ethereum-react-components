@@ -3,40 +3,31 @@ import PropTypes from 'prop-types'
 import ethUtils from 'ethereumjs-util'
 import i18n from '../../../i18n'
 import Spinner from '../../Widgets/AnimatedIcons/Spinner'
-import * as util from '../../../lib/util'
+import styled from 'styled-components'
 
 const { BN } = ethUtils
 
 export default class FeeSelector extends Component {
-  static displayName = 'FeeSelector'
-
   static propTypes = {
-    togglePriority: PropTypes.string.isRequired,
-    gasLoading: PropTypes.bool,
-    // network: PropTypes.string,
+    network: PropTypes.string,
     etherPriceUSD: PropTypes.string,
-    priority: PropTypes.bool,
+    gas: PropTypes.string,
     gasPrice: PropTypes.string,
-    estimatedGas: PropTypes.string
-  }
-
-  static defaultProps = {
-    // network: 'main'
+    gasLoading: PropTypes.bool,
+    updateGasPrice: PropTypes.func
   }
 
   state = {
-    gasRetries: 0
+    priority: false
   }
 
   parseFee = () => {
-    const { estimatedGas, priority, gasPrice, etherPriceUSD } = this.props
+    const { gas, gasPrice, etherPriceUSD, network } = this.props
+    const { priority } = this.state
 
-    // FIXME
-    const network = 'main'
-
-    const gas = util.toBigNumber(estimatedGas)
-    const bigGasPrice = util.toBigNumber(gasPrice)
-    const gasEtherAmount = gas
+    const bigGas = new BN(gas)
+    const bigGasPrice = new BN(gasPrice)
+    const gasEtherAmount = bigGas
       .mul(bigGasPrice)
       .div(new BN('1000000000000000000'))
     const gasEtherAmountPriority = gasEtherAmount.mul(new BN(2))
@@ -44,83 +35,98 @@ export default class FeeSelector extends Component {
     let fee
     if (!priority) {
       if (network.toLowerCase() === 'main' && etherPriceUSD) {
-        const standardFee = gasEtherAmount.mul(etherPriceUSD)
-        const formattedFee = this.formatter.format(standardFee)
-        fee = `${formattedFee} USD (${gasEtherAmount} ETH)`
+        const standardFee = gasEtherAmount.mul(new BN(etherPriceUSD))
+        fee = `$${standardFee} USD (${gasEtherAmount} ETH)`
       } else {
         fee = `${gasEtherAmount} ETH`
       }
+    } else if (network.toLowerCase() === 'main' && etherPriceUSD) {
+      const priorityFee = gasEtherAmountPriority.mul(new BN(etherPriceUSD))
+      fee = `$${priorityFee} USD (${gasEtherAmountPriority} ETH)`
     } else {
-      if (network.toLowerCase() === 'main' && etherPriceUSD) {
-        const priorityFee = gasEtherAmountPriority.mul(etherPriceUSD)
-        const formattedFee = this.formatter.format(priorityFee)
-        fee = `${formattedFee} USD (${gasEtherAmount} ETH)`
-      } else {
-        fee = `${gasEtherAmountPriority} ETH`
-      }
+      fee = `${gasEtherAmountPriority} ETH`
     }
-
     return fee
   }
 
   handleClick = () => {
-    const { togglePriority } = this.props
-    togglePriority()
+    const { priority } = this.state
+    this.setState({ priority: !priority })
   }
 
   renderStatus = () => {
-    const { gasLoading } = this.props
-    const { gasRetries } = this.state
+    const { gas, gasLoading } = this.props
 
     let error
-
-    if (gasLoading && gasRetries < 5) {
+    if (!gas && gasLoading) {
       error = (
-        <div className="fee-selector__error">
-          {i18n.t('mist.sendTx.gasLoadingWarning')}
-        </div>
+        <StyledWarning>{i18n.t('mist.sendTx.gasLoadingWarning')}</StyledWarning>
       )
-    } else if (gasLoading && gasRetries === 5) {
-      error = (
-        <div className="fee-selector__error">
-          {i18n.t('mist.sendTx.gasLoadingError')}
-        </div>
-      )
+    } else {
+      error = <StyledError>{i18n.t('mist.sendTx.gasLoadingError')}</StyledError>
     }
 
     return (
-      <React.Fragment>
-        {gasLoading && (
-          <Spinner singleColor="#00aafa" size={16} className="react-spinner" />
-        )}
+      <div>
         {error}
-      </React.Fragment>
+        {gasLoading && <Spinner />}
+      </div>
     )
   }
 
   render() {
-    const { priority } = this.props
+    const { gas } = this.props
+    const { priority } = this.state
+
+    if (!gas) {
+      return <div>{this.renderStatus()}</div>
+    }
 
     return (
-      <div className="fee-selector">
+      <div>
         {priority ? (
-          <span
+          <StyledFeeSelector
             onClick={this.handleClick}
-            className="fee-selector__btn"
-            data-tooltip="Click For Standard Fee">
+            onKeyDown={this.handleClick}
+            role="button"
+            tabIndex={0}
+            title="Click For Standard Fee"
+          >
             {i18n.t('mist.sendTx.priorityFee')}
-          </span>
+          </StyledFeeSelector>
         ) : (
-          <span
+          <StyledFeeSelector
             onClick={this.handleClick}
-            className="fee-selector__btn"
-            data-tooltip="Click For Priority Fee">
+            onKeyDown={this.handleClick}
+            role="button"
+            tabIndex={0}
+            title="Click For Priority Fee"
+          >
             {i18n.t('mist.sendTx.standardFee')}
-          </span>
+          </StyledFeeSelector>
         )}{' '}
-        <span className="fee-amount">{this.parseFee()}</span>
-        {this.renderStatus()}
+        <StyledFeeAmount>{this.parseFee()}</StyledFeeAmount>
       </div>
     )
   }
 }
+
+const StyledFeeSelector = styled.span`
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: 0;
+  }
+`
+const StyledFeeAmount = styled.span``
+
+const StyledWarning = styled.div`
+  font-style: italic;
+`
+
+const StyledError = styled.div`
+  color: red;
+  font-weight: bold;
+`

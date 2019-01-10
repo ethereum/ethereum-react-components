@@ -155,9 +155,9 @@ const en = {
       "notEnoughGas":
         "Gas might not be enough to successfully finish this transaction.<br>Click here to increase the gas amount.",
       "gasLoadingWarning":
-        "This is taking a while! You may choose to use this default fee. Your actual fee will likely be less.",
+        "Loading gas estimate...",
       "gasLoadingError":
-        "Failed to estimate gas. You may choose to use this default fee. Your actual fee will likely be less.",
+        "Failed to estimate gas.",
       "errors": {
         "connectionTimeout":
           "Couldn't connect to the node, did it crash in the background?",

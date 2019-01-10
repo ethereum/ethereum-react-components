@@ -25,7 +25,8 @@ export default class Spinner extends Component {
           ...pstyle,
           width: '65px',
           height: '65px'
-        }}>
+        }}
+      >
         <div className="ball-spin-fade-loader">
           {[...Array(divCount)].map((_, idx) => (
             <div key={idx} style={style} />
