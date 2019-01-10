@@ -6,7 +6,8 @@ import {
   AccountItem,
   AccountList,
   NavbarItem,
-  NetworkStatus
+  NetworkStatus,
+  Notification
 } from '../components'
 
 storiesOf('Wallet/NavbarItem', module)
@@ -127,3 +128,7 @@ storiesOf('Wallet/Account/Item', module)
       />
     )
   })
+
+storiesOf('Wallet/Notification', module).add('default', () => (
+  <Notification message="Example message" />
+))
