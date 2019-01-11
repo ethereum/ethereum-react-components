@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.5.0...v1.6.0) (2019-01-11)
+
+
+### Features
+
+* Transaction history components ([#73](https://github.com/PhilippLgh/ethereum-react-components/issues/73)) ([8687062](https://github.com/PhilippLgh/ethereum-react-components/commit/8687062))
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.6...v1.5.0) (2019-01-07)
 
