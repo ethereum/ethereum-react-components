@@ -13,7 +13,6 @@ export default class QuickSync extends Component {
     this.state = {
       props
     }
-    console.log(props)
   }
 
   componentDidMount() {
