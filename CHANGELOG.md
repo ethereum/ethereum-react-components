@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.7.0...v1.7.1) (2019-01-11)
+
+
+### Bug Fixes
+
+* progress bar style color ([93f8863](https://github.com/PhilippLgh/ethereum-react-components/commit/93f8863))
+* remove console log ([8094263](https://github.com/PhilippLgh/ethereum-react-components/commit/8094263))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.6.0...v1.7.0) (2019-01-11)
 
