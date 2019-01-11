@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ethUtils from 'ethereumjs-util'
+import styled from 'styled-components'
 import i18n from '../../../i18n'
 import Spinner from '../../Widgets/AnimatedIcons/Spinner'
-import styled from 'styled-components'
 
 const { BN } = ethUtils
 
@@ -14,23 +14,33 @@ export default class FeeSelector extends Component {
     gas: PropTypes.string,
     gasPrice: PropTypes.string,
     gasLoading: PropTypes.bool,
-    updateGasPrice: PropTypes.func
+    togglePriority: PropTypes.func
   }
 
   state = {
     priority: false
   }
 
-  parseFee = () => {
-    const { gas, gasPrice, etherPriceUSD, network } = this.props
-    const { priority } = this.state
-
+  gasEtherAmount = () => {
+    const { gas, gasPrice } = this.props
     const bigGas = new BN(gas)
     const bigGasPrice = new BN(gasPrice)
     const gasEtherAmount = bigGas
       .mul(bigGasPrice)
       .div(new BN('1000000000000000000'))
-    const gasEtherAmountPriority = gasEtherAmount.mul(new BN(2))
+    return gasEtherAmount
+  }
+
+  gasEtherAmountPriority = () => {
+    return this.gasEtherAmount().mul(new BN(2))
+  }
+
+  parseFee = () => {
+    const { etherPriceUSD, network } = this.props
+    const { priority } = this.state
+
+    const gasEtherAmount = this.gasEtherAmount()
+    const gasEtherAmountPriority = this.gasEtherAmountPriority()
 
     let fee
     if (!priority) {
@@ -49,9 +59,14 @@ export default class FeeSelector extends Component {
     return fee
   }
 
-  handleClick = () => {
+  togglePriority = () => {
+    const { togglePriority } = this.props
     const { priority } = this.state
-    this.setState({ priority: !priority })
+    this.setState({ priority: !priority }, () => {
+      if (togglePriority) {
+        togglePriority()
+      }
+    })
   }
 
   renderStatus = () => {
@@ -68,8 +83,8 @@ export default class FeeSelector extends Component {
 
     return (
       <div>
-        {error}
         {gasLoading && <Spinner />}
+        {error}
       </div>
     )
   }
@@ -83,11 +98,11 @@ export default class FeeSelector extends Component {
     }
 
     return (
-      <div>
+      <StyledContainer>
         {priority ? (
           <StyledFeeSelector
-            onClick={this.handleClick}
-            onKeyDown={this.handleClick}
+            onClick={this.togglePriority}
+            onKeyDown={this.togglePriority}
             role="button"
             tabIndex={0}
             title="Click For Standard Fee"
@@ -96,8 +111,8 @@ export default class FeeSelector extends Component {
           </StyledFeeSelector>
         ) : (
           <StyledFeeSelector
-            onClick={this.handleClick}
-            onKeyDown={this.handleClick}
+            onClick={this.togglePriority}
+            onKeyDown={this.togglePriority}
             role="button"
             tabIndex={0}
             title="Click For Priority Fee"
@@ -106,13 +121,16 @@ export default class FeeSelector extends Component {
           </StyledFeeSelector>
         )}{' '}
         <StyledFeeAmount>{this.parseFee()}</StyledFeeAmount>
-      </div>
+      </StyledContainer>
     )
   }
 }
 
+const StyledContainer = styled.div``
+
 const StyledFeeSelector = styled.span`
   font-weight: bold;
+  user-select: none;
   &:hover {
     cursor: pointer;
   }
@@ -123,10 +141,12 @@ const StyledFeeSelector = styled.span`
 const StyledFeeAmount = styled.span``
 
 const StyledWarning = styled.div`
+  display: inline-block;
   font-style: italic;
 `
 
 const StyledError = styled.div`
+  display: inline-block;
   color: red;
   font-weight: bold;
 `

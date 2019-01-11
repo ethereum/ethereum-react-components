@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import TxDescription from './TxDescription'
 import FeeSelector from './FeeSelector'
-import FormSubmit from './FormSubmitTx'
+import SubmitTxForm from './SubmitTxForm'
 import GasNotification from './GasNotification'
 import TxParties from './TxParties'
 
@@ -15,12 +15,17 @@ export default class SendTx extends Component {
   state = {
     hasSignature: false,
     providedGas: 0,
-    fromIsContract: false
+    fromIsContract: false,
+    priority: false
   }
 
-  togglePriority = () => {}
+  togglePriority = () => {
+    const { priority } = this.state
+    this.setState({ priority: !priority })
+  }
 
   handleSubmit = formData => {
+    const { priority } = this.state
     const {
       data,
       to,
@@ -28,7 +33,6 @@ export default class SendTx extends Component {
       gas,
       gasPrice,
       estimatedGas,
-      priority,
       value
     } = this.props.newTx
 
@@ -57,8 +61,10 @@ export default class SendTx extends Component {
 
   render() {
     const { newTx, network, priority, etherPriceUSD } = this.props
-    const { from, to, value } = newTx
     const {
+      from,
+      to,
+      value,
       gasPrice,
       estimatedGas,
       gasError,
@@ -118,15 +124,12 @@ export default class SendTx extends Component {
           />
 
           <FeeSelector
-            estimatedGas={estimatedGas}
             gasLoading={gasLoading}
             gasPrice={gasPrice}
-            getGasPrice={this.getGasPrice}
-            getGasUsage={this.estimateGasUsage}
+            gas={estimatedGas}
             etherPriceUSD={etherPriceUSD}
             network={network}
-            priority={priority}
-            togglePriority={this.togglePriority}
+            updateGasPrice={this.updateGasPrice}
           />
 
           <GasNotification
@@ -137,11 +140,8 @@ export default class SendTx extends Component {
           />
 
           <div className="footer">
-            <FormSubmit
+            <SubmitTxForm
               unlocking={unlocking}
-              estimatedGas={estimatedGas}
-              gasPrice={gasPrice}
-              gasError={gasError}
               handleSubmit={this.handleSubmit}
             />
           </div>

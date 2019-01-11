@@ -23,8 +23,10 @@ export default class Spinner extends Component {
         className="loader"
         style={{
           ...pstyle,
-          width: '65px',
-          height: '65px'
+          width: '27px',
+          height: '8px',
+          transform: 'scale(0.3)',
+          display: 'inline-block'
         }}
       >
         <div className="ball-spin-fade-loader">

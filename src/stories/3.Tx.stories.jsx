@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import FeeSelector from '../components/Tx/SendTx/FeeSelector'
 import TxHistory from '../components/Tx/History'
-import FormSubmitTx from '../components/Tx/SendTx/FormSubmitTx'
+import SubmitTxForm from '../components/Tx/SendTx/SubmitTxForm'
 import TxDescription from '../components/Tx/SendTx/TxDescription'
 import DeployContract from '../components/Tx/SendTx/TxDescription/DeployContract'
 import TokenTransfer from '../components/Tx/SendTx/TxDescription/TokenTransfer'
@@ -11,7 +11,7 @@ import SendEther from '../components/Tx/SendTx/TxDescription/SendEther'
 import GasNotification from '../components/Tx/SendTx/GasNotification'
 import TxParties from '../components/Tx/SendTx/TxParties'
 import TxParty from '../components/Tx/SendTx/TxParty'
-import SendTx from '../components/Tx/SendTx/FormSendTx'
+import SendTx from '../components/Tx/SendTx/SendTxForm'
 
 const dummyTx = {
   nonce: 0,
@@ -52,16 +52,16 @@ storiesOf('Tx/Fee Selector', module)
   ))
 
 storiesOf('Tx/Submit Form', module)
-  .add('default', () => <FormSubmitTx />)
-  .add('confirming', () => <FormSubmitTx unlocking />)
-  .add('error', () => <FormSubmitTx error />)
+  .add('Default', () => <SubmitTxForm />)
+  .add('Confirming', () => <SubmitTxForm unlocking />)
+  .add('Error', () => <SubmitTxForm error />)
 
 storiesOf('Tx/Description', module)
   .add('default', () => {
     return <TxDescription {...dummyTx} />
   })
   .add('deploy contract', () => {
-    return <TxDescription {...dummyTx} isNewContract={true} />
+    return <TxDescription {...dummyTx} isNewContract />
   })
   .add('transfer tokens', () => {
     return (

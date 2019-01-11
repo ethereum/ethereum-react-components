@@ -18,7 +18,7 @@ import ConverterForm from './Tools/EthConverterForm'
 import NetworkChooser from './Network/NetworkChooser'
 import RpcTester from './Network/RPC/RpcTester'
 import TxHistory from './Tx/History'
-import FormSendTx from './Tx/SendTx'
+import SendTxForm from './Tx/SendTx'
 
 import AccountItem from './Wallet/AccountItem'
 import TokenListForItem from './Wallet/TokenListForItem'
@@ -36,7 +36,6 @@ export {
   EthAddress,
   FeeSelector,
   FormCreateAccount,
-  FormSendTx,
   Identicon,
   InputPassword,
   NetworkChooser,
@@ -44,6 +43,7 @@ export {
   NodeInfoBox,
   Pulse,
   RpcTester,
+  SendTxForm,
   Spinner,
   TokenListForItem,
   TxHistory,
