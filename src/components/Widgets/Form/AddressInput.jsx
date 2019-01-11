@@ -72,7 +72,6 @@ export default class AddressInput extends Component {
 
 const StyledWrapper = styled.div`
   position: relative;
-  display: inline-block;
 `
 
 const StyledInput = styled(Input)`

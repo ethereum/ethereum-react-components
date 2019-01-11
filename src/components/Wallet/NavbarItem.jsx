@@ -18,7 +18,7 @@ export default class NavbarItem extends Component {
     const { icon, title } = this.props
 
     return (
-      <StyledWrapper>
+      <StyledWrapper {...this.props}>
         <StyledIcon>
           <FontAwesomeIcon icon={icons[icon]} />
         </StyledIcon>

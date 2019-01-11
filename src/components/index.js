@@ -26,6 +26,7 @@ import AccountItem from './Wallet/AccountItem'
 import TokenListForItem from './Wallet/TokenListForItem'
 import NavbarItem from './Wallet/NavbarItem'
 import NetworkStatus from './Wallet/NetworkStatus'
+import Notification from './Wallet/Notification'
 
 import * as utils from '../lib/util'
 
@@ -52,6 +53,7 @@ export {
   NetworkStatus,
   NodeInfo,
   NodeInfoBox,
+  Notification,
   Pulse,
   RpcTester,
   Spinner,
