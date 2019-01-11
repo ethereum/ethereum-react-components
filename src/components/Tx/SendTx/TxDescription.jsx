@@ -156,7 +156,8 @@ export default class TxDescription extends Component {
           flat
           secondary
           className="execution-context__details-link"
-          onClick={this.handleDetailsClick}>
+          onClick={this.handleDetailsClick}
+        >
           {i18n.t('mist.sendTx.showDetails')}
         </Button>
       )
@@ -264,7 +265,8 @@ export default class TxDescription extends Component {
           flat
           secondary
           className="execution-context__details-link"
-          onClick={this.handleDetailsClick}>
+          onClick={this.handleDetailsClick}
+        >
           {i18n.t('mist.sendTx.hideDetails')}
         </Button>
       </div>

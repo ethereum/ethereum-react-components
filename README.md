@@ -6,13 +6,13 @@ A library of frequently used Ethereum React components to display and handle add
 
 For a detailed documentation of all available components check out [the generated storybook](https://ethereum.github.io/ethereum-react-components)
 
-WARNING: this lib is not production ready
+WARNING: this lib is not production ready. All component APIs are in exploratory phases and strict semantic versioning is not yet enforced.
 
 # Examples
 
 Two projects using these components are
 
-- [Mist React](https://github.com/ethereum/mist-ui-react)
+- [Mist React](https://github.com/ethereum/mist-ui)
 - [Mist](https://github.com/ethereum/mist)
 
 # Installation

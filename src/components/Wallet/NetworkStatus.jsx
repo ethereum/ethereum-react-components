@@ -20,8 +20,7 @@ export default class NetworkStatus extends Component {
 
   static defaultProps = {
     peers: 0,
-    blockNumber: '0',
-    timestamp: moment().unix()
+    blockNumber: '-'
   }
 
   constructor(props) {
@@ -44,6 +43,11 @@ export default class NetworkStatus extends Component {
 
   renderTimestamp() {
     const { timestamp } = this.props
+
+    if (!timestamp) {
+      return '-'
+    }
+
     const { diffTimestamp } = this.state
     const diff = moment
       .unix(diffTimestamp)
@@ -58,9 +62,9 @@ export default class NetworkStatus extends Component {
     const { peers, blockNumber } = this.props
 
     return (
-      <StyledWrapper>
+      <StyledWrapper {...this.props}>
         <StyledRow>
-          <StyledIcon icon={faUsers} /> {peers} peers
+          <StyledIcon icon={faUsers} /> {peers || '-'} peers
         </StyledRow>
         <StyledRow>
           <StyledIcon icon={faLayerGroup} /> {blockNumber}
@@ -77,7 +81,9 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: #766a6a;
+  color: rgba(130, 122, 122, 0.7);
+  font-size: 0.75em;
+  padding: 0px 32px;
 `
 
 const StyledRow = styled.div`
