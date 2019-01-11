@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faShareAlt,
@@ -13,15 +12,6 @@ import {
   faClock
 } from '@fortawesome/free-solid-svg-icons'
 import i18n from '../../../i18n'
-
-library.add(
-  faShareAlt,
-  faUsers,
-  faBolt,
-  faLayerGroup,
-  faCloudDownloadAlt,
-  faClock
-)
 
 const numberWithCommas = val => {
   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
