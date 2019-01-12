@@ -1,9 +1,16 @@
-import React from 'react'
+// TODO: placeholder
 
-const FileChooser = ({ children, onClick }) => (
-  <input type="file" className="input-field input-file" />
-)
+import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
 
-FileChooser.displayName = 'FileChooser'
+export default class FileChooser extends Component {
+  static displayName = 'FileChooser'
 
-export default FileChooser
+  static propTypes = {}
+
+  static defaultProps = {}
+
+  render() {
+    return <input type="file" {...this.props} />
+  }
+}
