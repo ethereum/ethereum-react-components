@@ -17,7 +17,7 @@ const { BN } = ethUtils
 
 export default class TxDescription extends Component {
   static propTypes = {
-    network: PropTypes.oneOf(['main']),
+    network: PropTypes.oneOf(['main', 'ropsten', 'rinkeby', 'kovan']),
     value: PropTypes.string,
     etherPriceUSD: PropTypes.string,
     isNewContract: PropTypes.bool,
@@ -116,10 +116,6 @@ export default class TxDescription extends Component {
     } = this.props
     const { showDetails } = this.state
 
-    if (!toIsContract && !isNewContract) {
-      return null
-    }
-
     const isTokenTransfer = executionFunction === 'transfer(address,uint256)'
 
     const showTxExecutingFunction =
@@ -127,10 +123,20 @@ export default class TxDescription extends Component {
 
     let tokenDisplayName
     if (isTokenTransfer) {
-      if (token.name && token.name !== token.symbol) {
-        tokenDisplayName = `${token.name} (${token.symbol})`
+      if (!token) {
+        tokenDisplayName = 'tokens'
       } else {
-        tokenDisplayName = token.name
+        if (token.name && token.name !== token.symbol) {
+          tokenDisplayName = `${token.name} (${token.symbol})`
+        } else {
+          if (token.name) {
+            tokenDisplayName = token.name
+          } else if (token.symbol) {
+            tokenDisplayName = token.symbol
+          } else {
+            tokenDisplayName = 'tokens'
+          }
+        }
       }
     }
 
@@ -216,21 +222,27 @@ export default class TxDescription extends Component {
 
         {isTokenTransfer && (
           <div>
-            {tokenDisplayName && (
+            {tokenDisplayName && tokenDisplayName !== 'tokens' && (
               <StyledExecutionContextRow>
                 <StyledExecutionContextTitle>
                   {i18n.t('mist.sendTx.tokenName')}
                 </StyledExecutionContextTitle>
-                <strong>{tokenDisplayName}</strong>
+                <StyledExecutionContextDetailsValue>
+                  {tokenDisplayName}
+                </StyledExecutionContextDetailsValue>
               </StyledExecutionContextRow>
             )}
-            {token.address && (
+            {token && token.address && (
               <StyledExecutionContextRow>
-                <span className="execution-context__details-title">
-                  {i18n.t('mist.sendTx.tokenName')}
-                </span>
-                <Identicon address={token.address} size="small" />
-                <strong>{token.address}</strong>
+                <StyledExecutionContextTitle>
+                  {i18n.t('mist.sendTx.tokenAddress')}
+                </StyledExecutionContextTitle>
+                <StyledExecutionContextParamIdenticon>
+                  <Identicon address={token.address} size="small" />
+                </StyledExecutionContextParamIdenticon>
+                <StyledExecutionContextDetailsValue>
+                  {token.address}
+                </StyledExecutionContextDetailsValue>
               </StyledExecutionContextRow>
             )}
           </div>
@@ -336,6 +348,8 @@ const StyledExecutionContextParamIdenticon = styled.span`
   display: flex;
   align-items: center;
   margin-right: 6px;
+  vertical-align: middle;
+  display: inline-block;
 `
 
 const StyledExecutionContextExecutionFunction = styled.span`

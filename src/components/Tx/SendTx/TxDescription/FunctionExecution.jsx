@@ -24,10 +24,12 @@ export default class FunctionExecution extends Component {
         <Bold>Execute </Bold>
         {executionFunctionClean ? (
           <React.Fragment>
-            &#8220;{executionFunctionClean}&#8221; function
+            &#8220;
+            <StyledFunctionName>{executionFunctionClean}</StyledFunctionName>
+            &#8221; Function
           </React.Fragment>
         ) : (
-          <React.Fragment>contract function</React.Fragment>
+          <React.Fragment>Contract Function</React.Fragment>
         )}
       </StyledWrapper>
     )
@@ -42,4 +44,8 @@ const StyledWrapper = styled.div`
 
 const Bold = styled.span`
   font-weight: bold;
+`
+
+const StyledFunctionName = styled.span`
+  text-transform: capitalize;
 `

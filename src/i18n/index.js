@@ -130,6 +130,7 @@ const en = {
       "transfer": "Transfer",
       "showDetails": "Show details",
       "hideDetails": "Hide details",
+      "tokenAddress": "Token Address:",
       "tokenName": "Token Name:",
       "tokenContractName": "Token Contract Address:",
       "parameters": "Parameters",

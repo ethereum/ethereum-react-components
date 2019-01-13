@@ -21,10 +21,7 @@ const dummyTx = {
   data: '',
   gasPrice: '0x9184e72a000', // 10000000000000
   value: '1000000000000000000',
-  params: [
-    { value: '0x4444444444444444444444444444444444444444' },
-    { value: '20000000000000000' }
-  ],
+  params: [],
   network: 'main'
 }
 
@@ -57,11 +54,20 @@ storiesOf('Tx/Submit Form', module)
   .add('Error', () => <SubmitTxForm error />)
 
 storiesOf('Tx/Description', module)
-  .add('Normal tx', () => {
+  .add('Standard tx', () => {
     return <TxDescription {...dummyTx} etherPriceUSD={200} />
   })
+  .add('Standard tx, testnet', () => {
+    return <TxDescription {...dummyTx} etherPriceUSD={200} network="rinkeby" />
+  })
   .add('Deploy contract', () => {
-    return <TxDescription {...dummyTx} isNewContract />
+    return (
+      <TxDescription
+        {...dummyTx}
+        data="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        isNewContract
+      />
+    )
   })
   .add('Transfer tokens', () => {
     return (
@@ -69,11 +75,37 @@ storiesOf('Tx/Description', module)
         {...dummyTx}
         executionFunction="transfer(address,uint256)"
         token={{ symbol: 'MKR', decimals: 18 }}
+        params={[
+          {
+            type: 'address',
+            value: '0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef'
+          },
+          { value: '800000000000000' }
+        ]}
+        toIsContract
+      />
+    )
+  })
+  .add('Transfer tokens without token data', () => {
+    return (
+      <TxDescription
+        {...dummyTx}
+        executionFunction="transfer(address,uint256)"
+        params={[
+          {
+            type: 'address',
+            value: '0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef'
+          },
+          { value: '800000000000000' }
+        ]}
         toIsContract
       />
     )
   })
   .add('Execute function', () => {
+    return <TxDescription {...dummyTx} toIsContract />
+  })
+  .add('Execute named function', () => {
     return (
       <TxDescription
         {...dummyTx}
@@ -83,66 +115,31 @@ storiesOf('Tx/Description', module)
     )
   })
 
-storiesOf('Tx/Description/DeployContract', module).add('with data', () => {
-  return <DeployContract data={'a'.repeat(500)} />
-})
-
-storiesOf('Tx/Description/TokenTransfer', module)
-  .add('with token data', () => {
-    return (
-      <TokenTransfer
-        params={[{ value: '?' }, { value: '800000000000000' }]}
-        token={{ symbol: 'MKR', decimals: 18 }}
-      />
-    )
-  })
-  .add('without token data', () => {
-    return (
-      <TokenTransfer params={[{ value: '?' }, { value: '800000000000000' }]} />
-    )
-  })
-
-storiesOf('Tx/Description/SendEther', module)
-  .add('default', () => {
-    return <SendEther value="0.03" valueInUSD="3" network="main" />
-  })
-  .add('transfer', () => {
-    return <SendEther value="0.03" valueInUSD="3" network="rinkeby" />
-  })
-
-storiesOf('Tx/Description/FunctionExecution', module)
-  .add('default', () => {
-    return <FunctionExecution />
-  })
-  .add('transfer', () => {
-    return <FunctionExecution executionFunction="transfer(uint256,address)" />
-  })
-
 storiesOf('Tx/TxParty', module)
-  .add('origin', () => {
+  .add('Origin', () => {
     return <TxParty address={dummyTx.from} />
   })
-  .add('origin - executing a contract', () => {
+  .add('Origin - executing a contract', () => {
     return <TxParty address={dummyTx.from} isContract />
   })
-  .add('destination - user', () => {
+  .add('Destination - user', () => {
     return <TxParty address={dummyTx.from} addressType="user" />
   })
-  .add('destination - contract', () => {
+  .add('Destination - contract', () => {
     return <TxParty address={dummyTx.from} addressType="contract" isContract />
   })
 
 storiesOf('Tx/TxParties', module)
-  .add('default', () => {
+  .add('Default', () => {
     return <TxParties {...dummyTx} />
   })
-  .add('deploy contract', () => {
+  .add('Deploy contract', () => {
     return <TxParties {...dummyTx} isNewContract />
   })
-  .add('executing contract function', () => {
+  .add('Executing contract function', () => {
     return <TxParties {...dummyTx} toIsContract />
   })
-  .add('sending tokens', () => {
+  .add('Sending tokens', () => {
     return <TxParties {...dummyTx} isTokenTransfer />
   })
 
