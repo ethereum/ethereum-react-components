@@ -131,6 +131,7 @@ const StyledContainer = styled.div``
 const StyledFeeSelector = styled.span`
   font-weight: bold;
   user-select: none;
+  color: blue;
   &:hover {
     cursor: pointer;
   }

@@ -57,23 +57,23 @@ storiesOf('Tx/Submit Form', module)
   .add('Error', () => <SubmitTxForm error />)
 
 storiesOf('Tx/Description', module)
-  .add('default', () => {
-    return <TxDescription {...dummyTx} />
+  .add('Normal tx', () => {
+    return <TxDescription {...dummyTx} etherPriceUSD={200} />
   })
-  .add('deploy contract', () => {
+  .add('Deploy contract', () => {
     return <TxDescription {...dummyTx} isNewContract />
   })
-  .add('transfer tokens', () => {
+  .add('Transfer tokens', () => {
     return (
       <TxDescription
         {...dummyTx}
         executionFunction="transfer(address,uint256)"
-        token={{ symbol: 'LOL', decimals: 18 }}
+        token={{ symbol: 'MKR', decimals: 18 }}
         toIsContract
       />
     )
   })
-  .add('execute function', () => {
+  .add('Execute function', () => {
     return (
       <TxDescription
         {...dummyTx}
@@ -92,7 +92,7 @@ storiesOf('Tx/Description/TokenTransfer', module)
     return (
       <TokenTransfer
         params={[{ value: '?' }, { value: '800000000000000' }]}
-        token={{ symbol: 'LOL', decimals: 18 }}
+        token={{ symbol: 'MKR', decimals: 18 }}
       />
     )
   })

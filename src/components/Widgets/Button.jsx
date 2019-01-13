@@ -39,13 +39,13 @@ export default class Button extends Component {
 }
 
 const StyledButton = styled.button`
-  background-color: #00aafa;
+  background-color: #f9f9f9;
   border: 1px solid #00aafa;
   border-radius: 4px;
   color: white;
-  padding: 12px 24px;
+  padding: 6px 12px;
+  text-transform: capitalize;
   font-size: 14px;
-  text-transform: uppercase;
   cursor: pointer;
 
   ${props =>
