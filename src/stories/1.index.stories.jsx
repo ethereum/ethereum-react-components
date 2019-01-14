@@ -21,9 +21,98 @@ import {
 import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
 import Cross from '../components/Widgets/AnimatedIcons/AnimatedCross'
 
+import AddressSelect from '../components/Widgets/Form/AddressSelect'
+
+ // wallet dummy data
+const dummyWallets =
+  {
+  '0x2685F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
+    balance: '3',
+    name: 'Account 1',
+    addressType: 'wallet',
+  },
+  '0xabc5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
+    balance: '0',
+    name: 'Account 2',
+    addressType: 'wallet',
+  },
+  '0xdef5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
+    balance: 0,
+    name: 'Account 3',
+    addressType: 'wallet',
+  },
+   '0xghi5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
+    balance: 0.0,
+    name: 'Account 4',
+    addressType: 'wallet',
+  },
+  '0xzzz5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
+    balance: 0.01,
+    name: 'Account 5',
+    addressType: 'wallet',
+  },
+   '0yyy5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
+    balance: '0.01',
+    name: 'Account 6',
+    addressType: 'wallet',
+  },
+   '0xwww5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
+    balance: '0.0',
+    name: 'Account 7',
+    addressType: 'wallet',
+  },
+}
+// contract dummy data
+const dummyContracts =
+  {
+    '0xD26B16d9Cf2054fd0B266a03A11C4CC198Eed025': {
+    // contractAddress: '0xD26B16d9Cf2054fd0B266a03A11C4CC198Eed025',
+    from: '0x672a39c474572338713d8d01024d497d364b2bed',
+    status: true,
+    to: null,
+    'contract-name': 'Contract 1',
+    address: '0xD26B16d9Cf2054fd0B266a03A11C4CC198Eed025',
+    balance: '0',
+    addressType: 'contract'
+  },
+  '0xabcB16d9Cf2054fd0B266a03A11C4CC198Eed025': {
+    from: '0x672a39c474572338713d8d01024d497d364b2bed',
+    balance: '2',
+    'contract-name': 'Contract 2',
+    addressType: 'contract'
+  },
+}
+
+
 storiesOf('Welcome', module).add('to Ethereum Components', () => (
   <Welcome showApp={linkTo('Button')} />
 ))
+
+storiesOf('Widgets/Form/AddressSelect', module)
+  .add('default', () => (
+    <AddressSelect
+      wallets={dummyWallets}
+      walletContracts={dummyContracts}
+      onChange={() => alert('onChange registered')}
+    />
+  ))
+  .add('only wallets', () => (
+    <AddressSelect
+      wallets={dummyWallets}
+      onChange={() => alert('onChange registered')}
+    />
+  ))
+  .add('only contracts', () => (
+    <AddressSelect
+      walletContracts={dummyContracts}
+      onChange={() => alert('onChange registered')}
+    />
+  ))
+  .add('no addresses provided', () => (
+    <AddressSelect
+      onChange={() => alert('onChange registered')}
+    />
+  ))
 
 storiesOf('Widgets/Identicon', module)
   .add('default', () => <Identicon />)
@@ -115,6 +204,7 @@ storiesOf('Widgets/Button', module)
       click me
     </Button>
   ))
+
 
 storiesOf('Widgets/Form/Input', module).add('default', () => (
   <Input placeholder="Sample input..." />
