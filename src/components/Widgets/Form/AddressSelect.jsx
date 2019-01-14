@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import ReactSelect from 'react-select'
 import shortid from 'shortid';
 import Identicon from '../../Identicon'
 import { combineWallets } from '../../../util/helpers';
@@ -75,7 +74,7 @@ export default class AddressSelect extends Component {
           size={identiconSize}
           address={selectedWallet}
         />
-      </StyledDiv>
+        </StyledDiv>
     );
   }
 }
