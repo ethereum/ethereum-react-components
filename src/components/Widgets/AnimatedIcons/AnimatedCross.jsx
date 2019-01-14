@@ -8,7 +8,8 @@ export default class Cross extends Component {
   static displayName = 'AnimatedCross'
 
   static propTypes = {
-    size: PropTypes.number
+    size: PropTypes.number,
+    style: PropTypes.object
   }
 
   static defaultProps = {
@@ -16,7 +17,7 @@ export default class Cross extends Component {
   }
 
   render() {
-    const { size } = this.props
+    const { size, style } = this.props
 
     return (
       <svg
@@ -24,6 +25,7 @@ export default class Cross extends Component {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 52 52"
         style={{
+          ...style,
           width: size,
           height: size
         }}>

@@ -6,13 +6,13 @@ A library of frequently used Ethereum React components to display and handle add
 
 For a detailed documentation of all available components check out [the generated storybook](https://ethereum.github.io/ethereum-react-components)
 
-WARNING: this lib is not production ready
+WARNING: this lib is not production ready. All component APIs are in exploratory phases and strict semantic versioning is not yet enforced.
 
 # Examples
 
 Two projects using these components are
 
-- [Mist React](https://github.com/ethereum/mist-ui-react)
+- [Mist React](https://github.com/ethereum/mist-ui)
 - [Mist](https://github.com/ethereum/mist)
 
 # Installation
@@ -35,6 +35,9 @@ import { Identicon } from 'ethereum-react-components';
 ```
 
 For a detailed documentation check out e.g. the [Identicon story](https://ethereum.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon)
+
+Note that this storybook uses the [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro:300,400,600,700) font.
+You'll need to import and apply this font (or another font of your choosing) in your own project.
 
 # Development
 

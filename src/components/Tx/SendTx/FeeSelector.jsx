@@ -83,7 +83,7 @@ export default class FeeSelector extends Component {
 
     return (
       <div>
-        {gasLoading && <Spinner />}
+        {gasLoading && <Spinner color="#00aafa" scale="0.5" />}
         {error}
       </div>
     )

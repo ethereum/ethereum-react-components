@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-class QuickSync extends Component {
+export default class QuickSync extends Component {
   static propTypes = {
     children: PropTypes.node
   }
@@ -27,7 +27,7 @@ class QuickSync extends Component {
 
   timer() {
     const { props, intervalId } = this.state
-    const { oldProps } = props
+    const oldProps = props
     let { active } = oldProps
 
     let newBlock = oldProps.local.sync.currentBlock + 2500
@@ -63,5 +63,3 @@ class QuickSync extends Component {
     return <div>{React.cloneElement(children, props)}</div>
   }
 }
-
-export default QuickSync

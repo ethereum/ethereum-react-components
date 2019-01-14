@@ -2,6 +2,107 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.7.0...v1.7.1) (2019-01-11)
+
+
+### Bug Fixes
+
+* progress bar style color ([93f8863](https://github.com/PhilippLgh/ethereum-react-components/commit/93f8863))
+* remove console log ([8094263](https://github.com/PhilippLgh/ethereum-react-components/commit/8094263))
+
+
+
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.6.0...v1.7.0) (2019-01-11)
+
+
+### Features
+
+* Notification ([#81](https://github.com/PhilippLgh/ethereum-react-components/issues/81)) ([6457c20](https://github.com/PhilippLgh/ethereum-react-components/commit/6457c20))
+
+
+
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.5.0...v1.6.0) (2019-01-11)
+
+
+### Features
+
+* Transaction history components ([#73](https://github.com/PhilippLgh/ethereum-react-components/issues/73)) ([8687062](https://github.com/PhilippLgh/ethereum-react-components/commit/8687062))
+
+
+
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.6...v1.5.0) (2019-01-07)
+
+
+### Features
+
+* introduces AddressInput ([#77](https://github.com/PhilippLgh/ethereum-react-components/issues/77)) ([3d303cb](https://github.com/PhilippLgh/ethereum-react-components/commit/3d303cb))
+
+
+
+<a name="1.4.6"></a>
+## [1.4.6](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.5...v1.4.6) (2019-01-03)
+
+
+### Bug Fixes
+
+* cleanup for wallet components ([#76](https://github.com/PhilippLgh/ethereum-react-components/issues/76)) ([6030a0e](https://github.com/PhilippLgh/ethereum-react-components/commit/6030a0e))
+
+
+
+<a name="1.4.5"></a>
+## [1.4.5](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.4...v1.4.5) (2018-12-29)
+
+
+### Bug Fixes
+
+* introduces NetworkStatus ([#72](https://github.com/PhilippLgh/ethereum-react-components/issues/72)) ([689f082](https://github.com/PhilippLgh/ethereum-react-components/commit/689f082))
+
+
+
+<a name="1.4.4"></a>
+## [1.4.4](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.3...v1.4.4) (2018-12-28)
+
+
+### Bug Fixes
+
+* introduces NavbarItem ([#70](https://github.com/PhilippLgh/ethereum-react-components/issues/70)) ([738300a](https://github.com/PhilippLgh/ethereum-react-components/commit/738300a))
+
+
+
+<a name="1.4.3"></a>
+## [1.4.3](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.2...v1.4.3) (2018-12-26)
+
+
+### Bug Fixes
+
+* introduces AccountList ([#66](https://github.com/PhilippLgh/ethereum-react-components/issues/66)) ([0ce8c53](https://github.com/PhilippLgh/ethereum-react-components/commit/0ce8c53))
+
+
+
+<a name="1.4.2"></a>
+## [1.4.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.1...v1.4.2) (2018-12-26)
+
+
+### Bug Fixes
+
+* adds loading state to Button ([#61](https://github.com/PhilippLgh/ethereum-react-components/issues/61)) ([1f2f0ad](https://github.com/PhilippLgh/ethereum-react-components/commit/1f2f0ad))
+
+
+
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.4.0...v1.4.1) (2018-12-26)
+
+
+### Bug Fixes
+
+* nano Identicon size ([#64](https://github.com/PhilippLgh/ethereum-react-components/issues/64)) ([74363ab](https://github.com/PhilippLgh/ethereum-react-components/commit/74363ab))
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.3.1...v1.4.0) (2018-12-19)
 

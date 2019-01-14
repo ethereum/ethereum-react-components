@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { Spinner } from '../..'
 
 export default class Button extends Component {
   static displayName = 'Button'
@@ -14,6 +15,7 @@ export default class Button extends Component {
     onClick: PropTypes.func,
     secondary: PropTypes.bool,
     type: PropTypes.oneOf(['button', 'reset', 'submit']),
+    /** If `true`, extra margin is added. See `SubmitFormTx` component for example usage. */
     withinInput: PropTypes.bool
   }
 
@@ -28,24 +30,38 @@ export default class Button extends Component {
   }
 
   render() {
-    const { children } = this.props
+    const { children, flat, loading, secondary } = this.props
+
+    const spinner = (
+      <Spinner color={!secondary && !flat ? 'white' : '#00aafa'} scale="0.5" />
+    )
 
     return (
       <StyledButton {...this.props} className="Button">
-        {children}
+        {loading ? spinner : children}
       </StyledButton>
     )
   }
 }
 
 const StyledButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #00aafa;
-  border: 1px solid #00aafa;
   border-radius: 4px;
+  border: 1px solid #00aafa;
   color: white;
-  padding: 12px 24px;
-  font-size: 14px;
   cursor: pointer;
+  font-size: 14px;
+  height: 46px;
+  line-height: 1;
+  min-width: 120px;
+  overflow: hidden;
+  padding: 12px 24px;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
 
   ${props =>
     props.secondary &&
@@ -64,7 +80,7 @@ const StyledButton = styled.button`
     `};
 
   ${props =>
-    props.disabled &&
+    (props.disabled || props.loading) &&
     css`
       cursor: not-allowed;
       opacity: 0.6;
