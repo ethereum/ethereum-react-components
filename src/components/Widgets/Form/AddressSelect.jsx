@@ -122,7 +122,7 @@ const StyledDiv = styled.div`
 `
 
 const StyledIdenticon = styled(Identicon)`
-  top:4px;
+  top: 4px;
   z-index: 2;
   position: absolute;
   left: 8px;
