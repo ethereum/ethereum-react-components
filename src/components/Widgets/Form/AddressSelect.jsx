@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import ReactSelect from 'react-select'
 import shortid from 'shortid';
 import Identicon from '../../Identicon'
 import { combineWallets } from '../../../util/helpers';
@@ -69,7 +70,7 @@ export default class AddressSelect extends Component {
             );
           })}
         </StyledSelect>
-        <Identicon
+        <StyledIdenticon
           title
           size={identiconSize}
           address={selectedWallet}
@@ -91,19 +92,44 @@ const StyledOption = styled.option`
 `
 
 const StyledSelect = styled.select`
-  color: #02a8f3;
-  width: 100%;
+  display: inline-block;
+  max-width: 100%;
+  padding: 9.2px 16px;
+  padding-bottom: 6.13333333px;
+  border: 0;
+  border-bottom: solid 2px #dddcdb;
+  box-sizing: border-box;
+  background-color: #f5f4f2;
+  font-size: 1em;
+  font-weight: 300;
+  z-index: 1;
+  margin-top: 0;
+  padding-left: 41.6px;
+  padding-right: 0;
+  transition-delay: 0s;
+  transition: background-color ease-in-out 1s, color ease-in-out 1s;
   -webkit-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
   border-radius: 0;
   height: 36px;
   line-height: 18px;
+  color: #02a8f3;
+  width: 100%;
 `
 
 const StyledDiv = styled.div`
-  position: relative;
+  display: block;
   box-sizing: border-box;
-  display: block;    
+  position: relative;
+`
+
+const StyledIdenticon = styled(Identicon)`
+  top:4px;
+  z-index: 2;
+  position: absolute;
+  left: 8px;
+  width: 26.66666667px;
+  height: 26.66666667px;
+  cursor: help;
+  transition: border-radius 2.5s;
+  transition-delay: 3s;
 `
