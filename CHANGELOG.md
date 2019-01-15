@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.7.2...v1.8.0) (2019-01-15)
+
+
+### Features
+
+* AddressSelect component ([#92](https://github.com/PhilippLgh/ethereum-react-components/issues/92)) ([e978ef0](https://github.com/PhilippLgh/ethereum-react-components/commit/e978ef0)), closes [#79](https://github.com/PhilippLgh/ethereum-react-components/issues/79)
+
+
+
 <a name="1.7.2"></a>
 ## [1.7.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.7.1...v1.7.2) (2019-01-15)
 
