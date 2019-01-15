@@ -36,21 +36,6 @@ const dummyWallets =
     name: 'Account 2',
     addressType: 'wallet',
   },
-  '0xdef5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
-    balance: 0,
-    name: 'Account 3',
-    addressType: 'wallet',
-  },
-   '0xghi5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
-    balance: 0.0,
-    name: 'Account 4',
-    addressType: 'wallet',
-  },
-  '0xzzz5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
-    balance: 0.01,
-    name: 'Account 5',
-    addressType: 'wallet',
-  },
    '0yyy5F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
     balance: '0.01',
     name: 'Account 6',
@@ -66,7 +51,6 @@ const dummyWallets =
 const dummyContracts =
   {
     '0xD26B16d9Cf2054fd0B266a03A11C4CC198Eed025': {
-    // contractAddress: '0xD26B16d9Cf2054fd0B266a03A11C4CC198Eed025',
     from: '0x672a39c474572338713d8d01024d497d364b2bed',
     status: true,
     to: null,
@@ -93,24 +77,24 @@ storiesOf('Widgets/Form/AddressSelect', module)
     <AddressSelect
       wallets={dummyWallets}
       walletContracts={dummyContracts}
-      onChange={() => alert('onChange registered')}
+      onChange={() => {}}
     />
   ))
   .add('only wallets', () => (
     <AddressSelect
       wallets={dummyWallets}
-      onChange={() => alert('onChange registered')}
+      onChange={() => {}}
     />
   ))
   .add('only contracts', () => (
     <AddressSelect
       walletContracts={dummyContracts}
-      onChange={() => alert('onChange registered')}
+      onChange={() => {}}
     />
   ))
   .add('no addresses provided', () => (
     <AddressSelect
-      onChange={() => alert('onChange registered')}
+      onChange={() => {}}
     />
   ))
 
