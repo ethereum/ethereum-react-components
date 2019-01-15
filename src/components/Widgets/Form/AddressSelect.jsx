@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import shortid from 'shortid';
 import Identicon from '../../Identicon'
 import { combineWallets } from '../../../util/helpers';
 
@@ -12,7 +11,6 @@ export default class AddressSelect extends Component {
     disabled: PropTypes.bool,
     wallets: PropTypes.object,
     walletContracts: PropTypes.object,
-    identiconSize: PropTypes.string,
     onChange: PropTypes.func,
   };
 
@@ -20,7 +18,6 @@ export default class AddressSelect extends Component {
     disabled: false,
     wallets: {},
     walletContracts: {},
-    identiconSize: 'tiny',
   };
 
   state = {
@@ -44,7 +41,7 @@ export default class AddressSelect extends Component {
   }
 
   render() {
-    const { disabled, identiconSize } = this.props;
+    const { disabled } = this.props;
     const { combinedWallets, selectedWallet } = this.state
     return (
       <StyledDiv>
@@ -55,23 +52,19 @@ export default class AddressSelect extends Component {
         >
           {combinedWallets.map(w => {
             return (
-              <StyledOption key={shortid.generate()} value={w.address}>
+              <StyledOption key={w.address} value={w.address}>
                 {
                   w.addressType === 'wallet'
                     ? `🔑 ${w.name}`
                     : w['contract-name']
+                  + ` - ${w.balance} ETHER`
                 }
-                &nbsp; - &nbsp;
-                { w.balance }
-                &nbsp;
-                ETHER
               </StyledOption>
             );
           })}
         </StyledSelect>
         <StyledIdenticon
-          title
-          size={identiconSize}
+          size={'tiny'}
           address={selectedWallet}
         />
         </StyledDiv>
