@@ -29,27 +29,22 @@ export default class AddressSelect extends Component {
   componentDidMount() {
     const { wallets, walletContracts, onChange } = this.props;
     const combinedWallets = combineWallets(wallets, walletContracts);
-    const address = combinedWallets[0] ? combinedWallets[0].address : ''
+    let wallet = combinedWallets[0]
+    const address = wallet ? wallet.address : ''
     this.setState(
-      { combinedWallets, selectedWallet: address },
+      { combinedWallets, selectedWallet: {value: address, ...wallet} },
       onChange(combinedWallets[0])
     )
   }
 
   selectAddress = e => {
-    console.log(e)
-    console.log(e.value)
-    console.log(e.target)
-    // console.log(e.target.value)
     const { onChange } = this.props;
-    // this.setState({ selectedWallet: e.target.value }, onChange(e))
     this.setState({ selectedWallet: e }, onChange(e))
   }
 
   render() {
     const { disabled } = this.props;
     const { combinedWallets, selectedWallet } = this.state
-    console.log(this.state)
 
     let options = combinedWallets.map(w => {
       return {
@@ -62,52 +57,25 @@ export default class AddressSelect extends Component {
     })
 
     return (
-      <React.Fragment>
-        <StyledDiv>
-          <StyledSelect
-            onChange={this.selectAddress}
-            disabled={disabled}
-            value={selectedWallet}
-          > 
-            {combinedWallets.map(w => {
-              return (
-                <StyledOption key={w.address} value={w.address}>
-                  {
-                    w.addressType === 'wallet'
-                      ? `🔑 ${w.name}`
-                      : w['contract-name'] 
-                    + ` - ${w.balance} ETHER`
-                  }
-                </StyledOption>
-              );
-            })}
-          </StyledSelect>
-          <StyledIdenticon
-            size={'tiny'}
-            address={selectedWallet}
-          />
-        </StyledDiv>
-        <StyledDiv>
-          <StyledReactSelect
-            classNamePrefix="kielkielkielkielkiel"
-            options={options} 
-            onChange={this.selectAddress}
-            disabled={disabled}
-            defaultValue={selectedWallet}
-          />
-          <StyledIdenticon
-            size={'tiny'}
-            address={selectedWallet.address}
-          />
-        </StyledDiv>
-      </React.Fragment>
+      <StyledDiv>
+        <StyledReactSelect
+          classNamePrefix="AddressSelect"
+          options={options} 
+          onChange={this.selectAddress}
+          disabled={disabled}
+        />
+        <StyledIdenticon
+          size={'tiny'}
+          address={selectedWallet.address}
+        />
+      </StyledDiv>
     );
   }
 }
 
 
 const StyledReactSelect = styled(ReactSelect)`
-  & .kielkielkielkielkiel__control {
+  & .AddressSelect__control {
     display: inline-block;
     max-width: 100%;
     padding: 9.2px 16px;
@@ -132,26 +100,24 @@ const StyledReactSelect = styled(ReactSelect)`
     width: 100%;
   }
 
-  & .kielkielkielkielkiel__single-value {
+  & .AddressSelect__single-value {
     color: #02a8f3;
   }
 
-  & .kielkielkielkielkiel__input {
+  & .AddressSelect__input {
     color: #02a8f3;
   }
 
-  & .kielkielkielkielkiel__value-container {
+  & .AddressSelect__value-container {
     height: 100%;
     padding-left: 0px;
     margin-left: 0px;
   }
-  & .kielkielkielkielkiel__indicators {
+  & .AddressSelect__indicators {
     display:none;
   }
 
-  & .kielkielkielkielkiel__indicators {}
-
-  & .kielkielkielkielkiel__option {
+  & .AddressSelect__option {
     font-weight: normal;
     display: block;
     white-space: pre;
@@ -161,42 +127,6 @@ const StyledReactSelect = styled(ReactSelect)`
     line-height: 18px;
     font-size: 1em;
   }
-`
-
-
-const StyledOption = styled.option`
-  font-weight: normal;
-  display: block;
-  white-space: pre;
-  min-height: 1.2em;
-  padding: 0px 2px 1px;
-  color: #02a8f3;
-  line-height: 18px;
-  font-size: 1em;
-`
-const StyledSelect = styled.select`
-  display: inline-block;
-  max-width: 100%;
-  padding: 9.2px 16px;
-  padding-bottom: 6.13333333px;
-  border: 0;
-  border-bottom: solid 2px #dddcdb;
-  box-sizing: border-box;
-  background-color: #f5f4f2;
-  font-size: 1em;
-  font-weight: 300;
-  z-index: 1;
-  margin-top: 0;
-  padding-left: 41.6px;
-  padding-right: 0;
-  transition-delay: 0s;
-  transition: background-color ease-in-out 1s, color ease-in-out 1s;
-  -webkit-appearance: none;
-  border-radius: 0;
-  height: 36px;
-  line-height: 18px;
-  color: #02a8f3;
-  width: 100%;
 `
 
 const StyledDiv = styled.div`
