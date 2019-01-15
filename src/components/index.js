@@ -8,6 +8,7 @@ import Spinner from './Widgets/AnimatedIcons/Spinner'
 import Pulse from './Widgets/AnimatedIcons/Pulse'
 import Button from './Widgets/Button'
 import Checkbox from './Widgets/Checkbox'
+import AddressSelect from './Widgets/Form/AddressSelect'
 import RadioButton from './Widgets/Form/RadioButton'
 import Input from './Widgets/Form/Input'
 import AddressInput from './Widgets/Form/AddressInput'
@@ -34,6 +35,7 @@ export {
   AccountList,
   AccountItem,
   AddressInput,
+  AddressSelect,
   Button,
   Checkbox,
   RadioButton,

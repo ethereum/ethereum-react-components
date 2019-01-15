@@ -79,7 +79,7 @@
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react-minimal-pie-chart": "^3.3.0",
-    "react-select": "^2.1.2",
+    "react-select": "^2.2.0",
     "styled-components": "^4.1.1"
   },
   "husky": {
