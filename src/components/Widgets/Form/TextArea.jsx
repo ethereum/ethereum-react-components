@@ -1,9 +1,16 @@
-import React from 'react'
+// TODO: placeholder
 
-const TextArea = ({ children, onClick }) => (
-  <textarea className="input-field input-textarea" />
-)
+import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
 
-TextArea.displayName = 'TextArea'
+export default class TextArea extends Component {
+  static displayName = 'TextArea'
 
-export default TextArea
+  static propTypes = {}
+
+  static defaultProps = {}
+
+  render() {
+    return <textarea {...this.props} />
+  }
+}
