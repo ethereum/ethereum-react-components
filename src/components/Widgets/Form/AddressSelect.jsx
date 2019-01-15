@@ -1,80 +1,84 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactSelect from 'react-select'
+import Select from 'react-select'
 import styled from 'styled-components'
 import Identicon from '../../Identicon'
-import { combineWallets } from '../../../util/helpers';
+import { combineWallets } from '../../../util/helpers'
 
 export default class AddressSelect extends Component {
-  static displayName = 'AddressSelect';
+  static displayName = 'AddressSelect'
 
   static propTypes = {
     disabled: PropTypes.bool,
     wallets: PropTypes.object,
     walletContracts: PropTypes.object,
-    onChange: PropTypes.func,
-  };
+    onChange: PropTypes.func
+  }
 
   static defaultProps = {
     disabled: false,
     wallets: {},
-    walletContracts: {},
-  };
-
-  state = {
-    selectedWallet: '',
-    combinedWallets: [],
+    walletContracts: {}
   }
 
-  componentDidMount() {
-    const { wallets, walletContracts, onChange } = this.props;
-    const combinedWallets = combineWallets(wallets, walletContracts);
-    let wallet = combinedWallets[0]
-    const address = wallet ? wallet.address : ''
-    this.setState(
-      { combinedWallets, selectedWallet: {value: address, ...wallet} },
-      onChange(combinedWallets[0])
-    )
+  constructor(props) {
+    super(props)
+
+    const combinedWallets = combineWallets(props.wallets, props.walletContracts)
+
+    this.state = {
+      selectedWallet: this.buildSelectOption(combinedWallets[0]),
+      combinedWallets
+    }
   }
 
-  selectAddress = e => {
-    const { onChange } = this.props;
-    this.setState({ selectedWallet: e }, onChange(e))
+  buildSelectOption = wallet => {
+    if (!wallet) {
+      return ''
+    }
+
+    return {
+      value: wallet.address,
+      label:
+        wallet.addressType === 'wallet'
+          ? `🔑 ${wallet.name} - ${wallet.balance} ETHER`
+          : `${wallet['contract-name']} - ${wallet.balance} ETHER`,
+      ...wallet
+    }
+  }
+
+  selectAddress = selected => {
+    const { onChange } = this.props
+
+    this.setState({ selectedWallet: selected }, () => {
+      if (onChange) {
+        onChange(selected)
+      }
+    })
   }
 
   render() {
-    const { disabled } = this.props;
+    const { disabled } = this.props
     const { combinedWallets, selectedWallet } = this.state
 
-    let options = combinedWallets.map(w => {
-      return {
-        value: w.address,
-        label :w.addressType === 'wallet' 
-          ? `🔑 ${w.name}` + ` - ${w.balance} ETHER`
-          : w['contract-name'] + ` - ${w.balance} ETHER`,
-        ...w
-      }
-    })
+    const options = combinedWallets.map(w => this.buildSelectOption(w))
 
     return (
       <StyledDiv>
-        <StyledReactSelect
+        <StyledSelect
           classNamePrefix="AddressSelect"
-          options={options} 
+          options={options}
+          value={selectedWallet}
           onChange={this.selectAddress}
           disabled={disabled}
         />
-        <StyledIdenticon
-          size={'tiny'}
-          address={selectedWallet.address}
-        />
+        <StyledIdenticon size="tiny" address={selectedWallet.address} />
       </StyledDiv>
-    );
+    )
   }
 }
 
-
-const StyledReactSelect = styled(ReactSelect)`
+const StyledSelect = styled(Select)`
   & .AddressSelect__control {
     display: inline-block;
     max-width: 100%;
@@ -114,7 +118,7 @@ const StyledReactSelect = styled(ReactSelect)`
     margin-left: 0px;
   }
   & .AddressSelect__indicators {
-    display:none;
+    display: none;
   }
 
   & .AddressSelect__option {
@@ -124,8 +128,12 @@ const StyledReactSelect = styled(ReactSelect)`
     min-height: 1.2em;
     padding: 0px 2px 1px 8px;
     color: #02a8f3;
-    line-height: 18px;
+    line-height: 32px;
     font-size: 1em;
+  }
+
+  & .AddressSelect__option--is-selected {
+    color: white;
   }
 `
 
