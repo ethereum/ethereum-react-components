@@ -26,7 +26,7 @@ export default class CurrencySelect extends Component {
   }
 
   renderEther() {
-    const { etherBalance, etherSymbol } = this.props
+    const { etherBalance } = this.props
     return (
       <React.Fragment>
         <StyledSymbol className="ether-symbol">Ξ</StyledSymbol>
@@ -39,7 +39,7 @@ export default class CurrencySelect extends Component {
   }
 
   renderTokens() {
-    const { etherBalance, etherSymbol, tokens } = this.props
+    const { etherBalance, tokens } = this.props
     return (
       <StyledUL className="select-token">
         <StyledLI onClick={this.chooseToken}>
@@ -51,7 +51,7 @@ export default class CurrencySelect extends Component {
         <StyledLI onClick={this.chooseToken}>
           <StyledInput type="radio" />
           <StyledLabel htmlFor="ether" onClick={this.chooseToken}>
-            <StyledIdenticon size="tiny" address={'asdf'} />
+            <StyledIdenticon size="tiny" address="asdf" />
             <StyledName className="token-name">ETHER</StyledName>
             <StyledBalance className="balance">
               {` ${etherBalance} tokenName`}
