@@ -13,6 +13,8 @@ import TxParty from '../components/Tx/SendTx/TxParty'
 import SendTx from '../components/Tx/SendTx/FormSendTx'
 import TxHistory from '../components/Tx/TxHistory'
 
+import CurrencySelect from '../components/Tx/SendTx/CurrencySelect'
+
 const dummyTx = {
   nonce: 0,
   from: '0xf17f52151EbEF6C7334FAD080c5704D77216b732',
@@ -27,6 +29,10 @@ const dummyTx = {
   ],
   network: 'main'
 }
+
+storiesOf('Tx/Currency Select', module).add('default ', () => (
+  <CurrencySelect />
+))
 
 storiesOf('Tx/Fee Selector', module).add('default ', () => <FeeSelector />)
 
