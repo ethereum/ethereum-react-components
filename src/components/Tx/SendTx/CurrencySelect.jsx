@@ -7,39 +7,49 @@ export default class CurrencySelect extends Component {
   static displayName = 'CurrencySelect'
 
   static propTypes = {
-    etherWallet: PropTypes.object,
-    onClick: PropTypes.func,
-    tokens: PropTypes.array
+    etherWallet: PropTypes.shape({
+      balance: PropTypes.string,
+      symbol: PropTypes.string,
+      address: PropTypes.string,
+      name: PropTypes.string
+    }),
+    onSelect: PropTypes.func,
+    tokens: PropTypes.arrayOf(
+      PropTypes.shape({
+        balance: PropTypes.string,
+        symbol: PropTypes.string,
+        address: PropTypes.string,
+        name: PropTypes.string
+      })
+    )
   }
 
   static defaultProps = {
-    etherWallet: {
-      name: 'ETHER',
-      symbol: 'ETHER',
-      address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz',
-      balance: '0.00'
-    },
+    etherWallet: {},
     tokens: []
   }
 
-  chooseCurrency = e => {
-    const { onClick } = this.props
-    if (onClick) {
-      onClick(e)
+  chooseCurrency = event => {
+    const { onSelect } = this.props
+    if (onSelect) {
+      onSelect(event)
     }
   }
 
   static renderCurrencySpans = currency => {
+    const { address, balance, name, symbol } = currency
+    let symbolSpan = null
+    if (name === 'ETHER') {
+      symbolSpan = <StyledSymbol>Ξ</StyledSymbol>
+    } else {
+      symbolSpan = <StyledIdenticon size="tiny" address={address} />
+    }
     return (
       <React.Fragment>
-        {currency.name === 'ETHER' ? (
-          <StyledSymbol className="ether-symbol">Ξ</StyledSymbol>
-        ) : (
-          <StyledIdenticon size="tiny" address={currency.address} />
-        )}
-        <StyledName className="currency-name">{currency.name}</StyledName>
-        <StyledBalance className="balance">
-          {` ${currency.balance} ${currency.symbol}`}
+        {symbolSpan}
+        <StyledName>{name}</StyledName>
+        <StyledBalance>
+          {` ${balance} ${symbol}`}
         </StyledBalance>
       </React.Fragment>
     )
@@ -57,9 +67,9 @@ export default class CurrencySelect extends Component {
             {CurrencySelect.renderCurrencySpans(currencyList[0])}
           </StyledDiv>
         ) : (
-          <StyledUL className="select-currency">
+          <StyledUL>
             {currencyList.map(currency => (
-              <StyledLI key={currency.address} onClick={this.chooseCurrency}>
+              <StyledLI key={currency.address} onSelect={this.chooseCurrency}>
                 <StyledInput
                   type="radio"
                   id={currency.name}
@@ -68,7 +78,7 @@ export default class CurrencySelect extends Component {
                 />
                 <StyledLabel
                   htmlFor={currency.name}
-                  onClick={this.chooseCurrency}
+                  onSelect={this.chooseCurrency}
                 >
                   {CurrencySelect.renderCurrencySpans(currency)}
                 </StyledLabel>

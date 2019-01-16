@@ -55,9 +55,11 @@ const dummyWallet = {
 }
 
 storiesOf('Tx/Currency Select', module)
-  .add('default ', () => <CurrencySelect />)
-  .add('only ether', () => <CurrencySelect etherWallet={dummyWallet} />)
-  .add('ether and tokens', () => (
+  .add('No ether, no tokens ', () => (
+    <CurrencySelect etherWallet={{ ...dummyWallet, balance: '0.00' }} />
+  ))
+  .add('Ether, no tokens', () => <CurrencySelect etherWallet={dummyWallet} />)
+  .add('No ether, tokens', () => (
     <CurrencySelect etherWallet={dummyWallet} tokens={dummyAccountTokens} />
   ))
 
