@@ -217,7 +217,7 @@ export default class TxDescription extends Component {
           </StyledExecutionContextTitle>
           <StyledExecutionContextDetailsValue>{`${new BN(
             estimatedGas
-          ).toString()} wei`}</StyledExecutionContextDetailsValue>
+          ).toString()} gas`}</StyledExecutionContextDetailsValue>
         </StyledExecutionContextRow>
 
         {isTokenTransfer && (
