@@ -16,7 +16,6 @@ export default class CurrencySelect extends Component {
     etherWallet: {
       name: 'ETHER',
       symbol: 'ETHER',
-      decimals: '10',
       address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz',
       balance: '0.00'
     },
