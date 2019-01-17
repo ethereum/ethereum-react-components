@@ -17,8 +17,6 @@ export default class CurrencySelect extends Component {
   }
 
   chooseToken = e => {
-    console.log(e.target)
-    console.log(e.currentTarget)
     const { onClick } = this.props
     if (onClick) {
       onClick(e)
@@ -43,7 +41,7 @@ export default class CurrencySelect extends Component {
     return (
       <StyledUL className="select-token">
         <StyledLI onClick={this.chooseToken}>
-          <StyledInput type="radio" />
+          <StyledInput type="radio" id="ether" />
           <StyledLabel htmlFor="ether" onClick={this.chooseToken}>
             {this.renderEther()}
           </StyledLabel>
@@ -80,18 +78,6 @@ export default class CurrencySelect extends Component {
     return <React.Fragment>{this.renderTokens()}</React.Fragment>
   }
 }
-
-//      {
-//   (!tokens ?
-//     (
-//       <div className="token-ether">
-//       { this.renderEther() }
-//       </div>
-//     )
-//     : this.renderTokens())
-
-//   )
-// }
 
 const StyledSpan = styled.span`
   flex: 1 auto;
@@ -140,15 +126,6 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   display: none !important;
-  &:checked {
-    position: relative;
-    border-color: #ccc6c6;
-    color: #695e5e;
-    padding: 6.13333333px 16px;
-    opacity: 1;
-    background: #ccc6c6;
-    font-weight: 400;
-  }
 `
 
 const StyledLI = styled.li`
@@ -156,16 +133,20 @@ const StyledLI = styled.li`
   padding: 0;
   margin: 0;
   text-align: -webkit-match-parent;
+  > input:checked + label {
+    position: relative;
+    border-color: #695e5e;
+    color: #695e5e;
+    padding: 6.13333333px 16px;
+    opacity: 1;
+    background: #ccc6c6;
+    font-weight: 400;
+
+    .ether-symbol {
+      border: 1px solid #695e5e !important;
+    }
+  }
 `
-// &:checked {
-//     position: relative;
-//     border-color: #ccc6c6;
-//     color: #695e5e;
-//     padding: 6.13333333px 16px;
-//     opacity: 1;
-//     background: #ccc6c6;
-//     font-weight: 400;
-//   }
 
 const StyledUL = styled.ul`
   margin-block-start: 1em;
