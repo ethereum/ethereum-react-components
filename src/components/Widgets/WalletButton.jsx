@@ -6,17 +6,14 @@ export default class WalletButton extends Component {
   static displayName = 'WalletButton'
 
   static propTypes = {
-    /** Display text to be displayed as button symbol */
-    buttonSymbol: PropTypes.string,
     /** Display text describing button action */
-    innerText: PropTypes.string,
+    children: PropTypes.string,
     /** Callback to be executed onClick */
     onClick: PropTypes.func
   }
 
   static defaultProps = {
-    buttonSymbol: '+',
-    innerText: ''
+    children: ''
   }
 
   handleClick = e => {
@@ -27,11 +24,11 @@ export default class WalletButton extends Component {
   }
 
   render() {
-    const { buttonSymbol, innerText } = this.props
+    const { children } = this.props
     return (
-      <StyledButton onClick={this.handleClick}>
-        <StyledDiv> {buttonSymbol} </StyledDiv>
-        <StyledH3> {innerText} </StyledH3>
+      <StyledButton {...this.props} onClick={this.handleClick}>
+        <StyledDiv> + </StyledDiv>
+        <StyledChildrenDiv> {children} </StyledChildrenDiv>
       </StyledButton>
     )
   }
@@ -92,7 +89,7 @@ const StyledDiv = styled.div`
   box-sizing: border-box;
 `
 
-const StyledH3 = styled.h3`
+const StyledChildrenDiv = styled.div`
   margin: 0;
   margin-top: 0;
   color: #02a8f3;

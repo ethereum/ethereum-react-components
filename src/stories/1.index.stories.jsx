@@ -120,13 +120,15 @@ storiesOf('Widgets/Animations/Spinner', module).add('default', () => (
   <Spinner />
 ))
 
-storiesOf('Widgets/WalletButton', module).add('default', () => (
-  <WalletButton
-    buttonSymbol="+"
-    innerText="Add Wallet Contract"
-    onClick={() => {}}
-  />
-))
+storiesOf('Widgets/WalletButton', module)
+  .add('default', () => (
+    <WalletButton onClick={() => {}}> Add Wallet Contract </WalletButton>
+  ))
+  .add('type submit', () => (
+    <WalletButton type="submit" onClick={() => {}}>
+      Add Wallet Contract
+    </WalletButton>
+  ))
 
 storiesOf('Widgets/Animations/Pulse', module)
   .add('default', () => <Pulse />)
