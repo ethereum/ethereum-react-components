@@ -30,7 +30,7 @@ export default class CurrencySelect extends Component {
     }
   }
 
-  renderCurrencySpans(currency) {
+  static renderCurrencySpans = currency => {
     return (
       <React.Fragment>
         {currency.name === 'ETHER' ? (
@@ -54,7 +54,9 @@ export default class CurrencySelect extends Component {
     return (
       <React.Fragment>
         {currencyList.length === 1 ? (
-          <StyledDiv>{this.renderCurrencySpans(currencyList[0])}</StyledDiv>
+          <StyledDiv>
+            {CurrencySelect.renderCurrencySpans(currencyList[0])}
+          </StyledDiv>
         ) : (
           <StyledUL className="select-currency">
             {currencyList.map(currency => (
@@ -69,7 +71,7 @@ export default class CurrencySelect extends Component {
                   htmlFor={currency.name}
                   onClick={this.chooseCurrency}
                 >
-                  {this.renderCurrencySpans(currency)}
+                  {CurrencySelect.renderCurrencySpans(currency)}
                 </StyledLabel>
               </StyledLI>
             ))}
