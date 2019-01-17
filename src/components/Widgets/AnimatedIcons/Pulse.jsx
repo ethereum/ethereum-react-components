@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import 'loaders.css'
-import './LoadingAnimations.css'
 
 export default class Pulse extends Component {
   static displayName = 'Pulse'
@@ -59,8 +59,7 @@ export default class Pulse extends Component {
     type = config[type]
 
     return (
-      <div
-        className="loader"
+      <StyledWrapper
         style={{
           ...pstyle,
           width: '65px',
@@ -71,7 +70,28 @@ export default class Pulse extends Component {
             <div key={idx} style={type.style} />
           ))}
         </div>
-      </div>
+      </StyledWrapper>
     )
   }
 }
+
+const StyledWrapper = styled.div`
+  box-sizing: border-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -ms-flex-preferred-size: 25%;
+  flex-basis: 25%;
+  max-width: 25%;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+`
