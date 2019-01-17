@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.8.1...v1.9.0) (2019-01-17)
+
+
+### Features
+
+* WalletButton component ([#93](https://github.com/PhilippLgh/ethereum-react-components/issues/93)) ([2ca7395](https://github.com/PhilippLgh/ethereum-react-components/commit/2ca7395)), closes [#82](https://github.com/PhilippLgh/ethereum-react-components/issues/82)
+
+
+
 <a name="1.8.1"></a>
 ## [1.8.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.8.0...v1.8.1) (2019-01-17)
 
