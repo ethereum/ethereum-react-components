@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import TxDescription from './TxDescription'
 import FeeSelector from './FeeSelector'
 import SubmitTxForm from './SubmitTxForm'
@@ -89,64 +90,68 @@ export default class SendTx extends Component {
     } = this.state
 
     return (
-      <div className="popup-windows tx-info">
-        <div ref={divElement => (this.divElement = divElement)}>
-          <TxDescription
-            adjustWindowHeight={this.adjustWindowHeight}
-            data={data}
-            estimatedGas={estimatedGas}
-            executionFunction={executionFunction}
-            gasLoading={gasLoading}
-            gasPrice={gasPrice}
-            gasError={gasError}
-            isNewContract={isNewContract}
-            network={network}
-            params={params}
-            etherPriceUSD={etherPriceUSD}
-            providedGas={providedGas}
-            showFormattedParams={showFormattedParams}
-            to={to}
-            toIsContract={toIsContract}
-            value={value}
-            token={token}
-          />
+      <div>
+        <TxDescription
+          adjustWindowHeight={this.adjustWindowHeight}
+          data={data}
+          estimatedGas={estimatedGas}
+          executionFunction={executionFunction}
+          gasLoading={gasLoading}
+          gasPrice={gasPrice}
+          gasError={gasError}
+          isNewContract={isNewContract}
+          network={network}
+          params={params}
+          etherPriceUSD={etherPriceUSD}
+          providedGas={providedGas}
+          showFormattedParams={showFormattedParams}
+          to={to}
+          toIsContract={toIsContract}
+          value={value}
+          token={token}
+        />
 
-          <TxParties
-            fromIsContract={fromIsContract}
-            from={from}
-            isNewContract={isNewContract}
-            to={to}
-            toIsContract={toIsContract}
-            executionFunction={executionFunction}
-            params={params}
-            hasSignature={hasSignature}
-            value={value}
-          />
+        <TxParties
+          fromIsContract={fromIsContract}
+          from={from}
+          isNewContract={isNewContract}
+          to={to}
+          toIsContract={toIsContract}
+          executionFunction={executionFunction}
+          params={params}
+          hasSignature={hasSignature}
+          value={value}
+        />
 
+        <StyledSpacer>
           <FeeSelector
             gasLoading={gasLoading}
             gasPrice={gasPrice}
-            gas={estimatedGas}
+            estimatedGas={estimatedGas}
             etherPriceUSD={etherPriceUSD}
             network={network}
             updateGasPrice={this.updateGasPrice}
           />
+        </StyledSpacer>
 
-          <GasNotification
-            estimatedGas={estimatedGas}
-            gasLoading={gasLoading}
-            toIsContract={toIsContract}
-            to={to}
+        <GasNotification
+          estimatedGas={estimatedGas}
+          gasLoading={gasLoading}
+          toIsContract={toIsContract}
+          to={to}
+        />
+
+        {!gasLoading && estimatedGas !== undefined && (
+          <SubmitTxForm
+            unlocking={unlocking}
+            handleSubmit={this.handleSubmit}
           />
-
-          <div className="footer">
-            <SubmitTxForm
-              unlocking={unlocking}
-              handleSubmit={this.handleSubmit}
-            />
-          </div>
-        </div>
+        )}
       </div>
     )
   }
 }
+
+const StyledSpacer = styled.div`
+  margin: 20px 0;
+`

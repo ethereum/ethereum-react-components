@@ -11,7 +11,7 @@ export default class FeeSelector extends Component {
   static propTypes = {
     network: PropTypes.string,
     etherPriceUSD: PropTypes.string,
-    gas: PropTypes.string,
+    estimatedGas: PropTypes.string,
     gasPrice: PropTypes.string,
     gasLoading: PropTypes.bool,
     togglePriority: PropTypes.func
@@ -22,8 +22,8 @@ export default class FeeSelector extends Component {
   }
 
   gasEtherAmount = () => {
-    const { gas, gasPrice } = this.props
-    const bigGas = new BN(gas)
+    const { estimatedGas, gasPrice } = this.props
+    const bigGas = new BN(estimatedGas)
     const bigGasPrice = new BN(gasPrice)
     const gasEtherAmount = bigGas
       .mul(bigGasPrice)
@@ -70,10 +70,10 @@ export default class FeeSelector extends Component {
   }
 
   renderStatus = () => {
-    const { gas, gasLoading } = this.props
+    const { estimatedGas, gasLoading } = this.props
 
     let error
-    if (!gas && gasLoading) {
+    if (!estimatedGas && gasLoading) {
       error = (
         <StyledWarning>{i18n.t('mist.sendTx.gasLoadingWarning')}</StyledWarning>
       )
@@ -83,17 +83,21 @@ export default class FeeSelector extends Component {
 
     return (
       <div>
-        {gasLoading && <Spinner color="#00aafa" scale="0.5" />}
+        {gasLoading && (
+          <StyledSpinnerContainer>
+            <Spinner color="#00aafa" scale="0.5" />
+          </StyledSpinnerContainer>
+        )}
         {error}
       </div>
     )
   }
 
   render() {
-    const { gas } = this.props
+    const { estimatedGas } = this.props
     const { priority } = this.state
 
-    if (!gas) {
+    if (!estimatedGas) {
       return <div>{this.renderStatus()}</div>
     }
 
@@ -129,9 +133,8 @@ export default class FeeSelector extends Component {
 const StyledContainer = styled.div``
 
 const StyledFeeSelector = styled.span`
-  font-weight: bold;
   user-select: none;
-  color: blue;
+  color: #00aafa;
   &:hover {
     cursor: pointer;
   }
@@ -150,4 +153,17 @@ const StyledError = styled.div`
   display: inline-block;
   color: red;
   font-weight: bold;
+`
+
+const StyledSpinnerContainer = styled.div`
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  .loader {
+    display: inline-block;
+    height: 0;
+    width: 0;
+    padding-left: 20px;
+    padding-top: 10px;
+  }
 `

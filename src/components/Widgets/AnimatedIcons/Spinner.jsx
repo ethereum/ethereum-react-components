@@ -27,7 +27,9 @@ export default class Spinner extends Component {
     return (
       <div
         className="loader"
-        style={{ transform: `scale(${scale}, ${scale})` }}
+        style={{
+          transform: `scale(${scale}, ${scale})`
+        }}
       >
         <div className="ball-spin-fade-loader">
           {[...Array(divCount)].map((_, idx) => (

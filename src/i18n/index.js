@@ -153,9 +153,9 @@ const en = {
       "estimatedGasError":
         "It seems this transaction will fail. If you submit it, it may consume all the gas you provide.",
       "overBlockGasLimit":
-        "The gas required for this execution could exceed the block gas limit.",
+        "The gas required for this execution exceeds the block gas limit.",
       "notEnoughGas":
-        "Gas might not be enough to successfully finish this transaction.<br>Click here to increase the gas amount.",
+        "Gas might not be enough to successfully finish this transaction.",
       "gasLoadingWarning":
         "Loading gas estimate...",
       "gasLoadingError":

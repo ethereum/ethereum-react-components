@@ -13,7 +13,7 @@ const dummyTx = {
   nonce: 0,
   from: '0xf17f52151EbEF6C7334FAD080c5704D77216b732',
   to: '0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef',
-  gas: '0x76c0', // 30400
+  estimatedGas: '0x76c0', // 30400
   data: '',
   gasPrice: '0x9184e72a000', // 10000000000000
   value: '1000000000000000000',
@@ -32,14 +32,14 @@ storiesOf('Tx/Fee Selector', module)
     <FeeSelector
       network="main"
       etherPriceUSD={200}
-      gas={dummyTx.gas}
+      estimatedGas={dummyTx.estimatedGas}
       gasPrice={dummyTx.gasPrice}
     />
   ))
   .add('Test network', () => (
     <FeeSelector
       network="rinkeby"
-      gas={dummyTx.gas}
+      estimatedGas={dummyTx.estimatedGas}
       gasPrice={dummyTx.gasPrice}
     />
   ))
@@ -57,13 +57,7 @@ storiesOf('Tx/Description', module)
     return <TxDescription {...dummyTx} etherPriceUSD={200} network="rinkeby" />
   })
   .add('Deploy contract', () => {
-    return (
-      <TxDescription
-        {...dummyTx}
-        data="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        isNewContract
-      />
-    )
+    return <TxDescription {...dummyTx} data={'a'.repeat(500)} isNewContract />
   })
   .add('Transfer tokens', () => {
     return (
@@ -126,26 +120,72 @@ storiesOf('Tx/TxParty', module)
   })
 
 storiesOf('Tx/TxParties', module)
-  .add('Default', () => {
-    return <TxParties {...dummyTx} />
+  .add('Standard tx', () => {
+    return (
+      <TxParties from={dummyTx.from} to={dummyTx.to} params={dummyTx.params} />
+    )
   })
   .add('Deploy contract', () => {
-    return <TxParties {...dummyTx} isNewContract />
+    return (
+      <TxParties
+        from={dummyTx.from}
+        to={dummyTx.to}
+        params={dummyTx.params}
+        isNewContract
+      />
+    )
   })
   .add('Executing contract function', () => {
-    return <TxParties {...dummyTx} toIsContract />
+    return (
+      <TxParties
+        from={dummyTx.from}
+        to={dummyTx.to}
+        params={dummyTx.params}
+        toIsContract
+      />
+    )
   })
   .add('Sending tokens', () => {
-    return <TxParties {...dummyTx} isTokenTransfer />
+    return (
+      <TxParties
+        from={dummyTx.from}
+        to={dummyTx.to}
+        params={dummyTx.params}
+        isTokenTransfer
+      />
+    )
   })
 
-storiesOf('Tx/Gas Notification', module).add('default', () => (
-  <GasNotification />
-))
+storiesOf('Tx/Gas Notification', module)
+  .add('No error', () => <GasNotification />)
+  .add('Not enough gas', () => <GasNotification gasError="notEnoughGas" />)
+  .add('Over block gas limit', () => (
+    <GasNotification gasError="overBlockGasLimit" />
+  ))
 
-storiesOf('Tx/SendTx', module).add('default', () => {
-  return <SendTx network="main" newTx={dummyTx} />
-})
+storiesOf('Tx/SendTx', module)
+  .add('Standard tx, main', () => {
+    return <SendTx network="main" newTx={dummyTx} etherPriceUSD={200} />
+  })
+  .add('Standard tx, testnet', () => {
+    return <SendTx network="ropsten" newTx={dummyTx} />
+  })
+  .add('Standard tx, gas loading', () => {
+    return (
+      <SendTx
+        network="ropsten"
+        newTx={{ ...dummyTx, estimatedGas: undefined, gasLoading: true }}
+      />
+    )
+  })
+  .add('Standard tx, no gas estimate', () => {
+    return (
+      <SendTx
+        network="ropsten"
+        newTx={{ ...dummyTx, estimatedGas: undefined, gasLoading: false }}
+      />
+    )
+  })
 
 const standardTxPending = {
   blockNumber: null,

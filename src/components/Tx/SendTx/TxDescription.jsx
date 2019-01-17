@@ -104,7 +104,7 @@ export default class TxDescription extends Component {
 
   renderMoreDetails() {
     const {
-      gas,
+      estimatedGas,
       executionFunction,
       gasError,
       gasPrice,
@@ -216,7 +216,7 @@ export default class TxDescription extends Component {
             {i18n.t('mist.sendTx.gasEstimate')}
           </StyledExecutionContextTitle>
           <StyledExecutionContextDetailsValue>{`${new BN(
-            gas
+            estimatedGas
           ).toString()} wei`}</StyledExecutionContextDetailsValue>
         </StyledExecutionContextRow>
 
@@ -313,7 +313,9 @@ const StyledExecutionContextParamsTitle = styled.div`
 
 const StyledExecutionContextParamsTable = styled.div``
 
-const StyledButton = styled(Button)``
+const StyledButton = styled(Button)`
+  margin-left: -20px;
+`
 
 const StyledContextDescription = styled.div``
 
@@ -324,7 +326,7 @@ const StyledExecutionContextDetailsTitle = styled.span`
 const StyledExecutionContextDetailsValue = styled.span`
   display: flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: bold;
 `
 
 const StyledExecutionContextParamAddress = styled.span`
