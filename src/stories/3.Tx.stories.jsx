@@ -15,7 +15,7 @@ const dummyTx = {
   to: '0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef',
   estimatedGas: '0x76c0', // 30400
   data: '',
-  gasPrice: '0x9184e72a000', // 10000000000000
+  gasPrice: '5000000000', // 5 gwei
   value: '1000000000000000000',
   params: [],
   network: 'main'

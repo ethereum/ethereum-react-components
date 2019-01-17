@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ethUtils from 'ethereumjs-util'
 import styled from 'styled-components'
 import i18n from '../../../i18n'
 import Spinner from '../../Widgets/AnimatedIcons/Spinner'
-
-const { BN } = ethUtils
+import { toBigNumber, weiToEther } from '../../../lib/util'
 
 export default class FeeSelector extends Component {
   static propTypes = {
@@ -23,16 +21,14 @@ export default class FeeSelector extends Component {
 
   gasEtherAmount = () => {
     const { estimatedGas, gasPrice } = this.props
-    const bigGas = new BN(estimatedGas)
-    const bigGasPrice = new BN(gasPrice)
-    const gasEtherAmount = bigGas
-      .mul(bigGasPrice)
-      .div(new BN('1000000000000000000'))
+    const bigGas = toBigNumber(estimatedGas)
+    const bigGasPrice = toBigNumber(gasPrice)
+    const gasEtherAmount = weiToEther(bigGas.times(bigGasPrice))
     return gasEtherAmount
   }
 
   gasEtherAmountPriority = () => {
-    return this.gasEtherAmount().mul(new BN(2))
+    return this.gasEtherAmount().times(toBigNumber(2))
   }
 
   parseFee = () => {
@@ -45,13 +41,17 @@ export default class FeeSelector extends Component {
     let fee
     if (!priority) {
       if (network.toLowerCase() === 'main' && etherPriceUSD) {
-        const standardFee = gasEtherAmount.mul(new BN(etherPriceUSD))
+        const standardFee = gasEtherAmount
+          .times(toBigNumber(etherPriceUSD))
+          .toFixed(2)
         fee = `$${standardFee} USD (${gasEtherAmount} ETH)`
       } else {
         fee = `${gasEtherAmount} ETH`
       }
     } else if (network.toLowerCase() === 'main' && etherPriceUSD) {
-      const priorityFee = gasEtherAmountPriority.mul(new BN(etherPriceUSD))
+      const priorityFee = gasEtherAmountPriority
+        .times(toBigNumber(etherPriceUSD))
+        .toFixed(2)
       fee = `$${priorityFee} USD (${gasEtherAmountPriority} ETH)`
     } else {
       fee = `${gasEtherAmountPriority} ETH`
