@@ -7,99 +7,125 @@ export default class CurrencySelect extends Component {
   static displayName = 'CurrencySelect'
 
   static propTypes = {
-    etherBalance: PropTypes.string,
+    etherWallet: PropTypes.object,
+    onClick: PropTypes.func,
     tokens: PropTypes.array
   }
 
   static defaultProps = {
-    etherBalance: '0',
+    etherWallet: {
+      name: 'ETHER',
+      symbol: 'ETHER',
+      decimals: '10',
+      address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz',
+      balance: '0.00'
+    },
     tokens: []
   }
 
-  chooseToken = e => {
+  chooseCurrency = e => {
     const { onClick } = this.props
     if (onClick) {
       onClick(e)
     }
   }
 
-  renderEther() {
-    const { etherBalance } = this.props
+  renderCurrencySpans(currency) {
     return (
       <React.Fragment>
-        <StyledSymbol className="ether-symbol">Ξ</StyledSymbol>
-        <StyledName className="token-name">ETHER</StyledName>
+        {currency.name === 'ETHER' ? (
+          <StyledSymbol className="ether-symbol">Ξ</StyledSymbol>
+        ) : (
+          <StyledIdenticon size="tiny" address={currency.address} />
+        )}
+        <StyledName className="currency-name">{currency.name}</StyledName>
         <StyledBalance className="balance">
-          {` ${etherBalance} ETHER`}
+          {` ${currency.balance} ${currency.symbol}`}
         </StyledBalance>
       </React.Fragment>
     )
   }
 
-  renderTokens() {
-    const { etherBalance, tokens } = this.props
+  render() {
+    const { etherWallet, tokens } = this.props
+    const currencyList = [...tokens]
+    currencyList.unshift(etherWallet)
+
     return (
-      <StyledUL className="select-token">
-        <StyledLI onClick={this.chooseToken}>
-          <StyledInput type="radio" id="ether" />
-          <StyledLabel htmlFor="ether" onClick={this.chooseToken}>
-            {this.renderEther()}
-          </StyledLabel>
-        </StyledLI>
-        <StyledLI onClick={this.chooseToken}>
-          <StyledInput type="radio" />
-          <StyledLabel htmlFor="ether" onClick={this.chooseToken}>
-            <StyledIdenticon size="tiny" address="asdf" />
-            <StyledName className="token-name">ETHER</StyledName>
-            <StyledBalance className="balance">
-              {` ${etherBalance} tokenName`}
-            </StyledBalance>
-          </StyledLabel>
-        </StyledLI>
-        {/*}
-        {tokens.map(token => (
-          <StyledLI key={token.address}>
-            <label htmlFor={token.address}>
-              <StyledIdenticon size="tiny" address={token.address} />
-              <span className="token-name">{token.name}</span>
-              <span className="balance">
-                {`${token.balance} ${token.symbol}` }
-              </span>
-            </label>
-          </StyledLI>
-        ))}
-      */}
-      </StyledUL>
+      <React.Fragment>
+        {currencyList.length === 1 ? (
+          <StyledDiv>{this.renderCurrencySpans(currencyList[0])}</StyledDiv>
+        ) : (
+          <StyledUL className="select-currency">
+            {currencyList.map(currency => (
+              <StyledLI key={currency.address} onClick={this.chooseCurrency}>
+                <StyledInput
+                  type="radio"
+                  id={currency.name}
+                  value={currency.address}
+                  name="choose-token"
+                />
+                <StyledLabel
+                  htmlFor={currency.name}
+                  onClick={this.chooseCurrency}
+                >
+                  {this.renderCurrencySpans(currency)}
+                </StyledLabel>
+              </StyledLI>
+            ))}
+          </StyledUL>
+        )}
+      </React.Fragment>
     )
   }
-
-  render() {
-    const { tokens } = this.props
-    return <React.Fragment>{this.renderTokens()}</React.Fragment>
-  }
 }
+
+const StyledDiv = styled.div`
+  box-sizing: border-box;
+  position: relative;
+  color: #695e5e;
+  font-size: 16px;
+  font-weight: normal;
+  min-height: 30px;
+  margin-top: 13.8px;
+  padding: 4.6px 16px;
+
+  .balance {
+    float: right;
+  }
+
+  .currency-name {
+    position: absolute;
+  }
+
+  .ether-symbol {
+    border: 1px solid #695e5e !important;
+  }
+`
 
 const StyledSpan = styled.span`
   flex: 1 auto;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 25px;
 `
 
 const StyledSymbol = styled(StyledSpan)`
-  -webkit-box-flex: 0;
+  box-sizing: border-box;
   flex: 0;
   display: inline-block;
   min-width: 22px;
   padding: 1px 0;
   height: 22px;
-  border: 1px solid #02a8f3;
+
   background-clip: padding-box;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
   text-align: center;
   font-size: 14px;
+  line-height: 19px;
 `
 
 const StyledName = styled(StyledSpan)`
@@ -110,15 +136,17 @@ const StyledName = styled(StyledSpan)`
 const StyledBalance = styled(StyledSpan)`
   text-align: right;
   color: #827a7a;
+  float: ${props => props.float || ''};
 `
 
 const StyledLabel = styled.label`
+  -webkit-box-sizing: border-box;
+  position: relative;
   font-weight: 300;
   color: #02a8f3;
   display: flex;
   overflow: hidden;
   height: 36.8px;
-  padding: 6.13333333px 16px;
   transition: height 200ms, opacity 200ms, padding 200ms;
   cursor: pointer;
   background: #fafafa;
@@ -130,7 +158,7 @@ const StyledInput = styled.input`
 
 const StyledLI = styled.li`
   display: block;
-  padding: 0;
+  padding: 1px;
   margin: 0;
   text-align: -webkit-match-parent;
   > input:checked + label {
@@ -146,13 +174,31 @@ const StyledLI = styled.li`
       border: 1px solid #695e5e !important;
     }
   }
+
+  :hover {
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  > input:not(:checked) + label {
+    font-weight: 300;
+    color: #02a8f3;
+    display: flex;
+    overflow: hidden;
+    height: 36.8px;
+    padding: 6.13333333px 16px;
+    transition: height 200ms, opacity 200ms, padding 200ms;
+    cursor: pointer;
+    background: #fafafa;
+
+    .ether-symbol {
+      border: 1px solid #02a8f3 !important;
+    }
+  }
 `
 
 const StyledUL = styled.ul`
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
   padding: 0;
   margin: 0;
   list-style: none;

@@ -30,9 +30,37 @@ const dummyTx = {
   network: 'main'
 }
 
-storiesOf('Tx/Currency Select', module).add('default ', () => (
-  <CurrencySelect />
-))
+const dummyAccountTokens = [
+  {
+    address: '0xD87C62BfA2A4DFAbdD1Fad5A1cb73a63345aA2B0',
+    name: 'Stellar',
+    symbol: 'XLM',
+    balance: '20',
+    decimals: '18'
+  },
+  {
+    address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345aA2B0',
+    name: 'Golem',
+    symbol: 'GO',
+    balance: '33',
+    decimals: '10'
+  }
+]
+
+const dummyWallet = {
+  name: 'ETHER',
+  symbol: 'ETHER',
+  decimals: '10',
+  address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz',
+  balance: '15'
+}
+
+storiesOf('Tx/Currency Select', module)
+  .add('default ', () => <CurrencySelect />)
+  .add('only ether', () => <CurrencySelect etherWallet={dummyWallet} />)
+  .add('ether and tokens', () => (
+    <CurrencySelect etherWallet={dummyWallet} tokens={dummyAccountTokens} />
+  ))
 
 storiesOf('Tx/Fee Selector', module).add('default ', () => <FeeSelector />)
 
