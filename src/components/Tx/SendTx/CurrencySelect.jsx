@@ -166,7 +166,6 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   display: none !important;
 `
-
 const StyledLI = styled.li`
   display: block;
   padding: 1px;
