@@ -28,26 +28,13 @@ export default class TxDescription extends Component {
     params: PropTypes.array,
     data: PropTypes.object,
     gasPrice: PropTypes.string,
-    gas: PropTypes.string
+    estimatedGas: PropTypes.string
   }
 
   static defaultProps = {}
 
   state = {
     showDetails: false
-  }
-
-  calculateTransferValue = () => {
-    const { value, etherPriceUSD } = this.props
-
-    if (!value || !etherPriceUSD) {
-      return
-    }
-
-    const fee = new BN(value)
-      .times(etherPriceUSD)
-      .dividedBy(new BN('1000000000000000000'))
-    return fee
   }
 
   handleDetailsClick = () => {
@@ -72,7 +59,7 @@ export default class TxDescription extends Component {
     return 'etherTransfer'
   }
 
-  renderDescription() {
+  renderDescription = () => {
     const {
       etherPriceUSD,
       executionFunction,
@@ -91,15 +78,38 @@ export default class TxDescription extends Component {
       case 'genericFunctionExecution':
         return <FunctionExecution executionFunction={executionFunction} />
       default:
-        const etherAmount = util.weiToEther(value)
         return (
           <SendEther
             network={network}
-            value={etherAmount}
-            valueInUSD={util.toUsd(etherAmount, etherPriceUSD)}
+            value={util.weiToEther(value)}
+            valueInUSD={util.toUsd(util.weiToEther(value), etherPriceUSD)}
           />
         )
     }
+  }
+
+  parseTokenDisplayName = () => {
+    const { executionFunction, token } = this.props
+
+    const isTokenTransfer = executionFunction === 'transfer(address,uint256)'
+
+    if (!isTokenTransfer) {
+      return null
+    }
+
+    if (token.name && token.name !== token.symbol) {
+      return `${token.name} (${token.symbol})`
+    }
+
+    if (token.name) {
+      return token.name
+    }
+
+    if (token.symbol) {
+      return token.symbol
+    }
+
+    return 'tokens'
   }
 
   renderMoreDetails() {
@@ -110,7 +120,6 @@ export default class TxDescription extends Component {
       gasPrice,
       isNewContract,
       params,
-      toIsContract,
       token,
       value
     } = this.props
@@ -121,24 +130,7 @@ export default class TxDescription extends Component {
     const showTxExecutingFunction =
       executionFunction && !isNewContract && !isTokenTransfer
 
-    let tokenDisplayName
-    if (isTokenTransfer) {
-      if (!token) {
-        tokenDisplayName = 'tokens'
-      } else {
-        if (token.name && token.name !== token.symbol) {
-          tokenDisplayName = `${token.name} (${token.symbol})`
-        } else {
-          if (token.name) {
-            tokenDisplayName = token.name
-          } else if (token.symbol) {
-            tokenDisplayName = token.symbol
-          } else {
-            tokenDisplayName = 'tokens'
-          }
-        }
-      }
-    }
+    const tokenDisplayName = this.parseTokenDisplayName()
 
     if (!showDetails) {
       return (
@@ -215,9 +207,9 @@ export default class TxDescription extends Component {
           <StyledExecutionContextTitle>
             {i18n.t('mist.sendTx.gasEstimate')}
           </StyledExecutionContextTitle>
-          <StyledExecutionContextDetailsValue>{`${new BN(
-            estimatedGas
-          ).toString()} gas`}</StyledExecutionContextDetailsValue>
+          <StyledExecutionContextDetailsValue>
+            {`${new BN(estimatedGas).toString()} gas`}
+          </StyledExecutionContextDetailsValue>
         </StyledExecutionContextRow>
 
         {isTokenTransfer && (
@@ -329,11 +321,6 @@ const StyledExecutionContextDetailsValue = styled.span`
   font-weight: bold;
 `
 
-const StyledExecutionContextParamAddress = styled.span`
-  user-select: all;
-  margin-left: 6px;
-`
-
 const StyledExecutionContextParam = styled.span`
   user-select: all;
   display: flex;
@@ -363,29 +350,4 @@ const StyledExeuctionContextParamType = styled.span`
   align-items: center;
 `
 
-const StyledContextDescriptionSentence = styled.div`
-  margin: 18px 0 24px;
-  font-size: 36px;
-  text-align: left;
-`
-
-const StyledContextDescriptionSubtext = styled.div`
-  font-size: 16px;
-  margin: 12px 0;
-`
-
-const StyledContextDescriptionSendEthAlert = styled.div`
-  font-size: 15px;
-`
-
-const StyledContextDescriptionError = styled.div`
-  color: #f66d6f;
-  margin: -12px 0 12px;
-  text-align: left;
-  font-size: 16px;
-  font-weight: bold;
-`
-
 const StyledExecutionContextParamValue = styled.span``
-
-const StyledDescription = styled.div``

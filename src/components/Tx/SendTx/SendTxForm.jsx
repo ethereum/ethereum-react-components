@@ -8,9 +8,10 @@ import GasNotification from './GasNotification'
 import TxParties from './TxParties'
 
 export default class SendTx extends Component {
-  props = {
-    gas: PropTypes.string,
-    gasPrice: PropTypes.string
+  static propTypes = {
+    etherPriceUSD: PropTypes.string,
+    network: PropTypes.string,
+    newTx: PropTypes.object
   }
 
   state = {
@@ -27,24 +28,17 @@ export default class SendTx extends Component {
 
   handleSubmit = formData => {
     const { priority } = this.state
-    const {
-      data,
-      to,
-      from,
-      gas,
-      gasPrice,
-      estimatedGas,
-      value
-    } = this.props.newTx
+    const { newTx } = this.props
+    const { data, to, from, gas, gasPrice, estimatedGas, value } = newTx
 
     // If no gas value was provided, use estimatedGas
     const gasValue =
       parseInt(gas, 16) !== 0 ? gas : `0x${estimatedGas.toString(16)}`
 
     // If priority tx, double the value and format it
-    const chosenPrice = priority ? '0x' + (gasPrice * 2).toString(16) : gasPrice
+    const chosenPrice = priority ? `0x${(gasPrice * 2).toString(16)}` : gasPrice
 
-    let txData = {
+    const txData = {
       data,
       from,
       gas: gasValue,
@@ -58,10 +52,11 @@ export default class SendTx extends Component {
     }
 
     // FIXME this.props.dispatch(confirmTx(txData))
+    console.log('txData', txData)
   }
 
   render() {
-    const { newTx, network, priority, etherPriceUSD } = this.props
+    const { newTx, network, etherPriceUSD } = this.props
     const {
       from,
       to,
@@ -71,10 +66,7 @@ export default class SendTx extends Component {
       gasError,
       gasLoading,
       unlocking,
-      data
-    } = newTx
-
-    const {
+      data,
       isNewContract,
       toIsContract,
       executionFunction,
