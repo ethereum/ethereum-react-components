@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.1"></a>
+## [1.9.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.0...v1.9.1) (2019-01-18)
+
+
+### Bug Fixes
+
+* ADD styled-components to Checkmark & AnimatedCross ([#99](https://github.com/PhilippLgh/ethereum-react-components/issues/99)) ([6e35692](https://github.com/PhilippLgh/ethereum-react-components/commit/6e35692))
+
+
+
 <a name="1.9.0"></a>
 # [1.9.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.8.1...v1.9.0) (2019-01-17)
 
