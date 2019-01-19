@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import i18n from '../../i18n'
 import { Button, InputPassword } from '..'
-import './FormCreateAccount.scss'
 
 // TODO this falls under category API dependencies and needs to be
 // - required in the beginning: const Mist = require(./api/mist)
@@ -18,6 +18,8 @@ export default class CreateAccount extends Component {
   static displayName = 'CreateAccount'
 
   static propTypes = {}
+
+  static defaultProps = {}
 
   constructor(props) {
     super(props)
@@ -100,11 +102,10 @@ export default class CreateAccount extends Component {
 
     return (
       <div>
-        <div className={`field-container ${showRepeat ? 'repeat-field' : ''}`}>
+        <div>
           {showRepeat ? (
             /** repeat password */
             <InputPassword
-              className="password-repeat"
               placeholder={i18n.t(
                 'mist.popupWindows.requestAccount.repeatPassword'
               )}
@@ -112,9 +113,7 @@ export default class CreateAccount extends Component {
               value={pwRepeat}
             />
           ) : (
-            /** enter password */
             <InputPassword
-              className="password"
               placeholder={i18n.t(
                 'mist.popupWindows.requestAccount.enterPassword'
               )}
@@ -123,21 +122,21 @@ export default class CreateAccount extends Component {
             />
           )}
         </div>
-        <div className="dapp-modal-buttons">
+        <DappModalBtn>
           <Button flat secondary onClick={e => this.handleCancel(e)}>
             {i18n.t('buttons.cancel')}
           </Button>
           <Button flat type="submit">
             {i18n.t('buttons.ok')}
           </Button>
-        </div>
+        </DappModalBtn>
       </div>
     )
   }
 
   render() {
     return (
-      <div className="popup-windows request-account">
+      <div>
         <form onSubmit={e => this.handleSubmit(e)}>
           <h1>{i18n.t('mist.popupWindows.requestAccount.title')}</h1>
           {this.renderFormBody()}
@@ -146,3 +145,7 @@ export default class CreateAccount extends Component {
     )
   }
 }
+
+const DappModalBtn = styled.div`
+  margin-top: 30px;
+`
