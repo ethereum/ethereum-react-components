@@ -140,7 +140,7 @@ const en = {
       "gasPricePriority": "Gas Price (Priority):",
       "gasEstimate": "Gas Estimate:",
       "errorMessage": "Error Message:",
-      "transactionExecutingFunction": "Transaction Executing Function:",
+      "txExecutingFunction": "Transaction Executing Function:",
       "from": "From",
       "to": "To",
       "contract": "Contract",

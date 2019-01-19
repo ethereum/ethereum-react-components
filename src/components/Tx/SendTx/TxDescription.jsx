@@ -88,12 +88,15 @@ export default class TxDescription extends Component {
     }
   }
 
+  isTokenTransfer = () => {
+    const { executionFunction } = this.props
+    return executionFunction === 'transfer(address,uint256)'
+  }
+
   parseTokenDisplayName = () => {
     const { executionFunction, token } = this.props
 
-    const isTokenTransfer = executionFunction === 'transfer(address,uint256)'
-
-    if (!isTokenTransfer) {
+    if (!this.isTokenTransfer) {
       return null
     }
 
@@ -112,34 +115,128 @@ export default class TxDescription extends Component {
     return 'tokens'
   }
 
-  renderMoreDetails() {
-    const {
-      estimatedGas,
-      executionFunction,
-      gasError,
-      gasPrice,
-      isNewContract,
-      params,
-      token,
-      value
-    } = this.props
-    const { showDetails } = this.state
+  renderGasError() {
+    const { gasError } = this.props
+    if (!gasError) {
+      return null
+    }
+    return (
+      <StyledExecutionContextRow>
+        <StyledExecutionContextTitle>
+          {i18n.t('mist.sendTx.errorMessage')}
+        </StyledExecutionContextTitle>
+        <StyledExecutionContextDetailsValue>
+          <StyledError>{gasError}</StyledError>
+        </StyledExecutionContextDetailsValue>
+      </StyledExecutionContextRow>
+    )
+  }
 
-    const isTokenTransfer = executionFunction === 'transfer(address,uint256)'
+  renderTxExecutingFunction() {
+    const { executionFunction, isNewContract } = this.props
 
-    const showTxExecutingFunction =
-      executionFunction && !isNewContract && !isTokenTransfer
+    if (!executionFunction || isNewContract || this.isTokenTransfer()) {
+      return null
+    }
+
+    return (
+      <StyledExecutionContextRow>
+        <StyledExecutionContextDetailsTitle>
+          {i18n.t('mist.sendTx.txExecutingFunction')}
+        </StyledExecutionContextDetailsTitle>
+        <StyledExecutionContextExecutionFunction>
+          {executionFunction.slice(0, executionFunction.indexOf('('))}
+        </StyledExecutionContextExecutionFunction>
+      </StyledExecutionContextRow>
+    )
+  }
+
+  renderEtherAmount() {
+    const { value } = this.props
+    const etherAmount = util.weiToEther(value).toString()
+    return (
+      <StyledExecutionContextRow>
+        <StyledExecutionContextTitle>
+          {i18n.t('mist.sendTx.etherAmount')}
+        </StyledExecutionContextTitle>
+        <StyledExecutionContextDetailsValue>
+          {etherAmount}
+        </StyledExecutionContextDetailsValue>
+      </StyledExecutionContextRow>
+    )
+  }
+
+  renderGasPrice() {
+    const { gasPrice } = this.props
+    const gasPriceGwei = new BN(gasPrice).div(new BN('1000000000'))
+    return (
+      <StyledExecutionContextRow>
+        <StyledExecutionContextTitle>
+          {i18n.t('mist.sendTx.gasPrice')}
+        </StyledExecutionContextTitle>
+        <StyledExecutionContextDetailsValue>{`${gasPriceGwei} gwei`}</StyledExecutionContextDetailsValue>
+      </StyledExecutionContextRow>
+    )
+  }
+
+  renderGasEstimate() {
+    const { estimatedGas } = this.props
+    const gas = util.toBigNumber(estimatedGas).toString()
+    return (
+      <StyledExecutionContextRow>
+        <StyledExecutionContextTitle>
+          {i18n.t('mist.sendTx.gasEstimate')}
+        </StyledExecutionContextTitle>
+        <StyledExecutionContextDetailsValue>
+          {gas} gas
+        </StyledExecutionContextDetailsValue>
+      </StyledExecutionContextRow>
+    )
+  }
+
+  renderTokenDetails() {
+    const { token } = this.props
+
+    if (!token || !this.isTokenTransfer) {
+      return null
+    }
 
     const tokenDisplayName = this.parseTokenDisplayName()
 
-    if (!showDetails) {
-      return (
-        <StyledButton flat secondary onClick={this.handleDetailsClick}>
-          {i18n.t('mist.sendTx.showDetails')}
-        </StyledButton>
-      )
-    }
+    return (
+      <div>
+        {tokenDisplayName !== 'tokens' && (
+          <StyledExecutionContextRow>
+            <StyledExecutionContextTitle>
+              {i18n.t('mist.sendTx.tokenName')}
+            </StyledExecutionContextTitle>
+            <StyledExecutionContextDetailsValue>
+              {tokenDisplayName}
+            </StyledExecutionContextDetailsValue>
+          </StyledExecutionContextRow>
+        )}
+        {token.address && (
+          <StyledExecutionContextRow>
+            <StyledExecutionContextTitle>
+              {i18n.t('mist.sendTx.tokenAddress')}
+            </StyledExecutionContextTitle>
+            <StyledExecutionContextParamIdenticon>
+              <Identicon address={token.address} size="small" />
+            </StyledExecutionContextParamIdenticon>
+            <StyledExecutionContextDetailsValue>
+              {token.address}
+            </StyledExecutionContextDetailsValue>
+          </StyledExecutionContextRow>
+        )}
+      </div>
+    )
+  }
 
+  renderParams() {
+    const { params } = this.props
+    if (params.length === 0) {
+      return null
+    }
     const paramsRows = params.map(param => {
       return (
         <StyledExecutionContextParam key={Math.random()}>
@@ -160,96 +257,38 @@ export default class TxDescription extends Component {
         </StyledExecutionContextParam>
       )
     })
+    return (
+      <div>
+        <StyledExecutionContextParamsTitle>
+          {i18n.t('mist.sendTx.parameters')}
+        </StyledExecutionContextParamsTitle>
+        <StyledExecutionContextParamsTable>
+          {paramsRows}
+        </StyledExecutionContextParamsTable>
+      </div>
+    )
+  }
 
-    const gasPriceGwei = new BN(gasPrice).div(new BN('1000000000'))
+  renderMoreDetails() {
+    const { showDetails } = this.state
+
+    if (!showDetails) {
+      return (
+        <StyledButton flat secondary onClick={this.handleDetailsClick}>
+          {i18n.t('mist.sendTx.showDetails')}
+        </StyledButton>
+      )
+    }
 
     return (
       <StyledExecutionContextDetails>
-        {gasError && (
-          <StyledExecutionContextRow>
-            <StyledExecutionContextTitle>
-              {i18n.t('mist.sendTx.errorMessage')}
-            </StyledExecutionContextTitle>
-            <StyledExecutionContextDetailsValue>
-              {gasError}
-            </StyledExecutionContextDetailsValue>
-          </StyledExecutionContextRow>
-        )}
-
-        {showTxExecutingFunction && (
-          <StyledExecutionContextRow>
-            <StyledExecutionContextDetailsTitle>
-              {i18n.t('mist.sendTx.transactionExecutingFunction')}
-            </StyledExecutionContextDetailsTitle>
-            <StyledExecutionContextExecutionFunction>
-              {executionFunction.slice(0, executionFunction.indexOf('('))}
-            </StyledExecutionContextExecutionFunction>
-          </StyledExecutionContextRow>
-        )}
-
-        <StyledExecutionContextRow>
-          <StyledExecutionContextTitle>
-            {i18n.t('mist.sendTx.etherAmount')}
-          </StyledExecutionContextTitle>
-          <StyledExecutionContextDetailsValue>
-            {util.weiToEther(value).toString()}
-          </StyledExecutionContextDetailsValue>
-        </StyledExecutionContextRow>
-
-        <StyledExecutionContextRow>
-          <StyledExecutionContextTitle>
-            {i18n.t('mist.sendTx.gasPrice')}
-          </StyledExecutionContextTitle>
-          <StyledExecutionContextDetailsValue>{`${gasPriceGwei} gwei`}</StyledExecutionContextDetailsValue>
-        </StyledExecutionContextRow>
-
-        <StyledExecutionContextRow>
-          <StyledExecutionContextTitle>
-            {i18n.t('mist.sendTx.gasEstimate')}
-          </StyledExecutionContextTitle>
-          <StyledExecutionContextDetailsValue>
-            {`${new BN(estimatedGas).toString()} gas`}
-          </StyledExecutionContextDetailsValue>
-        </StyledExecutionContextRow>
-
-        {isTokenTransfer && (
-          <div>
-            {tokenDisplayName && tokenDisplayName !== 'tokens' && (
-              <StyledExecutionContextRow>
-                <StyledExecutionContextTitle>
-                  {i18n.t('mist.sendTx.tokenName')}
-                </StyledExecutionContextTitle>
-                <StyledExecutionContextDetailsValue>
-                  {tokenDisplayName}
-                </StyledExecutionContextDetailsValue>
-              </StyledExecutionContextRow>
-            )}
-            {token && token.address && (
-              <StyledExecutionContextRow>
-                <StyledExecutionContextTitle>
-                  {i18n.t('mist.sendTx.tokenAddress')}
-                </StyledExecutionContextTitle>
-                <StyledExecutionContextParamIdenticon>
-                  <Identicon address={token.address} size="small" />
-                </StyledExecutionContextParamIdenticon>
-                <StyledExecutionContextDetailsValue>
-                  {token.address}
-                </StyledExecutionContextDetailsValue>
-              </StyledExecutionContextRow>
-            )}
-          </div>
-        )}
-
-        {params.length > 0 && (
-          <div>
-            <StyledExecutionContextParamsTitle>
-              {i18n.t('mist.sendTx.parameters')}
-            </StyledExecutionContextParamsTitle>
-            <StyledExecutionContextParamsTable>
-              {paramsRows}
-            </StyledExecutionContextParamsTable>
-          </div>
-        )}
+        {this.renderGasError()}
+        {this.renderTxExecutingFunction()}
+        {this.renderEtherAmount()}
+        {this.renderGasPrice()}
+        {this.renderGasEstimate()}
+        {this.renderTokenDetails()}
+        {this.renderParams()}
 
         <StyledButton flat secondary onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.hideDetails')}
@@ -266,10 +305,10 @@ export default class TxDescription extends Component {
         <StyledContextDescription>
           {this.renderDescription()}
           {!!gasError && (
-            <div className="context-description__error">
+            <StyledError>
               Warning: this transaction is likely going to fail and burn your
               fees.
-            </div>
+            </StyledError>
           )}
         </StyledContextDescription>
         {this.renderMoreDetails()}
@@ -342,7 +381,7 @@ const StyledExecutionContextParamIdenticon = styled.span`
 `
 
 const StyledExecutionContextExecutionFunction = styled.span`
-  font-weight: 500;
+  font-weight: bold;
 `
 
 const StyledExeuctionContextParamType = styled.span`
@@ -351,3 +390,7 @@ const StyledExeuctionContextParamType = styled.span`
 `
 
 const StyledExecutionContextParamValue = styled.span``
+
+const StyledError = styled.span`
+  color: red;
+`
