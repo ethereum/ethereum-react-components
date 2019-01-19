@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { storiesOf } from '@storybook/react'
-import FeeSelector from '../components/Tx/SendTx/FeeSelector'
+import FeeSelectorStorybookContainer from '../components/Tx/SendTx/FeeSelectorStorybookContainer'
 import SubmitTxForm from '../components/Tx/SendTx/SubmitTxForm'
 import TxDescription from '../components/Tx/SendTx/TxDescription'
 import GasNotification from '../components/Tx/SendTx/GasNotification'
@@ -23,13 +23,17 @@ const dummyTx = {
 
 storiesOf('Tx/Fee Selector', module)
   .add('Main network, gas loading', () => (
-    <FeeSelector network="main" etherPriceUSD={200} gasLoading />
+    <FeeSelectorStorybookContainer
+      network="main"
+      etherPriceUSD={200}
+      gasLoading
+    />
   ))
   .add('Main network, no gas', () => (
-    <FeeSelector network="main" etherPriceUSD={200} />
+    <FeeSelectorStorybookContainer network="main" etherPriceUSD={200} />
   ))
   .add('Main network', () => (
-    <FeeSelector
+    <FeeSelectorStorybookContainer
       network="main"
       etherPriceUSD={200}
       estimatedGas={dummyTx.estimatedGas}
@@ -37,7 +41,7 @@ storiesOf('Tx/Fee Selector', module)
     />
   ))
   .add('Test network', () => (
-    <FeeSelector
+    <FeeSelectorStorybookContainer
       network="rinkeby"
       estimatedGas={dummyTx.estimatedGas}
       gasPrice={dummyTx.gasPrice}

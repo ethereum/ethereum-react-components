@@ -78,7 +78,8 @@ export default class SendTx extends Component {
       fromIsContract,
       hasSignature,
       showFormattedParams,
-      providedGas
+      providedGas,
+      priority
     } = this.state
 
     return (
@@ -122,7 +123,8 @@ export default class SendTx extends Component {
             estimatedGas={estimatedGas}
             etherPriceUSD={etherPriceUSD}
             network={network}
-            updateGasPrice={this.updateGasPrice}
+            togglePriority={this.togglePriority}
+            priority={priority}
           />
         </StyledSpacer>
 

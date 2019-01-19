@@ -12,11 +12,8 @@ export default class FeeSelector extends Component {
     estimatedGas: PropTypes.string,
     gasPrice: PropTypes.string,
     gasLoading: PropTypes.bool,
-    togglePriority: PropTypes.func
-  }
-
-  state = {
-    priority: false
+    togglePriority: PropTypes.func,
+    priority: PropTypes.bool
   }
 
   gasEtherAmount = () => {
@@ -32,8 +29,7 @@ export default class FeeSelector extends Component {
   }
 
   parseFee = () => {
-    const { etherPriceUSD, network } = this.props
-    const { priority } = this.state
+    const { etherPriceUSD, network, priority } = this.props
 
     const gasEtherAmount = this.gasEtherAmount()
     const gasEtherAmountPriority = this.gasEtherAmountPriority()
@@ -61,12 +57,7 @@ export default class FeeSelector extends Component {
 
   togglePriority = () => {
     const { togglePriority } = this.props
-    const { priority } = this.state
-    this.setState({ priority: !priority }, () => {
-      if (togglePriority) {
-        togglePriority()
-      }
-    })
+    togglePriority()
   }
 
   renderStatus = () => {
@@ -94,8 +85,7 @@ export default class FeeSelector extends Component {
   }
 
   render() {
-    const { estimatedGas } = this.props
-    const { priority } = this.state
+    const { estimatedGas, priority } = this.props
 
     if (!estimatedGas) {
       return <div>{this.renderStatus()}</div>
@@ -159,11 +149,5 @@ const StyledSpinnerContainer = styled.div`
   width: 50px;
   height: 50px;
   display: inline-block;
-  .loader {
-    display: inline-block;
-    height: 0;
-    width: 0;
-    padding-left: 20px;
-    padding-top: 10px;
-  }
+  margin-left: 10px;
 `
