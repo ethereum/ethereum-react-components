@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.2"></a>
+## [1.9.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.1...v1.9.2) (2019-01-21)
+
+
+### Bug Fixes
+
+* estimated gas units in terms of 'gas' ([df56d92](https://github.com/PhilippLgh/ethereum-react-components/commit/df56d92))
+* FeeSelector math ([091211b](https://github.com/PhilippLgh/ethereum-react-components/commit/091211b))
+* FeeSelector math ([91266b8](https://github.com/PhilippLgh/ethereum-react-components/commit/91266b8))
+* resolves remaining lints ([69eeebe](https://github.com/PhilippLgh/ethereum-react-components/commit/69eeebe))
+
+
+
 <a name="1.9.1"></a>
 ## [1.9.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.0...v1.9.1) (2019-01-18)
 
