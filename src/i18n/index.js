@@ -130,15 +130,17 @@ const en = {
       "transfer": "Transfer",
       "showDetails": "Show details",
       "hideDetails": "Hide details",
-      "tokenName": "Token name:",
+      "tokenAddress": "Token Address:",
+      "tokenName": "Token Name:",
       "tokenContractName": "Token Contract Address:",
       "parameters": "Parameters",
       "etherAmount": "Ether Amount:",
+      "gasPrice": "Gas Price:",
       "gasPriceStandard": "Gas Price (Standard):",
       "gasPricePriority": "Gas Price (Priority):",
       "gasEstimate": "Gas Estimate:",
       "errorMessage": "Error Message:",
-      "transactionExecutingFunction": "Transaction Executing Function:",
+      "txExecutingFunction": "Transaction Executing Function:",
       "from": "From",
       "to": "To",
       "contract": "Contract",
@@ -151,13 +153,13 @@ const en = {
       "estimatedGasError":
         "It seems this transaction will fail. If you submit it, it may consume all the gas you provide.",
       "overBlockGasLimit":
-        "The gas required for this execution could exceed the block gas limit.",
+        "The gas required for this execution exceeds the block gas limit.",
       "notEnoughGas":
-        "Gas might not be enough to successfully finish this transaction.<br>Click here to increase the gas amount.",
+        "Gas might not be enough to successfully finish this transaction.",
       "gasLoadingWarning":
-        "This is taking a while! You may choose to use this default fee. Your actual fee will likely be less.",
+        "Loading gas estimate...",
       "gasLoadingError":
-        "Failed to estimate gas. You may choose to use this default fee. Your actual fee will likely be less.",
+        "Failed to estimate gas.",
       "errors": {
         "connectionTimeout":
           "Couldn't connect to the node, did it crash in the background?",

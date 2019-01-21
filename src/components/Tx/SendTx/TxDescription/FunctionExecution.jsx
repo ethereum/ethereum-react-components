@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import { formatFunctionName } from '../../../../util/formatters'
 
 export default class FunctionExecution extends Component {
-  static displayName = 'FunctionExecution'
-
   static propTypes = {
     executionFunction: PropTypes.string
   }
@@ -24,10 +22,12 @@ export default class FunctionExecution extends Component {
         <Bold>Execute </Bold>
         {executionFunctionClean ? (
           <React.Fragment>
-            &#8220;{executionFunctionClean}&#8221; function
+            &#8220;
+            <StyledFunctionName>{executionFunctionClean}</StyledFunctionName>
+            &#8221; Function
           </React.Fragment>
         ) : (
-          <React.Fragment>contract function</React.Fragment>
+          <React.Fragment>Contract Function</React.Fragment>
         )}
       </StyledWrapper>
     )
@@ -35,11 +35,13 @@ export default class FunctionExecution extends Component {
 }
 
 const StyledWrapper = styled.div`
-  margin: 18px 0 24px;
   font-size: 36px;
-  text-align: left;
 `
 
 const Bold = styled.span`
   font-weight: bold;
+`
+
+const StyledFunctionName = styled.span`
+  text-transform: capitalize;
 `
