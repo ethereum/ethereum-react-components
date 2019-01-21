@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.1"></a>
+## [1.9.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.0...v1.9.1) (2019-01-18)
+
+
+### Bug Fixes
+
+* ADD styled-components to Checkmark & AnimatedCross ([#99](https://github.com/PhilippLgh/ethereum-react-components/issues/99)) ([6e35692](https://github.com/PhilippLgh/ethereum-react-components/commit/6e35692))
+
+
+
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.8.1...v1.9.0) (2019-01-17)
+
+
+### Features
+
+* WalletButton component ([#93](https://github.com/PhilippLgh/ethereum-react-components/issues/93)) ([2ca7395](https://github.com/PhilippLgh/ethereum-react-components/commit/2ca7395)), closes [#82](https://github.com/PhilippLgh/ethereum-react-components/issues/82)
+
+
+
+<a name="1.8.1"></a>
+## [1.8.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.8.0...v1.8.1) (2019-01-17)
+
+
+### Bug Fixes
+
+* add styled-components to InputPassword ([#96](https://github.com/PhilippLgh/ethereum-react-components/issues/96)) ([fe53cc7](https://github.com/PhilippLgh/ethereum-react-components/commit/fe53cc7))
+
+
+
 <a name="1.8.0"></a>
 # [1.8.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.7.2...v1.8.0) (2019-01-15)
 
