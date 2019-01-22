@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.0"></a>
+# [1.11.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.10.1...v1.11.0) (2019-01-22)
+
+
+### Features
+
+* CurrencySelect ([#97](https://github.com/PhilippLgh/ethereum-react-components/issues/97)) ([3c090ff](https://github.com/PhilippLgh/ethereum-react-components/commit/3c090ff)), closes [#86](https://github.com/PhilippLgh/ethereum-react-components/issues/86) [#86](https://github.com/PhilippLgh/ethereum-react-components/issues/86)
+
+
+
 <a name="1.10.1"></a>
 ## [1.10.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.10.0...v1.10.1) (2019-01-22)
 
