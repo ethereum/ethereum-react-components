@@ -29,6 +29,7 @@ import TokenListForItem from './Wallet/TokenListForItem'
 import NavbarItem from './Wallet/NavbarItem'
 import NetworkStatus from './Wallet/NetworkStatus'
 import Notification from './Wallet/Notification'
+import TokenCard from './Wallet/TokenCard'
 
 import * as utils from '../lib/util'
 
@@ -60,6 +61,7 @@ export {
   RpcTester,
   SendTxForm,
   Spinner,
+  TokenCard,
   TokenListForItem,
   TxHistory,
   ValidatedField,
