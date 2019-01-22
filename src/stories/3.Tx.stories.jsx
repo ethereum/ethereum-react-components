@@ -9,6 +9,41 @@ import TxParty from '../components/Tx/SendTx/TxParty'
 import SendTx from '../components/Tx/SendTx/SendTxForm'
 import TxHistory from '../components/Tx/TxHistory'
 
+import CurrencySelect from '../components/Tx/SendTx/CurrencySelect'
+
+const dummyAccountTokens = [
+  {
+    address: '0xD87C62BfA2A4DFAbdD1Fad5A1cb73a63345aA2B0',
+    name: 'Stellar',
+    symbol: 'XLM',
+    balance: '20',
+    decimals: '18'
+  },
+  {
+    address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345aA2B0',
+    name: 'Golem',
+    symbol: 'GO',
+    balance: '33',
+    decimals: '10'
+  }
+]
+
+const dummyWallet = {
+  name: 'ETHER',
+  symbol: 'ETHER',
+  address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz',
+  balance: '15'
+}
+
+storiesOf('Tx/Currency Select', module)
+  .add('No ether, no tokens ', () => (
+    <CurrencySelect etherWallet={{ ...dummyWallet, balance: '0.00' }} />
+  ))
+  .add('Ether, no tokens', () => <CurrencySelect etherWallet={dummyWallet} />)
+  .add('No ether, tokens', () => (
+    <CurrencySelect etherWallet={dummyWallet} tokens={dummyAccountTokens} />
+  ))
+
 const dummyTx = {
   nonce: 0,
   from: '0xf17f52151EbEF6C7334FAD080c5704D77216b732',
