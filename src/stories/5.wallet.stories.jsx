@@ -7,7 +7,8 @@ import {
   AccountList,
   NavbarItem,
   NetworkStatus,
-  Notification
+  Notification,
+  TokenCard
 } from '../components'
 
 storiesOf('Wallet/NavbarItem', module)
@@ -132,3 +133,12 @@ storiesOf('Wallet/Account/Item', module)
 storiesOf('Wallet/Notification', module).add('default', () => (
   <Notification message="Example message" />
 ))
+
+storiesOf('Wallet/TokenCard', module)
+  .add('default', () => (
+    <TokenCard
+      address="0x9999999999999999999999999999999999999999"
+      name="Example Token"
+    />
+  ))
+  .add('empty state', () => <TokenCard />)

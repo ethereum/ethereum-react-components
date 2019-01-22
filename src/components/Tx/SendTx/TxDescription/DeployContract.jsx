@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 export default class DeployContract extends Component {
-  static displayName = 'DeployContract'
-
   static propTypes = {
     data: PropTypes.string
   }
@@ -28,9 +26,7 @@ export default class DeployContract extends Component {
 }
 
 const StyledWrapper = styled.div`
-  margin: 18px 0 24px;
   font-size: 36px;
-  text-align: left;
 `
 
 const StyledSubtext = styled.div`

@@ -15,8 +15,9 @@ export default class Button extends Component {
     onClick: PropTypes.func,
     secondary: PropTypes.bool,
     type: PropTypes.oneOf(['button', 'reset', 'submit']),
-    /** If `true`, extra margin is added. See `SubmitFormTx` component for example usage. */
-    withinInput: PropTypes.bool
+    /** If `true`, extra margin is added. See `SubmitTxForm` component for example usage. */
+    withinInput: PropTypes.bool,
+    className: PropTypes.string
   }
 
   static defaultProps = {
@@ -26,18 +27,19 @@ export default class Button extends Component {
     loading: false,
     secondary: false,
     type: 'button',
-    withinInput: false
+    withinInput: false,
+    className: 'Button'
   }
 
   render() {
-    const { children, flat, loading, secondary } = this.props
+    const { children, flat, loading, secondary, className } = this.props
 
     const spinner = (
       <Spinner color={!secondary && !flat ? 'white' : '#00aafa'} scale="0.5" />
     )
 
     return (
-      <StyledButton {...this.props} className="Button">
+      <StyledButton {...this.props} className={className}>
         {loading ? spinner : children}
       </StyledButton>
     )
@@ -60,7 +62,7 @@ const StyledButton = styled.button`
   overflow: hidden;
   padding: 12px 24px;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: capitalize;
   white-space: nowrap;
 
   ${props =>
