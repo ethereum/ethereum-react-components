@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.10.1"></a>
+## [1.10.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.10.0...v1.10.1) (2019-01-22)
+
+
+### Bug Fixes
+
+* ADD styled-components to FormCreateAccount ([#100](https://github.com/PhilippLgh/ethereum-react-components/issues/100)) ([a0d6eb7](https://github.com/PhilippLgh/ethereum-react-components/commit/a0d6eb7))
+
+
+
 <a name="1.10.0"></a>
 # [1.10.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.2...v1.10.0) (2019-01-22)
 
