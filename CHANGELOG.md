@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.10.0"></a>
+# [1.10.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.2...v1.10.0) (2019-01-22)
+
+
+### Features
+
+* introduces TokenCard ([#95](https://github.com/PhilippLgh/ethereum-react-components/issues/95)) ([422a47d](https://github.com/PhilippLgh/ethereum-react-components/commit/422a47d))
+
+
+
 <a name="1.9.2"></a>
 ## [1.9.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.1...v1.9.2) (2019-01-21)
 
