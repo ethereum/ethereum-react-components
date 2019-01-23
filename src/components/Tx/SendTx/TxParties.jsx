@@ -62,7 +62,6 @@ export default class TxParties extends Component {
 
 const StyledDiv = styled.div`
   text-align: left;
-  margin: 18px 34px 12px;
   display: flex;
   flex-direction: column;
 `

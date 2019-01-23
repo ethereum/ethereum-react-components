@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.0"></a>
+# [1.11.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.10.1...v1.11.0) (2019-01-22)
+
+
+### Features
+
+* CurrencySelect ([#97](https://github.com/PhilippLgh/ethereum-react-components/issues/97)) ([3c090ff](https://github.com/PhilippLgh/ethereum-react-components/commit/3c090ff)), closes [#86](https://github.com/PhilippLgh/ethereum-react-components/issues/86) [#86](https://github.com/PhilippLgh/ethereum-react-components/issues/86)
+
+
+
+<a name="1.10.1"></a>
+## [1.10.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.10.0...v1.10.1) (2019-01-22)
+
+
+### Bug Fixes
+
+* ADD styled-components to FormCreateAccount ([#100](https://github.com/PhilippLgh/ethereum-react-components/issues/100)) ([a0d6eb7](https://github.com/PhilippLgh/ethereum-react-components/commit/a0d6eb7))
+
+
+
+<a name="1.10.0"></a>
+# [1.10.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.2...v1.10.0) (2019-01-22)
+
+
+### Features
+
+* introduces TokenCard ([#95](https://github.com/PhilippLgh/ethereum-react-components/issues/95)) ([422a47d](https://github.com/PhilippLgh/ethereum-react-components/commit/422a47d))
+
+
+
+<a name="1.9.2"></a>
+## [1.9.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.1...v1.9.2) (2019-01-21)
+
+
+### Bug Fixes
+
+* estimated gas units in terms of 'gas' ([df56d92](https://github.com/PhilippLgh/ethereum-react-components/commit/df56d92))
+* FeeSelector math ([091211b](https://github.com/PhilippLgh/ethereum-react-components/commit/091211b))
+* FeeSelector math ([91266b8](https://github.com/PhilippLgh/ethereum-react-components/commit/91266b8))
+* resolves remaining lints ([69eeebe](https://github.com/PhilippLgh/ethereum-react-components/commit/69eeebe))
+
+
+
 <a name="1.9.1"></a>
 ## [1.9.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.9.0...v1.9.1) (2019-01-18)
 

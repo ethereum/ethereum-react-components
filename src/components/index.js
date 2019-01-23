@@ -20,8 +20,8 @@ import ValidatedField from './Widgets/Form/ValidatedField'
 import ConverterForm from './Tools/EthConverterForm'
 import NetworkChooser from './Network/NetworkChooser'
 import RpcTester from './Network/RPC/RpcTester'
-import FormSendTx from './Tx/SendTx'
 import TxHistory from './Tx/TxHistory'
+import SendTxForm from './Tx/SendTx'
 
 import AccountList from './Wallet/AccountList'
 import AccountItem from './Wallet/AccountItem'
@@ -29,6 +29,7 @@ import TokenListForItem from './Wallet/TokenListForItem'
 import NavbarItem from './Wallet/NavbarItem'
 import NetworkStatus from './Wallet/NetworkStatus'
 import Notification from './Wallet/Notification'
+import TokenCard from './Wallet/TokenCard'
 
 import * as utils from '../lib/util'
 
@@ -48,7 +49,6 @@ export {
   EthAddress,
   FeeSelector,
   FormCreateAccount,
-  FormSendTx,
   Identicon,
   InputPassword,
   NavbarItem,
@@ -59,7 +59,9 @@ export {
   Notification,
   Pulse,
   RpcTester,
+  SendTxForm,
   Spinner,
+  TokenCard,
   TokenListForItem,
   TxHistory,
   ValidatedField,

@@ -44,7 +44,7 @@ You'll need to import and apply this font (or another font of your choosing) in 
 ## Clone & Storybook
 
 ```
-git clone https://github.com/PhilippLgh/ethereum-react-components.git
+git clone https://github.com/ethereum/ethereum-react-components.git
 cd ethereum-react-components
 yarn
 yarn storybook

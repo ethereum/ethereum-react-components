@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 export default class SendEther extends Component {
-  static displayName = 'SendEther'
-
   static propTypes = {
     network: PropTypes.string,
     value: PropTypes.string,
@@ -14,7 +12,6 @@ export default class SendEther extends Component {
   static defaultProps = {}
 
   render() {
-    console.log('∆∆∆ this.props', this.props)
     const { network, value, valueInUSD } = this.props
 
     let conversion = <span>About ${valueInUSD} USD</span>
@@ -30,7 +27,7 @@ export default class SendEther extends Component {
     return (
       <StyledWrapper>
         <div>
-          <Bold>Transfer</Bold> {value.toString} ETHER
+          <Bold>Transfer</Bold> {value.toString()} Ether
         </div>
         <StyledSubtext>{conversion}</StyledSubtext>
       </StyledWrapper>
@@ -39,9 +36,7 @@ export default class SendEther extends Component {
 }
 
 const StyledWrapper = styled.div`
-  margin: 18px 0 24px;
   font-size: 36px;
-  text-align: left;
 `
 
 const StyledSubtext = styled.div`
