@@ -14,8 +14,6 @@ export default class Modal extends Component {
     title: PropTypes.string
   }
 
-  static defaultProps = {}
-
   render() {
     const { buttons, children, title } = this.props
     let titleRow = null
@@ -27,7 +25,7 @@ export default class Modal extends Component {
       buttonRow = <StyledButtonRow>{buttons}</StyledButtonRow>
     }
     return (
-      <StyledOverlay id="RenderedModal">
+      <StyledOverlay>
         <StyledSection>
           {titleRow}
           {children}
