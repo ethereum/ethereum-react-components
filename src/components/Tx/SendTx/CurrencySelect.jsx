@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Identicon from '../../Identicon'
 
 export default class CurrencySelect extends Component {
   static displayName = 'CurrencySelect'
 
   static propTypes = {
-    etherWallet: PropTypes.shape({
-      balance: PropTypes.string,
-      symbol: PropTypes.string,
-      address: PropTypes.string,
-      name: PropTypes.string
-    }),
+    address: PropTypes.string,
+    balance: PropTypes.string,
     onSelect: PropTypes.func,
     tokens: PropTypes.arrayOf(
       PropTypes.shape({
@@ -25,68 +21,76 @@ export default class CurrencySelect extends Component {
   }
 
   static defaultProps = {
-    etherWallet: {},
     tokens: []
   }
 
-  chooseCurrency = event => {
-    const { onSelect } = this.props
-    if (onSelect) {
-      onSelect(event)
-    }
+  state = {
+    selectedCurrency: 'ETHER'
   }
 
-  static renderCurrencySpans = currency => {
+  chooseCurrency = selectedCurrency => {
+    const { onSelect } = this.props
+
+    this.setState({ selectedCurrency }, () => {
+      if (onSelect) {
+        onSelect(selectedCurrency)
+      }
+    })
+  }
+
+  renderCurrencyRow = currency => {
+    const { selectedCurrency } = this.state
     const { address, balance, name, symbol } = currency
-    let symbolSpan = null
+
+    let symbolDisplay
     if (name === 'ETHER') {
-      symbolSpan = <StyledSymbol>Ξ</StyledSymbol>
+      symbolDisplay = (
+        <StyledSymbol unselected={selectedCurrency !== 'ETHER'}>Ξ</StyledSymbol>
+      )
     } else {
-      symbolSpan = <StyledIdenticon size="tiny" address={address} />
+      symbolDisplay = <StyledIdenticon size="tiny" address={address} />
     }
+
     return (
-      <React.Fragment>
-        {symbolSpan}
+      <StyledRow>
+        {symbolDisplay}
         <StyledName>{name}</StyledName>
-        <StyledBalance>
-          {` ${balance} ${symbol}`}
-        </StyledBalance>
-      </React.Fragment>
+        <StyledBalance>{` ${balance} ${symbol}`}</StyledBalance>
+      </StyledRow>
     )
   }
 
   render() {
-    const { etherWallet, tokens } = this.props
-    const currencyList = [...tokens]
-    currencyList.unshift(etherWallet)
+    const { address, balance, tokens } = this.props
+    const { selectedCurrency } = this.state
+
+    const currencyList = [
+      { address, balance, name: 'ETHER', symbol: 'ETHER' },
+      ...tokens
+    ]
+
+    if (currencyList.length === 1) {
+      return <StyledDiv>{this.renderCurrencyRow(currencyList[0])}</StyledDiv>
+    }
 
     return (
-      <React.Fragment>
-        {currencyList.length === 1 ? (
-          <StyledDiv>
-            {CurrencySelect.renderCurrencySpans(currencyList[0])}
-          </StyledDiv>
-        ) : (
-          <StyledUL>
-            {currencyList.map(currency => (
-              <StyledLI key={currency.address} onSelect={this.chooseCurrency}>
-                <StyledInput
-                  type="radio"
-                  id={currency.name}
-                  value={currency.address}
-                  name="choose-token"
-                />
-                <StyledLabel
-                  htmlFor={currency.name}
-                  onSelect={this.chooseCurrency}
-                >
-                  {CurrencySelect.renderCurrencySpans(currency)}
-                </StyledLabel>
-              </StyledLI>
-            ))}
-          </StyledUL>
-        )}
-      </React.Fragment>
+      <StyledList>
+        {currencyList.map(currency => (
+          <StyledListItem key={currency.address}>
+            <StyledInput
+              type="radio"
+              id={currency.name}
+              value={currency.name}
+              name="choose-token"
+              checked={currency.name === selectedCurrency}
+              onChange={e => this.chooseCurrency(e.target.value)}
+            />
+            <StyledLabel htmlFor={currency.name}>
+              {this.renderCurrencyRow(currency)}
+            </StyledLabel>
+          </StyledListItem>
+        ))}
+      </StyledList>
     )
   }
 }
@@ -100,18 +104,11 @@ const StyledDiv = styled.div`
   min-height: 30px;
   margin-top: 13.8px;
   padding: 4.6px 16px;
+`
 
-  .balance {
-    float: right;
-  }
-
-  .currency-name {
-    position: absolute;
-  }
-
-  .ether-symbol {
-    border: 1px solid #695e5e !important;
-  }
+const StyledRow = styled.div`
+  display: flex;
+  width: 100%;
 `
 
 const StyledSpan = styled.span`
@@ -129,7 +126,6 @@ const StyledSymbol = styled(StyledSpan)`
   min-width: 22px;
   padding: 1px 0;
   height: 22px;
-
   background-clip: padding-box;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -137,17 +133,28 @@ const StyledSymbol = styled(StyledSpan)`
   text-align: center;
   font-size: 14px;
   line-height: 19px;
+  border: 1px solid #695e5e !important;
+
+  ${props =>
+    props.unselected &&
+    css`
+      border: 1px solid #02a8f3 !important;
+    `}
+`
+
+const StyledIdenticon = styled(Identicon)`
+  min-width: 21px;
 `
 
 const StyledName = styled(StyledSpan)`
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 0 8px;
 `
 
 const StyledBalance = styled(StyledSpan)`
   text-align: right;
   color: #827a7a;
-  float: ${props => props.float || ''};
+  flex-grow: 1;
+  text-align: right;
 `
 
 const StyledLabel = styled.label`
@@ -166,7 +173,8 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   display: none !important;
 `
-const StyledLI = styled.li`
+
+const StyledListItem = styled.li`
   display: block;
   padding: 1px;
   margin: 0;
@@ -179,10 +187,6 @@ const StyledLI = styled.li`
     opacity: 1;
     background: #ccc6c6;
     font-weight: 400;
-
-    .ether-symbol {
-      border: 1px solid #695e5e !important;
-    }
   }
 
   :hover {
@@ -201,23 +205,14 @@ const StyledLI = styled.li`
     transition: height 200ms, opacity 200ms, padding 200ms;
     cursor: pointer;
     background: #fafafa;
-
-    .ether-symbol {
-      border: 1px solid #02a8f3 !important;
-    }
   }
 `
 
-const StyledUL = styled.ul`
+const StyledList = styled.ul`
   padding: 0;
   margin: 0;
   list-style: none;
   transition: box-shadow 800ms;
   background: #f5f4f2;
   margin-top: 13.8px;
-`
-
-const StyledIdenticon = styled(Identicon)`
-  flex: 0;
-  min-width: 21px;
 `
