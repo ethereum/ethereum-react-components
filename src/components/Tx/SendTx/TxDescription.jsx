@@ -94,7 +94,7 @@ export default class TxDescription extends Component {
   }
 
   parseTokenDisplayName = () => {
-    const { executionFunction, token } = this.props
+    const { token } = this.props
 
     if (!this.isTokenTransfer) {
       return null
