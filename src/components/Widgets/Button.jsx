@@ -58,7 +58,6 @@ const StyledButton = styled.button`
   font-size: 14px;
   height: 46px;
   line-height: 1;
-  min-width: 120px;
   overflow: hidden;
   padding: 12px 24px;
   text-decoration: none;
@@ -99,5 +98,12 @@ const StyledButton = styled.button`
     css`
       border: 1px solid #f66d6f;
       background-color: #f66d6f;
+    `}
+
+  ${props =>
+    props.direction &&
+    css`
+      padding-${props.direction}: 0px;
+      justify-content: flex-${props.direction === 'right' ? 'end' : 'start'};
     `}
 `

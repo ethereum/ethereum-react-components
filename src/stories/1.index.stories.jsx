@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import { linkTo } from '@storybook/addon-links'
 import Welcome from './Welcome'
@@ -16,8 +17,10 @@ import {
   TextArea,
   Select,
   FileChooser,
-  WalletButton
+  WalletButton,
+  Modal
 } from '../components'
+
 import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
 import Cross from '../components/Widgets/AnimatedIcons/AnimatedCross'
 
@@ -62,9 +65,55 @@ const dummyContracts = {
   }
 }
 
+const ModalButtons = () => (
+  <React.Fragment>
+    <Button flat secondary direction="right">
+      CANCEL
+    </Button>
+    <Button flat direction="right">
+      {' '}
+      OK{' '}
+    </Button>
+  </React.Fragment>
+)
+
+const ModalInputs = () => (
+  <React.Fragment>
+    <StyledH3>To</StyledH3>
+    <AddressInput value="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
+    <StyledH3>From</StyledH3>
+    <AddressInput />
+    <StyledH3>Amount</StyledH3>
+    <Input />
+  </React.Fragment>
+)
+
+const StyledH3 = styled.h3`
+  margin: 16px 0;
+  padding: 0;
+  color: rgba(130, 122, 122, 0.7);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1em;
+  clear: both;
+`
+
 storiesOf('Welcome', module).add('to Ethereum Components', () => (
   <Welcome showApp={linkTo('Button')} />
 ))
+
+storiesOf('Modal', module)
+  .add('With title', () => <Modal title="Add token" />)
+  .add('With children', () => (
+    <Modal title="Add token">
+      <ModalInputs />
+    </Modal>
+  ))
+  .add('With buttons', () => (
+    <Modal title="Add token" buttons={<ModalButtons />}>
+      <ModalInputs />
+    </Modal>
+  ))
 
 storiesOf('Widgets/Form/AddressSelect', module)
   .add('wallets and contracts', () => (

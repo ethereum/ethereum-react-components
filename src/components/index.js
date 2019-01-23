@@ -1,5 +1,6 @@
 import Identicon from './Identicon'
 import EthAddress from './EthAddress'
+import Modal from './Modal'
 import FeeSelector from './Tx/SendTx/FeeSelector'
 import { FormCreateAccount, InputPassword } from './CreateAccount'
 import NodeInfo from './Network/NodeInfo'
@@ -51,6 +52,7 @@ export {
   FormCreateAccount,
   Identicon,
   InputPassword,
+  Modal,
   NavbarItem,
   NetworkChooser,
   NetworkStatus,
