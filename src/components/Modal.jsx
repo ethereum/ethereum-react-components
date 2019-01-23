@@ -10,10 +10,7 @@ export default class Modal extends Component {
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
     ]),
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-    ]),
+    children: PropTypes.any,
     title: PropTypes.string
   }
 

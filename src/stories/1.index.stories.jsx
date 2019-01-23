@@ -71,8 +71,7 @@ const ModalButtons = () => (
       CANCEL
     </Button>
     <Button flat direction="right">
-      {' '}
-      OK{' '}
+      OK
     </Button>
   </React.Fragment>
 )

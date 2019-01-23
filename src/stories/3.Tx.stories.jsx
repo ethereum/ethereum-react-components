@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import FeeSelectorStorybookContainer from '../components/Tx/SendTx/FeeSelectorStorybookContainer'
 import SubmitTxForm from '../components/Tx/SendTx/SubmitTxForm'

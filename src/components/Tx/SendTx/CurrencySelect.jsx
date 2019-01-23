@@ -48,9 +48,7 @@ export default class CurrencySelect extends Component {
       <React.Fragment>
         {symbolSpan}
         <StyledName>{name}</StyledName>
-        <StyledBalance>
-          {` ${balance} ${symbol}`}
-        </StyledBalance>
+        <StyledBalance>{` ${balance} ${symbol}`}</StyledBalance>
       </React.Fragment>
     )
   }
