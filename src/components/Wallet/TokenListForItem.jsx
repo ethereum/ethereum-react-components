@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Identicon } from '..'
+import Identicon from '../Identicon'
 
 export default class TokenListForItem extends Component {
   static displayName = 'TokenListForItem'

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 export default class SendEther extends Component {
+  static displayName = 'SendEther'
+
   static propTypes = {
     network: PropTypes.string,
     value: PropTypes.string,

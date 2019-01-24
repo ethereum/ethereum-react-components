@@ -14,6 +14,8 @@ import SendEther from './TxDescription/SendEther'
 const { BN } = ethUtils
 
 export default class TxDescription extends Component {
+  static displayName = 'TxDescription'
+
   static propTypes = {
     network: PropTypes.oneOf(['main', 'ropsten', 'rinkeby', 'kovan']),
     value: PropTypes.string,

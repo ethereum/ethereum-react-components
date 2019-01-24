@@ -1,7 +1,14 @@
-import Select from 'react-select'
+import React, { Component } from 'react'
+import ReactSelect from 'react-select'
 
-const CustomSelect = Select
+export default class Select extends Component {
+  static displayName = 'Select'
 
-CustomSelect.displayName = 'Select'
+  static propTypes = {}
 
-export default CustomSelect
+  static defaultProps = {}
+
+  render() {
+    return <ReactSelect {...this.props} />
+  }
+}

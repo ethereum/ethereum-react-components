@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faKey } from '@fortawesome/free-solid-svg-icons'
-import { Identicon, TokenListForItem, EthAddress } from '..'
+import Identicon from '../Identicon'
+import TokenListForItem from './TokenListForItem'
+import EthAddress from '../EthAddress'
 
 export default class AccountItem extends Component {
   static displayName = 'AccountItem'

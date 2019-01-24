@@ -12,6 +12,8 @@ import {
 } from '../../../lib/util'
 
 export default class TxEntry extends Component {
+  static displayName = 'TxEntry'
+
   static propTypes = {
     /** Tx details */
     tx: PropTypes.shape({

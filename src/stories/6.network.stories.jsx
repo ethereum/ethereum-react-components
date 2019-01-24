@@ -196,6 +196,7 @@ const privateNet = () => {
 storiesOf('Network/Node Info/Dot', module).add('no connection ', () => (
   <NodeInfoDot {...initial} />
 ))
+
 storiesOf('Network/Node Info/Dot/Main Net/Remote', module)
   .add('remote', () => <NodeInfoDot {...mainRemote()} />)
   .add('remote, new block every 3s', () => (
@@ -237,9 +238,10 @@ storiesOf('Network/Node Info/Dot/Main Net/Local', module)
 storiesOf('Network/Node Info/Dot/Test Net', module)
   .add('remote', () => <NodeInfoDot {...testRemote()} />)
   .add('local', () => <NodeInfoDot {...testLocal()} />)
-storiesOf('Network/Node Info/Dot/Private Net', module).add('local', () => (
-  <NodeInfoDot {...privateNet()} />
-))
+
+storiesOf('Network/Node Info/Dot/Private Net', module).add('local', () => {
+  return <NodeInfoDot {...privateNet()} />
+})
 
 storiesOf('Network/Node Info/Box', module).add('no connection ', () => (
   <NodeInfoBox {...initial} />
@@ -297,6 +299,7 @@ storiesOf('Network/Node Info/Box/Test Net', module)
       <NodeInfoBox />
     </QuickSync>
   ))
+
 storiesOf('Network/Node Info/Box/Private Network', module).add('local', () => (
   <NodeInfoBox {...privateNet()} />
 ))
@@ -304,6 +307,7 @@ storiesOf('Network/Node Info/Box/Private Network', module).add('local', () => (
 storiesOf('Network/Node Info/Full', module).add('no connection ', () => (
   <NodeInfo {...initial} />
 ))
+
 storiesOf('Network/Node Info/Full/Main Net/Remote', module)
   .add('remote', () => <NodeInfo {...mainRemote()} />)
   .add('remote, new block every 3s', () => (
@@ -324,6 +328,7 @@ storiesOf('Network/Node Info/Full/Main Net/Remote', module)
   .add('remote, no local peers', () => (
     <NodeInfo {...mainRemoteNoLocalPeers()} />
   ))
+
 storiesOf('Network/Node Info/Full/Main Net/Local', module)
   .add('local', () => <NodeInfo {...mainLocal()} />)
   .add('local, new block every 3s', () => (
@@ -346,14 +351,14 @@ storiesOf('Network/Node Info/Full/Main Net/Local', module)
 storiesOf('Network/Node Info/Full/Test Net', module)
   .add('remote', () => <NodeInfo {...testRemote()} />)
   .add('local', () => <NodeInfo {...testLocal()} />)
+
 storiesOf('Network/Node Info/Full/Private Net', module).add('local', () => (
   <NodeInfo {...privateNet} />
 ))
 
 storiesOf('Network/Network Chooser', module).add('default', () => (
   <div style={{ width: 200 }}>
-    {' '}
-    <NetworkChooser />{' '}
+    <NetworkChooser />
   </div>
 ))
 
