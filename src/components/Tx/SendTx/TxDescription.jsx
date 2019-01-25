@@ -3,15 +3,13 @@ import PropTypes from 'prop-types'
 import ethUtils from 'ethereumjs-util'
 import styled from 'styled-components'
 import i18n from '../../../i18n'
-import { Identicon } from '../..'
+import Button from '../../Widgets/Button'
+import Identicon from '../../Identicon'
 import * as util from '../../../lib/util'
-
 import DeployContract from './TxDescription/DeployContract'
 import TokenTransfer from './TxDescription/TokenTransfer'
 import FunctionExecution from './TxDescription/FunctionExecution'
 import SendEther from './TxDescription/SendEther'
-
-import { Button } from '../../..'
 
 const { BN } = ethUtils
 
