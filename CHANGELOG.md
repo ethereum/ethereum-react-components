@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.2"></a>
+## [1.11.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.11.1...v1.11.2) (2019-01-25)
+
+
+### Bug Fixes
+
+* prod build bug ([#104](https://github.com/PhilippLgh/ethereum-react-components/issues/104)) ([b7289bc](https://github.com/PhilippLgh/ethereum-react-components/commit/b7289bc))
+
+
+
 <a name="1.11.1"></a>
 ## [1.11.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.11.0...v1.11.1) (2019-01-23)
 
