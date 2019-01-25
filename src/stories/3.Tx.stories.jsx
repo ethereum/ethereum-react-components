@@ -8,7 +8,6 @@ import TxParties from '../components/Tx/SendTx/TxParties'
 import TxParty from '../components/Tx/SendTx/TxParty'
 import SendTx from '../components/Tx/SendTx/SendTxForm'
 import TxHistory from '../components/Tx/TxHistory'
-
 import CurrencySelect from '../components/Tx/SendTx/CurrencySelect'
 
 const dummyAccountTokens = [
