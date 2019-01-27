@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import EthCommon from 'ethereumjs-common'
 import Select from '../Widgets/Form/Select'
 // import { Pulse } from '..'
@@ -23,13 +23,13 @@ const chainColor = {
 
 const chainOptions = chains.map(chain => new EthCommon(chain))
 
-function jsUcfirst(string) {
+function uppercaseFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 const options = chainOptions.map(chain => {
   const value = Date.now()
-  const label = jsUcfirst(chain.chainName())
+  const label = uppercaseFirst(chain.chainName())
   return {
     value,
     label,
@@ -45,7 +45,8 @@ const NetworkOption = ({ innerProps, data }) => (
       display: 'flex',
       flexDirection: 'row',
       height: 40
-    }}>
+    }}
+  >
     {/* <Pulse multiple fill color='lightgreen' size="10px"/> */}
     <span
       style={{
@@ -64,6 +65,10 @@ const NetworkOption = ({ innerProps, data }) => (
 export default class NetworkChooser extends Component {
   static displayName = 'NetworkChooser'
 
+  propTypes = {
+    className: PropTypes.string
+  }
+
   state = {
     selectedOption: null
   }
@@ -73,17 +78,17 @@ export default class NetworkChooser extends Component {
   }
 
   render() {
+    const { className } = this.props
     const { selectedOption } = this.state
 
     return (
-      <div>
-        <Select
-          value={selectedOption}
-          onChange={this.handleChange}
-          options={options}
-          components={{ Option: NetworkOption }}
-        />
-      </div>
+      <Select
+        className={className}
+        value={selectedOption}
+        onChange={this.handleChange}
+        options={options}
+        components={{ Option: NetworkOption }}
+      />
     )
   }
 }
