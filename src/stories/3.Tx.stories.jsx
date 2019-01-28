@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import FeeSelector from '../components/Tx/SendTx/FeeSelector'
 import FormSubmitTx from '../components/Tx/SendTx/FormSubmitTx'
@@ -12,6 +13,7 @@ import TxParties from '../components/Tx/SendTx/TxParties'
 import TxParty from '../components/Tx/SendTx/TxParty'
 import SendTx from '../components/Tx/SendTx/FormSendTx'
 import TxHistory from '../components/Tx/TxHistory'
+import TransactionRow from '../components/Tx/TransactionRow'
 
 const dummyTx = {
   nonce: 0,
@@ -25,10 +27,106 @@ const dummyTx = {
     { value: '0x4444444444444444444444444444444444444444' },
     { value: '20000000000000000' }
   ],
-  network: 'main'
+  network: 'main',
+  // description is not part of the receipt or hash
+  // and must be set by the program.
+  description: 'Sent',
+  // dateSent is not part of the receipt or hash
+  // and must be set by the program.
+  dateSent: new Date()
 }
 
 storiesOf('Tx/Fee Selector', module).add('default ', () => <FeeSelector />)
+
+const TxTable = styled.table`
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin: 16px 0;
+`
+
+const TxTableBody = styled.tbody`
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+  tr:nth-child(odd) {
+    background-color: rgba(204, 198, 198, 0.3);
+  }
+`
+
+storiesOf('Tx/TransactionRow', module)
+  .add('Sent Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            onClick={console.log}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add("Multiple tx's", () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            onClick={console.log}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+          <TransactionRow
+            isRecipient
+            onClick={console.log}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Received Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            isRecipient
+            onClick={console.log}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Pending Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow onClick={console.log} transaction={dummyTx} />
+          <TransactionRow
+            onClick={console.log}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Confirming Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          {React.cloneElement(
+            <TransactionRow
+              onClick={console.log}
+              transaction={Object.assign({}, dummyTx, {
+                confirmationNumber: 6
+              })}
+            />
+          )}
+        </TxTableBody>
+      </TxTable>
+    )
+  })
 
 storiesOf('Tx/Submit Form', module)
   .add('default', () => <FormSubmitTx />)

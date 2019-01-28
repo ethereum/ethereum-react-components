@@ -30,6 +30,8 @@ import NavbarItem from './Wallet/NavbarItem'
 import NetworkStatus from './Wallet/NetworkStatus'
 import Notification from './Wallet/Notification'
 
+import TransactionRow from './Tx/TransactionRow'
+
 import * as utils from '../lib/util'
 
 export {
@@ -61,6 +63,7 @@ export {
   RpcTester,
   Spinner,
   TokenListForItem,
+  TransactionRow,
   TxHistory,
   ValidatedField,
   WalletButton,
