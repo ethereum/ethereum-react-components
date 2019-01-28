@@ -10,7 +10,9 @@ export default class TransactionRow extends Component {
 
   static propTypes = {
     isRecipient: PropTypes.bool,
-    onClick: PropTypes.func,
+    onAddressClick: PropTypes.func,
+    onArrowClick: PropTypes.func,
+    onTxClick: PropTypes.func,
     transaction: PropTypes.shape({
       contractAddress: PropTypes.any,
       dateSent: PropTypes.string,
@@ -20,31 +22,52 @@ export default class TransactionRow extends Component {
     })
   }
 
-  transactionAddress = address => {
+  AddressClick = () => {
+    const { onAddressClick } = this.props
+    if (onAddressClick) {
+      onAddressClick()
+    }
+  }
+
+  ArrowClick = () => {
+    const { onArrowClick } = this.props
+    if (onArrowClick) {
+      onArrowClick()
+    }
+  }
+
+  TxClick = () => {
+    const { onTxClick } = this.props
+    if (onTxClick) {
+      onTxClick()
+    }
+  }
+
+  transactionAddress = (address, AddressClick) => {
     return (
       <span>
         <StyledIdenticon size="tiny" address={address} />
-        <EthAddress address={address} short onClick={console.log} />
+        <EthAddress address={address} short onClick={() => {}} />
       </span>
     )
   }
 
   transactionType(transaction) {
-    const { description, from, to } = transaction
+    const { AddressClick, description, from, to } = transaction
     return (
-      <StyledAccounts className="account-name">
+      <StyledAccounts>
         <h2> {description} </h2>
         <p>
-          {this.transactionAddress(from)}
-          <StyledAccountArrow className="arrow">→</StyledAccountArrow>
-          {this.transactionAddress(to)}
+          {this.transactionAddress(from, AddressClick)}
+          <StyledAccountArrow>→</StyledAccountArrow>
+          {this.transactionAddress(to, AddressClick)}
         </p>
       </StyledAccounts>
     )
   }
 
   render() {
-    const { isRecipient, onClick, transaction } = this.props
+    const { isRecipient, onArrowClick, transaction, TxClick } = this.props
     const { confirmationNumber } = transaction
 
     let progressBar = null
@@ -67,7 +90,7 @@ export default class TransactionRow extends Component {
             + {transaction.value} ETHER
           </StyledReceivedAmount>
           <StyledArrow>
-            <StyledArrrowLeft onClick={console.log} />
+            <StyledArrrowLeft onClick={onArrowClick} />
           </StyledArrow>
         </React.Fragment>
       )
@@ -76,14 +99,14 @@ export default class TransactionRow extends Component {
         <React.Fragment>
           <StyledSentAmount> - {transaction.value} ETHER</StyledSentAmount>
           <StyledArrow>
-            <StyledArrrowRight onClick={console.log} />
+            <StyledArrrowRight onClick={onArrowClick} />
           </StyledArrow>
         </React.Fragment>
       )
     }
 
     return (
-      <StyledTableRow confirmationNumber={confirmationNumber} onClick={onClick}>
+      <StyledTableRow confirmationNumber={confirmationNumber} onClick={TxClick}>
         {progressBar}
         <StyledDate data-tool-tip={transaction.dateSent}>
           <h2>{getMonthName(transaction.dateSent)}</h2>
