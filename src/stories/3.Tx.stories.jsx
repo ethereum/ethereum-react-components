@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import FeeSelectorStorybookContainer from '../components/Tx/SendTx/FeeSelectorStorybookContainer'
 import SubmitTxForm from '../components/Tx/SendTx/SubmitTxForm'
@@ -8,40 +8,44 @@ import TxParties from '../components/Tx/SendTx/TxParties'
 import TxParty from '../components/Tx/SendTx/TxParty'
 import SendTx from '../components/Tx/SendTx/SendTxForm'
 import TxHistory from '../components/Tx/TxHistory'
-
 import CurrencySelect from '../components/Tx/SendTx/CurrencySelect'
 
 const dummyAccountTokens = [
   {
     address: '0xD87C62BfA2A4DFAbdD1Fad5A1cb73a63345aA2B0',
-    name: 'Stellar',
-    symbol: 'XLM',
+    name: 'Augur',
+    symbol: 'REP',
     balance: '20',
     decimals: '18'
   },
   {
     address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345aA2B0',
     name: 'Golem',
-    symbol: 'GO',
+    symbol: 'GNT',
     balance: '33',
     decimals: '10'
   }
 ]
 
-const dummyWallet = {
-  name: 'ETHER',
-  symbol: 'ETHER',
-  address: '0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz',
-  balance: '15'
-}
-
 storiesOf('Tx/Currency Select', module)
   .add('No ether, no tokens ', () => (
-    <CurrencySelect etherWallet={{ ...dummyWallet, balance: '0.00' }} />
+    <CurrencySelect
+      address="0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz"
+      balance="0.00"
+    />
   ))
-  .add('Ether, no tokens', () => <CurrencySelect etherWallet={dummyWallet} />)
+  .add('Ether, no tokens', () => (
+    <CurrencySelect
+      address="0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz"
+      balance="15"
+    />
+  ))
   .add('No ether, tokens', () => (
-    <CurrencySelect etherWallet={dummyWallet} tokens={dummyAccountTokens} />
+    <CurrencySelect
+      address="0x123456BfA2A4DFAbdD1Fad5A1cb73a63345zzzzz"
+      balance="15"
+      tokens={dummyAccountTokens}
+    />
   ))
 
 const dummyTx = {
