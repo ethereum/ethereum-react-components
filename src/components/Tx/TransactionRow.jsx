@@ -15,10 +15,11 @@ export default class TransactionRow extends Component {
     onTxClick: PropTypes.func,
     transaction: PropTypes.shape({
       contractAddress: PropTypes.any,
-      dateSent: PropTypes.string,
+      dateSent: PropTypes.instanceOf(Date),
       from: PropTypes.string,
       to: PropTypes.any,
-      value: PropTypes.string
+      value: PropTypes.string,
+      confirmationNumber: PropTypes.any
     })
   }
 
@@ -44,10 +45,14 @@ export default class TransactionRow extends Component {
   }
 
   transactionAddress = (address, AddressClick) => {
+    let clickAddress = () => {}
+    if (AddressClick) {
+      clickAddress = AddressClick
+    }
     return (
       <span>
         <StyledIdenticon size="tiny" address={address} />
-        <EthAddress address={address} short onClick={() => {}} />
+        <EthAddress address={address} short onClick={clickAddress} />
       </span>
     )
   }
@@ -67,7 +72,7 @@ export default class TransactionRow extends Component {
   }
 
   render() {
-    const { isRecipient, onArrowClick, transaction, TxClick } = this.props
+    const { isRecipient, transaction } = this.props
     const { confirmationNumber } = transaction
 
     let progressBar = null
@@ -90,7 +95,7 @@ export default class TransactionRow extends Component {
             + {transaction.value} ETHER
           </StyledReceivedAmount>
           <StyledArrow>
-            <StyledArrrowLeft onClick={onArrowClick} />
+            <StyledArrrowLeft onClick={this.ArrowClick} />
           </StyledArrow>
         </React.Fragment>
       )
@@ -99,14 +104,17 @@ export default class TransactionRow extends Component {
         <React.Fragment>
           <StyledSentAmount> - {transaction.value} ETHER</StyledSentAmount>
           <StyledArrow>
-            <StyledArrrowRight onClick={onArrowClick} />
+            <StyledArrrowRight onClick={this.ArrowClick} />
           </StyledArrow>
         </React.Fragment>
       )
     }
 
     return (
-      <StyledTableRow confirmationNumber={confirmationNumber} onClick={TxClick}>
+      <StyledTableRow
+        confirmationNumber={confirmationNumber}
+        onClick={this.TxClick}
+      >
         {progressBar}
         <StyledDate data-tool-tip={transaction.dateSent}>
           <h2>{getMonthName(transaction.dateSent)}</h2>
