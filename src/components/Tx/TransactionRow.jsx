@@ -9,13 +9,15 @@ export default class TransactionRow extends Component {
   static displayName = 'TransactionRow'
 
   static propTypes = {
+    isRecipient: PropTypes.bool,
+    onClick: PropTypes.func,
     transaction: PropTypes.shape({
+      contractAddress: PropTypes.any,
+      dateSent: PropTypes.string,
       from: PropTypes.string,
       to: PropTypes.any,
-      contractAddress: PropTypes.any
-    }),
-    isRecipient: PropTypes.bool,
-    onClick: PropTypes.func
+      value: PropTypes.string
+    })
   }
 
   transactionAddress = address => {
