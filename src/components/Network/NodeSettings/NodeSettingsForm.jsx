@@ -142,7 +142,12 @@ export default class NodeSettingsForm extends Component {
           options={availableVersions}
           onChange={this.handleChangeVersion}
         />
-        <StyledButton loading={isCheckingForUpdate} flat onClick={checkUpdate}>
+        <StyledButton
+          checkUpdate
+          loading={isCheckingForUpdate}
+          flat
+          onClick={checkUpdate}
+        >
           Check Update
         </StyledButton>
       </StyledSetting>
@@ -274,7 +279,7 @@ export default class NodeSettingsForm extends Component {
         <StyledRunning isRunning={isRunning}>
           {isRunning ? 'Running' : 'Stopped'}
         </StyledRunning>
-        <StyledButton flat onClick={() => onStartStop(isRunning)}>
+        <StyledButton startStop flat onClick={() => onStartStop(isRunning)}>
           {isRunning ? 'Stop' : 'Start'}
         </StyledButton>
       </StyledSetting>
@@ -308,6 +313,7 @@ const StyledForm = styled.form`
 
 const StyledSetting = styled.div`
   margin: 0 0 20px 0;
+  position: relative;
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -353,12 +359,24 @@ const StyledFooter = styled.div`
 `
 
 const StyledButton = styled(Button)`
-  display: inline-block;
-  margin-top: 10px;
   border: 1px solid #eee;
   &:hover {
     border-color: #ddd;
   }
+  ${props =>
+    props.checkUpdate &&
+    css`
+      position: absolute;
+      top: 15px;
+      left: 275px;
+    `}
+  ${props =>
+    props.startStop &&
+    css`
+      position: absolute;
+      top: 0;
+      left: 100px;
+    `}
 `
 
 const StyledWarning = styled.div`
