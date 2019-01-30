@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.0"></a>
+# [1.12.0](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.11.2...v1.12.0) (2019-01-30)
+
+
+### Features
+
+* NodeSettings ([#109](https://github.com/PhilippLgh/ethereum-react-components/issues/109)) ([ec3c122](https://github.com/PhilippLgh/ethereum-react-components/commit/ec3c122))
+
+
+
 <a name="1.11.2"></a>
 ## [1.11.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.11.1...v1.11.2) (2019-01-25)
 
