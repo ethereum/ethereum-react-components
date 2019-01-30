@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import EthCommon from 'ethereumjs-common'
+import styled from 'styled-components'
 import Select from '../Widgets/Form/Select'
 // import { Pulse } from '..'
 
@@ -23,13 +24,9 @@ const chainColor = {
 
 const chainOptions = chains.map(chain => new EthCommon(chain))
 
-function uppercaseFirst(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
 const options = chainOptions.map(chain => {
   const value = Date.now()
-  const label = uppercaseFirst(chain.chainName())
+  const label = chain.chainName()
   return {
     value,
     label,
@@ -82,7 +79,7 @@ export default class NetworkChooser extends Component {
     const { selectedOption } = this.state
 
     return (
-      <Select
+      <StyledSelect
         className={className}
         value={selectedOption}
         onChange={this.handleChange}
@@ -92,3 +89,7 @@ export default class NetworkChooser extends Component {
     )
   }
 }
+
+const StyledSelect = styled(Select)`
+  text-transform: capitalize;
+`

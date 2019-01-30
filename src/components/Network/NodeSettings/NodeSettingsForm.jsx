@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components'
 import Select from '../../Widgets/Form/Select'
 import Input from '../../Widgets/Form/Input'
 import FileChooser from '../../Widgets/Form/FileChooser'
-import NetworkChooser from '../NetworkChooser'
 import Button from '../../Widgets/Button'
 
 export default class NodeSettingsForm extends Component {
@@ -39,21 +38,17 @@ export default class NodeSettingsForm extends Component {
     })
   }
 
-  static uppercaseFirstLetter(value) {
-    return value.charAt(0).toUpperCase() + value.slice(1)
-  }
-
   state = {
     config: this.props.config,
     status: this.props.status
   }
 
-  componentDidUpdate(oldProps) {
+  componentDidUpdate(prevProps) {
     const { config, status } = this.props
-    if (oldProps.config !== config) {
+    if (prevProps.config !== config) {
       this.setState({ config })
     }
-    if (oldProps.status !== status) {
+    if (prevProps.status !== status) {
       this.setState({ status })
     }
   }
@@ -94,7 +89,6 @@ export default class NodeSettingsForm extends Component {
   handleChangeNetwork = selectedOption => {
     const { config } = this.state
     const network = selectedOption.value
-    console.log(network)
     this.setState({ config: { ...config, network } })
   }
 
@@ -160,11 +154,11 @@ export default class NodeSettingsForm extends Component {
     const { networks } = options
     const { network } = config
     const availableNetworks = networks.map(node => ({
-      label: NodeSettingsForm.uppercaseFirstLetter(node),
+      label: node,
       value: node
     }))
     const selectedNetwork = {
-      label: NodeSettingsForm.uppercaseFirstLetter(network),
+      label: network,
       value: network
     }
     return (
@@ -174,6 +168,7 @@ export default class NodeSettingsForm extends Component {
           value={selectedNetwork}
           options={availableNetworks}
           onChange={this.handleChangeNetwork}
+          capitalize
         />
       </StyledSetting>
     )
@@ -185,11 +180,11 @@ export default class NodeSettingsForm extends Component {
     const { syncMode } = config
     const { syncModes } = options
     const availableSyncModes = syncModes.map(node => ({
-      label: NodeSettingsForm.uppercaseFirstLetter(node),
+      label: node,
       value: node
     }))
     const selectedSyncMode = {
-      label: NodeSettingsForm.uppercaseFirstLetter(syncMode),
+      label: syncMode,
       value: syncMode
     }
     return (
@@ -199,6 +194,7 @@ export default class NodeSettingsForm extends Component {
           value={selectedSyncMode}
           options={availableSyncModes}
           onChange={this.handleChangeSyncMode}
+          capitalize
         />
       </StyledSetting>
     )
@@ -348,10 +344,11 @@ const StyledInput = styled(Input)`
 
 const StyledSelect = styled(Select)`
   max-width: 250px;
-`
-
-const StyledNetworkChooser = styled(NetworkChooser)`
-  max-width: 250px;
+  ${props =>
+    props.capitalize &&
+    css`
+      text-transform: capitalize;
+    `}
 `
 
 const StyledFooter = styled.div`
