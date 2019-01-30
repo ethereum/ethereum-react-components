@@ -9,6 +9,7 @@ import NewBlockEvery3s from '../components/Network/NodeInfo/NewBlockEvery3s'
 import QuickSync from '../components/Network/NodeInfo/QuickSync'
 import NetworkChooser from '../components/Network/NetworkChooser'
 import RpcTest from '../components/Network/RPC/RpcTester'
+import NodeSettingsStorybookContainer from '../components/Network/NodeSettings/NodeSettingsStorybookContainer'
 
 const initial = {
   active: 'remote',
@@ -361,4 +362,8 @@ storiesOf('Network/Rpc', module).add('default', () => (
   <div style={{ width: 200 }}>
     <RpcTest />
   </div>
+))
+
+storiesOf('Network/NodeSettings', module).add('Default', () => (
+  <NodeSettingsStorybookContainer />
 ))
