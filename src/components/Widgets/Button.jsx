@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Spinner } from '../..'
+import Spinner from './AnimatedIcons/Spinner'
 
 export default class Button extends Component {
   static displayName = 'Button'

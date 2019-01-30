@@ -7,14 +7,12 @@ export default class WalletButton extends Component {
 
   static propTypes = {
     /** Display text describing button action */
-    children: PropTypes.string,
+    children: PropTypes.node,
     /** Callback to be executed onClick */
     onClick: PropTypes.func
   }
 
-  static defaultProps = {
-    children: ''
-  }
+  static defaultProps = {}
 
   handleClick = e => {
     const { onClick } = this.props
@@ -25,10 +23,11 @@ export default class WalletButton extends Component {
 
   render() {
     const { children } = this.props
+
     return (
       <StyledButton {...this.props} onClick={this.handleClick}>
         <StyledDiv> + </StyledDiv>
-        <StyledChildrenDiv> {children} </StyledChildrenDiv>
+        <StyledChildrenDiv>{children}</StyledChildrenDiv>
       </StyledButton>
     )
   }

@@ -7,6 +7,8 @@ import NodeInfoDot from './NodeInfoDot'
 import NodeInfoBox from './NodeInfoBox'
 
 export default class NodeInfo extends Component {
+  static displayName = 'NodeInfo'
+
   static propTypes = {
     /** Active network */
     active: PropTypes.oneOf(['remote', 'local']).isRequired,

@@ -8,6 +8,8 @@ import GasNotification from './GasNotification'
 import TxParties from './TxParties'
 
 export default class SendTx extends Component {
+  static displayName = 'SendTx'
+
   static propTypes = {
     etherPriceUSD: PropTypes.string,
     network: PropTypes.string,

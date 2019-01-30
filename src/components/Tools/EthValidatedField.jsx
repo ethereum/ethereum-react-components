@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import util from 'ethereumjs-util'
-import { ValidatedField } from '..'
+import ValidatedField from '../Widgets/Form/ValidatedField'
 
 const config = {
   address: {

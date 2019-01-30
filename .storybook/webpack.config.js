@@ -16,18 +16,23 @@ module.exports = (storybookBaseConfig, configType) => {
 
   storybookBaseConfig.module.rules.push({
     test: /\.css$/,
-    loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    loaders: ['style-loader', 'css-loader'],
     include: path.resolve(__dirname, '../')
   })
 
   storybookBaseConfig.module.rules.push({
-    test: /\.js$/,
+    test: /\.(js|jsx)$/,
     exclude: /node_modules/,
-    use: ['babel-loader', 'eslint-loader']
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env', '@babel/preset-react']
+      }
+    }
   })
 
   storybookBaseConfig.module.rules.push({
-    test: /\.(png|jpg|gif)$/i,
+    test: /\.(png|jpg|gif|svg)$/i,
     use: ['file-loader']
   })
 

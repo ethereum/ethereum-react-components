@@ -5,6 +5,8 @@ import Identicon from '../../Identicon'
 import i18n from '../../../i18n'
 
 export default class TxParty extends Component {
+  static displayName = 'TxParty'
+
   static propTypes = {
     address: PropTypes.string,
     addressType: PropTypes.oneOf(['origin', 'user', 'contract']),
@@ -36,7 +38,8 @@ export default class TxParty extends Component {
       <StyledWrapper className="tx-parties__party">
         <Identicon address={address.toLowerCase()} size="small" />
         <StyledDirectionName
-          isContract={isContract || addressType === 'contract'}>
+          isContract={isContract || addressType === 'contract'}
+        >
           {this.renderDirectionText()}
         </StyledDirectionName>
         <StyledAddress>{address}</StyledAddress>
