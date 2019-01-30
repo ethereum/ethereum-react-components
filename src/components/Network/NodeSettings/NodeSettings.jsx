@@ -51,7 +51,7 @@ export default class NodeSettings extends Component {
       <StyledSettings>
         <StyledH1>Node Settings</StyledH1>
         <StyledH3>
-          Node: <StyledValue>{client}</StyledValue>
+          Client: <StyledValue>{client}</StyledValue>
         </StyledH3>
         <StyledH3>
           Path: <StyledValue>{binPath}</StyledValue>
