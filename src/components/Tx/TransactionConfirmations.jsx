@@ -32,8 +32,6 @@ export default class TransactionConfirmations extends Component {
     let { confirmations } = this.state
     confirmations += 1
 
-    this.setState({ confirmations })
-
     const newProps = {
       ...oldProps,
       confirmations,
@@ -42,7 +40,8 @@ export default class TransactionConfirmations extends Component {
         confirmationNumber: oldProps.confirmations % 12
       }
     }
-    this.setState({ props: newProps })
+
+    this.setState({ confirmations }, this.setState({ props: newProps }))
   }
 
   render() {

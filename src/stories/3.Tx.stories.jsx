@@ -62,7 +62,6 @@ storiesOf('Tx/TransactionRow', module)
       <TxTable>
         <TxTableBody>
           <TransactionRow
-            onClick={() => {}}
             transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
           />
         </TxTableBody>
@@ -117,7 +116,7 @@ storiesOf('Tx/TransactionRow', module)
       <TxTable>
         <TxTableBody>
           <TransactionConfirmations
-            transaction={Object.assign({}, dummyTx, { confirmationNumber: 1 })}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 0 })}
           >
             <TransactionRow onClick={() => {}} />
           </TransactionConfirmations>

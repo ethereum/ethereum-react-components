@@ -86,13 +86,13 @@ export default class TransactionRow extends Component {
       confirmationCount = `${confirmationNumber} of 12 Confirmations`
     }
 
+    const amount = ` ${transaction.value} ETHER`
+
     let toOrFrom = null
     if (isRecipient) {
       toOrFrom = (
         <React.Fragment>
-          <StyledReceivedAmount>
-            ` ${transaction.value} ETHER`
-          </StyledReceivedAmount>
+          <StyledReceivedAmount>{amount}</StyledReceivedAmount>
           <StyledArrow>
             <StyledArrrowLeft onClick={this.ArrowClick} />
           </StyledArrow>
@@ -127,7 +127,7 @@ export default class TransactionRow extends Component {
   }
 }
 
-const StyledProgress = styled.div`
+const StyledProgress = styled.td`
   position: absolute;
   left: 29px;
   right: 1px;
