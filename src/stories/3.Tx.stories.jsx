@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import FeeSelectorStorybookContainer from '../components/Tx/SendTx/FeeSelectorStorybookContainer'
 import SubmitTxForm from '../components/Tx/SendTx/SubmitTxForm'
@@ -60,7 +61,13 @@ const dummyTx = {
   gasPrice: '5000000000', // 5 gwei
   value: '1000000000000000000',
   params: [],
-  network: 'main'
+  network: 'main',
+  // description is not part of the receipt or hash
+  // and must be set by the program.
+  description: 'Sent',
+  // dateSent is not part of the receipt or hash
+  // and must be set by the program.
+  dateSent: new Date()
 }
 
 storiesOf('Tx/Fee Selector', module)
@@ -110,69 +117,111 @@ const TxTableBody = styled.tbody`
 storiesOf('Tx/TransactionRow', module)
   .add('Sent Tx', () => {
     return (
-      <TxTable>
-        <TxTableBody>
-          <TransactionRow
-            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
-          />
-        </TxTableBody>
-      </TxTable>
+      <React.Fragment>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+        />
+        <TxTable>
+          <TxTableBody>
+            <TransactionRow
+              transaction={Object.assign({}, dummyTx, {
+                confirmationNumber: 13
+              })}
+            />
+          </TxTableBody>
+        </TxTable>
+      </React.Fragment>
     )
   })
   .add("Multiple tx's", () => {
     return (
-      <TxTable>
-        <TxTableBody>
-          <TransactionRow
-            onClick={() => {}}
-            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
-          />
-          <TransactionRow
-            isRecipient
-            onClick={() => {}}
-            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
-          />
-        </TxTableBody>
-      </TxTable>
+      <React.Fragment>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+        />
+        <TxTable>
+          <TxTableBody>
+            <TransactionRow
+              onClick={() => {}}
+              transaction={Object.assign({}, dummyTx, {
+                confirmationNumber: 13
+              })}
+            />
+            <TransactionRow
+              isRecipient
+              onClick={() => {}}
+              transaction={Object.assign({}, dummyTx, {
+                confirmationNumber: 13
+              })}
+            />
+          </TxTableBody>
+        </TxTable>
+      </React.Fragment>
     )
   })
   .add('Received Tx', () => {
     return (
-      <TxTable>
-        <TxTableBody>
-          <TransactionRow
-            isRecipient
-            onClick={() => {}}
-            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
-          />
-        </TxTableBody>
-      </TxTable>
+      <React.Fragment>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+        />
+        <TxTable>
+          <TxTableBody>
+            <TransactionRow
+              isRecipient
+              onClick={() => {}}
+              transaction={Object.assign({}, dummyTx, {
+                confirmationNumber: 13
+              })}
+            />
+          </TxTableBody>
+        </TxTable>
+      </React.Fragment>
     )
   })
   .add('Pending Tx', () => {
     return (
-      <TxTable>
-        <TxTableBody>
-          <TransactionRow onClick={() => {}} transaction={dummyTx} />
-          <TransactionRow
-            onClick={() => {}}
-            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
-          />
-        </TxTableBody>
-      </TxTable>
+      <React.Fragment>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+        />
+        <TxTable>
+          <TxTableBody>
+            <TransactionRow onClick={() => {}} transaction={dummyTx} />
+            <TransactionRow
+              onClick={() => {}}
+              transaction={Object.assign({}, dummyTx, {
+                confirmationNumber: 13
+              })}
+            />
+          </TxTableBody>
+        </TxTable>
+      </React.Fragment>
     )
   })
   .add('Confirming Tx', () => {
     return (
-      <TxTable>
-        <TxTableBody>
-          <TransactionConfirmations
-            transaction={Object.assign({}, dummyTx, { confirmationNumber: 0 })}
-          >
-            <TransactionRow onClick={() => {}} />
-          </TransactionConfirmations>
-        </TxTableBody>
-      </TxTable>
+      <React.Fragment>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+        />
+        <TxTable>
+          <TxTableBody>
+            <TransactionConfirmations
+              transaction={Object.assign({}, dummyTx, {
+                confirmationNumber: 0
+              })}
+            >
+              <TransactionRow onClick={() => {}} />
+            </TransactionConfirmations>
+          </TxTableBody>
+        </TxTable>
+      </React.Fragment>
     )
   })
 

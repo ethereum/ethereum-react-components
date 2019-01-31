@@ -17,7 +17,7 @@ export default class TransactionConfirmations extends Component {
   }
 
   componentDidMount() {
-    const confirmations = setInterval(this.timer.bind(this), 5000)
+    const confirmations = setInterval(this.timer.bind(this), 2000)
     this.setState({ confirmations })
   }
 
