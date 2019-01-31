@@ -34,9 +34,6 @@ import TokenCard from './Wallet/TokenCard'
 import TransactionRow from './Tx/TransactionRow'
 import TransactionConfirmations from './Tx/TransactionConfirmations'
 
-import TransactionRow from './Tx/TransactionRow'
-import TransactionConfirmations from './Tx/TransactionConfirmations'
-
 import * as utils from '../lib/util'
 
 export {
