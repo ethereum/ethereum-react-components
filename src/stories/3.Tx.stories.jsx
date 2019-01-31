@@ -14,6 +14,7 @@ import TxParty from '../components/Tx/SendTx/TxParty'
 import SendTx from '../components/Tx/SendTx/FormSendTx'
 import TxHistory from '../components/Tx/TxHistory'
 import TransactionRow from '../components/Tx/TransactionRow'
+import TransactionConfirmations from '../components/Tx/TransactionConfirmations'
 
 const dummyTx = {
   nonce: 0,
@@ -61,7 +62,7 @@ storiesOf('Tx/TransactionRow', module)
       <TxTable>
         <TxTableBody>
           <TransactionRow
-            onClick={console.log}
+            onClick={() => {}}
             transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
           />
         </TxTableBody>
@@ -73,12 +74,12 @@ storiesOf('Tx/TransactionRow', module)
       <TxTable>
         <TxTableBody>
           <TransactionRow
-            onClick={console.log}
+            onClick={() => {}}
             transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
           />
           <TransactionRow
             isRecipient
-            onClick={console.log}
+            onClick={() => {}}
             transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
           />
         </TxTableBody>
@@ -91,7 +92,7 @@ storiesOf('Tx/TransactionRow', module)
         <TxTableBody>
           <TransactionRow
             isRecipient
-            onClick={console.log}
+            onClick={() => {}}
             transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
           />
         </TxTableBody>
@@ -102,9 +103,9 @@ storiesOf('Tx/TransactionRow', module)
     return (
       <TxTable>
         <TxTableBody>
-          <TransactionRow onClick={console.log} transaction={dummyTx} />
+          <TransactionRow onClick={() => {}} transaction={dummyTx} />
           <TransactionRow
-            onClick={console.log}
+            onClick={() => {}}
             transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
           />
         </TxTableBody>
@@ -115,14 +116,11 @@ storiesOf('Tx/TransactionRow', module)
     return (
       <TxTable>
         <TxTableBody>
-          {React.cloneElement(
-            <TransactionRow
-              onClick={console.log}
-              transaction={Object.assign({}, dummyTx, {
-                confirmationNumber: 6
-              })}
-            />
-          )}
+          <TransactionConfirmations
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 1 })}
+          >
+            <TransactionRow onClick={() => {}} />
+          </TransactionConfirmations>
         </TxTableBody>
       </TxTable>
     )

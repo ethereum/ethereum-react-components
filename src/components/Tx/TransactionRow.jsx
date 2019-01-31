@@ -91,8 +91,7 @@ export default class TransactionRow extends Component {
       toOrFrom = (
         <React.Fragment>
           <StyledReceivedAmount>
-            {' '}
-            + {transaction.value} ETHER
+            ` ${transaction.value} ETHER`
           </StyledReceivedAmount>
           <StyledArrow>
             <StyledArrrowLeft onClick={this.ArrowClick} />
@@ -130,7 +129,7 @@ export default class TransactionRow extends Component {
 
 const StyledProgress = styled.div`
   position: absolute;
-  left: 1px;
+  left: 29px;
   right: 1px;
   margin: 0;
   height: 84px;
@@ -270,7 +269,7 @@ const StyledArrrowRight = styled.i`
 const StyledArrrowLeft = styled.i`
   color: #827a7a;
   box-sizing: border-box;
-  :before {
+  ::before {
     font-family: 'Simple-Line-Icons';
     content: '\\e078';
   }

@@ -31,6 +31,7 @@ import NetworkStatus from './Wallet/NetworkStatus'
 import Notification from './Wallet/Notification'
 
 import TransactionRow from './Tx/TransactionRow'
+import TransactionConfirmations from './Tx/TransactionConfirmations'
 
 import * as utils from '../lib/util'
 
@@ -64,6 +65,7 @@ export {
   Spinner,
   TokenListForItem,
   TransactionRow,
+  TransactionConfirmations,
   TxHistory,
   ValidatedField,
   WalletButton,
