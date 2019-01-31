@@ -29,7 +29,13 @@ import TokenListForItem from './Wallet/TokenListForItem'
 import NavbarItem from './Wallet/NavbarItem'
 import NetworkStatus from './Wallet/NetworkStatus'
 import Notification from './Wallet/Notification'
+<<<<<<< HEAD
 import TokenCard from './Wallet/TokenCard'
+=======
+
+import TransactionRow from './Tx/TransactionRow'
+import TransactionConfirmations from './Tx/TransactionConfirmations'
+>>>>>>> fix: progress bar animation
 
 import * as utils from '../lib/util'
 
@@ -63,6 +69,11 @@ export {
   Spinner,
   TokenCard,
   TokenListForItem,
+<<<<<<< HEAD
+=======
+  TransactionRow,
+  TransactionConfirmations,
+>>>>>>> fix: progress bar animation
   TxHistory,
   ValidatedField,
   WalletButton,

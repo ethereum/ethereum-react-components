@@ -10,6 +10,9 @@ import SendTx from '../components/Tx/SendTx/SendTxForm'
 import TxHistory from '../components/Tx/TxHistory'
 import CurrencySelect from '../components/Tx/SendTx/CurrencySelect'
 
+import TransactionRow from '../components/Tx/TransactionRow'
+import TransactionConfirmations from '../components/Tx/TransactionConfirmations'
+
 const dummyAccountTokens = [
   {
     address: '0xD87C62BfA2A4DFAbdD1Fad5A1cb73a63345aA2B0',
@@ -86,6 +89,93 @@ storiesOf('Tx/Fee Selector', module)
       gasPrice={dummyTx.gasPrice}
     />
   ))
+
+const TxTable = styled.table`
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin: 16px 0;
+`
+
+const TxTableBody = styled.tbody`
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+  tr:nth-child(odd) {
+    background-color: rgba(204, 198, 198, 0.3);
+  }
+`
+
+storiesOf('Tx/TransactionRow', module)
+  .add('Sent Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add("Multiple tx's", () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+          <TransactionRow
+            isRecipient
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Received Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            isRecipient
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Pending Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow onClick={() => {}} transaction={dummyTx} />
+          <TransactionRow
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Confirming Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionConfirmations
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 1 })}
+          >
+            <TransactionRow onClick={() => {}} />
+          </TransactionConfirmations>
+        </TxTableBody>
+      </TxTable>
+    )
+  })
 
 storiesOf('Tx/Submit Form', module)
   .add('Default', () => <SubmitTxForm />)
