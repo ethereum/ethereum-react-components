@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
 
 export default class Cross extends Component {
-  static displayName = 'AnimatedCross'
+  static displayName = 'Cross'
 
   static propTypes = {
     size: PropTypes.number,

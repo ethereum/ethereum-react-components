@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Input, Identicon, utils } from '../..'
-import Cross from '../AnimatedIcons/AnimatedCross'
+import Identicon from '../../Identicon'
+import Input from './Input'
+import { isAddress } from '../../../lib/util'
+import Cross from '../AnimatedIcons/Cross'
 
 export default class AddressInput extends Component {
   static displayName = 'AddressInput'
@@ -27,7 +29,7 @@ export default class AddressInput extends Component {
     const { onChange } = this.props
 
     let icon
-    if (utils.isAddress(value)) {
+    if (isAddress(value)) {
       icon = (
         <Identicon
           address={value}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Checkmark from '../AnimatedIcons/Checkmark'
-import Cross from '../AnimatedIcons/AnimatedCross'
+import Cross from '../AnimatedIcons/Cross'
 
 const height = 50
 
@@ -98,7 +98,8 @@ export default class ValidatedField extends Component {
             height,
             display: 'flex',
             alignItems: 'center'
-          }}>
+          }}
+        >
           <StyledInput
             type={type}
             size={size}

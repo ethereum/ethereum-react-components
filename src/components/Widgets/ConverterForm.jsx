@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ValidatedField } from '..'
+import ValidatedField from './Form/ValidatedField'
 
 export default class ConverterForm extends Component {
   static displayName = 'ConverterForm'

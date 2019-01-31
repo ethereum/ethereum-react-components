@@ -19,7 +19,7 @@ import {
   WalletButton
 } from '../components'
 import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
-import Cross from '../components/Widgets/AnimatedIcons/AnimatedCross'
+import Cross from '../components/Widgets/AnimatedIcons/Cross'
 
 const dummyWallets = {
   '0x2685F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
@@ -120,15 +120,9 @@ storiesOf('Widgets/Animations/Spinner', module).add('default', () => (
   <Spinner />
 ))
 
-storiesOf('Widgets/WalletButton', module)
-  .add('default', () => (
-    <WalletButton onClick={() => {}}> Add Wallet Contract </WalletButton>
-  ))
-  .add('type submit', () => (
-    <WalletButton type="submit" onClick={() => {}}>
-      Add Wallet Contract
-    </WalletButton>
-  ))
+storiesOf('Widgets/WalletButton', module).add('default', () => (
+  <WalletButton onClick={() => {}}>Add Wallet Contract</WalletButton>
+))
 
 storiesOf('Widgets/Animations/Pulse', module)
   .add('default', () => <Pulse />)

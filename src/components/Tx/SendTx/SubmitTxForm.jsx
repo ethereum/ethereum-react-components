@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Button } from '../..'
+import Button from '../../Widgets/Button'
 import i18n from '../../../i18n'
 
 export default class SubmitTxForm extends Component {
+  static displayName = 'SubmitTxForm'
+
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     unlocking: PropTypes.bool,

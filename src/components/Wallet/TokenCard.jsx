@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Identicon } from '..'
 import styled from 'styled-components'
 import GeoPattern from 'geopattern'
+import Identicon from '../Identicon'
 
 export default class TokenCard extends Component {
   static displayName = 'TokenCard'

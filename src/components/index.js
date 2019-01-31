@@ -4,6 +4,7 @@ import FeeSelector from './Tx/SendTx/FeeSelector'
 import { FormCreateAccount, InputPassword } from './CreateAccount'
 import NodeInfo from './Network/NodeInfo'
 import NodeInfoBox from './Network/NodeInfo/NodeInfoBox'
+import NodeSettings from './Network/NodeSettings'
 import Spinner from './Widgets/AnimatedIcons/Spinner'
 import Pulse from './Widgets/AnimatedIcons/Pulse'
 import Button from './Widgets/Button'
@@ -56,6 +57,7 @@ export {
   NetworkStatus,
   NodeInfo,
   NodeInfoBox,
+  NodeSettings,
   Notification,
   Pulse,
   RpcTester,

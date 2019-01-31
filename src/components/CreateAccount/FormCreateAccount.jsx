@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import i18n from '../../i18n'
-import { Button, InputPassword } from '..'
+import InputPassword from './InputPassword'
+import Button from '../Widgets/Button'
 
 // TODO this falls under category API dependencies and needs to be
 // - required in the beginning: const Mist = require(./api/mist)
