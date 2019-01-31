@@ -114,7 +114,10 @@ export default class TransactionRow extends Component {
         confirmationNumber={confirmationNumber}
         onClick={this.TxClick}
       >
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+        />
         {progressBar}
         <StyledDate data-tool-tip={transaction.dateSent}>
           <h2>{getMonthName(transaction.dateSent)}</h2>
