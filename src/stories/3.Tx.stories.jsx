@@ -60,7 +60,10 @@ const dummyTx = {
   data: '',
   gasPrice: '5000000000', // 5 gwei
   value: '1000000000000000000',
-  params: [],
+  params: [
+    { value: '0x4444444444444444444444444444444444444444' },
+    { value: '20000000000000000' }
+  ],
   network: 'main',
   // description is not part of the receipt or hash
   // and must be set by the program.
@@ -222,6 +225,92 @@ storiesOf('Tx/TransactionRow', module)
           </TxTableBody>
         </TxTable>
       </React.Fragment>
+    )
+  })
+
+const TxTable = styled.table`
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin: 16px 0;
+`
+
+const TxTableBody = styled.tbody`
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+  tr:nth-child(odd) {
+    background-color: rgba(204, 198, 198, 0.3);
+  }
+`
+
+storiesOf('Tx/TransactionRow', module)
+  .add('Sent Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add("Multiple tx's", () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+          <TransactionRow
+            isRecipient
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Received Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow
+            isRecipient
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Pending Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionRow onClick={() => {}} transaction={dummyTx} />
+          <TransactionRow
+            onClick={() => {}}
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 13 })}
+          />
+        </TxTableBody>
+      </TxTable>
+    )
+  })
+  .add('Confirming Tx', () => {
+    return (
+      <TxTable>
+        <TxTableBody>
+          <TransactionConfirmations
+            transaction={Object.assign({}, dummyTx, { confirmationNumber: 0 })}
+          >
+            <TransactionRow onClick={() => {}} />
+          </TransactionConfirmations>
+        </TxTableBody>
+      </TxTable>
     )
   })
 
