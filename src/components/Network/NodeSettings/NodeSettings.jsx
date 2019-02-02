@@ -48,7 +48,7 @@ export default class NodeSettings extends Component {
     const { binPath, client } = status
 
     return (
-      <StyledSettings>
+      <div>
         <StyledH1>Node Settings</StyledH1>
         <StyledH3>
           Client: <StyledValue>{client}</StyledValue>
@@ -67,12 +67,10 @@ export default class NodeSettings extends Component {
           isCheckingForUpdate={isCheckingForUpdate}
           checkUpdate={checkUpdate}
         />
-      </StyledSettings>
+      </div>
     )
   }
 }
-
-const StyledSettings = styled.div``
 
 const StyledH1 = styled.h1`
   margin: 0 0 10px 0;

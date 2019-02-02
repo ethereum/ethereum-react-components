@@ -121,14 +121,12 @@ export default class TxDescription extends Component {
       return null
     }
     return (
-      <StyledExecutionContextRow>
-        <StyledExecutionContextTitle>
-          {i18n.t('mist.sendTx.errorMessage')}
-        </StyledExecutionContextTitle>
-        <StyledExecutionContextDetailsValue>
+      <divRow>
+        <divTitle>{i18n.t('mist.sendTx.errorMessage')}</divTitle>
+        <divDetailsValue>
           <StyledError>{gasError}</StyledError>
-        </StyledExecutionContextDetailsValue>
-      </StyledExecutionContextRow>
+        </divDetailsValue>
+      </divRow>
     )
   }
 
@@ -140,14 +138,14 @@ export default class TxDescription extends Component {
     }
 
     return (
-      <StyledExecutionContextRow>
-        <StyledExecutionContextDetailsTitle>
+      <divRow>
+        <divDetailsTitle>
           {i18n.t('mist.sendTx.txExecutingFunction')}
-        </StyledExecutionContextDetailsTitle>
-        <StyledExecutionContextExecutionFunction>
+        </divDetailsTitle>
+        <divExecutionFunction>
           {executionFunction.slice(0, executionFunction.indexOf('('))}
-        </StyledExecutionContextExecutionFunction>
-      </StyledExecutionContextRow>
+        </divExecutionFunction>
+      </divRow>
     )
   }
 
@@ -155,14 +153,10 @@ export default class TxDescription extends Component {
     const { value } = this.props
     const etherAmount = util.weiToEther(value).toString()
     return (
-      <StyledExecutionContextRow>
-        <StyledExecutionContextTitle>
-          {i18n.t('mist.sendTx.etherAmount')}
-        </StyledExecutionContextTitle>
-        <StyledExecutionContextDetailsValue>
-          {etherAmount}
-        </StyledExecutionContextDetailsValue>
-      </StyledExecutionContextRow>
+      <divRow>
+        <divTitle>{i18n.t('mist.sendTx.etherAmount')}</divTitle>
+        <divDetailsValue>{etherAmount}</divDetailsValue>
+      </divRow>
     )
   }
 
@@ -170,12 +164,10 @@ export default class TxDescription extends Component {
     const { gasPrice } = this.props
     const gasPriceGwei = new BN(gasPrice).div(new BN('1000000000'))
     return (
-      <StyledExecutionContextRow>
-        <StyledExecutionContextTitle>
-          {i18n.t('mist.sendTx.gasPrice')}
-        </StyledExecutionContextTitle>
-        <StyledExecutionContextDetailsValue>{`${gasPriceGwei} gwei`}</StyledExecutionContextDetailsValue>
-      </StyledExecutionContextRow>
+      <divRow>
+        <divTitle>{i18n.t('mist.sendTx.gasPrice')}</divTitle>
+        <divDetailsValue>{`${gasPriceGwei} gwei`}</divDetailsValue>
+      </divRow>
     )
   }
 
@@ -183,14 +175,10 @@ export default class TxDescription extends Component {
     const { estimatedGas } = this.props
     const gas = util.toBigNumber(estimatedGas).toString()
     return (
-      <StyledExecutionContextRow>
-        <StyledExecutionContextTitle>
-          {i18n.t('mist.sendTx.gasEstimate')}
-        </StyledExecutionContextTitle>
-        <StyledExecutionContextDetailsValue>
-          {gas} gas
-        </StyledExecutionContextDetailsValue>
-      </StyledExecutionContextRow>
+      <divRow>
+        <divTitle>{i18n.t('mist.sendTx.gasEstimate')}</divTitle>
+        <divDetailsValue>{gas} gas</divDetailsValue>
+      </divRow>
     )
   }
 
@@ -206,27 +194,19 @@ export default class TxDescription extends Component {
     return (
       <div>
         {tokenDisplayName !== 'tokens' && (
-          <StyledExecutionContextRow>
-            <StyledExecutionContextTitle>
-              {i18n.t('mist.sendTx.tokenName')}
-            </StyledExecutionContextTitle>
-            <StyledExecutionContextDetailsValue>
-              {tokenDisplayName}
-            </StyledExecutionContextDetailsValue>
-          </StyledExecutionContextRow>
+          <divRow>
+            <divTitle>{i18n.t('mist.sendTx.tokenName')}</divTitle>
+            <divDetailsValue>{tokenDisplayName}</divDetailsValue>
+          </divRow>
         )}
         {token.address && (
-          <StyledExecutionContextRow>
-            <StyledExecutionContextTitle>
-              {i18n.t('mist.sendTx.tokenAddress')}
-            </StyledExecutionContextTitle>
-            <StyledExecutionContextParamIdenticon>
+          <divRow>
+            <divTitle>{i18n.t('mist.sendTx.tokenAddress')}</divTitle>
+            <divParamIdenticon>
               <Identicon address={token.address} size="small" />
-            </StyledExecutionContextParamIdenticon>
-            <StyledExecutionContextDetailsValue>
-              {token.address}
-            </StyledExecutionContextDetailsValue>
-          </StyledExecutionContextRow>
+            </divParamIdenticon>
+            <divDetailsValue>{token.address}</divDetailsValue>
+          </divRow>
         )}
       </div>
     )
@@ -239,32 +219,26 @@ export default class TxDescription extends Component {
     }
     const paramsRows = params.map(param => {
       return (
-        <StyledExecutionContextParam key={Math.random()}>
-          <StyledExecutionContextParamValue>
-            <StyledExecutionContextParamUnicode>
-              {'\u2192'}
-            </StyledExecutionContextParamUnicode>
+        <divParam key={Math.random()}>
+          <span>
+            <divParamUnicode>{'\u2192'}</divParamUnicode>
             {param.type === 'address' ? (
-              <StyledExecutionContextParamIdenticon>
+              <divParamIdenticon>
                 <Identicon address={param.value} size="small" />
-              </StyledExecutionContextParamIdenticon>
+              </divParamIdenticon>
             ) : null}
             {param.value}
-          </StyledExecutionContextParamValue>
+          </span>
           <StyledExeuctionContextParamType>
             {param.type}
           </StyledExeuctionContextParamType>
-        </StyledExecutionContextParam>
+        </divParam>
       )
     })
     return (
       <div>
-        <StyledExecutionContextParamsTitle>
-          {i18n.t('mist.sendTx.parameters')}
-        </StyledExecutionContextParamsTitle>
-        <StyledExecutionContextParamsTable>
-          {paramsRows}
-        </StyledExecutionContextParamsTable>
+        <divParamsTitle>{i18n.t('mist.sendTx.parameters')}</divParamsTitle>
+        <div>{paramsRows}</div>
       </div>
     )
   }
@@ -281,7 +255,7 @@ export default class TxDescription extends Component {
     }
 
     return (
-      <StyledExecutionContextDetails>
+      <divDetails>
         {this.renderGasError()}
         {this.renderTxExecutingFunction()}
         {this.renderEtherAmount()}
@@ -293,7 +267,7 @@ export default class TxDescription extends Component {
         <StyledButton flat secondary onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.hideDetails')}
         </StyledButton>
-      </StyledExecutionContextDetails>
+      </divDetails>
     )
   }
 
@@ -301,8 +275,8 @@ export default class TxDescription extends Component {
     const { gasError } = this.props
 
     return (
-      <StyledExecutionContext>
-        <StyledContextDescription>
+      <div>
+        <div>
           {this.renderDescription()}
           {!!gasError && (
             <StyledError>
@@ -310,77 +284,70 @@ export default class TxDescription extends Component {
               fees.
             </StyledError>
           )}
-        </StyledContextDescription>
+        </div>
         {this.renderMoreDetails()}
-      </StyledExecutionContext>
+      </div>
     )
   }
 }
 
-const StyledExecutionContext = styled.div``
-
-const StyledExecutionContextRow = styled.div`
+const divRow = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 12px;
 `
 
-const StyledExecutionContextDetails = styled.div`
+const divDetails = styled.div`
   margin: 18px 0 0;
   font-size: 14px;
   text-align: left;
   -webkit-app-region: drag;
 `
 
-const StyledExecutionContextTitle = styled.span`
+const divTitle = styled.span`
   width: 100px;
 `
 
-const StyledExecutionContextParamsTitle = styled.div`
+const divParamsTitle = styled.div`
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 6px;
 `
 
-const StyledExecutionContextParamsTable = styled.div``
-
 const StyledButton = styled(Button)`
   margin-left: -20px;
 `
 
-const StyledContextDescription = styled.div``
-
-const StyledExecutionContextDetailsTitle = styled.span`
+const divDetailsTitle = styled.span`
   margin-right: 5px;
 `
 
-const StyledExecutionContextDetailsValue = styled.span`
+const divDetailsValue = styled.span`
   display: flex;
   align-items: center;
   font-weight: bold;
 `
 
-const StyledExecutionContextParam = styled.span`
+const divParam = styled.span`
   user-select: all;
   display: flex;
   justify-content: space-between;
   height: 36px;
 `
 
-const StyledExecutionContextParamUnicode = styled.span`
+const divParamUnicode = styled.span`
   font-size: 24px;
   margin-right: 12px;
 `
 
-const StyledExecutionContextParamIdenticon = styled.span`
-  display: flex;
+const divParamIdenticon = styled.span`
   align-items: center;
   margin-right: 6px;
   vertical-align: middle;
   display: inline-block;
 `
 
-const StyledExecutionContextExecutionFunction = styled.span`
+const divExecutionFunction = styled.span`
   font-weight: bold;
 `
 
@@ -388,8 +355,6 @@ const StyledExeuctionContextParamType = styled.span`
   display: flex;
   align-items: center;
 `
-
-const StyledExecutionContextParamValue = styled.span``
 
 const StyledError = styled.span`
   color: red;

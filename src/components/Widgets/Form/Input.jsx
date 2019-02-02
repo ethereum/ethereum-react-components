@@ -26,8 +26,8 @@ const StyledInput = styled.input`
   height: 36.8px;
   max-width: 100%;
   padding: 10px 16px 8px;
-  transition-delay: 0s;
   transition: background-color ease-in-out 1s, color ease-in-out 1s;
+  transition-delay: 0s;
   width: 440px;
   z-index: 1;
 

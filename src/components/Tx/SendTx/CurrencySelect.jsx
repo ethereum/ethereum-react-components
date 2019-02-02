@@ -127,8 +127,6 @@ const StyledSymbol = styled(StyledSpan)`
   padding: 1px 0;
   height: 22px;
   background-clip: padding-box;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
   border-radius: 50%;
   text-align: center;
   font-size: 14px;
@@ -151,14 +149,12 @@ const StyledName = styled(StyledSpan)`
 `
 
 const StyledBalance = styled(StyledSpan)`
-  text-align: right;
   color: #827a7a;
   flex-grow: 1;
   text-align: right;
 `
 
 const StyledLabel = styled.label`
-  -webkit-box-sizing: border-box;
   position: relative;
   font-weight: 300;
   color: #02a8f3;
@@ -190,8 +186,6 @@ const StyledListItem = styled.li`
   }
 
   :hover {
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   }
 

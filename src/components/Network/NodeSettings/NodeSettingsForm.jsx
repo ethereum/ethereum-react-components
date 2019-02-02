@@ -1,3 +1,5 @@
+/* eslint-disable react/no-did-update-set-state */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
