@@ -153,45 +153,36 @@ export default class NodeInfoDot extends Component {
 
 const beaconOrange = keyframes`
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.4);
     box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.4);
   }
   70% {
-    -moz-box-shadow: 0 0 0 10px rgba(255, 165, 0, 0);
     box-shadow: 0 0 0 10px rgba(255, 165, 0, 0);
   }
   100% {
-    -moz-box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
     box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
   }
 `
 
 const beaconGreen = keyframes`
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(36, 195, 58, 0.4);
     box-shadow: 0 0 0 0 rgba(36, 195, 58, 0.4);
   }
   70% {
-    -moz-box-shadow: 0 0 0 10px rgba(36, 195, 58, 0);
     box-shadow: 0 0 0 10px rgba(36, 195, 58, 0);
   }
   100% {
-    -moz-box-shadow: 0 0 0 0 rgba(36, 195, 58, 0);
     box-shadow: 0 0 0 0 rgba(36, 195, 58, 0);
   }
 `
 
 const beaconBlue = keyframes`
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(0, 170, 250, 0.4);
     box-shadow: 0 0 0 0 rgba(0, 170, 250, 0.4);
   }
   70% {
-    -moz-box-shadow: 0 0 0 10px rgba(0, 170, 250, 0);
     box-shadow: 0 0 0 10px rgba(0, 170, 250, 0);
   }
   100% {
-    -moz-box-shadow: 0 0 0 0 rgba(0, 170, 250, 0);
     box-shadow: 0 0 0 0 rgba(0, 170, 250, 0);
   }
 `

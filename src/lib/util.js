@@ -41,15 +41,15 @@ export const toUsd = (etherAmount = '0', etherPriceUSD) => {
 export const networkIdToName = networkId => {
   switch (networkId) {
     case 1:
-    return 'Main'
+      return 'Main'
     case 3:
-    return 'Ropsten'
+      return 'Ropsten'
     case 4:
-    return 'Rinkeby'
+      return 'Rinkeby'
     case 42:
-    return 'Kovan'
+      return 'Kovan'
     default:
-    return 'Private'
+      return 'Private'
   }
 }
 

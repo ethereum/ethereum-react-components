@@ -49,16 +49,10 @@ const StyledWrapper = styled.div`
   padding-right: 16px;
   margin-right: 16px;
   margin-bottom: 16px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border: 0;
-  -webkit-transition: background-color 1600ms, opacity 400ms;
-  -moz-transition: background-color 1600ms, opacity 400ms;
-  -o-transition: background-color 1600ms, opacity 400ms;
   transition: background-color 1600ms, opacity 400ms;
   perspective: 800px;
-  position: relative;
   background-repeat: repeat-y;
   background-color: #ccc6c6;
   background-size: cover;
