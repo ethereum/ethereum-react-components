@@ -121,12 +121,14 @@ export default class TxDescription extends Component {
       return null
     }
     return (
-      <divRow>
-        <divTitle>{i18n.t('mist.sendTx.errorMessage')}</divTitle>
-        <divDetailsValue>
+      <StyledExecutionContextRow>
+        <StyledExecutionContextTitle>
+          {i18n.t('mist.sendTx.errorMessage')}
+        </StyledExecutionContextTitle>
+        <StyledExecutionContextDetailsValue>
           <StyledError>{gasError}</StyledError>
-        </divDetailsValue>
-      </divRow>
+        </StyledExecutionContextDetailsValue>
+      </StyledExecutionContextRow>
     )
   }
 
@@ -138,14 +140,14 @@ export default class TxDescription extends Component {
     }
 
     return (
-      <divRow>
-        <divDetailsTitle>
+      <StyledExecutionContextRow>
+        <StyledExecutionContextDetailsTitle>
           {i18n.t('mist.sendTx.txExecutingFunction')}
-        </divDetailsTitle>
-        <divExecutionFunction>
+        </StyledExecutionContextDetailsTitle>
+        <StyledExecutionContextExecutionFunction>
           {executionFunction.slice(0, executionFunction.indexOf('('))}
-        </divExecutionFunction>
-      </divRow>
+        </StyledExecutionContextExecutionFunction>
+      </StyledExecutionContextRow>
     )
   }
 
@@ -153,10 +155,14 @@ export default class TxDescription extends Component {
     const { value } = this.props
     const etherAmount = util.weiToEther(value).toString()
     return (
-      <divRow>
-        <divTitle>{i18n.t('mist.sendTx.etherAmount')}</divTitle>
-        <divDetailsValue>{etherAmount}</divDetailsValue>
-      </divRow>
+      <StyledExecutionContextRow>
+        <StyledExecutionContextTitle>
+          {i18n.t('mist.sendTx.etherAmount')}
+        </StyledExecutionContextTitle>
+        <StyledExecutionContextDetailsValue>
+          {etherAmount}
+        </StyledExecutionContextDetailsValue>
+      </StyledExecutionContextRow>
     )
   }
 
@@ -164,10 +170,12 @@ export default class TxDescription extends Component {
     const { gasPrice } = this.props
     const gasPriceGwei = new BN(gasPrice).div(new BN('1000000000'))
     return (
-      <divRow>
-        <divTitle>{i18n.t('mist.sendTx.gasPrice')}</divTitle>
-        <divDetailsValue>{`${gasPriceGwei} gwei`}</divDetailsValue>
-      </divRow>
+      <StyledExecutionContextRow>
+        <StyledExecutionContextTitle>
+          {i18n.t('mist.sendTx.gasPrice')}
+        </StyledExecutionContextTitle>
+        <StyledExecutionContextDetailsValue>{`${gasPriceGwei} gwei`}</StyledExecutionContextDetailsValue>
+      </StyledExecutionContextRow>
     )
   }
 
@@ -175,10 +183,14 @@ export default class TxDescription extends Component {
     const { estimatedGas } = this.props
     const gas = util.toBigNumber(estimatedGas).toString()
     return (
-      <divRow>
-        <divTitle>{i18n.t('mist.sendTx.gasEstimate')}</divTitle>
-        <divDetailsValue>{gas} gas</divDetailsValue>
-      </divRow>
+      <StyledExecutionContextRow>
+        <StyledExecutionContextTitle>
+          {i18n.t('mist.sendTx.gasEstimate')}
+        </StyledExecutionContextTitle>
+        <StyledExecutionContextDetailsValue>
+          {gas} gas
+        </StyledExecutionContextDetailsValue>
+      </StyledExecutionContextRow>
     )
   }
 
@@ -194,19 +206,27 @@ export default class TxDescription extends Component {
     return (
       <div>
         {tokenDisplayName !== 'tokens' && (
-          <divRow>
-            <divTitle>{i18n.t('mist.sendTx.tokenName')}</divTitle>
-            <divDetailsValue>{tokenDisplayName}</divDetailsValue>
-          </divRow>
+          <StyledExecutionContextRow>
+            <StyledExecutionContextTitle>
+              {i18n.t('mist.sendTx.tokenName')}
+            </StyledExecutionContextTitle>
+            <StyledExecutionContextDetailsValue>
+              {tokenDisplayName}
+            </StyledExecutionContextDetailsValue>
+          </StyledExecutionContextRow>
         )}
         {token.address && (
-          <divRow>
-            <divTitle>{i18n.t('mist.sendTx.tokenAddress')}</divTitle>
-            <divParamIdenticon>
+          <StyledExecutionContextRow>
+            <StyledExecutionContextTitle>
+              {i18n.t('mist.sendTx.tokenAddress')}
+            </StyledExecutionContextTitle>
+            <StyledExecutionContextParamIdenticon>
               <Identicon address={token.address} size="small" />
-            </divParamIdenticon>
-            <divDetailsValue>{token.address}</divDetailsValue>
-          </divRow>
+            </StyledExecutionContextParamIdenticon>
+            <StyledExecutionContextDetailsValue>
+              {token.address}
+            </StyledExecutionContextDetailsValue>
+          </StyledExecutionContextRow>
         )}
       </div>
     )
@@ -219,25 +239,29 @@ export default class TxDescription extends Component {
     }
     const paramsRows = params.map(param => {
       return (
-        <divParam key={Math.random()}>
+        <StyledExecutionContextParam key={Math.random()}>
           <span>
-            <divParamUnicode>{'\u2192'}</divParamUnicode>
+            <StyledExecutionContextParamUnicode>
+              {'\u2192'}
+            </StyledExecutionContextParamUnicode>
             {param.type === 'address' ? (
-              <divParamIdenticon>
+              <StyledExecutionContextParamIdenticon>
                 <Identicon address={param.value} size="small" />
-              </divParamIdenticon>
+              </StyledExecutionContextParamIdenticon>
             ) : null}
             {param.value}
           </span>
           <StyledExeuctionContextParamType>
             {param.type}
           </StyledExeuctionContextParamType>
-        </divParam>
+        </StyledExecutionContextParam>
       )
     })
     return (
       <div>
-        <divParamsTitle>{i18n.t('mist.sendTx.parameters')}</divParamsTitle>
+        <StyledExecutionContextParamsTitle>
+          {i18n.t('mist.sendTx.parameters')}
+        </StyledExecutionContextParamsTitle>
         <div>{paramsRows}</div>
       </div>
     )
@@ -255,7 +279,7 @@ export default class TxDescription extends Component {
     }
 
     return (
-      <divDetails>
+      <StyledExecutionContextDetails>
         {this.renderGasError()}
         {this.renderTxExecutingFunction()}
         {this.renderEtherAmount()}
@@ -267,7 +291,7 @@ export default class TxDescription extends Component {
         <StyledButton flat secondary onClick={this.handleDetailsClick}>
           {i18n.t('mist.sendTx.hideDetails')}
         </StyledButton>
-      </divDetails>
+      </StyledExecutionContextDetails>
     )
   }
 
@@ -291,24 +315,24 @@ export default class TxDescription extends Component {
   }
 }
 
-const divRow = styled.div`
+const StyledExecutionContextRow = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 12px;
 `
 
-const divDetails = styled.div`
+const StyledExecutionContextDetails = styled.div`
   margin: 18px 0 0;
   font-size: 14px;
   text-align: left;
   -webkit-app-region: drag;
 `
 
-const divTitle = styled.span`
+const StyledExecutionContextTitle = styled.span`
   width: 100px;
 `
 
-const divParamsTitle = styled.div`
+const StyledExecutionContextParamsTitle = styled.div`
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 6px;
@@ -318,36 +342,36 @@ const StyledButton = styled(Button)`
   margin-left: -20px;
 `
 
-const divDetailsTitle = styled.span`
+const StyledExecutionContextDetailsTitle = styled.span`
   margin-right: 5px;
 `
 
-const divDetailsValue = styled.span`
+const StyledExecutionContextDetailsValue = styled.span`
   display: flex;
   align-items: center;
   font-weight: bold;
 `
 
-const divParam = styled.span`
+const StyledExecutionContextParam = styled.span`
   user-select: all;
   display: flex;
   justify-content: space-between;
   height: 36px;
 `
 
-const divParamUnicode = styled.span`
+const StyledExecutionContextParamUnicode = styled.span`
   font-size: 24px;
   margin-right: 12px;
 `
 
-const divParamIdenticon = styled.span`
+const StyledExecutionContextParamIdenticon = styled.span`
   align-items: center;
   margin-right: 6px;
   vertical-align: middle;
   display: inline-block;
 `
 
-const divExecutionFunction = styled.span`
+const StyledExecutionContextExecutionFunction = styled.span`
   font-weight: bold;
 `
 

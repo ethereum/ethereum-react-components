@@ -13,7 +13,7 @@
     "lint:watch": "esw -w src --ext .jsx --ext .js",
     "lint": "eslint --fix src --ext .jsx --ext .js",
     "lint:style": "stylelint 'src/components/**/*.{js,jsx}'",
-    "pretty": "prettier --no-semi --single-quote --write'src/**/*.js'"
+    "pretty": "prettier --no-semi --single-quote --write"
   },
   "peerDependencies": {
     "react": ">=16.6.3",
