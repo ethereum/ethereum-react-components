@@ -178,7 +178,7 @@ export default class NodeInfoBox extends Component {
     if (remote.blockNumber < 1000) {
       // Still loading initial remote results
       return (
-        <div id="remote-stats" className="node-info__section">
+        <StyledSection>
           <StyledTitle network="remote">
             <strong>Remote</strong> Node
           </StyledTitle>
@@ -188,7 +188,7 @@ export default class NodeInfoBox extends Component {
               {i18n.t('mist.nodeInfo.connecting')}
             </div>
           </div>
-        </div>
+        </StyledSection>
       )
     }
     return (
