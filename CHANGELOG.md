@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.2"></a>
+## [1.12.2](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.12.1...v1.12.2) (2019-02-03)
+
+
+### Bug Fixes
+
+* missing padding on remote node info box ([#114](https://github.com/PhilippLgh/ethereum-react-components/issues/114)) ([3855334](https://github.com/PhilippLgh/ethereum-react-components/commit/3855334))
+
+
+
 <a name="1.12.1"></a>
 ## [1.12.1](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.12.0...v1.12.1) (2019-01-30)
 
