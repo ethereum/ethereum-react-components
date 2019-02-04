@@ -9,7 +9,9 @@ export default class NavbarBalance extends Component {
     balance: PropTypes.string,
     currency: PropTypes.string,
     currencyTitle: PropTypes.string,
-    network: PropTypes.string
+    initialBalance: PropTypes.string,
+    network: PropTypes.string,
+    testButton: PropTypes.bool
   }
 
   static defaultProps = {
@@ -22,8 +24,7 @@ export default class NavbarBalance extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      balance: props.initialBalance,
-      initialBalance: props.balance
+      balance: props.initialBalance
     }
     this.run = this.run.bind(this)
   }
@@ -63,7 +64,11 @@ export default class NavbarBalance extends Component {
 
     let runButton
     if (testButton) {
-      runButton = <button onClick={this.run}>RUN</button>
+      runButton = (
+        <button type="button" onClick={this.run}>
+          RUN
+        </button>
+      )
     } else {
       runButton = null
     }
