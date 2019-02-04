@@ -27,6 +27,7 @@ import SendTxForm from './Tx/SendTx'
 import AccountList from './Wallet/AccountList'
 import AccountItem from './Wallet/AccountItem'
 import TokenListForItem from './Wallet/TokenListForItem'
+import NavbarBalance from './Wallet/NavbarBalance'
 import NavbarItem from './Wallet/NavbarItem'
 import NetworkStatus from './Wallet/NetworkStatus'
 import Notification from './Wallet/Notification'
@@ -52,6 +53,7 @@ export {
   FormCreateAccount,
   Identicon,
   InputPassword,
+  NavbarBalance,
   NavbarItem,
   NetworkChooser,
   NetworkStatus,
