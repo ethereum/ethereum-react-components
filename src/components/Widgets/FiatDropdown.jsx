@@ -49,7 +49,6 @@ export default class FiatDropdown extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <StyledDiv ref={node => (this.node = node)}>
         <StyledUl>
