@@ -16,7 +16,8 @@ import {
   TextArea,
   Select,
   FileChooser,
-  WalletButton
+  WalletButton,
+  FiatDropdown
 } from '../components'
 import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
 import Cross from '../components/Widgets/AnimatedIcons/Cross'
@@ -65,6 +66,12 @@ const dummyContracts = {
 storiesOf('Welcome', module).add('to Ethereum Components', () => (
   <Welcome showApp={linkTo('Button')} />
 ))
+
+storiesOf('Widgets/FiatDropdown', module)
+  .add('display', () => <FiatDropdown display onClick={() => {}} />)
+  .add('Require focused click', () => (
+    <FiatDropdown display onClick={() => {}} requireFocusToClose />
+  ))
 
 storiesOf('Widgets/Form/AddressSelect', module)
   .add('wallets and contracts', () => (
