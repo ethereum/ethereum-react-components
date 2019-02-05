@@ -2,29 +2,21 @@
 
 # Ethereum React Components
 
-A library of frequently used Ethereum React components to display and handle addresses, transactions, accounts...
+A library of frequently used Ethereum components.
 
-For a detailed documentation of all available components check out [the generated storybook](https://ethereum.github.io/ethereum-react-components)
+All available components can be found in the the project [storybook](https://ethereum.github.io/ethereum-react-components).
 
 WARNING: this lib is not production ready. All component APIs are in exploratory phases and strict semantic versioning is not yet enforced.
 
-# Examples
+## Installation
 
-Two projects using these components are
-
-- [Mist React](https://github.com/ethereum/mist-ui)
-- [Mist](https://github.com/ethereum/mist)
-
-# Installation
-
-Our CI automatically bundles and publishes the latest production version to [NPM](https://www.npmjs.com/package/ethereum-react-components) and
-[GitHub Releases](https://github.com/ethereum/ethereum-react-components/releases)
+Our CI automatically bundles and publishes the latest production version to [npm](https://www.npmjs.com/package/ethereum-react-components) and [GitHub Releases](https://github.com/ethereum/ethereum-react-components/releases)
 
 ```
 yarn add ethereum-react-components
 ```
 
-# Use in project
+## Usage
 
 ```
 import { Identicon } from 'ethereum-react-components';
@@ -34,14 +26,17 @@ import { Identicon } from 'ethereum-react-components';
 </div>
 ```
 
-For a detailed documentation check out e.g. the [Identicon story](https://ethereum.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon)
+See the project [storybook](https://ethereum.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon) for detailed documentation.
 
-Note that this storybook uses the [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro:300,400,600,700) font.
-You'll need to import and apply this font (or another font of your choosing) in your own project.
+Note that this storybook uses the [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro:300,400,600,700) font. You'll need to import and apply this font (or another font of your choosing) in your own project.
 
-# Development
+## Contributing
 
-## Clone & Storybook
+There are many ways to get involved with this project. Get started [here](/docs/CONTRIBUTING.md).
+
+## Development
+
+### Clone & Storybook
 
 ```
 git clone https://github.com/ethereum/ethereum-react-components.git
@@ -50,13 +45,15 @@ yarn
 yarn storybook
 ```
 
-## Workflow
+### Workflow
 
-- Mind the [component style checklist](CHECKLIST.md)
-- Use eslint in your editor or via command line: `yarn lint:watch`
-- Make [Conventional Commits](https://www.conventionalcommits.org/)
+- Mind the [component style checklist](CHECKLIST.md).
+- Use eslint in your editor or via command line: `yarn lint:watch`.
+- Make [conventional commits](https://www.conventionalcommits.org/).
 
-## Local Testing
+### Local Testing
+
+While in development, [npm link](https://docs.npmjs.com/cli/link.html) allows for testing this library on another local project without publishing to npm.
 
 ```
 cd ethereum-react-components
