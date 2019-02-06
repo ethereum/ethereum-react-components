@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { storiesOf } from '@storybook/react'
+import moment from 'moment'
 import FeeSelectorStorybookContainer from '../components/Tx/SendTx/FeeSelectorStorybookContainer'
 import SubmitTxForm from '../components/Tx/SendTx/SubmitTxForm'
 import TxDescription from '../components/Tx/SendTx/TxDescription'
@@ -70,7 +71,7 @@ const dummyTx = {
   description: 'Sent',
   // dateSent is not part of the receipt or hash
   // and must be set by the program.
-  dateSent: new Date()
+  dateSent: moment()
 }
 
 storiesOf('Tx/Fee Selector', module)

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import moment from 'moment'
 import { Identicon, EthAddress } from '..'
-
-import { getMonthName, getDate } from '../../util/formatters'
 
 export default class TransactionRow extends Component {
   static displayName = 'TransactionRow'
@@ -116,8 +115,8 @@ export default class TransactionRow extends Component {
       >
         {progressBar}
         <StyledDate data-tool-tip={transaction.dateSent}>
-          <h2>{getMonthName(transaction.dateSent)}</h2>
-          <p>{getDate(transaction.dateSent)}</p>
+          <h2>{moment(transaction.dateSent).format('MMM')}</h2>
+          <p>{moment(transaction.dateSent).format('Do')}</p>
         </StyledDate>
         {this.transactionType(transaction)}
         <StyledInfo> {confirmationCount} </StyledInfo>
