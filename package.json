@@ -95,12 +95,12 @@
     }
   },
   "lint-staged": {
+    "*.{js,jsx,json,css,md}": "prettier --no-semi --single-quote --write",
     "src/**/*.{js,jsx}": [
-      "yarn pretty",
       "yarn lint",
-      "yarn lint:style",
-      "git add"
-    ]
+      "yarn lint:style"
+    ],
+    "*": "git add"
   },
   "directories": {
     "doc": "docs"
