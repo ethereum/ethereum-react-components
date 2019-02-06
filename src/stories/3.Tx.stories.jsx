@@ -122,10 +122,6 @@ storiesOf('Tx/TransactionRow', module)
   .add('Sent Tx', () => {
     return (
       <React.Fragment>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
-        />
         <TxTable>
           <TxTableBody>
             <TransactionRow
@@ -141,10 +137,6 @@ storiesOf('Tx/TransactionRow', module)
   .add('Received Tx', () => {
     return (
       <React.Fragment>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
-        />
         <TxTable>
           <TxTableBody>
             <TransactionRow
@@ -162,10 +154,6 @@ storiesOf('Tx/TransactionRow', module)
   .add('Pending Tx', () => {
     return (
       <React.Fragment>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
-        />
         <TxTable>
           <TxTableBody>
             <TransactionRow onClick={() => {}} transaction={dummyTx} />
@@ -177,10 +165,6 @@ storiesOf('Tx/TransactionRow', module)
   .add('Confirming Tx', () => {
     return (
       <React.Fragment>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
-        />
         <TxTable>
           <TxTableBody>
             <TransactionConfirmations
