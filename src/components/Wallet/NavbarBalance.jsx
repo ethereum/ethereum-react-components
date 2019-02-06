@@ -9,7 +9,6 @@ export default class NavbarBalance extends Component {
     balance: PropTypes.string,
     currency: PropTypes.string,
     currencyTitle: PropTypes.string,
-    initialBalance: PropTypes.string,
     network: PropTypes.string,
     testButton: PropTypes.bool
   }
@@ -17,16 +16,30 @@ export default class NavbarBalance extends Component {
   static defaultProps = {
     currency: 'ETHER*',
     currencyTitle: 'This is testnet ether, no real market value',
-    initialBalance: '0.00',
+    balance: '0.00',
     network: 'rinkeby'
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      balance: props.initialBalance
+      balance: '0.00'
     }
-    this.run = this.run.bind(this)
+  }
+
+  componentDidMount() {
+    this.mounted = true
+    let { balance: bal1 } = this.state
+    let { balance: bal2 } = this.props
+    bal1 = parseFloat(bal1)
+    bal2 = parseFloat(bal2)
+    if (bal1 !== bal2) {
+      this.changeBalance(bal1, bal2)
+    }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
   }
 
   componentDidUpdate() {
@@ -35,14 +48,18 @@ export default class NavbarBalance extends Component {
     bal1 = parseFloat(bal1)
     bal2 = parseFloat(bal2)
     if (bal1 !== bal2) {
-      setTimeout(
-        () =>
-          this.setState({
-            balance: bal1 < bal2 ? this.increment(bal1) : this.decrement(bal1)
-          }),
-        20
-      )
+      this.changeBalance(bal1, bal2)
     }
+  }
+
+  changeBalance = (bal1, bal2) => {
+    setTimeout(() => {
+      if (this.mounted) {
+        this.setState({
+          balance: bal1 < bal2 ? this.increment(bal1) : this.decrement(bal1)
+        })
+      }
+    }, 20)
   }
 
   increment = bal1 => {
@@ -53,28 +70,12 @@ export default class NavbarBalance extends Component {
     return (bal1 - 0.01).toFixed(2).toString()
   }
 
-  run() {
-    const { initialBalance } = this.props
-    this.setState({ balance: initialBalance })
-  }
-
   render() {
     const { currency, currencyTitle, network, testButton } = this.props
     const { balance } = this.state
 
-    let runButton
-    if (testButton) {
-      runButton = (
-        <button type="button" onClick={this.run}>
-          RUN
-        </button>
-      )
-    } else {
-      runButton = null
-    }
-
     let currencySelect
-    if (network !== 'MAIN') {
+    if (network !== 'main') {
       currencySelect = currency
     } else {
       currencySelect = <StyledButton type="button">ETHER</StyledButton>
@@ -88,7 +89,6 @@ export default class NavbarBalance extends Component {
             <StyledCurrency>{currencySelect}</StyledCurrency>
           </StyledBalance>
         </StyledLi>
-        {runButton}
       </React.Fragment>
     )
   }

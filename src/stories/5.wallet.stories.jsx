@@ -28,13 +28,10 @@ storiesOf('Wallet/NavbarBalance', module)
     return <NavbarBalance />
   })
   .add('increment testnet', () => {
-    return <NavbarBalance initialBalance="0.00" balance="5.00" testButton />
-  })
-  .add('decrement testnet', () => {
-    return <NavbarBalance initialBalance="5.00" balance="0.00" testButton />
+    return <NavbarBalance balance="5.00" />
   })
   .add('no balance mainnet', () => {
-    return <NavbarBalance network="MAIN" balance="0.00" />
+    return <NavbarBalance network="main" balance="0.00" />
   })
 
 storiesOf('Wallet/NetworkStatus', module)
