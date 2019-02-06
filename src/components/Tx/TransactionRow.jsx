@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import moment from 'moment'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { Identicon, EthAddress } from '..'
 
 export default class TransactionRow extends Component {
@@ -93,7 +95,7 @@ export default class TransactionRow extends Component {
         <React.Fragment>
           <StyledReceivedAmount>{amount}</StyledReceivedAmount>
           <StyledArrow>
-            <StyledArrrowLeft onClick={this.ArrowClick} />
+            <StyledFAUp size="1px" icon={faArrowUp} onClick={this.ArrowClick} />
           </StyledArrow>
         </React.Fragment>
       )
@@ -102,7 +104,11 @@ export default class TransactionRow extends Component {
         <React.Fragment>
           <StyledSentAmount> - {transaction.value} ETHER</StyledSentAmount>
           <StyledArrow>
-            <StyledArrrowRight onClick={this.ArrowClick} />
+            <StyledFARight
+              size="1px"
+              icon={faArrowRight}
+              onClick={this.ArrowClick}
+            />
           </StyledArrow>
         </React.Fragment>
       )
@@ -256,22 +262,20 @@ const StyledArrow = styled.td`
   vertical-align: middle;
 `
 
-const StyledArrrowRight = styled.i`
+const StyledFARight = styled(FontAwesomeIcon)`
   font-style: normal;
   color: #c20e25;
+  padding: 2px;
   box-sizing: border-box;
-  ::before {
-    font-family: 'Simple-Line-Icons';
-    content: '\\e079';
-  }
+  border: 1px solid;
+  border-radius: 50%;
 `
 
-const StyledArrrowLeft = styled.i`
+const StyledFAUp = styled(FontAwesomeIcon)`
   font-style: normal;
   color: #827a7a;
+  padding: 2px;
   box-sizing: border-box;
-  ::before {
-    font-family: 'Simple-Line-Icons';
-    content: '\\e078';
-  }
+  border: 1px solid;
+  border-radius: 50%;
 `
