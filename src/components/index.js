@@ -32,7 +32,6 @@ import Notification from './Wallet/Notification'
 import TokenCard from './Wallet/TokenCard'
 
 import TransactionRow from './Tx/TransactionRow'
-import TransactionConfirmations from './Tx/TransactionConfirmations'
 
 import * as utils from '../lib/util'
 
@@ -67,7 +66,6 @@ export {
   TokenCard,
   TokenListForItem,
   TransactionRow,
-  TransactionConfirmations,
   TxHistory,
   ValidatedField,
   WalletButton,

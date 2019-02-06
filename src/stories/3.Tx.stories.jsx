@@ -59,7 +59,7 @@ const dummyTx = {
   estimatedGas: '0x76c0', // 30400
   data: '',
   gasPrice: '5000000000', // 5 gwei
-  value: '1000000000000000000',
+  value: '2',
   params: [
     { value: '0x4444444444444444444444444444444444444444' },
     { value: '20000000000000000' }
@@ -137,33 +137,6 @@ storiesOf('Tx/TransactionRow', module)
       </React.Fragment>
     )
   })
-  .add("Multiple tx's", () => {
-    return (
-      <React.Fragment>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
-        />
-        <TxTable>
-          <TxTableBody>
-            <TransactionRow
-              onClick={() => {}}
-              transaction={Object.assign({}, dummyTx, {
-                confirmationNumber: 13
-              })}
-            />
-            <TransactionRow
-              isRecipient
-              onClick={() => {}}
-              transaction={Object.assign({}, dummyTx, {
-                confirmationNumber: 13
-              })}
-            />
-          </TxTableBody>
-        </TxTable>
-      </React.Fragment>
-    )
-  })
   .add('Received Tx', () => {
     return (
       <React.Fragment>
@@ -195,12 +168,6 @@ storiesOf('Tx/TransactionRow', module)
         <TxTable>
           <TxTableBody>
             <TransactionRow onClick={() => {}} transaction={dummyTx} />
-            <TransactionRow
-              onClick={() => {}}
-              transaction={Object.assign({}, dummyTx, {
-                confirmationNumber: 13
-              })}
-            />
           </TxTableBody>
         </TxTable>
       </React.Fragment>
