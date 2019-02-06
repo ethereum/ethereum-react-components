@@ -8,14 +8,12 @@ export default class NavbarBalance extends Component {
   static propTypes = {
     balance: PropTypes.string,
     currency: PropTypes.string,
-    currencyTitle: PropTypes.string,
     network: PropTypes.string,
     testButton: PropTypes.bool
   }
 
   static defaultProps = {
     currency: 'ETHER*',
-    currencyTitle: 'This is testnet ether, no real market value',
     balance: '0.00',
     network: 'rinkeby'
   }
@@ -71,12 +69,14 @@ export default class NavbarBalance extends Component {
   }
 
   render() {
-    const { currency, currencyTitle, network, testButton } = this.props
+    const { currency, network, testButton } = this.props
     const { balance } = this.state
 
     let currencySelect
+    let title
     if (network !== 'main') {
       currencySelect = currency
+      title = 'This is testnet ether, no real market value'
     } else {
       currencySelect = <StyledButton type="button">ETHER</StyledButton>
     }
@@ -84,9 +84,9 @@ export default class NavbarBalance extends Component {
       <React.Fragment>
         <StyledLi>
           <StyledDiv>Balance</StyledDiv>
-          <StyledBalance title={currencyTitle}>
+          <StyledBalance>
             {balance}
-            <StyledCurrency>{currencySelect}</StyledCurrency>
+            <StyledCurrency title={title}>{currencySelect}</StyledCurrency>
           </StyledBalance>
         </StyledLi>
       </React.Fragment>
