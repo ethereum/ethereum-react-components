@@ -116,9 +116,9 @@ storiesOf('Widgets/Identicon', module)
     />
   ))
 
-storiesOf('Widgets/Animations/Spinner', module).add('default', () => (
-  <Spinner />
-))
+storiesOf('Widgets/Animations/Spinner', module)
+  .add('default', () => <Spinner />)
+  .add('half-size', () => <Spinner scale="0.5" />)
 
 storiesOf('Widgets/WalletButton', module).add('default', () => (
   <WalletButton onClick={() => {}}>Add Wallet Contract</WalletButton>
