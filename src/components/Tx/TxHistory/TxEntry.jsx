@@ -74,7 +74,7 @@ export default class TxEntry extends Component {
     return (
       <div>
         <StyledLabel>{i18n.t('mist.txHistory.txHash')}</StyledLabel>
-        <StyledValue>{linkedTxHash}</StyledValue>
+        <span>{linkedTxHash}</span>
       </div>
     )
   }
@@ -89,10 +89,10 @@ export default class TxEntry extends Component {
     return (
       <div>
         <StyledLabel>{i18n.t('mist.txHistory.etherAmount')}</StyledLabel>
-        <StyledValue>
+        <span>
           {etherAmount} Ether{' '}
           {etherAmountUSD && <span> (~${etherAmountUSD} USD)</span>}
-        </StyledValue>
+        </span>
       </div>
     )
   }
@@ -102,7 +102,7 @@ export default class TxEntry extends Component {
     return (
       <div>
         <StyledLabel>{i18n.t('mist.txHistory.nonce')}</StyledLabel>
-        <StyledValue>{hexToNumberString(tx.nonce)}</StyledValue>
+        <span>{hexToNumberString(tx.nonce)}</span>
       </div>
     )
   }
@@ -115,19 +115,19 @@ export default class TxEntry extends Component {
       <div>
         <div>
           <StyledLabel>{i18n.t('mist.txHistory.gasLimit')}</StyledLabel>
-          <StyledValue>{hexToNumberString(tx.gas)}</StyledValue>
+          <span>{hexToNumberString(tx.gas)}</span>
         </div>
         {tx.gasUsed && (
           <div>
             <StyledLabel>{i18n.t('mist.txHistory.gasUsed')}</StyledLabel>
-            <StyledValue>{hexToNumberString(tx.gasUsed)}</StyledValue>
+            <span>{hexToNumberString(tx.gasUsed)}</span>
           </div>
         )}
         <div>
           <StyledLabel>{i18n.t('mist.txHistory.gasPrice')}</StyledLabel>
-          <StyledValue>
+          <span>
             {gasPriceEther} Ether ({gasPriceGwei} Gwei)
-          </StyledValue>
+          </span>
         </div>
       </div>
     )
@@ -152,7 +152,7 @@ export default class TxEntry extends Component {
     return (
       <div>
         <StyledLabel>{i18n.t('mist.txHistory.txCost')}</StyledLabel>
-        <StyledValue>{txCostEther} Ether</StyledValue>
+        <span>{txCostEther} Ether</span>
         {txCostUSD && <span> (${txCostUSD} USD)</span>}
       </div>
     )
@@ -168,9 +168,9 @@ export default class TxEntry extends Component {
     return (
       <div>
         <StyledLabel>{i18n.t('mist.txHistory.data')}</StyledLabel>
-        <StyledValue>
-          <StyledData>{tx.data}</StyledData>
-        </StyledValue>
+        <span>
+          <div>{tx.data}</div>
+        </span>
       </div>
     )
   }
@@ -215,15 +215,15 @@ export default class TxEntry extends Component {
   renderStatus() {
     const { tx } = this.props
     let status = (
-      <StyledValue style={{ color: 'grey' }}>
+      <span style={{ color: 'grey' }}>
         {i18n.t('mist.txHistory.statusPending')}
-      </StyledValue>
+      </span>
     )
     if (tx.status === 0) {
       status = (
-        <StyledValue style={{ color: 'red' }}>
+        <span style={{ color: 'red' }}>
           {i18n.t('mist.txHistory.statusFailed')}
-        </StyledValue>
+        </span>
       )
     } else if (tx.status === 1 && tx.blockNumber) {
       const { blockNumber } = this.props
@@ -231,19 +231,19 @@ export default class TxEntry extends Component {
 
       status = (
         <span>
-          <StyledValue style={{ color: 'green' }}>
+          <span style={{ color: 'green' }}>
             {i18n.t('mist.txHistory.statusConfirmed')}
-          </StyledValue>{' '}
-          <StyledValue>
+          </span>{' '}
+          <span>
             ({numberConfirmations} {i18n.t('mist.txHistory.confirmations')})
-          </StyledValue>
+          </span>
         </span>
       )
     }
     return (
       <div>
         <StyledLabel>{i18n.t('mist.txHistory.status')}</StyledLabel>
-        <StyledValue style={{ fontWeight: 'bold' }}>{status}</StyledValue>
+        <span style={{ fontWeight: 'bold' }}>{status}</span>
       </div>
     )
   }
@@ -280,7 +280,7 @@ export default class TxEntry extends Component {
         <StyledIdenticon>
           <Identicon address={tx.from} size="small" />
         </StyledIdenticon>
-        <StyledValue>{tx.from}</StyledValue>
+        <span>{tx.from}</span>
       </div>
     )
   }
@@ -295,7 +295,7 @@ export default class TxEntry extends Component {
           <StyledIdenticon>
             <Identicon address={tokensTo} size="small" />
           </StyledIdenticon>
-          <StyledValue>{tokensTo}</StyledValue>
+          <span>{tokensTo}</span>
         </div>
       )
     }
@@ -313,7 +313,7 @@ export default class TxEntry extends Component {
         <StyledIdenticon>
           <Identicon address={tx.to} size="small" />
         </StyledIdenticon>
-        <StyledValue>{tx.to}</StyledValue>
+        <span>{tx.to}</span>
       </div>
     )
   }
@@ -329,7 +329,7 @@ export default class TxEntry extends Component {
         <StyledIdenticon>
           <Identicon address={tx.contractAddress} size="small" />
         </StyledIdenticon>
-        <StyledValue>{tx.contractAddress}</StyledValue>
+        <span>{tx.contractAddress}</span>
       </div>
     )
   }
@@ -400,8 +400,6 @@ const StyledLabel = styled.div`
   margin-right: 5px;
 `
 
-const StyledValue = styled.span``
-
 const StyledDate = styled.div`
   font-size: 80%;
   margin-bottom: 0;
@@ -433,5 +431,3 @@ const StyledIdenticon = styled.div`
   vertical-align: middle;
   margin: 0 7px 0 2px;
 `
-
-const StyledData = styled.div``

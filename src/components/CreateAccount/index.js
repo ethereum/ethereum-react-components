@@ -1,7 +1,4 @@
-import FormCreateAccount from './FormCreateAccount';
-import InputPassword from './InputPassword';
+import FormCreateAccount from './FormCreateAccount'
+import InputPassword from './InputPassword'
 
-export {
-  FormCreateAccount,
-  InputPassword,
-};
+export { FormCreateAccount, InputPassword }

@@ -1,14 +1,14 @@
 export function sortByBalance(wallets) {
   return wallets
     .filter(wallet => parseFloat(wallet.balance) !== 0)
-    .sort((a, b) => b.balance - a.balance);
+    .sort((a, b) => b.balance - a.balance)
 }
 
 // export function combineWallets(addresses, walletContracts) {
 export function combineWallets(addr, wc) {
   /* scrub for undefined parameters */
-  let addresses = addr;
-  let walletContracts = wc;
+  let addresses = addr
+  let walletContracts = wc
   if (!addr) {
     addresses = {}
   }
@@ -22,17 +22,17 @@ export function combineWallets(addr, wc) {
         return {
           ...addresses[address],
           address,
-          addressType: 'wallet',
-        };
+          addressType: 'wallet'
+        }
       })
       .concat(
         Object.keys(walletContracts).map(address => {
           return {
             ...walletContracts[address],
             address,
-            addressType: 'contract',
-          };
+            addressType: 'contract'
+          }
         })
       )
-  );
+  )
 }
