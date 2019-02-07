@@ -5,6 +5,7 @@ import moment from 'moment'
 import {
   AccountItem,
   AccountList,
+  NavbarBalance,
   NavbarItem,
   NetworkStatus,
   Notification,
@@ -20,6 +21,17 @@ storiesOf('Wallet/NavbarItem', module)
   })
   .add('contracts', () => {
     return <NavbarItem title="contracts" icon="faCopy" />
+  })
+
+storiesOf('Wallet/NavbarBalance', module)
+  .add('no balance testnet', () => {
+    return <NavbarBalance />
+  })
+  .add('increment testnet', () => {
+    return <NavbarBalance balance="5.00" />
+  })
+  .add('no balance mainnet', () => {
+    return <NavbarBalance network="main" balance="0.00" />
   })
 
 storiesOf('Wallet/NetworkStatus', module)
