@@ -34,6 +34,7 @@ const StyledCheckbox = styled.input`
   position: relative;
   margin: 0;
   outline: none !important;
+  appearance: none;
   margin-left: 16px;
   width: 24px;
   height: 24px;

@@ -10,8 +10,9 @@
     "build": "webpack --config webpack.prod.config.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs",
+    "lint": "eslint src --ext .jsx --ext .js",
+    "lint:fix": "eslint --fix src --ext .jsx --ext .js",
     "lint:watch": "esw -w src --ext .jsx --ext .js",
-    "lint": "eslint --fix src --ext .jsx --ext .js",
     "lint:style": "stylelint 'src/components/**/*.{js,jsx}'",
     "pretty": "prettier --no-semi --single-quote --write"
   },
@@ -101,7 +102,7 @@
     ],
     "src/**/*.{js,jsx}": [
       "yarn pretty",
-      "yarn lint",
+      "yarn lint:fix",
       "yarn lint:style",
       "git add"
     ]

@@ -17,7 +17,7 @@ jobs:
 
       - run: yarn install
 
-        #- run: yarn test
+      - run: yarn lint
 
       - save_cache:
           paths:
