@@ -8,8 +8,7 @@ export default class NavbarBalance extends Component {
   static propTypes = {
     balance: PropTypes.string,
     currency: PropTypes.string,
-    network: PropTypes.string,
-    testButton: PropTypes.bool
+    network: PropTypes.string
   }
 
   static defaultProps = {
@@ -36,10 +35,6 @@ export default class NavbarBalance extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.mounted = false
-  }
-
   componentDidUpdate() {
     let { balance: bal1 } = this.state
     let { balance: bal2 } = this.props
@@ -48,6 +43,10 @@ export default class NavbarBalance extends Component {
     if (bal1 !== bal2) {
       this.changeBalance(bal1, bal2)
     }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
   }
 
   changeBalance = (bal1, bal2) => {
@@ -69,7 +68,7 @@ export default class NavbarBalance extends Component {
   }
 
   render() {
-    const { currency, network, testButton } = this.props
+    const { currency, network } = this.props
     const { balance } = this.state
 
     let currencySelect
