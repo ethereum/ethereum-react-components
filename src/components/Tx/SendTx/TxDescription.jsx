@@ -240,7 +240,7 @@ export default class TxDescription extends Component {
     const paramsRows = params.map(param => {
       return (
         <StyledExecutionContextParam key={Math.random()}>
-          <StyledExecutionContextParamValue>
+          <span>
             <StyledExecutionContextParamUnicode>
               {'\u2192'}
             </StyledExecutionContextParamUnicode>
@@ -250,7 +250,7 @@ export default class TxDescription extends Component {
               </StyledExecutionContextParamIdenticon>
             ) : null}
             {param.value}
-          </StyledExecutionContextParamValue>
+          </span>
           <StyledExeuctionContextParamType>
             {param.type}
           </StyledExeuctionContextParamType>
@@ -262,9 +262,7 @@ export default class TxDescription extends Component {
         <StyledExecutionContextParamsTitle>
           {i18n.t('mist.sendTx.parameters')}
         </StyledExecutionContextParamsTitle>
-        <StyledExecutionContextParamsTable>
-          {paramsRows}
-        </StyledExecutionContextParamsTable>
+        <div>{paramsRows}</div>
       </div>
     )
   }
@@ -301,8 +299,8 @@ export default class TxDescription extends Component {
     const { gasError } = this.props
 
     return (
-      <StyledExecutionContext>
-        <StyledContextDescription>
+      <div>
+        <div>
           {this.renderDescription()}
           {!!gasError && (
             <StyledError>
@@ -310,14 +308,12 @@ export default class TxDescription extends Component {
               fees.
             </StyledError>
           )}
-        </StyledContextDescription>
+        </div>
         {this.renderMoreDetails()}
-      </StyledExecutionContext>
+      </div>
     )
   }
 }
-
-const StyledExecutionContext = styled.div``
 
 const StyledExecutionContextRow = styled.div`
   display: flex;
@@ -342,13 +338,9 @@ const StyledExecutionContextParamsTitle = styled.div`
   margin-bottom: 6px;
 `
 
-const StyledExecutionContextParamsTable = styled.div``
-
 const StyledButton = styled(Button)`
   margin-left: -20px;
 `
-
-const StyledContextDescription = styled.div``
 
 const StyledExecutionContextDetailsTitle = styled.span`
   margin-right: 5px;
@@ -373,7 +365,6 @@ const StyledExecutionContextParamUnicode = styled.span`
 `
 
 const StyledExecutionContextParamIdenticon = styled.span`
-  display: flex;
   align-items: center;
   margin-right: 6px;
   vertical-align: middle;
@@ -388,8 +379,6 @@ const StyledExeuctionContextParamType = styled.span`
   display: flex;
   align-items: center;
 `
-
-const StyledExecutionContextParamValue = styled.span``
 
 const StyledError = styled.span`
   color: red;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import 'loaders.css'
+import styled, { keyframes } from 'styled-components'
 
 // for more examples see https://connoratherton.com/loaders
 // https://github.com/ConnorAtherton/loaders.css
@@ -9,8 +8,9 @@ export default class Spinner extends Component {
   static displayName = 'Spinner'
 
   static propTypes = {
+    color: PropTypes.string,
     scale: PropTypes.string,
-    color: PropTypes.string
+    style: PropTypes.object
   }
 
   static defaultProps = {
@@ -19,40 +19,88 @@ export default class Spinner extends Component {
   }
 
   render() {
-    const { color, scale } = this.props
+    const { color, scale, style } = this.props
 
     const divCount = 8
-    const style = { backgroundColor: color }
 
     return (
-      <StyledWrapper style={{ transform: `scale(${scale}, ${scale})` }}>
-        <div className="ball-spin-fade-loader">
-          {[...Array(divCount)].map((_, idx) => (
-            <div key={idx} style={style} />
-          ))}
-        </div>
+      <StyledWrapper
+        scale={scale}
+        style={{ transform: `scale(${scale}, ${scale})`, ...style }}
+      >
+        {[...Array(divCount)].map((_, idx) => (
+          <div key={idx} style={{ backgroundColor: color }} />
+        ))}
       </StyledWrapper>
     )
   }
 }
 
+const BallSpin = keyframes`
+  50% {
+    opacity: 0.3;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+`
+
 const StyledWrapper = styled.div`
+  position: relative;
+  display: block;
+  width: 68px;
+  height: 68px;
   box-sizing: border-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -ms-flex-preferred-size: 25%;
-  flex-basis: 25%;
-  max-width: 25%;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+
+  & > div {
+    background-color: #fff;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    margin: 2px;
+    animation-fill-mode: both;
+    position: absolute;
+  }
+  & > div:nth-child(1) {
+    top: 50px;
+    left: 25px;
+    animation: ${BallSpin} 1s -0.96s infinite linear;
+  }
+  & > div:nth-child(2) {
+    top: 42.04545px;
+    left: 42.04545px;
+    animation: ${BallSpin} 1s -0.84s infinite linear;
+  }
+  & > div:nth-child(3) {
+    top: 25px;
+    left: 50px;
+    animation: ${BallSpin} 1s -0.72s infinite linear;
+  }
+  & > div:nth-child(4) {
+    top: 8.04545px;
+    left: 42.04545px;
+    animation: ${BallSpin} 1s -0.6s infinite linear;
+  }
+  & > div:nth-child(5) {
+    top: 0px;
+    left: 25px;
+    animation: ${BallSpin} 1s -0.48s infinite linear;
+  }
+  & > div:nth-child(6) {
+    top: 8.04545px;
+    left: 8.04545px;
+    animation: ${BallSpin} 1s -0.36s infinite linear;
+  }
+  & > div:nth-child(7) {
+    top: 25px;
+    left: 0;
+    animation: ${BallSpin} 1s -0.24s infinite linear;
+  }
+  & > div:nth-child(8) {
+    top: 42.04545px;
+    left: 8.04545px;
+    animation: ${BallSpin} 1s -0.12s infinite linear;
+  }
 `

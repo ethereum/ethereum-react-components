@@ -36,7 +36,6 @@ export default class WalletButton extends Component {
 const StyledButton = styled.button`
   position: relative;
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
   width: 208px;
   min-height: 73.6px;
@@ -44,24 +43,23 @@ const StyledButton = styled.button`
   padding-right: 16px;
   margin-right: 16px;
   margin-bottom: 16px;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border: 0;
   background: none;
-  -webkit-transition: background-color 1600ms, opacity 400ms;
-  -moz-transition: background-color 1600ms, opacity 400ms;
-  -o-transition: background-color 1600ms, opacity 400ms;
   transition: background-color 1600ms, opacity 400ms;
   color: #02a8f3;
   outline: 0;
   cursor: pointer;
   font-size: 100%;
+
   :hover {
     background-color: #ffffff;
   }
+
   :focus {
     border-bottom: 1px dotted #02a8f3;
   }
+
   :active {
     border: 0;
     transform: scale(0.95);
@@ -83,8 +81,6 @@ const StyledDiv = styled.div`
   color: #fafafa;
   font-size: 1.8em;
   text-align: center;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 `
 

@@ -1,6 +1,6 @@
 {
   "name": "ethereum-react-components",
-  "version": "1.12.3",
+  "version": "1.13.2",
   "description": "A components library which is used in multiple projects. Contains frequently used Ethereum components to display and handle addresses, transactions...",
   "main": "dist/index.js",
   "scripts": {
@@ -10,8 +10,11 @@
     "build": "webpack --config webpack.prod.config.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs",
+    "lint": "eslint src --ext .jsx --ext .js",
+    "lint:fix": "eslint --fix src --ext .jsx --ext .js",
     "lint:watch": "esw -w src --ext .jsx --ext .js",
-    "lint": "eslint src --ext .jsx --ext .js"
+    "lint:style": "stylelint 'src/components/**/*.{js,jsx}'",
+    "pretty": "prettier --no-semi --single-quote --write"
   },
   "peerDependencies": {
     "react": ">=16.6.3",
@@ -59,6 +62,10 @@
     "sass-loader": "^7.1.0",
     "standard-version": "^4.4.0",
     "style-loader": "^0.23.1",
+    "stylelint": "^9.9.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.5.1",
     "webpack": "^4.26.0",
     "webpack-cli": "^3.1.2"
   },
@@ -89,8 +96,14 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,json,css,md}": [
-      "prettier --no-semi --single-quote --write",
+    "*.{json,css,md}": [
+      "yarn pretty",
+      "git add"
+    ],
+    "src/**/*.{js,jsx}": [
+      "yarn pretty",
+      "yarn lint:fix",
+      "yarn lint:style",
       "git add"
     ]
   },

@@ -400,33 +400,31 @@ const StyledTitle = styled.div`
 `
 
 const StyledProgress = styled.progress`
-    width: 100%;
-    background-color: #eee;
-    border-radius: 3px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) inset;
-    background: rgba(255, 255, 255, 0.1);
-    height: 5px;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) inset;
+  background: rgba(255, 255, 255, 0.1);
+  height: 5px;
 
-    ${props =>
-      !props.testnet &&
-      css`
-        &::-webkit-progress-value {
-          bakground-image: linear-gradient(left, transparent, ${colorMainnet});
-          background: ${colorMainnet};
-          background-size: cover;
-        }
-      `}
-    ${props =>
-      props.testnet &&
-      css`
-        &::-webkit-progress-value {
-          background-image: linear-gradient(left, transparent, ${colorTestnet});
-          background: ${colorTestnet};
-          background-size: cover;
-        }
-      `}
+  ${props =>
+    !props.testnet &&
+    css`
+      &::-webkit-progress-value {
+        bakground-image: linear-gradient(left, transparent, ${colorMainnet});
+        background: ${colorMainnet};
+        background-size: cover;
+      }
+    `}
 
-  }
+  ${props =>
+    props.testnet &&
+    css`
+      &::-webkit-progress-value {
+        background-image: linear-gradient(left, transparent, ${colorTestnet});
+        background: ${colorTestnet};
+        background-size: cover;
+      }
+    `}
 `
 
 const StyledBox = styled.div`

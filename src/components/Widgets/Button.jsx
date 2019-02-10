@@ -35,7 +35,14 @@ export default class Button extends Component {
     const { children, flat, loading, secondary, className } = this.props
 
     const spinner = (
-      <Spinner color={!secondary && !flat ? 'white' : '#00aafa'} scale="0.5" />
+      <React.Fragment>
+        <Spinner
+          color={!secondary && !flat ? 'white' : '#00aafa'}
+          scale="0.4"
+          style={{ position: 'absolute', right: '0' }}
+        />
+        {children}
+      </React.Fragment>
     )
 
     return (
@@ -47,6 +54,7 @@ export default class Button extends Component {
 }
 
 const StyledButton = styled.button`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,13 +64,12 @@ const StyledButton = styled.button`
   color: white;
   cursor: pointer;
   font-size: 14px;
-  height: 46px;
+  height: 46px !important;
   line-height: 1;
-  min-width: 120px;
+  min-width: 200px;
   overflow: hidden;
-  padding: 12px 24px;
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: uppercase;
   white-space: nowrap;
 
   ${props =>

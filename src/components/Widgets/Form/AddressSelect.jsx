@@ -94,9 +94,8 @@ const StyledSelect = styled(Select)`
     margin-top: 0;
     padding-left: 41.6px;
     padding-right: 0;
-    transition-delay: 0s;
     transition: background-color ease-in-out 1s, color ease-in-out 1s;
-    -webkit-appearance: none;
+    transition-delay: 0s;
     border-radius: 0;
     height: 36px;
     line-height: 18px;

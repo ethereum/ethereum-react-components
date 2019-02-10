@@ -92,7 +92,7 @@ export default class FeeSelector extends Component {
     }
 
     return (
-      <StyledContainer>
+      <div>
         {priority ? (
           <StyledFeeSelector
             onClick={this.togglePriority}
@@ -114,13 +114,11 @@ export default class FeeSelector extends Component {
             {i18n.t('mist.sendTx.standardFee')}
           </StyledFeeSelector>
         )}{' '}
-        <StyledFeeAmount>{this.parseFee()}</StyledFeeAmount>
-      </StyledContainer>
+        <span>{this.parseFee()}</span>
+      </div>
     )
   }
 }
-
-const StyledContainer = styled.div``
 
 const StyledFeeSelector = styled.span`
   user-select: none;
@@ -132,7 +130,6 @@ const StyledFeeSelector = styled.span`
     outline: 0;
   }
 `
-const StyledFeeAmount = styled.span``
 
 const StyledWarning = styled.div`
   display: inline-block;

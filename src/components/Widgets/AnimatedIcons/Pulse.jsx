@@ -64,7 +64,8 @@ export default class Pulse extends Component {
           ...pstyle,
           width: '65px',
           height: '65px'
-        }}>
+        }}
+      >
         <div className={type.class}>
           {[...Array(type.divs)].map((_, idx) => (
             <div key={idx} style={type.style} />
@@ -77,21 +78,13 @@ export default class Pulse extends Component {
 
 const StyledWrapper = styled.div`
   box-sizing: border-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex: 0 1 auto;
   flex: 0 1 auto;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -ms-flex-positive: 1;
   flex-grow: 1;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -ms-flex-preferred-size: 25%;
   flex-basis: 25%;
   max-width: 25%;
-  -ms-flex-align: center;
   align-items: center;
-  -ms-flex-pack: center;
   justify-content: center;
 `
