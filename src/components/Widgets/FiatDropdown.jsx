@@ -47,7 +47,6 @@ export default class FiatDropdown extends Component {
 
     if (doesContain && onClick) {
       onClick(value)
-      // this.setState({display: false})
     }
 
     if (!doesContain && requireFocusToClose) {
