@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import FiatDropdown from '../Widgets/FiatDropdown'
 
 export default class NavbarBalance extends Component {
   static displayName = 'NavbarBalance'
 
   static propTypes = {
     balance: PropTypes.string,
-    currency: PropTypes.string,
     network: PropTypes.string
   }
 
   static defaultProps = {
-    currency: 'ETHER*',
     balance: '0.00',
     network: 'rinkeby'
   }
@@ -20,7 +19,9 @@ export default class NavbarBalance extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      balance: '0.00'
+      balance: '0.00',
+      currency: 'ETHER*',
+      displayCurrencyMenu: false
     }
   }
 
@@ -67,9 +68,18 @@ export default class NavbarBalance extends Component {
     return (bal1 - 0.01).toFixed(2).toString()
   }
 
+  toggleCurrencyMenu = () => {
+    const { displayCurrencyMenu } = this.state
+    this.setState({ displayCurrencyMenu: !displayCurrencyMenu })
+  }
+
+  onSelect = currency => {
+    this.setState({ currency, displayCurrencyMenu: false }, console.log)
+  }
+
   render() {
-    const { currency, network } = this.props
-    const { balance } = this.state
+    const { network } = this.props
+    const { balance, currency, displayCurrencyMenu } = this.state
 
     let currencySelect
     let title
@@ -77,7 +87,18 @@ export default class NavbarBalance extends Component {
       currencySelect = currency
       title = 'This is testnet ether, no real market value'
     } else {
-      currencySelect = <StyledButton type="button">ETHER</StyledButton>
+      currencySelect = (
+        <React.Fragment>
+          <StyledButton type="button" onClick={this.toggleCurrencyMenu}>
+            {currency}
+          </StyledButton>
+          <FiatDropdown
+            currentSelection={currency}
+            display={displayCurrencyMenu}
+            onClick={this.onSelect}
+          />
+        </React.Fragment>
+      )
     }
     return (
       <React.Fragment>

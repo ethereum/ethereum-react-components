@@ -24,6 +24,13 @@ export default class FiatDropdown extends Component {
     requireFocusToClose: false
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      display: props.display === undefined ? false : props.display
+    }
+  }
+
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClick, false)
   }
@@ -34,29 +41,43 @@ export default class FiatDropdown extends Component {
 
   handleClick = event => {
     const { onClick, requireFocusToClose } = this.props
+    const { display } = this.state
     const value = event.target.textContent
     const doesContain = this.node.contains(event.target)
 
     if (doesContain && onClick) {
       onClick(value)
+      // this.setState({display: false})
     }
 
     if (!doesContain && requireFocusToClose) {
       return
     }
 
-    this.setState({ display: false })
+    this.setState({ display: !display })
   }
 
   render() {
+    const { currentSelection, display } = this.props
     return (
-      <StyledDiv ref={node => (this.node = node)}>
+      <StyledDiv
+        ref={node => {
+          this.node = node
+        }}
+        display={display}
+      >
         <StyledUl>
           {fiats.map(f => (
-            <StyledLi>
-              <StyledButton type="button" data-value={f}>
-                {f}
-              </StyledButton>
+            <StyledLi key={f}>
+              {f !== currentSelection ? (
+                <StyledButton type="button" data-value={f}>
+                  {f}
+                </StyledButton>
+              ) : (
+                <StyledDisabled type="button" data-value={f}>
+                  {f}
+                </StyledDisabled>
+              )}
             </StyledLi>
           ))}
         </StyledUl>
@@ -67,20 +88,15 @@ export default class FiatDropdown extends Component {
 
 const StyledDiv = styled.div`
   transition-duration: 200ms;
-  display: inline-block;
-  position: relative;
+  display: ${props => (props.display ? 'inline-block' : 'none')};
+  position: absolute;
+  top: 22px;
   max-width: 200px;
   background-color: #fff;
-  max-width: 200px;
   width: auto;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   right: 0;
 `
-// zoom: 1;
-// filter: alpha(opacity=0);
-// opacity: 0;
-// transform: scale(0);
-// transform-origin: 0 95%;
 
 const StyledUl = styled.ul`
   width: 100%;
@@ -95,8 +111,7 @@ const StyledLi = styled.li`
 `
 
 const StyledButton = styled.button`
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial,
-    'sans-serif';
+  font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
   text-align: center;
   min-width: 20px;
   margin: 0;
@@ -109,4 +124,7 @@ const StyledButton = styled.button`
     outline: 0;
     background-color: #eee;
   }
+`
+const StyledDisabled = styled(StyledButton)`
+  color: #909090;
 `
