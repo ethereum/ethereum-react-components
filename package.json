@@ -82,6 +82,7 @@
     "ethereumjs-tx": "^1.3.7",
     "ethereumjs-util": "^6.0.0",
     "geopattern": "^1.2.3",
+    "grommet": "^2.4.0",
     "identicon.js": "^2.3.3",
     "loaders.css": "^0.1.2",
     "moment": "^2.22.2",

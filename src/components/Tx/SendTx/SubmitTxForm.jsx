@@ -46,9 +46,13 @@ export default class SubmitTxForm extends Component {
           placeholder={i18n.t('mist.sendTx.enterPassword')}
         />
 
-        <Button withinInput error={error} disabled={!pw} type="submit">
-          {i18n.t('mist.sendTx.execute')}
-        </Button>
+        <Button
+          withinInput
+          error={error}
+          disabled={!pw}
+          type="submit"
+          label={i18n.t('mist.sendTx.execute')}
+        />
       </StyledForm>
     )
   }

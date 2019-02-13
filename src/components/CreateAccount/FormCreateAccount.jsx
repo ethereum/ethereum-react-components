@@ -124,12 +124,12 @@ export default class CreateAccount extends Component {
           )}
         </div>
         <DappModalBtn>
-          <Button flat secondary onClick={e => this.handleCancel(e)}>
-            {i18n.t('buttons.cancel')}
-          </Button>
-          <Button flat type="submit">
-            {i18n.t('buttons.ok')}
-          </Button>
+          <Button
+            secondary
+            onClick={e => this.handleCancel(e)}
+            label={i18n.t('buttons.cancel')}
+          />
+          <Button type="submit" label={i18n.t('buttons.ok')} />
         </DappModalBtn>
       </div>
     )
@@ -148,5 +148,11 @@ export default class CreateAccount extends Component {
 }
 
 const DappModalBtn = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: end;
+
+  > * {
+    margin-right: 8px;
+  }
 `

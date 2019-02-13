@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import Spinner from './AnimatedIcons/Spinner'
+import { Grommet, Button as GrommetButton } from 'grommet'
 
 export default class Button extends Component {
   static displayName = 'Button'
@@ -9,102 +9,57 @@ export default class Button extends Component {
   static propTypes = {
     children: PropTypes.node,
     disabled: PropTypes.bool,
-    error: PropTypes.bool,
-    flat: PropTypes.bool,
-    loading: PropTypes.bool,
     onClick: PropTypes.func,
     secondary: PropTypes.bool,
     type: PropTypes.oneOf(['button', 'reset', 'submit']),
     /** If `true`, extra margin is added. See `SubmitTxForm` component for example usage. */
-    withinInput: PropTypes.bool,
-    className: PropTypes.string
+    withinInput: PropTypes.bool
   }
 
   static defaultProps = {
     disabled: false,
-    error: false,
-    flat: false,
-    loading: false,
     secondary: false,
     type: 'button',
-    withinInput: false,
-    className: 'Button'
+    withinInput: false
   }
 
   render() {
-    const { children, flat, loading, secondary, className } = this.props
-
-    const spinner = (
-      <React.Fragment>
-        <Spinner
-          color={!secondary && !flat ? 'white' : '#00aafa'}
-          scale="0.4"
-          style={{ position: 'absolute', right: '0' }}
-        />
-        {children}
-      </React.Fragment>
-    )
+    const { secondary } = this.props
 
     return (
-      <StyledButton {...this.props} className={className}>
-        {loading ? spinner : children}
-      </StyledButton>
+      <Grommet theme={{ global: { colors: { brand: '#00A4FF' } } }}>
+        <StyledButton {...this.props} primary={!secondary} />
+      </Grommet>
     )
   }
 }
 
-const StyledButton = styled.button`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #00aafa;
-  border-radius: 4px;
-  border: 1px solid #00aafa;
+const StyledButton = styled(GrommetButton)`
   color: white;
-  cursor: pointer;
-  font-size: 14px;
-  height: 46px !important;
-  line-height: 1;
-  min-width: 200px;
-  overflow: hidden;
-  text-decoration: none;
+  border-radius: 6px;
+  border-width: 1px;
+  padding-top: 6px;
+  padding-bottom: 2px;
+  font-size: 15px;
   text-transform: uppercase;
-  white-space: nowrap;
+  min-width: 160px;
 
   ${props =>
     props.secondary &&
     css`
-      background-color: white;
-      color: #00aafa;
+      color: #00a4ff;
     `}
 
   ${props =>
-    props.flat &&
-    css`
-      background-color: inherit;
-      border: none;
-      color: #00aafa;
-      font-weight: ${props.secondary ? 'inherit' : 'bold'};
-    `};
-
-  ${props =>
-    (props.disabled || props.loading) &&
+    props.disabled &&
     css`
       cursor: not-allowed;
-      opacity: 0.6;
     `}
 
   ${props =>
     props.withinInput &&
     css`
-      margin: 4px;
-    `}
-
-  ${props =>
-    props.error &&
-    css`
-      border: 1px solid #f66d6f;
-      background-color: #f66d6f;
+      margin: 7px;
+      padding: 9px 24px 5px;
     `}
 `

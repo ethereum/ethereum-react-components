@@ -113,9 +113,7 @@ export default class NodeSettingsForm extends Component {
   renderFooter() {
     return (
       <StyledFooter>
-        <Button flat onClick={() => this.applyChanges()}>
-          Apply Changes
-        </Button>
+        <Button onClick={() => this.applyChanges()} label="Apply Changes" />
       </StyledFooter>
     )
   }
@@ -141,11 +139,9 @@ export default class NodeSettingsForm extends Component {
         <StyledButton
           checkUpdate
           loading={isCheckingForUpdate}
-          flat
           onClick={checkUpdate}
-        >
-          Check Update
-        </StyledButton>
+          label="Check Update"
+        />
       </StyledSetting>
     )
   }
@@ -277,9 +273,11 @@ export default class NodeSettingsForm extends Component {
         <StyledRunning isRunning={isRunning}>
           {isRunning ? 'Running' : 'Stopped'}
         </StyledRunning>
-        <StyledButton startStop flat onClick={() => onStartStop(isRunning)}>
-          {isRunning ? 'Stop' : 'Start'}
-        </StyledButton>
+        <StyledButton
+          startStop
+          onClick={() => onStartStop(isRunning)}
+          label={isRunning ? 'Stop' : 'Start'}
+        />
       </StyledSetting>
     )
   }

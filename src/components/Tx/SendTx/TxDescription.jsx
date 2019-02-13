@@ -272,9 +272,11 @@ export default class TxDescription extends Component {
 
     if (!showDetails) {
       return (
-        <StyledButton flat secondary onClick={this.handleDetailsClick}>
-          {i18n.t('mist.sendTx.showDetails')}
-        </StyledButton>
+        <Button
+          secondary
+          onClick={this.handleDetailsClick}
+          label={i18n.t('mist.sendTx.showDetails')}
+        />
       )
     }
 
@@ -288,9 +290,11 @@ export default class TxDescription extends Component {
         {this.renderTokenDetails()}
         {this.renderParams()}
 
-        <StyledButton flat secondary onClick={this.handleDetailsClick}>
-          {i18n.t('mist.sendTx.hideDetails')}
-        </StyledButton>
+        <Button
+          secondary
+          onClick={this.handleDetailsClick}
+          label={i18n.t('mist.sendTx.hideDetails')}
+        />
       </StyledExecutionContextDetails>
     )
   }
@@ -336,10 +340,6 @@ const StyledExecutionContextParamsTitle = styled.div`
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 6px;
-`
-
-const StyledButton = styled(Button)`
-  margin-left: -20px;
 `
 
 const StyledExecutionContextDetailsTitle = styled.span`
