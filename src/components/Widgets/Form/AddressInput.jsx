@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import Identicon from '../../Identicon'
 import Input from './Input'
 import { isAddress } from '../../../lib/util'
@@ -34,18 +34,15 @@ export default class AddressInput extends Component {
         <Identicon
           address={value}
           size="tiny"
-          style={{ zIndex: 2, position: 'absolute', top: '8px', left: '12px' }}
+          style={{ marginRight: '10px' }}
         />
       )
     } else if (value) {
       icon = (
-        <Cross
-          size={24}
-          style={{ zIndex: 2, position: 'absolute', top: '6px' }}
-        />
+        <Cross size={23} style={{ marginRight: '8px', marginLeft: '0px' }} />
       )
     } else {
-      icon = null
+      icon = <Identicon anonymous size="tiny" style={{ marginRight: '10px' }} />
     }
 
     this.setState({ icon }, () => {
@@ -59,23 +56,14 @@ export default class AddressInput extends Component {
     const { icon } = this.state
 
     return (
-      <StyledWrapper>
-        {icon}
-        <StyledInput
-          {...this.props}
-          onChange={e => this.updateIcon(e.target.value)}
-          placeholder="0x000000..."
-          type="text"
-        />
-      </StyledWrapper>
+      <Input
+        {...this.props}
+        onChange={e => this.updateIcon(e.target.value)}
+        placeholder="0x000000..."
+        InputProps={{
+          startAdornment: <InputAdornment>{icon}</InputAdornment>
+        }}
+      />
     )
   }
 }
-
-const StyledWrapper = styled.div`
-  position: relative;
-`
-
-const StyledInput = styled(Input)`
-  padding-left: 42px;
-`
