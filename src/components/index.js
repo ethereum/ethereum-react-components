@@ -15,6 +15,7 @@ import RadioButton from './Widgets/Form/RadioButton'
 import Input from './Widgets/Form/Input'
 import AddressInput from './Widgets/Form/AddressInput'
 import TextArea from './Widgets/Form/TextArea'
+import Progress from './Widgets/Form/Progress'
 import Select from './Widgets/Form/Select'
 import FileChooser from './Widgets/Form/FileChooser'
 import ValidatedField from './Widgets/Form/ValidatedField'
@@ -61,6 +62,7 @@ export {
   NodeInfoBox,
   NodeSettings,
   Notification,
+  Progress,
   Pulse,
   RpcTester,
   SendTxForm,
