@@ -210,12 +210,12 @@ export default class NodeSettingsForm extends Component {
         <StyledLabel>RPC Host &amp; Port</StyledLabel>
         <StyledInput
           marginRight
-          type="text"
+          placeholder="host"
           value={host}
           onChange={this.handleChangeHost}
         />
         <StyledInput
-          type="text"
+          placeholder="port"
           value={port}
           onChange={this.handleChangePort}
         />
@@ -230,8 +230,8 @@ export default class NodeSettingsForm extends Component {
       <StyledSetting>
         <StyledLabel>Data Directory</StyledLabel>
         <StyledInput
-          type="text"
           value={dataDir}
+          placeholder="data directory"
           marginRight
           onChange={this.handleChangeDataDir}
         />
