@@ -1,7 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
-import Spinner from './AnimatedIcons/Spinner'
+import MuiButton from '@material-ui/core/Button'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#00A4FF',
+      contrastText: '#ffffff'
+    },
+    secondary: {
+      main: '#ffffff'
+    }
+  }
+})
 
 export default class Button extends Component {
   static displayName = 'Button'
@@ -9,102 +21,32 @@ export default class Button extends Component {
   static propTypes = {
     children: PropTypes.node,
     disabled: PropTypes.bool,
-    error: PropTypes.bool,
-    flat: PropTypes.bool,
-    loading: PropTypes.bool,
     onClick: PropTypes.func,
     secondary: PropTypes.bool,
     type: PropTypes.oneOf(['button', 'reset', 'submit']),
     /** If `true`, extra margin is added. See `SubmitTxForm` component for example usage. */
-    withinInput: PropTypes.bool,
     className: PropTypes.string
   }
 
   static defaultProps = {
     disabled: false,
-    error: false,
-    flat: false,
-    loading: false,
     secondary: false,
-    type: 'button',
-    withinInput: false,
-    className: 'Button'
+    type: 'button'
   }
 
   render() {
-    const { children, flat, loading, secondary, className } = this.props
-
-    const spinner = (
-      <React.Fragment>
-        <Spinner
-          color={!secondary && !flat ? 'white' : '#00aafa'}
-          scale="0.4"
-          style={{ position: 'absolute', right: '0' }}
-        />
-        {children}
-      </React.Fragment>
-    )
+    const { children, secondary } = this.props
 
     return (
-      <StyledButton {...this.props} className={className}>
-        {loading ? spinner : children}
-      </StyledButton>
+      <MuiThemeProvider theme={theme}>
+        <MuiButton
+          {...this.props}
+          color={secondary ? 'secondary' : 'primary'}
+          variant="contained"
+        >
+          {children}
+        </MuiButton>
+      </MuiThemeProvider>
     )
   }
 }
-
-const StyledButton = styled.button`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #00aafa;
-  border-radius: 4px;
-  border: 1px solid #00aafa;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  height: 46px !important;
-  line-height: 1;
-  min-width: 200px;
-  overflow: hidden;
-  text-decoration: none;
-  text-transform: uppercase;
-  white-space: nowrap;
-
-  ${props =>
-    props.secondary &&
-    css`
-      background-color: white;
-      color: #00aafa;
-    `}
-
-  ${props =>
-    props.flat &&
-    css`
-      background-color: inherit;
-      border: none;
-      color: #00aafa;
-      font-weight: ${props.secondary ? 'inherit' : 'bold'};
-    `};
-
-  ${props =>
-    (props.disabled || props.loading) &&
-    css`
-      cursor: not-allowed;
-      opacity: 0.6;
-    `}
-
-  ${props =>
-    props.withinInput &&
-    css`
-      margin: 4px;
-    `}
-
-  ${props =>
-    props.error &&
-    css`
-      border: 1px solid #f66d6f;
-      background-color: #f66d6f;
-    `}
-`

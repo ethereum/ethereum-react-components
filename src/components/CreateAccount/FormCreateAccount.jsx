@@ -124,12 +124,10 @@ export default class CreateAccount extends Component {
           )}
         </div>
         <DappModalBtn>
-          <Button flat secondary onClick={e => this.handleCancel(e)}>
+          <Button secondary onClick={e => this.handleCancel(e)}>
             {i18n.t('buttons.cancel')}
           </Button>
-          <Button flat type="submit">
-            {i18n.t('buttons.ok')}
-          </Button>
+          <Button type="submit">{i18n.t('buttons.ok')}</Button>
         </DappModalBtn>
       </div>
     )

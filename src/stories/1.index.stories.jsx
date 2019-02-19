@@ -135,47 +135,24 @@ storiesOf('Widgets/Animations/Icons', module)
   .add('checkmark', () => <Checkmark />)
   .add('cross', () => <Cross />)
 
-storiesOf('Widgets/Button', module)
-  .add('default', () => <Button>click me</Button>)
-  .add('loading', () => <Button loading>click me</Button>)
-  .add('disabled', () => <Button disabled>click me</Button>)
-  .add('secondary', () => <Button secondary>click me</Button>)
-  .add('secondary loading', () => (
-    <Button secondary loading>
-      click me
-    </Button>
-  ))
-  .add('secondary disabled', () => (
-    <Button secondary disabled>
-      click me
-    </Button>
-  ))
-  .add('flat', () => <Button flat>click me</Button>)
-  .add('flat loading', () => (
-    <Button flat loading>
-      click me
-    </Button>
-  ))
-  .add('flat disabled', () => (
-    <Button flat disabled>
-      click me
-    </Button>
-  ))
-  .add('flat secondary', () => (
-    <Button flat secondary>
-      click me
-    </Button>
-  ))
-  .add('flat secondary loading', () => (
-    <Button flat secondary loading>
-      click me
-    </Button>
-  ))
-  .add('flat secondary disabled', () => (
-    <Button flat secondary disabled>
-      click me
-    </Button>
-  ))
+storiesOf('Widgets/Button', module).add('index', () => {
+  return (
+    <div>
+      <Button>click me</Button>
+      <br />
+      <br />
+      <Button disabled>click me</Button>
+      <br />
+      <br />
+      <Button secondary>click me</Button>
+      <br />
+      <br />
+      <Button secondary disabled>
+        click me
+      </Button>
+    </div>
+  )
+})
 
 storiesOf('Widgets/Form/Input', module).add('default', () => (
   <Input label="Example Label" placeholder="Placeholder text..." />
