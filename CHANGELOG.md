@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.5"></a>
+## [1.13.5](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.4...v1.13.5) (2019-02-19)
+
+
+### Bug Fixes
+
+* mui textarea ([#123](https://github.com/PhilippLgh/ethereum-react-components/issues/123)) ([3a09321](https://github.com/PhilippLgh/ethereum-react-components/commit/3a09321))
+
+
+
 <a name="1.13.4"></a>
 ## [1.13.4](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.3...v1.13.4) (2019-02-19)
 
