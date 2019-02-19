@@ -1,7 +1,5 @@
-// TODO: placeholder
-
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import TextField from '@material-ui/core/TextField'
 
 export default class TextArea extends Component {
   static displayName = 'TextArea'
@@ -11,6 +9,6 @@ export default class TextArea extends Component {
   static defaultProps = {}
 
   render() {
-    return <textarea {...this.props} />
+    return <TextField multiline variant="outlined" {...this.props} />
   }
 }

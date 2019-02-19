@@ -174,7 +174,9 @@ storiesOf('Widgets/Form/AddressInput', module)
     )
   })
 
-storiesOf('Widgets/Form/TextArea', module).add('default', () => <TextArea />)
+storiesOf('Widgets/Form/TextArea', module).add('index', () => (
+  <TextArea label="Multiline Input" placeholder="Enter adds a line..." />
+))
 
 storiesOf('Widgets/Form/FileChooser', module).add('default', () => (
   <FileChooser />
