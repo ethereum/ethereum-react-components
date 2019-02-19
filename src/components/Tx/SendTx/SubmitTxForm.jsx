@@ -46,9 +46,9 @@ export default class SubmitTxForm extends Component {
           placeholder={i18n.t('mist.sendTx.enterPassword')}
         />
 
-        <Button withinInput error={error} disabled={!pw} type="submit">
+        <StyledButton error={error} disabled={!pw} type="submit">
           {i18n.t('mist.sendTx.execute')}
-        </Button>
+        </StyledButton>
       </StyledForm>
     )
   }
@@ -105,4 +105,8 @@ const UnlockingDiv = styled.div`
   background: #827a7a;
   color: #fafafa;
   font-weight: 400;
+`
+
+const StyledButton = styled(Button)`
+  margin: 6px !important;
 `
