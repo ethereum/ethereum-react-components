@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.4"></a>
+## [1.13.4](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.3...v1.13.4) (2019-02-19)
+
+
+### Bug Fixes
+
+* correct .prettierrc file name ([#122](https://github.com/PhilippLgh/ethereum-react-components/issues/122)) ([cc90720](https://github.com/PhilippLgh/ethereum-react-components/commit/cc90720))
+
+
+
 <a name="1.13.3"></a>
 ## [1.13.3](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.2...v1.13.3) (2019-02-19)
 
