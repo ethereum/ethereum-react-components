@@ -158,23 +158,26 @@ storiesOf('Widgets/Form/Input', module).add('default', () => (
   <Input label="Example Label" placeholder="Placeholder text..." />
 ))
 
-storiesOf('Widgets/Form/AddressInput', module)
-  .add('empty state', () => {
-    return <AddressInput label="address" />
-  })
-  .add('error state', () => {
-    return <AddressInput label="address" value="0x0123" />
-  })
-  .add('success state', () => {
-    return (
+storiesOf('Widgets/Form/AddressInput', module).add('index', () => {
+  return (
+    <div>
+      <AddressInput label="address" />
+      <br />
+      <br />
+      <AddressInput label="address" value="0x0123" />
+      <br />
+      <br />
       <AddressInput
         label="address"
         value="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
       />
-    )
-  })
+    </div>
+  )
+})
 
-storiesOf('Widgets/Form/TextArea', module).add('default', () => <TextArea />)
+storiesOf('Widgets/Form/TextArea', module).add('index', () => (
+  <TextArea label="Multiline Input" placeholder="Enter adds a line..." />
+))
 
 storiesOf('Widgets/Form/FileChooser', module).add('default', () => (
   <FileChooser />
