@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.7"></a>
+## [1.13.7](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.6...v1.13.7) (2019-02-20)
+
+
+### Bug Fixes
+
+* mui spinner ([#125](https://github.com/PhilippLgh/ethereum-react-components/issues/125)) ([c8ebce4](https://github.com/PhilippLgh/ethereum-react-components/commit/c8ebce4))
+
+
+
 <a name="1.13.6"></a>
 ## [1.13.6](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.5...v1.13.6) (2019-02-20)
 
