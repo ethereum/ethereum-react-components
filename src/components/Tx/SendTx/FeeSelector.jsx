@@ -76,7 +76,7 @@ export default class FeeSelector extends Component {
       <div>
         {gasLoading && (
           <StyledSpinnerContainer>
-            <Spinner color="#00aafa" scale="0.5" />
+            <Spinner size={18} />
           </StyledSpinnerContainer>
         )}
         {error}

@@ -129,9 +129,27 @@ storiesOf('Widgets/Progress', module).add('index', () => (
   </div>
 ))
 
-storiesOf('Widgets/Animations/Spinner', module)
-  .add('default', () => <Spinner />)
-  .add('half-size', () => <Spinner scale="0.5" />)
+storiesOf('Widgets/Animations/Spinner', module).add('index', () => (
+  <div>
+    <Spinner />
+    <Spinner size={30} />
+    <Spinner size={20} />
+
+    <br />
+    <br />
+    <div
+      style={{
+        backgroundColor: 'black',
+        padding: '20px',
+        display: 'inline-block'
+      }}
+    >
+      <Spinner color="secondary" />
+      <Spinner color="secondary" size={30} />
+      <Spinner color="secondary" size={20} />
+    </div>
+  </div>
+))
 
 storiesOf('Widgets/WalletButton', module).add('default', () => (
   <WalletButton onClick={() => {}}>Add Wallet Contract</WalletButton>
