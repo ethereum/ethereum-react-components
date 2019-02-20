@@ -4,18 +4,19 @@ import { linkTo } from '@storybook/addon-links'
 import Welcome from './Welcome'
 
 import {
-  Identicon,
-  EthAddress,
-  Spinner,
-  Pulse,
+  AddressInput,
+  AddressSelect,
   Button,
   Checkbox,
-  AddressSelect,
-  AddressInput,
-  Input,
-  TextArea,
-  Select,
+  EthAddress,
   FileChooser,
+  Identicon,
+  Input,
+  Progress,
+  Pulse,
+  Select,
+  Spinner,
+  TextArea,
   WalletButton
 } from '../components'
 import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
@@ -115,6 +116,18 @@ storiesOf('Widgets/Identicon', module)
       size="large"
     />
   ))
+
+storiesOf('Widgets/Progress', module).add('index', () => (
+  <div>
+    <Progress value={40} />
+    <br />
+    <Progress variant="indeterminate" />
+    <br />
+    <Progress variant="buffer" value={60} valueBuffer={70} />
+    <br />
+    <Progress variant="query" />
+  </div>
+))
 
 storiesOf('Widgets/Animations/Spinner', module)
   .add('default', () => <Spinner />)
