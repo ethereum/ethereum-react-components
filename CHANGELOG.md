@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.6"></a>
+## [1.13.6](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.5...v1.13.6) (2019-02-20)
+
+
+### Bug Fixes
+
+* mui progress ([#124](https://github.com/PhilippLgh/ethereum-react-components/issues/124)) ([4fd7668](https://github.com/PhilippLgh/ethereum-react-components/commit/4fd7668))
+
+
+
 <a name="1.13.5"></a>
 ## [1.13.5](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.4...v1.13.5) (2019-02-19)
 
