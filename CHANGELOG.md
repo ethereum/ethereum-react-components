@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.8"></a>
+## [1.13.8](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.7...v1.13.8) (2019-02-21)
+
+
+
 <a name="1.13.7"></a>
 ## [1.13.7](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.6...v1.13.7) (2019-02-20)
 
