@@ -214,7 +214,23 @@ storiesOf('Widgets/Form/FileChooser', module).add('default', () => (
   <FileChooser />
 ))
 
-storiesOf('Widgets/Form/Select', module).add('default', () => <Select />)
+storiesOf('Widgets/Form/Select', module).add('index', () => {
+  const options = [
+    { value: 1, label: 'main' },
+    { value: 3, label: 'ropsten' },
+    { value: 4, label: 'rinkeby' },
+    { value: 42, label: 'kovan' }
+  ]
+  return (
+    <Select
+      name="network"
+      id="colors-select"
+      defaultValue={4}
+      onChange={e => alert(`Value: ${e}`)}
+      options={options}
+    />
+  )
+})
 
 storiesOf('Widgets/Form/Checkbox', module)
   .add('unchecked', () => (
