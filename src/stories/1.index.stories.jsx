@@ -10,6 +10,7 @@ import {
   Checkbox,
   EthAddress,
   FileChooser,
+  Grid,
   Identicon,
   Input,
   Progress,
@@ -82,6 +83,31 @@ storiesOf('Widgets/Form/AddressSelect', module)
     <AddressSelect walletContracts={dummyContracts} onChange={() => {}} />
   ))
   .add('no addresses provided', () => <AddressSelect onChange={() => {}} />)
+
+storiesOf('Grid', module).add('index', () => {
+  return (
+    <Grid container justify="center" spacing={16}>
+      <Grid item xs={12}>
+        <div style={{ background: '#00A4FF', height: '50px' }} />
+      </Grid>
+      <Grid item xs={6}>
+        <div style={{ background: '#00A4FF', height: '50px' }} />
+      </Grid>
+      <Grid item xs={6}>
+        <div style={{ background: '#00A4FF', height: '50px' }} />
+      </Grid>
+      <Grid item xs={4} sm={3}>
+        <div style={{ background: '#00A4FF', height: '50px' }} />
+      </Grid>
+      <Grid item xs={4} sm={6}>
+        <div style={{ background: '#00A4FF', height: '50px' }} />
+      </Grid>
+      <Grid item xs={4} sm={3}>
+        <div style={{ background: '#00A4FF', height: '50px' }} />
+      </Grid>
+    </Grid>
+  )
+})
 
 storiesOf('Widgets/Identicon', module)
   .add('default', () => <Identicon />)
