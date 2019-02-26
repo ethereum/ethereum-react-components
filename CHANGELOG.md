@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.11"></a>
+## [1.13.11](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.10...v1.13.11) (2019-02-26)
+
+
+### Bug Fixes
+
+* btn API ([#129](https://github.com/PhilippLgh/ethereum-react-components/issues/129)) ([21b850d](https://github.com/PhilippLgh/ethereum-react-components/commit/21b850d))
+
+
+
 <a name="1.13.10"></a>
 ## [1.13.10](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.9...v1.13.10) (2019-02-26)
 
