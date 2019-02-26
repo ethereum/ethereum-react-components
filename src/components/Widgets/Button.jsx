@@ -7,31 +7,33 @@ export default class Button extends Component {
 
   static propTypes = {
     children: PropTypes.node,
+    color: PropTypes.oneOf(['primary', 'secondary']),
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     secondary: PropTypes.bool,
     type: PropTypes.oneOf(['button', 'reset', 'submit']),
-    /** If `true`, extra margin is added. See `SubmitTxForm` component for example usage. */
-    className: PropTypes.string
+    className: PropTypes.string,
+    variant: PropTypes.oneOf([
+      'text',
+      'outlined',
+      'contained',
+      'fab',
+      'extendedFab',
+      'flat',
+      'raised'
+    ])
   }
 
   static defaultProps = {
+    color: 'primary',
     disabled: false,
-    secondary: false,
-    type: 'button'
+    type: 'button',
+    variant: 'contained'
   }
 
   render() {
-    const { children, secondary } = this.props
+    const { children } = this.props
 
-    return (
-      <MuiButton
-        {...this.props}
-        color={secondary ? 'secondary' : 'primary'}
-        variant="contained"
-      >
-        {children}
-      </MuiButton>
-    )
+    return <MuiButton {...this.props}>{children}</MuiButton>
   }
 }
