@@ -6,16 +6,6 @@ import MuiSelect from '@material-ui/core/Select'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#00A4FF',
-      contrastText: '#ffffff'
-    }
-  }
-})
 
 export default class Select extends Component {
   static displayName = 'Select'
@@ -68,27 +58,23 @@ export default class Select extends Component {
     ))
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <FormControl variant="outlined" style={{ width: '100%' }}>
-          <InputLabel
-            ref={ref => {
-              this.InputLabelRef = ref
-            }}
-            htmlFor={id}
-          >
-            {name}
-          </InputLabel>
-          <MuiSelect
-            value={value}
-            onChange={this.handleChange}
-            input={
-              <OutlinedInput labelWidth={labelWidth} name={name} id={id} />
-            }
-          >
-            {opts}
-          </MuiSelect>
-        </FormControl>
-      </MuiThemeProvider>
+      <FormControl variant="outlined" style={{ width: '100%' }}>
+        <InputLabel
+          ref={ref => {
+            this.InputLabelRef = ref
+          }}
+          htmlFor={id}
+        >
+          {name}
+        </InputLabel>
+        <MuiSelect
+          value={value}
+          onChange={this.handleChange}
+          input={<OutlinedInput labelWidth={labelWidth} name={name} id={id} />}
+        >
+          {opts}
+        </MuiSelect>
+      </FormControl>
     )
   }
 }

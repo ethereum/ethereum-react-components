@@ -1,6 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { linkTo } from '@storybook/addon-links'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import Welcome from './Welcome'
 
 import {
@@ -22,6 +23,18 @@ import {
 } from '../components'
 import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
 import Cross from '../components/Widgets/AnimatedIcons/Cross'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#00A4FF',
+      contrastText: '#ffffff'
+    },
+    secondary: {
+      main: '#ffffff'
+    }
+  }
+})
 
 const dummyWallets = {
   '0x2685F863Ddb456601783A57A1C3E9F8f3ebc6c3B': {
@@ -144,7 +157,7 @@ storiesOf('Widgets/Identicon', module)
   ))
 
 storiesOf('Widgets/Progress', module).add('index', () => (
-  <div>
+  <MuiThemeProvider theme={theme}>
     <Progress value={40} />
     <br />
     <Progress variant="indeterminate" />
@@ -152,29 +165,31 @@ storiesOf('Widgets/Progress', module).add('index', () => (
     <Progress variant="buffer" value={60} valueBuffer={70} />
     <br />
     <Progress variant="query" />
-  </div>
+  </MuiThemeProvider>
 ))
 
 storiesOf('Widgets/Animations/Spinner', module).add('index', () => (
-  <div>
-    <Spinner />
-    <Spinner size={30} />
-    <Spinner size={20} />
+  <MuiThemeProvider theme={theme}>
+    <div>
+      <Spinner />
+      <Spinner size={30} />
+      <Spinner size={20} />
 
-    <br />
-    <br />
-    <div
-      style={{
-        backgroundColor: 'black',
-        padding: '20px',
-        display: 'inline-block'
-      }}
-    >
-      <Spinner color="secondary" />
-      <Spinner color="secondary" size={30} />
-      <Spinner color="secondary" size={20} />
+      <br />
+      <br />
+      <div
+        style={{
+          backgroundColor: 'black',
+          padding: '20px',
+          display: 'inline-block'
+        }}
+      >
+        <Spinner color="secondary" />
+        <Spinner color="secondary" size={30} />
+        <Spinner color="secondary" size={20} />
+      </div>
     </div>
-  </div>
+  </MuiThemeProvider>
 ))
 
 storiesOf('Widgets/WalletButton', module).add('default', () => (
@@ -194,20 +209,22 @@ storiesOf('Widgets/Animations/Icons', module)
 
 storiesOf('Widgets/Button', module).add('index', () => {
   return (
-    <div>
-      <Button>click me</Button>
-      <br />
-      <br />
-      <Button disabled>click me</Button>
-      <br />
-      <br />
-      <Button secondary>click me</Button>
-      <br />
-      <br />
-      <Button secondary disabled>
-        click me
-      </Button>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <div>
+        <Button>click me</Button>
+        <br />
+        <br />
+        <Button disabled>click me</Button>
+        <br />
+        <br />
+        <Button secondary>click me</Button>
+        <br />
+        <br />
+        <Button secondary disabled>
+          click me
+        </Button>
+      </div>
+    </MuiThemeProvider>
   )
 })
 
@@ -247,14 +264,17 @@ storiesOf('Widgets/Form/Select', module).add('index', () => {
     { value: 4, label: 'rinkeby' },
     { value: 42, label: 'kovan' }
   ]
+
   return (
-    <Select
-      name="network"
-      id="colors-select"
-      defaultValue={4}
-      onChange={e => alert(`Value: ${e}`)}
-      options={options}
-    />
+    <MuiThemeProvider theme={theme}>
+      <Select
+        name="network"
+        id="colors-select"
+        defaultValue={4}
+        onChange={e => alert(`Value: ${e}`)}
+        options={options}
+      />
+    </MuiThemeProvider>
   )
 })
 
