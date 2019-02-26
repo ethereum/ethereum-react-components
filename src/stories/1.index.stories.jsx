@@ -25,6 +25,9 @@ import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
 import Cross from '../components/Widgets/AnimatedIcons/Cross'
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true
+  },
   palette: {
     primary: {
       main: '#00A4FF',
@@ -217,10 +220,10 @@ storiesOf('Widgets/Button', module).add('index', () => {
         <Button disabled>click me</Button>
         <br />
         <br />
-        <Button secondary>click me</Button>
+        <Button color="secondary">click me</Button>
         <br />
         <br />
-        <Button secondary disabled>
+        <Button color="secondary" disabled>
           click me
         </Button>
       </div>
