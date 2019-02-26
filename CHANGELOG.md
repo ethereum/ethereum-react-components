@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.10"></a>
+## [1.13.10](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.9...v1.13.10) (2019-02-26)
+
+
+### Bug Fixes
+
+* remove theme from lib ([#128](https://github.com/PhilippLgh/ethereum-react-components/issues/128)) ([25dc4ee](https://github.com/PhilippLgh/ethereum-react-components/commit/25dc4ee))
+
+
+
 <a name="1.13.9"></a>
 ## [1.13.9](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.8...v1.13.9) (2019-02-25)
 
