@@ -1,15 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#00A4FF'
-    }
-  }
-})
 
 export default class Progress extends Component {
   static displayName = 'Progress'
@@ -30,10 +21,6 @@ export default class Progress extends Component {
   render() {
     const { variant } = this.props
 
-    return (
-      <MuiThemeProvider theme={theme}>
-        <LinearProgress {...this.props} variant={variant} />
-      </MuiThemeProvider>
-    )
+    return <LinearProgress {...this.props} variant={variant} />
   }
 }
