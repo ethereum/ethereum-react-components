@@ -1,5 +1,6 @@
 const path = require('path')
 const pkg = require('./package.json')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const libraryName = pkg.name
 
@@ -17,6 +18,19 @@ module.exports = {
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.scss']
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true, // Must be set to true if using source-maps in production
+        terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+          mangle: false
+        }
+      }),
+    ],
   },
   module: {
     rules: [
