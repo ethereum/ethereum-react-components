@@ -1,6 +1,6 @@
 {
   "name": "ethereum-react-components",
-  "version": "1.13.12",
+  "version": "1.13.13",
   "description": "A components library which is used in multiple projects. Contains frequently used Ethereum components to display and handle addresses, transactions...",
   "main": "dist/index.js",
   "scripts": {

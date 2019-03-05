@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.13"></a>
+## [1.13.13](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.11...v1.13.13) (2019-03-05)
+
+
+### Bug Fixes
+
+* webpack - deactivate mangling ([#130](https://github.com/PhilippLgh/ethereum-react-components/issues/130)) ([437fce3](https://github.com/PhilippLgh/ethereum-react-components/commit/437fce3))
+
+
+
 <a name="1.13.11"></a>
 ## [1.13.11](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.10...v1.13.11) (2019-02-26)
 
