@@ -29,8 +29,8 @@ module.exports = {
           // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
           mangle: false
         }
-      }),
-    ],
+      })
+    ]
   },
   module: {
     rules: [
@@ -45,8 +45,8 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpg|gif|svg)$/i,
-        loaders: ['file-loader']
+        test: /\.(png|jpg|gif)$/,
+        loaders: ['url-loader?limit=8192']
       },
       {
         test: /\.scss$/,
