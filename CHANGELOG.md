@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.14"></a>
+## [1.13.14](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.13...v1.13.14) (2019-03-06)
+
+
+### Bug Fixes
+
+* url-loader for imgs ([#131](https://github.com/PhilippLgh/ethereum-react-components/issues/131)) ([203bc0d](https://github.com/PhilippLgh/ethereum-react-components/commit/203bc0d))
+
+
+
 <a name="1.13.13"></a>
 ## [1.13.13](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.11...v1.13.13) (2019-03-05)
 
