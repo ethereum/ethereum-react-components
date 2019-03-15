@@ -86,7 +86,6 @@
     "ethereumjs-util": "^6.0.0",
     "geopattern": "^1.2.3",
     "identicon.js": "^2.3.3",
-    "loaders.css": "^0.1.2",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react-minimal-pie-chart": "^3.3.0",

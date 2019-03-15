@@ -10,7 +10,6 @@ import Checkbox from './Widgets/Checkbox'
 import FileChooser from './Widgets/Form/FileChooser'
 import Input from './Widgets/Form/Input'
 import Progress from './Widgets/Form/Progress'
-import Pulse from './Widgets/AnimatedIcons/Pulse'
 import RadioButton from './Widgets/Form/RadioButton'
 import Select from './Widgets/Form/Select'
 import Spinner from './Widgets/AnimatedIcons/Spinner'
@@ -69,7 +68,6 @@ export {
   NodeSettings,
   Notification,
   Progress,
-  Pulse,
   RpcTester,
   SendTxForm,
   Spinner,
