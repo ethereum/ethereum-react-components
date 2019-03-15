@@ -15,7 +15,6 @@ import {
   Identicon,
   Input,
   Progress,
-  Pulse,
   Select,
   Spinner,
   TextArea,
@@ -198,13 +197,6 @@ storiesOf('Widgets/Animations/Spinner', module).add('index', () => (
 storiesOf('Widgets/WalletButton', module).add('default', () => (
   <WalletButton onClick={() => {}}>Add Wallet Contract</WalletButton>
 ))
-
-storiesOf('Widgets/Animations/Pulse', module)
-  .add('default', () => <Pulse />)
-  .add('filled', () => <Pulse fill />)
-  .add('multiple', () => <Pulse multiple />)
-  .add('multiple filled', () => <Pulse multiple fill />)
-  .add('multiple filled green', () => <Pulse multiple fill color="#78c781" />)
 
 storiesOf('Widgets/Animations/Icons', module)
   .add('checkmark', () => <Checkmark />)
