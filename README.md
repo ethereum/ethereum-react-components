@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/PhilippLgh/ethereum-react-components.svg?style=shield)](https://circleci.com/gh/PhilippLgh/ethereum-react-components)
+[![CircleCI](https://circleci.com/gh/ethereum/ethereum-react-components.svg?style=shield)](https://circleci.com/gh/ethereum/ethereum-react-components)
 
 # Ethereum React Components
 A library of frequently used Ethereum React components to display and handle addresses, transactions, accounts...
