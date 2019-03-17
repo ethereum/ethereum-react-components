@@ -3,7 +3,7 @@
 # Ethereum React Components
 A library of frequently used Ethereum React components to display and handle addresses, transactions, accounts...
 
-For a detailed documentation of all available components check out [the generated storybook](https://philipplgh.github.io/ethereum-react-components)
+For a detailed documentation of all available components check out [the generated storybook](https://ethereum.github.io/ethereum-react-components)
 
 WARNING: this lib is not production ready
 
@@ -17,7 +17,7 @@ Two projects using these components are
 
 ## Clone & Storybook
 ```
-git clone https://github.com/PhilippLgh/ethereum-react-components.git
+git clone https://github.com/ethereum/ethereum-react-components.git
 cd ethereum-react-components
 yarn
 yarn storybook
@@ -33,7 +33,7 @@ yarn link "ethereum-react-components"
 
 # Installation
 Our CI automatically bundles and publishes the latest production version to [NPM](https://www.npmjs.com/package/ethereum-react-components) and
-[GitHub Releases](https://github.com/PhilippLgh/ethereum-react-components/releases)
+[GitHub Releases](https://github.com/ethereum/ethereum-react-components/releases)
 
 ```
 yarn add ethereum-react-components
@@ -47,5 +47,5 @@ import { Identicon } from 'ethereum-react-components';
   <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
 </div>
 ```
-For a detailed documentation check out e.g. the [Identicon story](https://philipplgh.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon)
+For a detailed documentation check out e.g. the [Identicon story](https://ethereum.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon)
 
