@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-class Checkbox extends Component {
+export default class Checkbox extends Component {
+  static displayName = 'Checkbox'
+
   static propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string,
@@ -11,27 +13,21 @@ class Checkbox extends Component {
     labelText: PropTypes.string
   }
 
+  static defaultProps = {}
+
   render() {
+    const { id, labelText } = this.props
+
     return (
       <React.Fragment>
-        <StyledCheckbox
-          id={this.props.id}
-          type="checkbox"
-          name={this.props.name}
-          checked={this.props.checked}
-          onChange={this.props.onChange}
-        />
-        {this.props.labelText && (
-          <StyledCheckboxLabel htmlFor={this.props.id}>
-            {this.props.labelText}
-          </StyledCheckboxLabel>
+        <StyledCheckbox {...this.props} type="checkbox" />
+        {labelText && (
+          <StyledCheckboxLabel htmlFor={id}>{labelText}</StyledCheckboxLabel>
         )}
       </React.Fragment>
     )
   }
 }
-
-export default Checkbox
 
 const StyledCheckbox = styled.input`
   display: inline-block;

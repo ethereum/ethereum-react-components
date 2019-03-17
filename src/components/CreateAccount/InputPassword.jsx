@@ -1,11 +1,11 @@
-import React from 'react'
-import i18n from '../../i18n'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import i18n from '../../i18n'
 import Checkbox from '../Widgets/Checkbox'
-import ValidatedField from '../Widgets/ValidatedField'
-import './InputPassword.scss'
+import ValidatedField from '../Widgets/Form/ValidatedField'
 
-class InputPassword extends React.Component {
+export default class InputPassword extends Component {
   static displayName = 'InputPassword'
 
   static propTypes = {
@@ -15,7 +15,7 @@ class InputPassword extends React.Component {
     /** handles value changes */
     onChange: PropTypes.func.isRequired,
     /** value to initialize the input field */
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     /** true: input is visible as plaintext */
     show: PropTypes.bool
   }
@@ -25,40 +25,46 @@ class InputPassword extends React.Component {
     placeholder: '',
     show: false
   }
+
   constructor(props) {
     super(props)
+
+    const { show } = this.props
+
     this.state = {
-      showPassword: this.props.show === true
+      showPassword: show === true
     }
   }
+
   render() {
+    const { className, placeholder, value, onChange } = this.props
+    const { showPassword } = this.state
+
     return (
-      <div className="input-password">
+      <div className={className}>
         <ValidatedField
           autoFocus
-          type={this.state.showPassword ? 'text' : 'password'}
-          placeholder={this.props.placeholder}
-          className={this.props.className}
-          value={this.props.value}
-          onChange={this.props.onChange}
+          type={showPassword ? 'text' : 'password'}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
         />
-        <div className="show-password-container">
+        <ShowPassword>
           <Checkbox
             id="show-password-checkbox"
             name="elements_input_bool"
-            className="show-password"
-            checked={this.state.showPassword}
-            onChange={() =>
-              this.setState({ showPassword: !this.state.showPassword })
-            }
+            checked={showPassword}
+            onChange={() => this.setState({ showPassword: !showPassword })}
             labelText={i18n.t(
               'mist.popupWindows.importAccount.buttons.showPassword'
             )}
           />
-        </div>
+        </ShowPassword>
       </div>
     )
   }
 }
 
-export default InputPassword
+const ShowPassword = styled.div`
+  margin-top: 10px;
+`

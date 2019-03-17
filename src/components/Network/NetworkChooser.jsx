@@ -1,16 +1,16 @@
-import React from 'react'
-import Select from 'react-select'
+import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import EthCommon from 'ethereumjs-common'
+import Select from '../Widgets/Form/Select'
 // import { Pulse } from '..'
 
 const chains = [
   'mainnet',
   'ropsten',
   'kovan',
-  'rinkeby',
- // 'private',
- // 'custom'
+  'rinkeby'
+  // 'private',
+  // 'custom'
 ]
 
 // same color-coding as metamask
@@ -27,7 +27,7 @@ function jsUcfirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-const options = chainOptions.map((chain) => {
+const options = chainOptions.map(chain => {
   const value = Date.now()
   const label = jsUcfirst(chain.chainName())
   return {
@@ -38,16 +38,14 @@ const options = chainOptions.map((chain) => {
   }
 })
 
-
-const NetworkOption = ({ innerProps, isDisabled, data }) => (
+const NetworkOption = ({ innerProps, data }) => (
   <div
-    {...innerProps} 
+    {...innerProps}
     style={{
       display: 'flex',
       flexDirection: 'row',
       height: 40
-    }}
-  >
+    }}>
     {/* <Pulse multiple fill color='lightgreen' size="10px"/> */}
     <span
       style={{
@@ -63,12 +61,14 @@ const NetworkOption = ({ innerProps, isDisabled, data }) => (
   </div>
 )
 
-class NetworkChooser extends React.Component {
+export default class NetworkChooser extends Component {
+  static displayName = 'NetworkChooser'
+
   state = {
-    selectedOption: null,
+    selectedOption: null
   }
 
-  handleChange = (selectedOption) => {
+  handleChange = selectedOption => {
     this.setState({ selectedOption })
   }
 
@@ -87,5 +87,3 @@ class NetworkChooser extends React.Component {
     )
   }
 }
-
-export default NetworkChooser

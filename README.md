@@ -1,51 +1,66 @@
-[![CircleCI](https://circleci.com/gh/PhilippLgh/ethereum-react-components.svg?style=shield)](https://circleci.com/gh/PhilippLgh/ethereum-react-components)
+[![CircleCI](https://circleci.com/gh/ethereum/ethereum-react-components.svg?style=shield)](https://circleci.com/gh/ethereum/ethereum-react-components)
 
 # Ethereum React Components
+
 A library of frequently used Ethereum React components to display and handle addresses, transactions, accounts...
 
-For a detailed documentation of all available components check out [the generated storybook](https://philipplgh.github.io/ethereum-react-components)
+For a detailed documentation of all available components check out [the generated storybook](https://ethereum.github.io/ethereum-react-components)
 
-WARNING: this lib is not production ready
+WARNING: this lib is not production ready. All component APIs are in exploratory phases and strict semantic versioning is not yet enforced.
 
 # Examples
-Two projects using these components are 
-- [Mist React](https://github.com/ethereum/mist-ui-react)
+
+Two projects using these components are
+
+- [Mist React](https://github.com/ethereum/mist-ui)
 - [Mist](https://github.com/ethereum/mist)
 
-
-# Development
-
-## Clone & Storybook
-```
-git clone https://github.com/PhilippLgh/ethereum-react-components.git
-cd ethereum-react-components
-yarn
-yarn storybook
-```
-
-## Local Testing
-```
-cd ethereum-react-components
-yarn link
-cd my/project/with/ethereum/components
-yarn link "ethereum-react-components"
-```
-
 # Installation
+
 Our CI automatically bundles and publishes the latest production version to [NPM](https://www.npmjs.com/package/ethereum-react-components) and
-[GitHub Releases](https://github.com/PhilippLgh/ethereum-react-components/releases)
+[GitHub Releases](https://github.com/ethereum/ethereum-react-components/releases)
 
 ```
 yarn add ethereum-react-components
 ```
 
 # Use in project
+
 ```
 import { Identicon } from 'ethereum-react-components';
 
 <div>
-  <Identicon seed="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
+  <Identicon address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D" />
 </div>
 ```
-For a detailed documentation check out e.g. the [Identicon story](https://philipplgh.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon)
 
+For a detailed documentation check out e.g. the [Identicon story](https://ethereum.github.io/ethereum-react-components?selectedKind=Widgets%2FIdenticon)
+
+Note that this storybook uses the [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro:300,400,600,700) font.
+You'll need to import and apply this font (or another font of your choosing) in your own project.
+
+# Development
+
+## Clone & Storybook
+
+```
+git clone https://github.com/ethereum/ethereum-react-components.git
+cd ethereum-react-components
+yarn
+yarn storybook
+```
+
+## Workflow
+
+- Mind the [component style checklist](CHECKLIST.md)
+- Use eslint in your editor or via command line: `yarn lint:watch`
+- Make [Conventional Commits](https://www.conventionalcommits.org/)
+
+## Local Testing
+
+```
+cd ethereum-react-components
+yarn link
+cd my/project/with/ethereum/components
+yarn link "ethereum-react-components"
+```
