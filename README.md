@@ -9,7 +9,7 @@ WARNING: this lib is not production ready
 
 # Examples
 Two projects using these components are 
-- [Mist React](https://github.com/ethereum/mist-ui-react)
+- [Grid UI](https://github.com/ethereum/grid-ui)
 - [Mist](https://github.com/ethereum/mist)
 
 
