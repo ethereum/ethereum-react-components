@@ -130,18 +130,20 @@ const en = {
       "transfer": "Transfer",
       "showDetails": "Show details",
       "hideDetails": "Hide details",
-      "tokenName": "Token name:",
+      "tokenAddress": "Token Address:",
+      "tokenName": "Token Name:",
       "tokenContractName": "Token Contract Address:",
       "parameters": "Parameters",
       "etherAmount": "Ether Amount:",
+      "gasPrice": "Gas Price:",
       "gasPriceStandard": "Gas Price (Standard):",
       "gasPricePriority": "Gas Price (Priority):",
       "gasEstimate": "Gas Estimate:",
       "errorMessage": "Error Message:",
-      "transactionExecutingFunction": "Transaction Executing Function:",
-      "from": "FROM",
-      "to": "TO",
-      "contract": "CONTRACT",
+      "txExecutingFunction": "Transaction Executing Function:",
+      "from": "From",
+      "to": "To",
+      "contract": "Contract",
       "loading": "Loading...",
       "priorityFee": "Priority Fee:",
       "standardFee": "Standard Fee:",
@@ -151,13 +153,13 @@ const en = {
       "estimatedGasError":
         "It seems this transaction will fail. If you submit it, it may consume all the gas you provide.",
       "overBlockGasLimit":
-        "The gas required for this execution could exceed the block gas limit.",
+        "The gas required for this execution exceeds the block gas limit.",
       "notEnoughGas":
-        "Gas might not be enough to successfully finish this transaction.<br>Click here to increase the gas amount.",
+        "Gas might not be enough to successfully finish this transaction.",
       "gasLoadingWarning":
-        "This is taking a while! You may choose to use this default fee. Your actual fee will likely be less.",
+        "Loading gas estimate...",
       "gasLoadingError":
-        "Failed to estimate gas. You may choose to use this default fee. Your actual fee will likely be less.",
+        "Failed to estimate gas.",
       "errors": {
         "connectionTimeout":
           "Couldn't connect to the node, did it crash in the background?",
@@ -171,15 +173,16 @@ const en = {
     },
     "txHistory": {
       "windowTitle": "Transaction History",
-      "total": "__count__ total",
+      "total": "total",
       "status": "Status",
       "statusPending": "Pending",
       "statusFailed": "Failed",
       "statusConfirmed": "Confirmed",
-      "confirmations": "__count__ confirmations",
+      "confirmations": "confirmations",
       "txHash": "Transaction Hash",
       "etherAmount": "Ether Amount",
       "nonce": "Nonce",
+      "noTxs": "No transactions yet.",
       "gasLimit": "Gas Limit",
       "gasUsed": "Gas Used",
       "gasPrice": "Gas Price",
@@ -313,7 +316,7 @@ const en = {
     "checksumAlert":
       "This address looks valid, but it doesn't have some security features that will protect you against typos, so double check you have the right one. If provided, check if the security icon matches.",
     "identiconHelper":
-      "This is a security icon.  If there were any change to the address, the resulting icon would be a completely different one",
+      "This is a security icon.  If there were any change to the address, the resulting icon would be a completely different one.",
     "type": {
       "address": "Address",
       "bool": "Boolean",

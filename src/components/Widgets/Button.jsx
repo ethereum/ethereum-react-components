@@ -1,52 +1,76 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import Spinner from './AnimatedIcons/Spinner'
 
-const Button = ({
-  children,
-  onClick,
-  type = 'button',
-  error = false,
-  disabled = false,
-  withinInput = false,
-  loading = false,
-  flat = false,
-  secondary = false
-}) => (
-  <StyledButton
-    className="Button"
-    type={type}
-    error={error}
-    disabled={disabled}
-    onClick={onClick}
-    withinInput={withinInput}
-    flat={flat}
-    secondary={secondary}>
-    {children}
-  </StyledButton>
-)
+export default class Button extends Component {
+  static displayName = 'Button'
 
-Button.propTypes = {
-  loading: PropTypes.bool,
-  disabled: PropTypes.bool,
-  flat: PropTypes.bool,
-  withinInput: PropTypes.bool,
-  onClick: PropTypes.func,
-  secondary: PropTypes.bool,
-  type: PropTypes.oneOf(['button', 'reset', 'submit'])
+  static propTypes = {
+    children: PropTypes.node,
+    disabled: PropTypes.bool,
+    error: PropTypes.bool,
+    flat: PropTypes.bool,
+    loading: PropTypes.bool,
+    onClick: PropTypes.func,
+    secondary: PropTypes.bool,
+    type: PropTypes.oneOf(['button', 'reset', 'submit']),
+    /** If `true`, extra margin is added. See `SubmitTxForm` component for example usage. */
+    withinInput: PropTypes.bool,
+    className: PropTypes.string
+  }
+
+  static defaultProps = {
+    disabled: false,
+    error: false,
+    flat: false,
+    loading: false,
+    secondary: false,
+    type: 'button',
+    withinInput: false,
+    className: 'Button'
+  }
+
+  render() {
+    const { children, flat, loading, secondary, className } = this.props
+
+    const spinner = (
+      <React.Fragment>
+        <Spinner
+          color={!secondary && !flat ? 'white' : '#00aafa'}
+          scale="0.4"
+          style={{ position: 'absolute', right: '0' }}
+        />
+        {children}
+      </React.Fragment>
+    )
+
+    return (
+      <StyledButton {...this.props} className={className}>
+        {loading ? spinner : children}
+      </StyledButton>
+    )
+  }
 }
 
-export default Button
-
 const StyledButton = styled.button`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #00aafa;
-  border: 1px solid #00aafa;
   border-radius: 4px;
+  border: 1px solid #00aafa;
   color: white;
-  padding: 12px 24px;
-  font-size: 14px;
-  text-transform: uppercase;
   cursor: pointer;
+  font-size: 14px;
+  height: 46px !important;
+  line-height: 1;
+  min-width: 200px;
+  overflow: hidden;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
 
   ${props =>
     props.secondary &&
@@ -61,11 +85,11 @@ const StyledButton = styled.button`
       background-color: inherit;
       border: none;
       color: #00aafa;
-      font-weight: ${props => (props.secondary ? 'inherit' : 'bold')};
+      font-weight: ${props.secondary ? 'inherit' : 'bold'};
     `};
 
   ${props =>
-    props.disabled &&
+    (props.disabled || props.loading) &&
     css`
       cursor: not-allowed;
       opacity: 0.6;
@@ -83,5 +107,4 @@ const StyledButton = styled.button`
       border: 1px solid #f66d6f;
       background-color: #f66d6f;
     `}
-
 `

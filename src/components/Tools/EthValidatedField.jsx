@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import util from 'ethereumjs-util'
-import { ValidatedField } from '..';
-
+import ValidatedField from '../Widgets/Form/ValidatedField'
 
 const config = {
   address: {
@@ -12,7 +11,7 @@ const config = {
   password: {
     placeholder: 'password',
     input: 'password',
-    validator: (pw) => {
+    validator: pw => {
       const ascii = /^[ -~]+$/
       if (!ascii.test(pw)) {
         throw new Error('illegal character (non-ascii)')
@@ -48,38 +47,49 @@ const config = {
   undefined: {
     validator: () => true
   }
-
 }
 
-const EthValidatedField = ({ type = 'undefined', value = '', placeholder, onChange, size=50 }) => {
-  config['undefined'].placeholder = placeholder
-  const { validator, placeholderConfig } = config[type]
-  const inputType = config[type].input || 'text'
-  return (
-    <ValidatedField
-      validator={validator}
-      type={inputType}
-      placeholder={placeholderConfig}
-      value={value}
-      onChange={onChange}
-      size={size}
-    />
-  )
+export default class EthValidatedField extends Component {
+  static displayName = 'ValidatedField'
+
+  static propTypes = {
+    type: PropTypes.oneOf([
+      'address',
+      'checksum-address',
+      'password',
+      'private-key',
+      'public-key',
+      'signature',
+      'zero-address'
+    ]),
+    placeholder: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.string,
+    size: PropTypes.any
+  }
+
+  static defaultProps = {
+    type: 'undefined',
+    value: '',
+    size: 50
+  }
+
+  render() {
+    const { type, value, placeholder, onChange, size } = this.props
+
+    config.undefined.placeholder = placeholder
+    const { validator, placeholderConfig } = config[type]
+    const inputType = config[type].input || 'text'
+
+    return (
+      <ValidatedField
+        validator={validator}
+        type={inputType}
+        placeholder={placeholderConfig}
+        value={value}
+        onChange={onChange}
+        size={size}
+      />
+    )
+  }
 }
-
-EthValidatedField.displayName = 'ValidatedField'
-
-EthValidatedField.propTypes = {
-  type: PropTypes.oneOf([
-    'address',
-    'checksum-address',
-    'password',
-    'private-key',
-    'public-key',
-    'signature',
-    'zero-address'
-  ]).isRequired
-}
-
-
-export default EthValidatedField
