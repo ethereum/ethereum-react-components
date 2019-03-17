@@ -31,6 +31,15 @@ cd my/project/with/ethereum/components
 yarn link "ethereum-react-components"
 ```
 
+## Publishing
+
+The storybook files will appear under `/docs` directory.
+
+```
+yarn prepublish
+yarn build-storybook
+```
+
 # Installation
 Our CI automatically bundles and publishes the latest production version to [NPM](https://www.npmjs.com/package/ethereum-react-components) and
 [GitHub Releases](https://github.com/ethereum/ethereum-react-components/releases)
