@@ -78,10 +78,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PhilippLgh/ethereum-react-components.git"
+    "url": "git+https://github.com/ethereum/ethereum-react-components.git"
   },
   "bugs": {
-    "url": "https://github.com/PhilippLgh/ethereum-react-components/issues"
+    "url": "https://github.com/ethereum/ethereum-react-components/issues"
   },
-  "homepage": "https://github.com/PhilippLgh/ethereum-react-components#readme"
+  "homepage": "https://github.com/ethereum/ethereum-react-components#readme"
 }
