@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import Select from '../../Widgets/Form/Select'
 import Input from '../../Widgets/Form/Input'
-import FileChooser from '../../Widgets/Form/FileChooser'
 import Button from '../../Widgets/Button'
 
 export default class NodeSettingsForm extends Component {
@@ -235,7 +234,7 @@ export default class NodeSettingsForm extends Component {
           marginRight
           onChange={this.handleChangeDataDir}
         />
-        <FileChooser onChange={this.handleChangeDataDir} />
+        <input type="file" onChange={this.handleChangeDataDir} />
       </StyledSetting>
     )
   }
