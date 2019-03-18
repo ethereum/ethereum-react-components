@@ -1,37 +1,39 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import i18n from '../../i18n'
-import PropTypes from 'prop-types'
-import { Button, InputPassword } from '..'
-import './FormCreateAccount.scss'
+import InputPassword from './InputPassword'
+import Button from '../Widgets/Button'
 
 // TODO this falls under category API dependencies and needs to be
 // - required in the beginning: const Mist = require(./api/mist)
 // - passed as utility: <MyForm Mist={Mist} /> || <MyForm utils={Mist.notifications} />
-// - put behind some abstract handler and logic moved up: <MyForm onFormValidationError={(error) => Mist.notification.warn(error.message) }} />
-let Mist = {
+// - put behind some abstract handler and logic moved up:
+//    <MyForm onFormValidationError={(error) => Mist.notification.warn(error.message) }} />
+const Mist = {
   notification: {
     warn: text => alert(text.content)
   }
 }
 
-class CreateAccount extends Component {
+export default class CreateAccount extends Component {
   static displayName = 'CreateAccount'
 
   static propTypes = {}
+
+  static defaultProps = {}
 
   constructor(props) {
     super(props)
 
     this.state = {
       creating: false,
-      passwordInputType: 'text',
       pw: '',
       pwRepeat: '',
       showRepeat: false
     }
   }
 
-  resetForm() {
+  resetForm = () => {
     this.setState({
       pw: '',
       pwRepeat: '',
@@ -40,7 +42,7 @@ class CreateAccount extends Component {
     })
   }
 
-  handleCancel(e) {
+  handleCancel = e => {
     e.preventDefault()
     Mist.closeThisWindow()
   }
@@ -81,7 +83,7 @@ class CreateAccount extends Component {
 
   async createAccount(pw) {
     try {
-      await Mist.createAccountWeb3()
+      await Mist.createAccountWeb3(pw)
     } catch (error) {
       console.log('error', error)
     }
@@ -101,11 +103,10 @@ class CreateAccount extends Component {
 
     return (
       <div>
-        <div className={`field-container ${showRepeat ? 'repeat-field' : ''}`}>
+        <div>
           {showRepeat ? (
             /** repeat password */
             <InputPassword
-              className="password-repeat"
               placeholder={i18n.t(
                 'mist.popupWindows.requestAccount.repeatPassword'
               )}
@@ -113,9 +114,7 @@ class CreateAccount extends Component {
               value={pwRepeat}
             />
           ) : (
-            /** enter password */
             <InputPassword
-              className="password"
               placeholder={i18n.t(
                 'mist.popupWindows.requestAccount.enterPassword'
               )}
@@ -124,21 +123,19 @@ class CreateAccount extends Component {
             />
           )}
         </div>
-        <div className="dapp-modal-buttons">
-          <Button flat secondary onClick={e => this.handleCancel(e)}>
+        <DappModalBtn>
+          <Button secondary onClick={e => this.handleCancel(e)}>
             {i18n.t('buttons.cancel')}
           </Button>
-          <Button flat type="submit">
-            {i18n.t('buttons.ok')}
-          </Button>
-        </div>
+          <Button type="submit">{i18n.t('buttons.ok')}</Button>
+        </DappModalBtn>
       </div>
     )
   }
 
   render() {
     return (
-      <div className="popup-windows request-account">
+      <div>
         <form onSubmit={e => this.handleSubmit(e)}>
           <h1>{i18n.t('mist.popupWindows.requestAccount.title')}</h1>
           {this.renderFormBody()}
@@ -148,4 +145,6 @@ class CreateAccount extends Component {
   }
 }
 
-export default CreateAccount
+const DappModalBtn = styled.div`
+  margin-top: 30px;
+`

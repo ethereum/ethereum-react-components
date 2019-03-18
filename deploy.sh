@@ -11,7 +11,7 @@ export FILES_CHANGED=`git status ./docs --untracked-files=no --porcelain | wc -l
 if [[ $FILES_CHANGED -gt 0 ]]; then
   git add docs;
   git commit -am 'Updating github pages [ci skip]';
-  git push origin $BRANCH;
+  # will be git-pushed within `standard-version` command.
 fi
 
 

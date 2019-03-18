@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path')
 
 //see https://storybook.js.org/configurations/custom-webpack-config/#full-control-mode--default
 // Export a function. Accept the base config as the only param.
@@ -10,22 +10,32 @@ module.exports = (storybookBaseConfig, configType) => {
   // Make whatever fine-grained changes you need
   storybookBaseConfig.module.rules.push({
     test: /\.scss$/,
-    loaders: ["style-loader", "css-loader", "sass-loader"],
-    include: path.resolve(__dirname, "../")
-  });
+    loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    include: path.resolve(__dirname, '../')
+  })
 
   storybookBaseConfig.module.rules.push({
     test: /\.css$/,
-    loaders: ["style-loader", "css-loader", "sass-loader"],
-    include: path.resolve(__dirname, "../")
-  });
+    loaders: ['style-loader', 'css-loader'],
+    include: path.resolve(__dirname, '../')
+  })
 
   storybookBaseConfig.module.rules.push({
-    test: /\.js$/,
+    test: /\.(js|jsx)$/,
     exclude: /node_modules/,
-    use: ['babel-loader', 'eslint-loader']
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env', '@babel/preset-react']
+      }
+    }
+  })
+
+  storybookBaseConfig.module.rules.push({
+    test: /\.(png|jpg|gif|svg)$/i,
+    use: ['file-loader']
   })
 
   // Return the altered config
-  return storybookBaseConfig;
-};
+  return storybookBaseConfig
+}

@@ -1,7 +1,8 @@
-const path = require('path');
-const pkg = require('./package.json');
+const path = require('path')
+const pkg = require('./package.json')
+const TerserPlugin = require('terser-webpack-plugin')
 
-const libraryName = pkg.name;
+const libraryName = pkg.name
 
 module.exports = {
   mode: 'production', // "production" | "development" | "none"
@@ -12,11 +13,24 @@ module.exports = {
     publicPath: '/dist/',
     library: libraryName,
     libraryTarget: 'umd',
-    umdNamedDefine: true,
+    umdNamedDefine: true
   },
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.scss']
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true, // Must be set to true if using source-maps in production
+        terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+          mangle: false
+        }
+      })
+    ]
   },
   module: {
     rules: [
@@ -31,13 +45,17 @@ module.exports = {
         }
       },
       {
+        test: /\.(png|jpg|gif)$/,
+        loaders: ['url-loader?limit=8192']
+      },
+      {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        loaders: ['style-loader', 'css-loader']
       }
     ]
   }
-};
+}

@@ -1,0 +1,9 @@
+- [ ] Class declaration: `export default class ExampleWidget extends Component { ... }`
+  - `Component` should be included in the import: `import React, { Component } from 'react'`
+- [ ] Include static class properties at the top of the class
+  - [ ] displayName: `static displayName = 'ExampleWidget'`
+  - [ ] propTypes: `static propTypes = { ... }`
+    - Bonus points for comment descriptions and alphabetization
+  - [ ] defaultProps: `static defaultProps = { ... }`
+    - Include even if empty
+- [ ] Styling: use `styled-components` to style the components within the same file. Avoid additional CSS files.

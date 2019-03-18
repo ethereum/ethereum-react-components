@@ -1,16 +1,17 @@
-import React from 'react'
-import Select from 'react-select'
-// import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import EthCommon from 'ethereumjs-common'
+import styled from 'styled-components'
+import Select from '../Widgets/Form/Select'
 // import { Pulse } from '..'
 
 const chains = [
   'mainnet',
   'ropsten',
   'kovan',
-  'rinkeby',
- // 'private',
- // 'custom'
+  'rinkeby'
+  // 'private',
+  // 'custom'
 ]
 
 // same color-coding as metamask
@@ -23,13 +24,9 @@ const chainColor = {
 
 const chainOptions = chains.map(chain => new EthCommon(chain))
 
-function jsUcfirst(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
-const options = chainOptions.map((chain) => {
+const options = chainOptions.map(chain => {
   const value = Date.now()
-  const label = jsUcfirst(chain.chainName())
+  const label = chain.chainName()
   return {
     value,
     label,
@@ -38,10 +35,9 @@ const options = chainOptions.map((chain) => {
   }
 })
 
-
-const NetworkOption = ({ innerProps, isDisabled, data }) => (
+const NetworkOption = ({ innerProps, data }) => (
   <div
-    {...innerProps} 
+    {...innerProps}
     style={{
       display: 'flex',
       flexDirection: 'row',
@@ -63,29 +59,37 @@ const NetworkOption = ({ innerProps, isDisabled, data }) => (
   </div>
 )
 
-class NetworkChooser extends React.Component {
-  state = {
-    selectedOption: null,
+export default class NetworkChooser extends Component {
+  static displayName = 'NetworkChooser'
+
+  propTypes = {
+    className: PropTypes.string
   }
 
-  handleChange = (selectedOption) => {
+  state = {
+    selectedOption: null
+  }
+
+  handleChange = selectedOption => {
     this.setState({ selectedOption })
   }
 
   render() {
+    const { className } = this.props
     const { selectedOption } = this.state
 
     return (
-      <div>
-        <Select
-          value={selectedOption}
-          onChange={this.handleChange}
-          options={options}
-          components={{ Option: NetworkOption }}
-        />
-      </div>
+      <StyledSelect
+        className={className}
+        value={selectedOption}
+        onChange={this.handleChange}
+        options={options}
+        components={{ Option: NetworkOption }}
+      />
     )
   }
 }
 
-export default NetworkChooser
+const StyledSelect = styled(Select)`
+  text-transform: capitalize;
+`
