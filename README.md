@@ -1,20 +1,12 @@
-[![CircleCI](https://circleci.com/gh/ethereum/ethereum-react-components.svg?style=shield)](https://circleci.com/gh/ethereum/ethereum-react-components)
-
-Live Storybook: https://ethereum.github.io/ethereum-react-components
-
-Test URL (`dev` branch): https://ethereum-react-components-dev.netlify.com/
-
 # Ethereum React Components
 
 A library of frequently used Ethereum components.
 
-All available components can be found in the the project [storybook](https://ethereum.github.io/ethereum-react-components).
+All available components can be found in the the project [storybook](https://ethereum.github.io/ethereum-react-components). The bleeding edge (`dev` branch) gets published [here](https://ethereum-react-components-dev.netlify.com/).
 
 WARNING: this lib is not production ready. All component APIs are in exploratory phases and strict semantic versioning is not yet enforced.
 
 ## Installation
-
-Our CI automatically bundles and publishes the latest production version to [npm](https://www.npmjs.com/package/ethereum-react-components) and [GitHub Releases](https://github.com/ethereum/ethereum-react-components/releases)
 
 ```
 yarn add ethereum-react-components
@@ -36,7 +28,7 @@ Note that this storybook uses the [Source Sans Pro](https://fonts.google.com/spe
 
 ## Contributing
 
-There are many ways to get involved with this project. Get started [here](/docs/CONTRIBUTING.md).
+There are many ways to get involved with this project. Get started [here](/CONTRIBUTING.md).
 
 ## Development
 
@@ -57,11 +49,11 @@ yarn storybook
 
 ### Local Testing
 
-While in development, [npm link](https://docs.npmjs.com/cli/link.html) allows for testing this library on another local project without publishing to npm.
+While in development, [yarn link](https://yarnpkg.com/lang/en/docs/cli/link/) allows for testing this library on another local project without publishing to npm.
 
 ```
 cd ethereum-react-components
 yarn link
 cd my/project/with/ethereum/components
-yarn link "ethereum-react-components"
+yarn link ethereum-react-components
 ```
