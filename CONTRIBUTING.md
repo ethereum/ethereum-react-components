@@ -7,8 +7,8 @@ First, thanks for your interest! We appreciate your time.
 This library is primarily maintained by the Mist team at the Ethereum Foundation. Mist was recently refactored into several projects; you can learn more about its constituent parts here:
 
 - ethereum-react-components (this repo) - a React component library
-- [mist-ui](https://github.com/ethereum/mist-ui) - uses the component library to assemble Mist's user interface
-- [mist-shell](https://github.com/ethereum/mist-shell) - the desktop app wrapper for mist-ui
+- [grid-ui](https://github.com/ethereum/grid-ui) - uses the component library to assemble Grid's user interface
+- [grid](https://github.com/ethereum/grid) - the desktop app wrapper for grid-ui
 - [electron-app-manager](https://github.com/PhilippLgh/electron-app-manager) - handles app updates
 
 #### How can I contribute?
