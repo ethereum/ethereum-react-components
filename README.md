@@ -31,12 +31,11 @@ cd my/project/with/ethereum/components
 yarn link "ethereum-react-components"
 ```
 
-## Publishing
+## Build for storybook static publishing
 
 The storybook files will appear under `/docs` directory.
 
 ```
-yarn prepublish
 yarn build-storybook
 ```
 
