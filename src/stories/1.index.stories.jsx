@@ -10,14 +10,9 @@ import {
   Button,
   Checkbox,
   EthAddress,
-  FileChooser,
-  Grid,
   Identicon,
-  Input,
-  Progress,
   Select,
   Spinner,
-  TextArea,
   WalletButton
 } from '../components'
 import Checkmark from '../components/Widgets/AnimatedIcons/Checkmark'
@@ -99,31 +94,6 @@ storiesOf('Widgets/Form/AddressSelect', module)
   ))
   .add('no addresses provided', () => <AddressSelect onChange={() => {}} />)
 
-storiesOf('Grid', module).add('index', () => {
-  return (
-    <Grid container justify="center" spacing={16}>
-      <Grid item xs={12}>
-        <div style={{ background: '#00A4FF', height: '50px' }} />
-      </Grid>
-      <Grid item xs={6}>
-        <div style={{ background: '#00A4FF', height: '50px' }} />
-      </Grid>
-      <Grid item xs={6}>
-        <div style={{ background: '#00A4FF', height: '50px' }} />
-      </Grid>
-      <Grid item xs={4} sm={3}>
-        <div style={{ background: '#00A4FF', height: '50px' }} />
-      </Grid>
-      <Grid item xs={4} sm={6}>
-        <div style={{ background: '#00A4FF', height: '50px' }} />
-      </Grid>
-      <Grid item xs={4} sm={3}>
-        <div style={{ background: '#00A4FF', height: '50px' }} />
-      </Grid>
-    </Grid>
-  )
-})
-
 storiesOf('Widgets/Identicon', module)
   .add('default', () => <Identicon />)
   .add('anonymous', () => <Identicon anonymous />)
@@ -157,18 +127,6 @@ storiesOf('Widgets/Identicon', module)
       size="large"
     />
   ))
-
-storiesOf('Widgets/Progress', module).add('index', () => (
-  <MuiThemeProvider theme={theme}>
-    <Progress value={40} />
-    <br />
-    <Progress variant="indeterminate" />
-    <br />
-    <Progress variant="buffer" value={60} valueBuffer={70} />
-    <br />
-    <Progress variant="query" />
-  </MuiThemeProvider>
-))
 
 storiesOf('Widgets/Animations/Spinner', module).add('index', () => (
   <MuiThemeProvider theme={theme}>
@@ -223,10 +181,6 @@ storiesOf('Widgets/Button', module).add('index', () => {
   )
 })
 
-storiesOf('Widgets/Form/Input', module).add('default', () => (
-  <Input label="Example Label" placeholder="Placeholder text..." />
-))
-
 storiesOf('Widgets/Form/AddressInput', module).add('index', () => {
   return (
     <div>
@@ -243,14 +197,6 @@ storiesOf('Widgets/Form/AddressInput', module).add('index', () => {
     </div>
   )
 })
-
-storiesOf('Widgets/Form/TextArea', module).add('index', () => (
-  <TextArea label="Multiline Input" placeholder="Enter adds a line..." />
-))
-
-storiesOf('Widgets/Form/FileChooser', module).add('default', () => (
-  <FileChooser />
-))
 
 storiesOf('Widgets/Form/Select', module).add('index', () => {
   const options = [
