@@ -6,7 +6,6 @@ import AddressInput from './Widgets/Form/AddressInput'
 import AddressSelect from './Widgets/Form/AddressSelect'
 import Button from './Widgets/Button'
 import Checkbox from './Widgets/Checkbox'
-import RadioButton from './Widgets/Form/RadioButton'
 import Select from './Widgets/Form/Select'
 import Spinner from './Widgets/AnimatedIcons/Spinner'
 import ValidatedField from './Widgets/Form/ValidatedField'
@@ -42,7 +41,6 @@ export {
   AddressSelect,
   Button,
   Checkbox,
-  RadioButton,
   Select,
   ConverterForm,
   EthAddress,

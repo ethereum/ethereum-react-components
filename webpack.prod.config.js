@@ -1,6 +1,9 @@
+const webpack = require('webpack')
 const path = require('path')
-const pkg = require('./package.json')
 const TerserPlugin = require('terser-webpack-plugin')
+const pkg = require('./package.json')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+// .BundleAnalyzerPlugin
 
 const libraryName = pkg.name
 
@@ -17,14 +20,14 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx']
   },
   optimization: {
     minimizer: [
       new TerserPlugin({
         cache: true,
         parallel: true,
-        sourceMap: true, // Must be set to true if using source-maps in production
+        sourceMap: false, // Must be set to true if using source-maps in production
         terserOptions: {
           // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
           mangle: false
@@ -47,15 +50,14 @@ module.exports = {
       {
         test: /\.(png|jpg|gif)$/,
         loaders: ['url-loader?limit=8192']
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/
+    })
+    // new BundleAnalyzerPlugin()
+  ]
 }

@@ -3,8 +3,6 @@ import { BigNumber as BNJS } from 'bignumber.js'
 
 BNJS.config({ EXPONENTIAL_AT: 18 })
 
-export const BigNumber = ethUtils.BN
-
 const isHex = str => typeof str === 'string' && str.startsWith('0x')
 export const toBN = str => new BNJS(str)
 export const hexToNumberString = str => toBN(str).toString(10)

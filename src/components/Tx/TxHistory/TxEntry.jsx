@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { BigNumber as BNJS } from 'bignumber.js'
 import i18n from '../../../i18n'
 import Identicon from '../../Identicon'
 import {
   networkIdToName,
   hexToNumberString,
   weiToEther,
-  etherToGwei,
-  BigNumber as BN
+  etherToGwei
 } from '../../../lib/util'
 
 export default class TxEntry extends Component {
@@ -142,7 +142,7 @@ export default class TxEntry extends Component {
 
     let txCostEther
     let txCostUSD
-    const txCost = new BN(tx.gasUsed).mul(new BN(tx.gasPrice))
+    const txCost = new BNJS(tx.gasUsed).times(new BNJS(tx.gasPrice))
     txCostEther = weiToEther(txCost)
     if (tx.networkId === 1 && etherPriceUSD > 0) {
       txCostUSD = (txCostEther * etherPriceUSD).toFixed(2)
