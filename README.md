@@ -6,7 +6,7 @@ A library of frequently used Ethereum components.
 
 This project leverages [material-ui](https://material-ui.com/) and is intended for use within apps that also use material-ui.
 
-All available components can be found in the the project [storybook](https://ethereum.github.io/ethereum-react-components). The bleeding edge (`dev` branch) gets published [here](https://ethereum-react-components-dev.netlify.com/).
+All available components can be found in the project [storybook](https://ethereum.github.io/ethereum-react-components). The bleeding edge (`dev` branch) gets published [here](https://ethereum-react-components-dev.netlify.com/).
 
 WARNING: this lib is not production ready. All component APIs are in exploratory phases and strict semantic versioning is not yet enforced.
 
