@@ -1,6 +1,7 @@
+const webpack = require('webpack')
 const path = require('path')
-const pkg = require('./package.json')
 const TerserPlugin = require('terser-webpack-plugin')
+const pkg = require('./package.json')
 
 const libraryName = pkg.name
 
@@ -57,5 +58,11 @@ module.exports = {
         loaders: ['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/
+    })
+  ]
 }
