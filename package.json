@@ -7,7 +7,7 @@
     "test": "jest --config=jest.config.js --coverage",
     "prepublish": "yarn run clean && yarn run build",
     "clean": "rm -rf ./dist",
-    "build": "webpack --config webpack.prod.config.js",
+    "build": "webpack --config webpack.prod.config.js --display-modules",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs",
     "lint": "eslint src --ext .jsx --ext .js",
@@ -40,7 +40,6 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
-    "css-loader": "^1.0.1",
     "eslint": "5.3.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-loader": "^2.1.1",
@@ -59,9 +58,7 @@
     "react-dom": "^16.6.3",
     "react-test-renderer": "^16.6.3",
     "regenerator-runtime": "^0.13.1",
-    "sass-loader": "^7.1.0",
     "standard-version": "^4.4.0",
-    "style-loader": "^0.23.1",
     "stylelint": "^9.9.0",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-styled-components": "^0.1.1",
@@ -114,10 +111,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PhilippLgh/ethereum-react-components.git"
+    "url": "git+https://github.com/ethereum/ethereum-react-components.git"
   },
   "bugs": {
-    "url": "https://github.com/PhilippLgh/ethereum-react-components/issues"
+    "url": "https://github.com/ethereum/ethereum-react-components/issues"
   },
-  "homepage": "https://github.com/PhilippLgh/ethereum-react-components#readme"
+  "homepage": "https://github.com/ethereum/ethereum-react-components#readme"
 }

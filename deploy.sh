@@ -26,6 +26,8 @@ yarn run standard-version --message='chore(release): %s [ci skip]'
 # Pushes changes back to the repository
 git push --follow-tags origin $BRANCH
 
-# Publishes npm module
-npm publish
+# Publishes npm module. Ensures publishing only from master branch
+if [[ $BRANCH == 'master' ]]; then
+  npm publish
+fi;
 
