@@ -78,7 +78,7 @@ storiesOf('Welcome', module).add('to Ethereum Components', () => (
   <Welcome showApp={linkTo('Button')} />
 ))
 
-storiesOf('Widgets/Form/AddressSelect', module)
+storiesOf('Widgets/AddressSelect', module)
   .add('wallets and contracts', () => (
     <AddressSelect
       wallets={dummyWallets}
@@ -94,71 +94,47 @@ storiesOf('Widgets/Form/AddressSelect', module)
   ))
   .add('no addresses provided', () => <AddressSelect onChange={() => {}} />)
 
-storiesOf('Widgets/Identicon', module)
-  .add('default', () => <Identicon />)
-  .add('anonymous', () => <Identicon anonymous />)
-  .add('nano (with address)', () => (
+storiesOf('Widgets/Identicon', module).add('index', () => (
+  <div>
+    <Identicon />
+    <Identicon anonymous />
     <Identicon
       address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
       size="nano"
     />
-  ))
-  .add('tiny (with address)', () => (
     <Identicon
       address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
       size="tiny"
     />
-  ))
-  .add('small (with address)', () => (
     <Identicon
       address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
       size="small"
     />
-  ))
-  .add('medium (with address)', () => (
     <Identicon
       address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
       size="medium"
     />
-  ))
-  .add('large (with address)', () => (
     <Identicon
       address="0xF5A5d5c30BfAC14bf207b6396861aA471F9A711D"
       size="large"
     />
-  ))
+  </div>
+))
 
-storiesOf('Widgets/Animations/Spinner', module).add('index', () => (
-  <MuiThemeProvider theme={theme}>
-    <div>
+storiesOf('Widgets/Animations', module)
+  .add('spinner', () => (
+    <MuiThemeProvider theme={theme}>
       <Spinner />
       <Spinner size={30} />
       <Spinner size={20} />
-
-      <br />
-      <br />
-      <div
-        style={{
-          backgroundColor: 'black',
-          padding: '20px',
-          display: 'inline-block'
-        }}
-      >
-        <Spinner color="secondary" />
-        <Spinner color="secondary" size={30} />
-        <Spinner color="secondary" size={20} />
-      </div>
-    </div>
-  </MuiThemeProvider>
-))
+    </MuiThemeProvider>
+  ))
+  .add('checkmark', () => <Checkmark />)
+  .add('cross', () => <Cross />)
 
 storiesOf('Widgets/WalletButton', module).add('default', () => (
   <WalletButton onClick={() => {}}>Add Wallet Contract</WalletButton>
 ))
-
-storiesOf('Widgets/Animations/Icons', module)
-  .add('checkmark', () => <Checkmark />)
-  .add('cross', () => <Cross />)
 
 storiesOf('Widgets/Button', module).add('index', () => {
   return (
@@ -181,7 +157,7 @@ storiesOf('Widgets/Button', module).add('index', () => {
   )
 })
 
-storiesOf('Widgets/Form/AddressInput', module).add('index', () => {
+storiesOf('Widgets/AddressInput', module).add('index', () => {
   return (
     <div>
       <AddressInput label="address" />
@@ -198,7 +174,7 @@ storiesOf('Widgets/Form/AddressInput', module).add('index', () => {
   )
 })
 
-storiesOf('Widgets/Form/Select', module).add('index', () => {
+storiesOf('Widgets/Select', module).add('index', () => {
   const options = [
     { value: 1, label: 'main' },
     { value: 3, label: 'ropsten' },
@@ -219,7 +195,7 @@ storiesOf('Widgets/Form/Select', module).add('index', () => {
   )
 })
 
-storiesOf('Widgets/Form/Checkbox', module)
+storiesOf('Widgets/Checkbox', module)
   .add('unchecked', () => (
     <Checkbox id="example" name="example" labelText="Example" />
   ))
