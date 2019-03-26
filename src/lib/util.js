@@ -1,4 +1,4 @@
-import ethUtils from 'ethereumjs-util'
+// import ethUtils from 'ethereumjs-util'
 import { BigNumber as BNJS } from 'bignumber.js'
 
 BNJS.config({ EXPONENTIAL_AT: 18 })
