@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.14.0"></a>
+# [1.14.0](https://github.com/ethereum/ethereum-react-components/compare/v1.13.15...v1.14.0) (2019-03-26)
+
+
+### Features
+
+* upgrade storybook v5 + manage deps ([#140](https://github.com/ethereum/ethereum-react-components/issues/140)) ([15487ee](https://github.com/ethereum/ethereum-react-components/commit/15487ee)), closes [#133](https://github.com/ethereum/ethereum-react-components/issues/133) [#134](https://github.com/ethereum/ethereum-react-components/issues/134) [#135](https://github.com/ethereum/ethereum-react-components/issues/135) [#136](https://github.com/ethereum/ethereum-react-components/issues/136) [#137](https://github.com/ethereum/ethereum-react-components/issues/137) [#139](https://github.com/ethereum/ethereum-react-components/issues/139)
+
+
+
 <a name="1.13.15"></a>
 ## [1.13.15](https://github.com/PhilippLgh/ethereum-react-components/compare/v1.13.14...v1.13.15) (2019-03-15)
 
