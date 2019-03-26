@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
-import ethUtils from 'ethereumjs-util'
+import { keccak } from 'ethereumjs-util'
 import ConverterForm from '../Widgets/ConverterForm'
 
 function perf(cb) {
@@ -13,7 +13,7 @@ function perf(cb) {
 }
 
 const converters = {
-  keccak: perf(input => ethUtils.keccak(input).toString('hex')),
+  keccak: perf(input => keccak(input).toString('hex')),
   base64_encode: perf(input => btoa(input)),
   base64_decode: perf(input => atob(input))
 }
