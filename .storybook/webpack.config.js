@@ -32,8 +32,8 @@ module.exports = ({ config, mode }) => {
   })
 
   config.module.rules.push({
-    test: /\.(png|jpg|gif|svg)$/i,
-    use: ['file-loader']
+    test: /\.(png|jpg|gif)$/i,
+    use: ['url-loader?limit=8192']
   })
 
   // Return the altered config
