@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ethUtils from 'ethereumjs-util'
+import { BN } from 'ethereumjs-util'
 import styled from 'styled-components'
 import i18n from '../../../i18n'
 import Button from '../../Widgets/Button'
@@ -10,8 +10,6 @@ import DeployContract from './TxDescription/DeployContract'
 import TokenTransfer from './TxDescription/TokenTransfer'
 import FunctionExecution from './TxDescription/FunctionExecution'
 import SendEther from './TxDescription/SendEther'
-
-const { BN } = ethUtils
 
 export default class TxDescription extends Component {
   static displayName = 'TxDescription'
