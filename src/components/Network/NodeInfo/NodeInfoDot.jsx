@@ -49,7 +49,7 @@ export default class NodeInfoDot extends Component {
   }
 
   componentDidMount() {
-    // NOTE: this component should update diff every second
+    // NOTE: This component should update diff every second
     this.diffInterval = setInterval(() => {
       this.setState({ diffTimestamp: moment().unix() })
     }, 1000)
