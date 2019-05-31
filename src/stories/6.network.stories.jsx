@@ -354,7 +354,7 @@ storiesOf('Network/Node Info/Full/Test Net', module)
   .add('local', () => <NodeInfo {...testLocal()} />)
 
 storiesOf('Network/Node Info/Full/Private Net', module).add('local', () => (
-  <NodeInfo {...privateNet} />
+  <NodeInfo {...privateNet()} />
 ))
 
 storiesOf('Network/Network Chooser', module).add('default', () => (
