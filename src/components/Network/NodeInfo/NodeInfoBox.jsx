@@ -40,7 +40,7 @@ export default class NodeInfoBox extends Component {
       timestamp: PropTypes.number.isRequired
     }).isRequired,
     /** Location of dot relative to box */
-    dotLocation: PropTypes.oneOf(['bottomLeft'])
+    dotLocation: PropTypes.oneOf(['topLeft'])
   }
 
   constructor(props) {
@@ -277,7 +277,7 @@ export default class NodeInfoBox extends Component {
     const { network, dotLocation } = this.props
     return (
       <StyledBox dotLocation={dotLocation}>
-        <StyledSubmenuContainer>
+        <StyledSubmenuContainer dotLocation={dotLocation}>
           <section>
             <StyledSection>
               <StyledNetworkTitle>{network}</StyledNetworkTitle>
